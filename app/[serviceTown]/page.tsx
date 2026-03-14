@@ -14,6 +14,7 @@ import {
 import type { Service, Town } from '@/types';
 import ServicePage from '@/components/templates/ServicePage';
 import ServiceTownPage from '@/components/templates/ServiceTownPage';
+import MicroLocationPage from '@/components/templates/MicroLocationPage';
 
 type Props = {
   params: Promise<{
@@ -39,12 +40,13 @@ export async function generateStaticParams() {
 
   const CORE_SERVICES = ['web-design', 'seo', 'lead-capture', 'business-automation', 'branding', 'logo-branding', 'social-media-setup', 'digital-marketing', 'workwear-print'];
 
-  // Generate Service x Town Pages (/web-design-ashford)
+  // Generate Service x Town Pages (/web-design-ashford) and Micro Locations (/web-design-near-ashford)
   services.forEach((service) => {
     if (service.slug && CORE_SERVICES.includes(service.slug)) {
       towns.forEach((town) => {
         if (town.slug) {
           uniquePaths.add(`${service.slug}-${town.slug}`);
+          uniquePaths.add(`${service.slug}-near-${town.slug}`);
         }
       });
     }
@@ -78,15 +80,27 @@ async function parseServiceOrTown(slug: string) {
   // Find town that matches the end of the slug
   let matchedTown = null;
   let matchedService = null;
+  let isMicroLocation = false;
   
   for (const t of towns) {
     if (t.slug && slug.endsWith(`-${t.slug}`)) {
-      const possibleServiceSlug = slug.replace(`-${t.slug}`, '');
-      const s = await getServiceBySlug(possibleServiceSlug);
-      if (s) {
-        matchedTown = t;
-        matchedService = s;
-        break;
+      if (slug.includes(`-near-${t.slug}`)) {
+         const possibleServiceSlug = slug.replace(`-near-${t.slug}`, '');
+         const s = await getServiceBySlug(possibleServiceSlug);
+         if (s) {
+           matchedTown = t;
+           matchedService = s;
+           isMicroLocation = true;
+           break;
+         }
+      } else {
+         const possibleServiceSlug = slug.replace(`-${t.slug}`, '');
+         const s = await getServiceBySlug(possibleServiceSlug);
+         if (s) {
+           matchedTown = t;
+           matchedService = s;
+           break;
+         }
       }
     }
   }
@@ -97,7 +111,7 @@ async function parseServiceOrTown(slug: string) {
     if (!CORE_SERVICES.includes(matchedService.slug)) {
       return null; // Block non-core programmatic execution
     }
-    return { type: 'serviceTown', service: matchedService, town: matchedTown };
+    return { type: isMicroLocation ? 'microLocation' : 'serviceTown', service: matchedService, town: matchedTown };
   }
 
   return null;
@@ -191,6 +205,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     return baseMetadata;
+  }
+
+  if (route.type === 'microLocation') {
+    const title = `${route.service?.name} Near ${route.town?.name} | Business Sorted Kent`;
+    const description = `Looking for ${route.service?.name?.toLowerCase()} near ${route.town?.name}? We help businesses in and around ${route.town?.name} grow online.`;
+    const url = `https://businesssortedkent.co.uk/${route.service?.slug}-near-${route.town?.slug}`;
+    const imageUrl = `https://businesssortedkent.co.uk/api/og?service=${route.service?.slug}&town=${route.town?.slug}`;
+
+    return {
+      title,
+      description,
+      alternates: {
+        canonical: url,
+      },
+      openGraph: {
+        title,
+        description,
+        url,
+        images: [
+          {
+            url: imageUrl,
+            width: 1200,
+            height: 630,
+            alt: title,
+          },
+        ],
+      },
+      robots: {
+        index: true,
+        follow: true,
+      }
+    };
   }
 
   return { title: 'Business Sorted Kent' };
@@ -360,6 +406,55 @@ export default async function ProgrammaticPage({ params }: Props) {
           caseStudies={allCaseStudies}
           painPoints={painPoints}
           guides={guides}
+        />
+      </>
+    );
+  }
+
+  // ==========================================
+  // TEMPLATE: MICRO LOCATION (NEAR)
+  // ==========================================
+  if (route.type === 'microLocation' && route.service && route.town) {
+    const { service, town } = route;
+    
+    let nearbyTowns: Town[] = [];
+    if (town.latitude !== null && town.longitude !== null) {
+      // Find even closer towns just for contextual linking
+      nearbyTowns = await getNearbyTowns(town.latitude, town.longitude, 4);
+    }
+
+    return (
+      <>
+        {/* JSON-LD LocalBusiness Schema for Micro Location */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+             __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "Business Sorted Kent",
+              "url": `https://businesssortedkent.co.uk`,
+              "areaServed": {
+                "@type": "GeoCircle",
+                "geoMidpoint": {
+                  "@type": "GeoCoordinates",
+                  "latitude": town.latitude,
+                  "longitude": town.longitude
+                },
+                "geoRadius": "10000"
+              },
+              "makesOffer": {
+                "@type": "Service",
+                "name": `${service.name} Near ${town.name}`
+              }
+            })
+          }}
+        />
+
+        <MicroLocationPage 
+          service={service as Service} 
+          town={town as Town} 
+          nearbyTowns={nearbyTowns.map(t => ({ name: t.name, slug: t.slug }))} 
         />
       </>
     );
