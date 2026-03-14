@@ -120,7 +120,7 @@ export default function ServicesPage() {
                 </div>
               </Reveal>
               <Reveal delay={0.2} className="order-1 lg:order-2">
-                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 md:p-8 aspect-square lg:aspect-auto lg:h-full flex flex-col justify-center relative overflow-hidden group">
+                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full aspect-[4/3] lg:aspect-square flex flex-col justify-center relative overflow-hidden group shadow-2xl">
                   <div className="absolute inset-0 z-0">
                     <Image src="/images/services/web-design.png" alt="Website Design Mockup" layout="fill" objectFit="cover" className="opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
                   </div>
@@ -132,7 +132,7 @@ export default function ServicesPage() {
             {/* Service 2: Text right / visual left */}
             <div className="py-[120px] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <Reveal className="order-1 lg:order-1">
-                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 md:p-8 aspect-square lg:aspect-auto lg:h-full flex flex-col justify-center relative overflow-hidden group">
+                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full aspect-[4/3] lg:aspect-square flex flex-col justify-center relative overflow-hidden group shadow-2xl">
                   <div className="absolute inset-0 z-0">
                     <Image src="/images/services/seo.png" alt="SEO Dashboard Mockup" layout="fill" objectFit="cover" className="opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
                   </div>
@@ -196,7 +196,7 @@ export default function ServicesPage() {
                 </div>
               </Reveal>
               <Reveal delay={0.2} className="order-1 lg:order-2">
-                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 md:p-8 aspect-square lg:aspect-auto lg:h-full flex flex-col justify-center relative overflow-hidden group">
+                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full aspect-[4/3] lg:aspect-square flex flex-col justify-center relative overflow-hidden group shadow-2xl">
                   <div className="absolute inset-0 z-0">
                     <Image src="/images/services/lead-capture.png" alt="Lead Capture Form Mockup" layout="fill" objectFit="cover" className="opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
                   </div>
@@ -208,7 +208,7 @@ export default function ServicesPage() {
             {/* Service 4: Text right / visual left */}
             <div className="py-[120px] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <Reveal className="order-1 lg:order-1">
-                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 md:p-8 aspect-square lg:aspect-auto lg:h-full flex flex-col justify-center relative overflow-hidden group">
+                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full aspect-[4/3] lg:aspect-square flex flex-col justify-center relative overflow-hidden group shadow-2xl">
                   <div className="absolute inset-0 z-0">
                     <Image src="/images/services/automation.png" alt="Automation Workflow Mockup" layout="fill" objectFit="cover" className="opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
                   </div>
