@@ -120,11 +120,9 @@ export default function ServicesPage() {
                 </div>
               </Reveal>
               <Reveal delay={0.2} className="order-1 lg:order-2">
-                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full aspect-[4/3] lg:aspect-square flex flex-col justify-center relative overflow-hidden group shadow-2xl">
-                  <div className="absolute inset-0 z-0">
-                    <Image src="/images/services/web-design.png" alt="Website Design Mockup" fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent z-10 pointer-events-none"></div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full flex flex-col justify-center relative overflow-hidden group shadow-2xl">
+                  <Image src="/images/services/web-design.png" alt="Website Design Mockup" width={1600} height={900} className="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/5 to-transparent z-10 pointer-events-none"></div>
                 </div>
               </Reveal>
             </div>
@@ -132,11 +130,9 @@ export default function ServicesPage() {
             {/* Service 2: Text right / visual left */}
             <div className="py-[120px] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <Reveal className="order-1 lg:order-1">
-                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full aspect-[4/3] lg:aspect-square flex flex-col justify-center relative overflow-hidden group shadow-2xl">
-                  <div className="absolute inset-0 z-0">
-                    <Image src="/images/services/seo.png" alt="SEO Dashboard Mockup" fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent z-10 pointer-events-none"></div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full flex flex-col justify-center relative overflow-hidden group shadow-2xl">
+                  <Image src="/images/services/seo.png" alt="SEO Dashboard Mockup" width={1600} height={900} className="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/5 to-transparent z-10 pointer-events-none"></div>
                 </div>
               </Reveal>
               <Reveal delay={0.2} className="order-2 lg:order-2 relative z-10">
@@ -196,11 +192,9 @@ export default function ServicesPage() {
                 </div>
               </Reveal>
               <Reveal delay={0.2} className="order-1 lg:order-2">
-                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full aspect-[4/3] lg:aspect-square flex flex-col justify-center relative overflow-hidden group shadow-2xl">
-                  <div className="absolute inset-0 z-0">
-                    <Image src="/images/services/lead-capture.png" alt="Lead Capture Form Mockup" fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent z-10 pointer-events-none"></div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full flex flex-col justify-center relative overflow-hidden group shadow-2xl">
+                  <Image src="/images/services/lead-capture.png" alt="Lead Capture Form Mockup" width={1600} height={900} className="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/5 to-transparent z-10 pointer-events-none"></div>
                 </div>
               </Reveal>
             </div>
@@ -208,11 +202,9 @@ export default function ServicesPage() {
             {/* Service 4: Text right / visual left */}
             <div className="py-[120px] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <Reveal className="order-1 lg:order-1">
-                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full aspect-[4/3] lg:aspect-square flex flex-col justify-center relative overflow-hidden group shadow-2xl">
-                  <div className="absolute inset-0 z-0">
-                    <Image src="/images/services/automation.png" alt="Automation Workflow Mockup" fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent z-10 pointer-events-none"></div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full flex flex-col justify-center relative overflow-hidden group shadow-2xl">
+                  <Image src="/images/services/automation.png" alt="Automation Workflow Mockup" width={1600} height={900} className="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/5 to-transparent z-10 pointer-events-none"></div>
                 </div>
               </Reveal>
               <Reveal delay={0.2} className="order-2 lg:order-2 relative z-10">
