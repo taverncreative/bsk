@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  
+  /* Hard overrides for default builder theme leaks natively */
+  --primary: #D6AD67;
+  --heading: #ffffff;
+  --accent: #D6AD67;
+  --text-muted: #888888;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-gold: #D6AD67;
+  --color-brand-black: #000000;
+  
+  /* Map logical variables for tailwind compatibility if needed */
+  --color-primary: var(--primary);
+  --color-heading: var(--heading);
+  --color-accent: var(--accent);
+}
+
+@layer utilities {
+  .shadow-brand-glow {
+    box-shadow: 0 0 60px rgba(214,173,103,0.15);
+  }
+  .shadow-brand-cta {
+    box-shadow: 0 8px 40px rgba(214,173,103,0.35);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes shimmer-vertical {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes snakeTravel {
+  0% {
+    stroke-dasharray: 15, 100;
+    stroke-dashoffset: 15;
+  }
+  100% {
+    stroke-dasharray: 15, 100;
+    stroke-dashoffset: -100;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
