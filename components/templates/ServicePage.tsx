@@ -18,7 +18,7 @@ import LocalAuthorityMap from '@/components/sections/LocalAuthorityMap';
 import Services from '@/components/sections/Services';
 import CredibilityMetrics from '@/components/sections/CredibilityMetrics';
 import Reveal from '@/components/ui/Reveal';
-import { Search, Laptop, FileText, Link as LinkIcon, MapPin, TrendingUp, Palette, Zap, Share2 } from 'lucide-react';
+import { Search, Laptop, FileText, Link as LinkIcon, MapPin, TrendingUp, Palette, Zap, Share2, MousePointerClick } from 'lucide-react';
 
 interface TownRef {
   name: string;
@@ -66,7 +66,7 @@ export default async function ServicePage({
     return (
       <>
         <ServiceHero
-          title={<>Local SEO Services<br />That Help Kent Businesses Get Found on Google</>}
+          title={<>SEO Services That Help Your Business<br />Get Found On Google</>}
           subtitle="If your business is not appearing in local search results, potential customers are finding your competitors instead. Our SEO services help businesses across Kent improve visibility, attract the right traffic, and turn searches into enquiries."
           primaryCTA={{ text: 'Get a Free SEO Review', href: '/contact' }}
         />
@@ -126,9 +126,8 @@ export default async function ServicePage({
           descriptionOverride="Our fully connected digital growth ecosystem integrates seamlessly to improve your search visibility and overall conversion rates."
           servicesOverride={[
             { title: 'Website Design', description: 'Professional, modern websites that build trust and showcase your services.', href: '/web-design', icon: Laptop },
-            { title: 'Logo & Branding', description: 'Professional brand identities that make your business stand out from competitors.', href: '/branding', icon: Palette },
-            { title: 'Business Automation', description: 'Systems that organise enquiries, follow-ups and processes automatically.', href: '/business-automation', icon: Zap },
-            { title: 'Social Media Setup', description: 'Optimised social media profiles structured to attract and convert local clients.', href: '/digital-marketing', icon: Share2 }
+            { title: 'Lead Capture Systems', description: 'Funnels and integrated systems engineered specifically to generate daily enquiries.', href: '/lead-capture', icon: MousePointerClick },
+            { title: 'Business Automation', description: 'Systems that organise enquiries, follow-ups and processes automatically.', href: '/business-automation', icon: Zap }
           ]}
         />
         
@@ -139,6 +138,7 @@ export default async function ServicePage({
         <CTA 
           titleOverride="Start Improving Your Google Visibility" 
           paragraphOverride="If your business is not appearing in search results, the right SEO strategy can change that. We help businesses across Kent improve visibility and generate more enquiries." 
+          buttonOverride="Get A Free SEO Review"
         />
       </>
     );
@@ -148,7 +148,7 @@ export default async function ServicePage({
     return (
       <>
         <ServiceHero
-          title={<>Website Design That Turns<br />Visitors Into Enquiries</>}
+          title={<>Website Design That Turns<br />Visitors Into Customers</>}
           subtitle="Your website should be more than an online brochure. It should showcase your business professionally, appear in search results, and convert visitors into real enquiries. We design modern, high-performing websites for businesses across Kent."
           primaryCTA={{ text: 'Get a Free Website Quote', href: '/contact' }}
         />
@@ -225,9 +225,8 @@ export default async function ServicePage({
           descriptionOverride="Successful websites also benefit from our fully connected digital growth ecosystem."
           servicesOverride={[
             { title: 'Local SEO', description: 'Optimised pages and local SEO that help your business appear in relevant searches.', href: '/seo', icon: Search },
-            { title: 'Logo & Branding', description: 'Professional brand identities that make your business stand out from competitors.', href: '/branding', icon: Palette },
-            { title: 'Business Automation', description: 'Systems that organise enquiries, follow-ups and processes automatically.', href: '/business-automation', icon: Zap },
-            { title: 'Social Media Setup', description: 'Optimised social media profiles structured to attract and convert local clients.', href: '/digital-marketing', icon: Share2 }
+            { title: 'Lead Capture Systems', description: 'Funnels and integrated systems engineered specifically to generate daily enquiries.', href: '/lead-capture', icon: MousePointerClick },
+            { title: 'Business Automation', description: 'Systems that organise enquiries, follow-ups and processes automatically.', href: '/business-automation', icon: Zap }
           ]}
         />
         
@@ -238,6 +237,7 @@ export default async function ServicePage({
         <CTA 
           titleOverride="Ready For A Website That Works For Your Business?" 
           paragraphOverride="If your current website feels outdated or is not generating enquiries, a professionally designed site can transform how customers see your business." 
+          buttonOverride="Get A Website Quote"
         />
       </>
     );
@@ -350,7 +350,7 @@ export default async function ServicePage({
     return (
       <>
         <ServiceHero
-          title={<>Lead Capture Systems<br />Turn Website Visitors Into Real Enquiries</>}
+          title={<>Lead Capture Systems That Turn<br />Visitors Into Enquiries</>}
           subtitle="Many websites receive visitors but fail to convert them into enquiries. We build lead capture systems that guide visitors toward action, making it easier for potential customers to contact your business."
           primaryCTA={{ text: 'Get a Free Website Review', href: '/contact' }}
         />
@@ -418,6 +418,16 @@ export default async function ServicePage({
 
         <LocalAuthorityMap headlineOverride="Lead Capture Systems For Businesses Across Kent" />
         
+        <Services 
+          headlineOverride="Connected Growth Services"
+          descriptionOverride="Lead Capture performs best when supported by the rest of our digital growth framework."
+          servicesOverride={[
+            { title: 'Website Design', description: 'Professional, modern websites that build trust and showcase your services.', href: '/web-design', icon: Laptop },
+            { title: 'Local SEO', description: 'Optimised pages and local SEO that help your business appear in relevant searches.', href: '/seo', icon: Search },
+            { title: 'Business Automation', description: 'Systems that organise enquiries, follow-ups and processes automatically.', href: '/business-automation', icon: Zap }
+          ]}
+        />
+        
         <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
         <GrowthSystem currentService={serviceSlug} />
         <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions`} />
@@ -425,7 +435,7 @@ export default async function ServicePage({
         <CTA 
           titleOverride="Turn Website Visitors Into Real Enquiries" 
           paragraphOverride="If your website receives traffic but generates few enquiries, improving lead capture can dramatically increase results." 
-          buttonOverride="Get a Free Website Review"
+          buttonOverride="Get A Website Review"
         />
       </>
     );
@@ -435,7 +445,7 @@ export default async function ServicePage({
     return (
       <>
         <ServiceHero
-          title={<>Business Automation Systems<br />Save Time And Organise Your Enquiries Automatically</>}
+          title={<>Business Automation Systems That Save<br />Time And Organise Enquiries</>}
           subtitle="As your business grows, managing enquiries, follow ups and processes manually becomes difficult. We build automation systems that organise incoming enquiries, trigger follow ups and streamline day to day operations."
           primaryCTA={{ text: 'Book An Automation Consultation', href: '/contact' }}
         />
@@ -509,6 +519,16 @@ export default async function ServicePage({
         </section>
 
         <LocalAuthorityMap headlineOverride="Automation Systems For Businesses Across Kent" />
+        
+        <Services 
+          headlineOverride="Connected Growth Services"
+          descriptionOverride="Automation works best when receiving consistent enquiries from a high-performing digital ecosystem."
+          servicesOverride={[
+            { title: 'Website Design', description: 'Professional, modern websites that build trust and showcase your services.', href: '/web-design', icon: Laptop },
+            { title: 'Local SEO', description: 'Optimised pages and local SEO that help your business appear in relevant searches.', href: '/seo', icon: Search },
+            { title: 'Lead Capture Systems', description: 'Funnels and integrated systems engineered specifically to generate daily enquiries.', href: '/lead-capture', icon: MousePointerClick }
+          ]}
+        />
         
         <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
         <GrowthSystem currentService={serviceSlug} />
