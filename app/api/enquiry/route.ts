@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { sendFormErrorAlert } from '@/lib/error-alert';
 
 // Helper to send email via Resend
 const sendEmail = async (to: string, subject: string, html: string) => {
@@ -33,8 +34,10 @@ const sendEmail = async (to: string, subject: string, html: string) => {
 };
 
 export async function POST(req: Request) {
+  let bodyContext: any = {};
   try {
     const body = await req.json();
+    bodyContext = body;
     const { name, email, website, service_required, preferred_day, preferred_time, message } = body;
 
     // 1. Insert into Supabase
@@ -54,6 +57,13 @@ export async function POST(req: Request) {
 
     if (insertError) {
       console.error('Enquiry Error:', insertError);
+      sendFormErrorAlert(
+        'General Enquiry',
+        'Primary Enquiry Form',
+        email || 'Unknown',
+        body,
+        insertError.message || 'Supabase unified_leads Insert Failed'
+      ).catch(console.error);
       return NextResponse.json({ error: 'Failed to submit enquiry. Please try again.' }, { status: 400 });
     }
 
@@ -71,8 +81,15 @@ export async function POST(req: Request) {
     await sendEmail('hello@businesssortedkent.co.uk', `New Enquiry from ${name}`, adminEmailHTML);
 
     return NextResponse.json({ success: true, enquiry });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error handling enquiry:', error);
+    sendFormErrorAlert(
+      'General Enquiry',
+      'Primary Enquiry Form',
+      bodyContext?.email || 'Unknown',
+      bodyContext || {},
+      error?.message || 'Server Exception in /api/enquiry'
+    ).catch(console.error);
     return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
   }
 }

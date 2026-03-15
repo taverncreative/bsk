@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { sendFormErrorAlert } from '@/lib/error-alert';
 
 // Helper to send email via Resend
 const sendEmail = async (to: string, subject: string, html: string, scheduledAt?: string) => {
@@ -34,8 +35,10 @@ const sendEmail = async (to: string, subject: string, html: string, scheduledAt?
 };
 
 export async function POST(req: Request) {
+  let bodyContext: any = {};
   try {
     const body = await req.json();
+    bodyContext = body;
     const { name, email, phone, website, date, time, notes, pageUrl } = body;
     
     // 1. Insert into Supabase (Bookings & Unified Leads)
@@ -133,8 +136,15 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ success: true, booking });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error handling booking:', error);
+    sendFormErrorAlert(
+        'Booking Calendar',
+        bodyContext?.pageUrl || 'Unknown',
+        bodyContext?.email || 'Unknown',
+        bodyContext || {},
+        error?.message || 'Server Exception in /api/book-consultation'
+    ).catch(console.error);
     return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
   }
 }

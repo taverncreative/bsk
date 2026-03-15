@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { generateText } from 'ai';
 import { openai } from '@ai-sdk/openai';
 import { createClient } from '@supabase/supabase-js';
+import { sendFormErrorAlert } from '@/lib/error-alert';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -40,8 +41,10 @@ Business Location
 }
 
 export async function POST(req: Request) {
+  let bodyContext: any = {};
   try {
     const body = await req.json();
+    bodyContext = body;
     const { name, url, email, pageUrl, timestamp, messages } = body;
 
     if (!url || !email) {
@@ -67,6 +70,13 @@ export async function POST(req: Request) {
     
     if (insertError) {
       console.error("Error inserting lead to Supabase:", insertError);
+      sendFormErrorAlert(
+        'Website Review',
+        pageUrl || 'Unknown',
+        email || 'Unknown',
+        body,
+        insertError.message || 'Supabase unified_leads Insert Failed'
+      ).catch(console.error);
     }
 
     // Also log Elle interaction
@@ -114,8 +124,15 @@ ${aiSummary}
 ------------------`);
 
     return NextResponse.json({ success: true, message: 'Review requested successfully.' });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error processing website review request:', error);
+    sendFormErrorAlert(
+        'Website Review',
+        bodyContext?.pageUrl || 'Unknown',
+        bodyContext?.email || 'Unknown',
+        bodyContext || {},
+        error?.message || 'Server Exception in /api/website-review'
+    ).catch(console.error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

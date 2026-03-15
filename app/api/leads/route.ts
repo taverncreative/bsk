@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { sendFormErrorAlert } from '@/lib/error-alert';
 
 // Helper to send email via Resend
 const sendEmail = async (to: string, subject: string, html: string) => {
@@ -34,8 +35,10 @@ const sendEmail = async (to: string, subject: string, html: string) => {
 };
 
 export async function POST(req: Request) {
+  let bodyContext: any = {};
   try {
     const body = await req.json();
+    bodyContext = body;
     const { name, email, phone, website_url, message, page_context, submission_type } = body;
 
     if (!name || !email) {
@@ -59,6 +62,13 @@ export async function POST(req: Request) {
 
     if (insertError) {
       console.error('Unified Lead Insert Error:', insertError);
+      sendFormErrorAlert(
+        submission_type || 'General Enquiry',
+        page_context || 'Unknown',
+        email || 'Unknown',
+        body,
+        insertError.message || 'Supabase unified_leads Insert Failed'
+      ).catch(console.error);
       return NextResponse.json({ error: 'Failed to capture lead. Please try again or call us.' }, { status: 500 });
     }
 
@@ -79,8 +89,15 @@ export async function POST(req: Request) {
     await sendEmail('hello@businesssortedkent.co.uk', `New Lead: ${name} (${submission_type})`, adminEmailHTML);
 
     return NextResponse.json({ success: true, lead });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error handling lead submission:', error);
+    sendFormErrorAlert(
+      bodyContext?.submission_type || 'Unknown Form Submission',
+      bodyContext?.page_context || 'Unknown',
+      bodyContext?.email || 'Unknown',
+      bodyContext || {},
+      error?.message || 'Server Exception in /api/leads'
+    ).catch(console.error);
     return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
   }
 }
