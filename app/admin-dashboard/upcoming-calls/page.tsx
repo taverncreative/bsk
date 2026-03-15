@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Calendar as CalendarIcon, Clock, PhoneCall, Globe, User, Mail, MessageSquare } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, PhoneCall, Globe, User, Mail, MessageSquare, XCircle } from 'lucide-react';
 
 export default function UpcomingCallsPage() {
   const [calls, setCalls] = useState<any[]>([]);
@@ -33,6 +33,18 @@ export default function UpcomingCallsPage() {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleCancelBooking = async (id: string) => {
+    if (!confirm('Are you sure you want to cancel this booking? The slot will be opened again.')) return;
+    try {
+      const { error } = await supabase.from('bookings').delete().eq('id', id);
+      if (error) throw error;
+      setCalls(calls.filter(c => c.id !== id));
+    } catch (err) {
+      console.error('Error cancelling booking:', err);
+      alert('Failed to cancel booking. Check console for details.');
     }
   };
 
@@ -152,6 +164,12 @@ export default function UpcomingCallsPage() {
                         </div>
                       </div>
                     )}
+                    
+                    <div className="mt-6 flex justify-end">
+                      <button onClick={() => handleCancelBooking(call.id)} className="px-4 py-2 bg-red-900/20 text-red-400 hover:bg-red-900/40 hover:text-red-300 text-xs font-bold rounded-lg transition-colors flex items-center gap-2 border border-red-900/30">
+                        <XCircle className="w-3.5 h-3.5" /> Cancel Booking
+                      </button>
+                    </div>
                   </div>
 
                 </div>

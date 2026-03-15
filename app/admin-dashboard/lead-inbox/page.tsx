@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Mail, Globe, Clock, User, MessageSquare, ExternalLink, Calendar } from 'lucide-react';
+import { Mail, Globe, Clock, User, MessageSquare, ExternalLink, Calendar, LayoutGrid } from 'lucide-react';
 
 export default function LeadInboxPage() {
   const [leads, setLeads] = useState<any[]>([]);
@@ -125,8 +125,24 @@ export default function LeadInboxPage() {
                     </div>
                   )}
 
-                  <div className="mt-4 flex items-center gap-2 text-xs text-zinc-600">
-                    <span className="font-semibold text-zinc-500">Source:</span> {lead.page_context}
+                  <div className="mt-4 flex items-center justify-between flex-wrap gap-4">
+                    <div className="flex items-center gap-2 text-xs text-zinc-600">
+                      <span className="font-semibold text-zinc-500">Source:</span> {lead.page_context}
+                    </div>
+                    
+                    <div className="flex gap-3">
+                      <button className="px-4 py-2 bg-brand-gold text-black text-xs font-bold rounded-lg hover:bg-white transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(214,173,103,0.15)] flex-shrink-0">
+                         <LayoutGrid className="w-3.5 h-3.5" /> Add to Pipeline
+                      </button>
+                      <a href={`mailto:${lead.email}`} className="px-4 py-2 bg-zinc-900 border border-zinc-800 text-white text-xs font-bold rounded-lg hover:border-brand-gold hover:text-brand-gold transition-colors flex items-center gap-2 flex-shrink-0">
+                         <Mail className="w-3.5 h-3.5" /> Contact Lead
+                      </a>
+                      {lead.page_context && lead.page_context !== 'Unknown' && lead.page_context.startsWith('http') && (
+                        <a href={lead.page_context} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-zinc-900 border border-zinc-800 text-white text-xs font-bold rounded-lg hover:border-blue-400 hover:text-blue-400 transition-colors flex items-center gap-2 flex-shrink-0">
+                           <ExternalLink className="w-3.5 h-3.5" /> View Source Page
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
