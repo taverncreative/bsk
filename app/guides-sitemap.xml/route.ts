@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   const guides = await getAllGuides();
-  const baseUrl = 'https://businesssortedkent.co.uk';
+  const baseUrl = 'https://www.businesssortedkent.co.uk';
 
   const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
