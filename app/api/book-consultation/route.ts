@@ -36,7 +36,7 @@ const sendEmail = async (to: string, subject: string, html: string, scheduledAt?
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, phone, website, date, time, notes } = body;
+    const { name, email, phone, website, date, time, notes, pageUrl } = body;
     
     // 1. Insert into Supabase (Bookings & Unified Leads)
     const { data: booking, error: insertError } = await supabase
@@ -65,6 +65,7 @@ export async function POST(req: Request) {
         <p><strong>User Name:</strong> ${name}</p>
         <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
         <p><strong>Website:</strong> ${website || 'N/A'}</p>
+        <p><strong>Page URL:</strong> ${pageUrl || 'N/A'}</p>
         <p><strong>Requested Slot:</strong> ${date} at ${time}</p>
         <p><strong>Notes:</strong> ${notes || 'None'}</p>
         <hr/>

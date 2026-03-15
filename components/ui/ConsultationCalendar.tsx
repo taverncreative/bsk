@@ -53,7 +53,12 @@ export default function ConsultationCalendar() {
       const res = await fetch('/api/book-consultation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, date: selectedDate, time: selectedTime })
+        body: JSON.stringify({ 
+          ...formData, 
+          date: selectedDate, 
+          time: selectedTime,
+          pageUrl: typeof window !== 'undefined' ? window.location.href : '' 
+        })
       });
       
       const result = await res.json();
