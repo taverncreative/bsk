@@ -12,11 +12,13 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     setActiveMenu(null);
     setIsMobileMenuOpen(false);
+    setMobileServicesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -330,28 +332,50 @@ export default function Navbar() {
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex flex-col gap-8 flex-1">
-          <div className="flex flex-col gap-4 border-b border-neutral-800 pb-6">
-            <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider">Services</h3>
-            <Link href="/web-design" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Web Design</Link>
-            <Link href="/seo" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">SEO & Rankings</Link>
-            <Link href="/lead-capture" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Lead Capture</Link>
-            <Link href="/business-automation" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Business Automation</Link>
+        <div className="flex flex-col gap-2 flex-1 w-full max-w-sm mx-auto">
+          <Link href="/" className="text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center border-b border-neutral-800/60">
+            Home
+          </Link>
+          
+          <div className="border-b border-neutral-800/60">
+            <button 
+              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+              className="w-full text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center justify-between transition-colors"
+            >
+              Services
+              <ChevronDown className={`w-6 h-6 transition-transform duration-300 ${mobileServicesOpen ? '-rotate-180 text-brand-gold' : 'text-neutral-500'}`} />
+            </button>
+            <div 
+              className={`overflow-hidden transition-all duration-300 ease-in-out pl-4 ${mobileServicesOpen ? 'max-h-[500px] opacity-100 pb-4' : 'max-h-0 opacity-0'}`}
+            >
+              <Link href="/services" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">All Services Overview</Link>
+              <Link href="/web-design" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Website Design</Link>
+              <Link href="/seo" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">SEO & Rankings</Link>
+              <Link href="/lead-capture" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Lead Capture</Link>
+              <Link href="/business-automation" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Business Automation</Link>
+            </div>
           </div>
 
-          <div className="flex flex-col gap-4 border-b border-neutral-800 pb-6">
-            <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider">Company</h3>
-            <Link href="/industries" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Industries</Link>
-            <Link href="/towns" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Locations Coverage</Link>
-            <Link href="/case-studies" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Case Studies</Link>
-            <Link href="/guides" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Guides</Link>
-            <Link href="/about" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">About Us</Link>
-          </div>
+          <Link href="/towns" className="text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center border-b border-neutral-800/60">
+            Locations
+          </Link>
+          <Link href="/industries" className="text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center border-b border-neutral-800/60">
+            Industries
+          </Link>
+          <Link href="/guides" className="text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center border-b border-neutral-800/60">
+            Guides
+          </Link>
+          <Link href="/about" className="text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center border-b border-neutral-800/60">
+            About
+          </Link>
+          <Link href="/contact" className="text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center border-b border-neutral-800/60">
+            Contact
+          </Link>
           
-          <div className="mt-auto pt-6">
+          <div className="mt-8 pt-4 pb-20">
             <Link
               href="/contact"
-              className="w-full flex items-center justify-center bg-brand-gold text-black font-extrabold px-6 h-14 rounded-xl shadow-[0_0_20px_rgba(214,173,103,0.3)] min-h-[48px]"
+              className="w-full flex items-center justify-center bg-brand-gold text-black font-extrabold px-6 py-4 rounded-xl shadow-[0_0_20px_rgba(214,173,103,0.3)] min-h-[56px] text-lg active:scale-95 transition-transform"
             >
               Get A Free Quote
             </Link>

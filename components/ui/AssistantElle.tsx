@@ -220,7 +220,7 @@ export default function AssistantElle() {
       {
         id: 'welcome',
         role: 'assistant',
-        content: "Hi, I'm Elle. I can help answer questions about websites, SEO or getting more enquiries from your site. What would you like to know?"
+        content: "Hi, I'm Elle. How can I help today?"
       }
     ]
   });
@@ -327,7 +327,7 @@ export default function AssistantElle() {
           </div>
 
           {/* Messages Window */}
-          <div className="p-5 flex-1 overflow-y-auto bg-black flex flex-col gap-6">
+          <div className="p-6 flex-1 overflow-y-auto bg-black flex flex-col gap-8">
             {messages.map((message: Message) => {
               const segments = message.role === 'assistant' 
                 ? message.content.replace('[RENDER_REVIEW_FORM]', '').replace('[RENDER_CALL_FORM]', '').replace('[RENDER_MESSAGE_FORM]', '').split('\n\n').filter(s => s.trim().length > 0)
@@ -345,15 +345,23 @@ export default function AssistantElle() {
                   {segments.map((segment, idx) => (
                     <div 
                       key={idx}
-                      className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                      className={`max-w-[85%] rounded-2xl px-5 py-4 text-sm leading-relaxed ${
                         message.role === 'user' 
                           ? 'bg-neutral-800 text-neutral-200 rounded-br-sm border border-neutral-700' 
-                          : 'bg-neutral-800/80 text-white rounded-bl-sm border border-neutral-700/60'
+                          : 'bg-neutral-900 text-white rounded-bl-sm border border-[rgba(255,255,255,0.06)]'
                       }`}
                     >
                       <div dangerouslySetInnerHTML={{ __html: segment.replace(/\n/g, '<br/>') }} />
                     </div>
                   ))}
+                  {messages.length === 1 && message.role === 'assistant' && (
+                    <div className="flex flex-col gap-2 w-full mt-2 animate-in fade-in duration-500">
+                      <button onClick={() => append({ role: 'user', content: 'Website Help' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Website Help</button>
+                      <button onClick={() => append({ role: 'user', content: 'Getting Found On Google' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Getting Found On Google</button>
+                      <button onClick={() => append({ role: 'user', content: 'Website Not Getting Enquiries' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Website Not Getting Enquiries</button>
+                      <button onClick={() => append({ role: 'user', content: 'Improve My Current Website' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Improve My Current Website</button>
+                    </div>
+                  )}
                   {hasReviewForm && (
                      <div className="w-full max-w-[85%]">
                        <InlineReviewForm messages={messages} />
@@ -396,43 +404,28 @@ export default function AssistantElle() {
 
           {!error && (
             <>
-              {/* Action Bar */}
-              <div className="bg-neutral-950 border-t border-neutral-800 py-3 px-4">
-                <div className="flex flex-col sm:flex-row gap-2 w-full justify-center hide-scrollbar">
-                   <button onClick={() => triggerAction('call')} className="whitespace-nowrap flex-1 rounded-full px-3 py-1.5 text-xs font-semibold bg-neutral-900 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-black transition-colors text-center selection-none">
-                     Book A Call
-                   </button>
-                   <button onClick={() => triggerAction('review')} className="whitespace-nowrap flex-1 rounded-full px-3 py-1.5 text-xs font-semibold bg-neutral-900 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-black transition-colors text-center selection-none">
-                     Website Review
-                   </button>
-                   <button onClick={() => triggerAction('message')} className="whitespace-nowrap flex-1 rounded-full px-3 py-1.5 text-xs font-semibold bg-neutral-900 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-black transition-colors text-center selection-none">
-                     Send Message
-                   </button>
-                </div>
-              </div>
-
               {/* Input Area */}
-              <div className="p-4 bg-neutral-950 border-t border-neutral-800">
+              <div className="p-4 bg-neutral-950 border-t border-neutral-800 relative z-10 transition-colors">
                 <form onSubmit={handleSubmit} className="relative flex items-center">
                 <input
                   value={input}
                   onChange={handleInputChange}
-                type="text"
-                placeholder="Ask Elle a question..."
-                className="w-full bg-neutral-800 border border-neutral-700 text-white text-sm rounded-xl py-3 pl-4 pr-12 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-all placeholder:text-neutral-500"
-              />
-              <button 
-                type="submit" 
-                disabled={!input.trim() || isLoading}
-                className="absolute right-2 w-8 h-8 flex items-center justify-center rounded-lg bg-brand-gold text-black disabled:opacity-50 disabled:bg-neutral-700 disabled:text-neutral-400 transition-colors"
-                aria-label="Send message"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
+                  type="text"
+                  placeholder="Type a message..."
+                  className="w-full bg-neutral-900 border border-neutral-700 text-white text-sm rounded-xl py-3 pl-4 pr-12 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-all placeholder:text-neutral-500"
+                />
+                <button 
+                  type="submit" 
+                  disabled={!input.trim() || isLoading}
+                  className="absolute right-2 w-8 h-8 flex items-center justify-center rounded-lg bg-brand-gold text-black disabled:opacity-50 disabled:bg-neutral-700 disabled:text-neutral-400 transition-colors"
+                  aria-label="Send message"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
                 </button>
-              </form>
-            </div>
+                </form>
+              </div>
             </>
           )}
         </div>

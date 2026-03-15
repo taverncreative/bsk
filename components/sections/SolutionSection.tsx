@@ -67,6 +67,30 @@ export default function SolutionSection({ headlineOverride, paragraphOverride, s
             </Reveal>
           ))}
         </div>
+
+        <div className="mt-24 hidden md:block">
+          <Reveal>
+            <div className="bg-neutral-950 border border-neutral-900 rounded-3xl p-10 lg:p-14 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
+              <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-gold/10 to-transparent mix-blend-screen pointer-events-none" />
+              <div className="flex-1 text-left relative z-10">
+                <h3 className="text-3xl font-extrabold text-white tracking-tight mb-4">
+                  Ready To Get Started?
+                </h3>
+                <p className="text-lg text-neutral-400 max-w-xl">
+                  Stop losing enquiries to competitors. Let's discuss how a tailored digital approach can turn your business into a reliable lead machine.
+                </p>
+              </div>
+              <div className="flex-shrink-0 relative z-10 flex gap-4">
+                <a 
+                  href="/contact"
+                  className="px-8 py-4 bg-brand-gold text-black font-extrabold rounded-xl shadow-[0_0_20px_rgba(214,173,103,0.3)] hover:scale-105 active:scale-95 transition-all outline-none inline-block text-center"
+                >
+                  Book A Call Today
+                </a>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

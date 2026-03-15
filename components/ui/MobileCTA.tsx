@@ -1,26 +1,30 @@
 import Link from 'next/link';
+import { Search, Phone, MessageSquare } from 'lucide-react';
 
 export default function MobileCTA() {
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[100] bg-black p-4 border-t border-slate-900 shadow-2xl pb-safe shadow-[0_-10px_20px_rgba(0,0,0,0.3)]">
-      <div className="flex gap-4">
-        <a 
-          href="tel:+440000000000" 
-          className="flex-1 flex items-center justify-center py-3.5 px-4 font-bold text-black bg-brand rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-md"
-        >
-          <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
-          Call Us
-        </a>
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[100] bg-neutral-950 p-3 pb-safe border-t border-neutral-900 shadow-[0_-10px_20px_rgba(0,0,0,0.5)]">
+      <div className="flex gap-2 max-w-sm mx-auto">
         <Link 
-          href="/contact#quote" 
-          className="flex-1 flex items-center justify-center py-3.5 px-4 font-bold text-black bg-brand rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-md"
+          href="/contact" 
+          className="flex-1 flex flex-col items-center justify-center py-2.5 px-1 bg-[#151515] border border-neutral-800 rounded-lg hover:border-brand-gold/50 active:scale-95 transition-all min-h-[56px] min-w-[48px]"
         >
-          <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-          </svg>
-          Get Quote
+          <Search className="w-5 h-5 text-brand-gold mb-1" />
+          <span className="text-[10px] font-semibold text-neutral-300 uppercase tracking-tighter">Review</span>
+        </Link>
+        <Link 
+          href="/contact" 
+          className="flex-1 flex flex-col items-center justify-center py-2.5 px-1 bg-brand-gold rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-[0_0_15px_rgba(214,173,103,0.2)] min-h-[56px] min-w-[48px]"
+        >
+          <Phone className="w-5 h-5 text-black mb-1" />
+          <span className="text-[10px] font-extrabold text-black uppercase tracking-tighter">Book Call</span>
+        </Link>
+        <Link 
+          href="/contact" 
+          className="flex-1 flex flex-col items-center justify-center py-2.5 px-1 bg-[#151515] border border-neutral-800 rounded-lg hover:border-brand-gold/50 active:scale-95 transition-all min-h-[56px] min-w-[48px]"
+        >
+          <MessageSquare className="w-5 h-5 text-brand-gold mb-1" />
+          <span className="text-[10px] font-semibold text-neutral-300 uppercase tracking-tighter">Message</span>
         </Link>
       </div>
     </div>

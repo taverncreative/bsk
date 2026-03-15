@@ -66,20 +66,20 @@ export default function ProcessAuthority({ headlineOverride, descriptionOverride
           {steps.map((step, index) => (
             <Reveal key={step.num} delay={index * 0.1}>
               <div 
-                 className="bg-[#111111] border border-[rgba(255,255,255,0.06)] hover:border-[rgba(201,162,89,0.5)] rounded-[18px] p-8 transition-all duration-400 ease-out hover:-translate-y-1 relative group h-full flex flex-col z-10 before:content-[''] before:absolute before:inset-0 before:-z-10 before:rounded-[18px] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-400 before:shadow-[0_0_30px_rgba(201,162,89,0.3)]"
+                 className="bg-[#111111] border border-[rgba(255,255,255,0.06)] hover:border-[rgba(201,162,89,0.5)] rounded-[18px] p-6 lg:p-8 transition-all duration-400 ease-out hover:-translate-y-1 relative group h-full flex flex-col z-10 before:content-[''] before:absolute before:inset-0 before:-z-10 before:rounded-[18px] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-400 before:shadow-[0_0_30px_rgba(201,162,89,0.3)]"
                  style={{
                    boxShadow: '0 10px 40px rgba(0,0,0,0.6)'
                  }}
               >
-                <div className="mb-6">
-                  <span className="text-brand-gold font-extrabold text-4xl opacity-80 group-hover:opacity-100 transition-opacity">
+                <div className="mb-4 lg:mb-6">
+                  <span className="text-brand-gold font-extrabold text-5xl lg:text-6xl opacity-80 group-hover:opacity-100 transition-opacity">
                     {step.num}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4">
+                <h3 className="text-xl lg:text-xl font-bold text-white mb-3 lg:mb-4 leading-tight">
                   {step.title}
                 </h3>
-                <p className="text-neutral-400 leading-relaxed text-sm">
+                <p className="text-neutral-300 lg:text-neutral-400 leading-relaxed text-base lg:text-sm">
                   {step.description}
                 </p>
               </div>
