@@ -109,22 +109,22 @@ export default function AccountPage() {
               <p className="text-sm text-zinc-400">
                 You can reach out to our team at any time for support, queries, or strategy discussions.
               </p>
-              <div className="flex items-center space-x-3 text-zinc-300">
+              <div className="flex items-center space-x-3 text-zinc-300 w-full">
                 <div className="flex-shrink-0 bg-brand-gold/10 p-2 rounded">
                   <Mail className="h-5 w-5 text-brand-gold" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium">Business Sorted Kent</p>
-                  <p className="text-sm text-zinc-400">hello@businesssortedkent.co.uk</p>
+                  <p className="text-sm text-zinc-400 break-all">hello@businesssortedkent.co.uk</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-3 text-zinc-300">
+              <div className="flex items-center space-x-3 text-zinc-300 w-full mt-4">
                 <div className="flex-shrink-0 bg-brand-gold/10 p-2 rounded">
                   <Phone className="h-5 w-5 text-brand-gold" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium">Phone Support</p>
-                  <p className="text-sm text-zinc-400">07522388055</p>
+                  <p className="text-sm text-zinc-400 truncate">07522388055</p>
                 </div>
               </div>
             </div>
