@@ -6,14 +6,17 @@ import Image from 'next/image';
 import { ChevronDown, ArrowRight, Laptop, Search, MousePointerClick, Zap, MapPin, TrendingUp, Briefcase } from 'lucide-react';
 import IconWrapper from '@/components/ui/IconWrapper';
 import { usePathname } from 'next/navigation';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     setActiveMenu(null);
+    setIsMobileMenuOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -297,19 +300,62 @@ export default function Navbar() {
 
           </div>
 
-          {/* Right Side: Primary CTA */}
-          <div className="flex items-center shrink-0 ml-8">
+          {/* Right Side: Primary CTA & Mobile Toggle */}
+          <div className="flex items-center shrink-0 ml-4 lg:ml-8 gap-4">
             <Link
               href="/contact"
-              className="group relative inline-flex items-center justify-center bg-brand-gold text-black font-extrabold px-7 py-[2.5] h-12 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(214,173,103,0.3)] hover:shadow-[0_0_40px_rgba(214,173,103,0.5)] hover:bg-white active:scale-95 overflow-hidden"
+              className="hidden md:inline-flex group relative items-center justify-center bg-brand-gold text-black font-extrabold px-7 py-[2.5] h-12 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(214,173,103,0.3)] hover:shadow-[0_0_40px_rgba(214,173,103,0.5)] hover:bg-white active:scale-95 overflow-hidden"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Get A Free Quote
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
             </Link>
+
+            <button 
+              className="lg:hidden p-2 text-white hover:text-brand-gold transition-colors z-50 flex items-center justify-center min-h-[48px] min-w-[48px]"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle Mobile Menu"
+            >
+              {isMobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+            </button>
           </div>
 
+        </div>
+      </div>
+
+      {/* Mobile Navigation Drawer */}
+      <div 
+        className={`fixed inset-0 bg-black z-40 transform transition-transform duration-500 ease-in-out lg:hidden flex flex-col pt-24 px-6 pb-6 overflow-y-auto ${
+          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col gap-8 flex-1">
+          <div className="flex flex-col gap-4 border-b border-neutral-800 pb-6">
+            <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider">Services</h3>
+            <Link href="/web-design" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Web Design</Link>
+            <Link href="/seo" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">SEO & Rankings</Link>
+            <Link href="/lead-capture" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Lead Capture</Link>
+            <Link href="/business-automation" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Business Automation</Link>
+          </div>
+
+          <div className="flex flex-col gap-4 border-b border-neutral-800 pb-6">
+            <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider">Company</h3>
+            <Link href="/industries" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Industries</Link>
+            <Link href="/towns" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Locations Coverage</Link>
+            <Link href="/case-studies" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Case Studies</Link>
+            <Link href="/guides" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">Guides</Link>
+            <Link href="/about" className="text-xl font-medium text-white hover:text-brand-gold py-2 min-h-[48px] flex items-center">About Us</Link>
+          </div>
+          
+          <div className="mt-auto pt-6">
+            <Link
+              href="/contact"
+              className="w-full flex items-center justify-center bg-brand-gold text-black font-extrabold px-6 h-14 rounded-xl shadow-[0_0_20px_rgba(214,173,103,0.3)] min-h-[48px]"
+            >
+              Get A Free Quote
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

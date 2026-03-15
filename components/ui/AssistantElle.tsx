@@ -246,6 +246,10 @@ export default function AssistantElle() {
   useEffect(() => {
     if (hasActivated) return;
 
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      return; // Do not auto-open on mobile
+    }
+
     const timer = setTimeout(() => {
       setIsOpen(true);
       setHasActivated(true);
@@ -295,11 +299,11 @@ export default function AssistantElle() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-[100px] right-4 md:bottom-6 md:right-6 lg:bottom-8 lg:right-8 z-50 flex flex-col items-end">
       {isOpen && (
-        <div className="bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl w-80 sm:w-96 h-[36rem] max-h-[85vh] mb-4 flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 fade-in duration-300">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl w-[calc(100vw-3rem)] sm:w-96 h-[28rem] sm:h-[36rem] max-h-[75vh] sm:max-h-[85vh] mb-4 flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 fade-in duration-300">
           {/* Header */}
-          <div className="bg-neutral-950 border-b border-neutral-800 p-4 flex items-center justify-between">
+          <div className="bg-neutral-950 border-b border-neutral-800 p-4 flex items-center justify-between z-10">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center border border-brand-gold/70 shadow-md">
                 <svg className="w-5 h-5 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -446,7 +450,7 @@ export default function AssistantElle() {
         >
           {/* Subtle Glow Pulse (only pulses if not activated yet) */}
           {!hasActivated && (
-            <div className="absolute inset-0 rounded-full border border-brand-gold opacity-0 animate-[ping_25s_cubic-bezier(0,0,0.2,1)_infinite_5s] pointer-events-none md:animate-[ping_40s_cubic-bezier(0,0,0.2,1)_infinite_10s]"></div>
+            <div className="absolute inset-0 rounded-full bg-brand-gold/30 opacity-0 animate-[slow-pulse_10s_ease-out_infinite] pointer-events-none"></div>
           )}
           
           <div className="relative flex items-center justify-center text-brand-gold">
