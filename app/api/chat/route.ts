@@ -90,23 +90,20 @@ async function performWebsiteScan(url: string): Promise<string> {
     const $ = cheerio.load(html);
     
     const findings: string[] = [];
-    
-    let platformDetected = false;
-    if (html.includes('elementor')) { findings.push('The site appears to use Elementor, which can sometimes add extra code that affects page speed.'); platformDetected = true; }
-    else if (html.includes('et_pb_') || html.includes('divi-')) { findings.push('The site appears to use Divi, which can be heavy and affect page load speed.'); platformDetected = true; }
-    else if (html.includes('wpb_') || html.includes('vc_row')) { findings.push('The site appears to use WPBakery, which often outputs bloated markup.'); platformDetected = true; }
-    else if (html.includes('wix.com') || html.includes('wix-image')) { findings.push('The site appears to be built on Wix, which can have strict limitations for advanced SEO.'); platformDetected = true; }
-    else if (html.includes('squarespace')) { findings.push('The site appears to be built on Squarespace. While visually nice, it can be rigid for technical SEO and scaling.'); platformDetected = true; }
-    else if (html.includes('shopify')) { findings.push('The site appears to be built on Shopify. While great for e-commerce, it often requires custom development to scale technical SEO.'); platformDetected = true; }
+    let hasSpeedIssue = false;
 
-    if (!platformDetected) {
-      findings.push("Platform detection confidence was low. You MUST say: 'I couldn't clearly detect the platform used from the homepage.'");
-    }
+    // Title & Description
+    const title = $('title').text();
+    const description = $('meta[name="description"]').attr('content');
+    if (!title || title.length < 5) findings.push('Missing or too short title tag');
+    if (!description || description.length < 10) findings.push('Missing or too short meta description');
 
+    // H1 Heading
     const h1Count = $('h1').length;
-    if (h1Count === 0) findings.push('The page is missing an H1 heading, which is an important signal for search engines.');
-    else if (h1Count > 1) findings.push('I noticed multiple H1 headings on the page which can make it harder for search engines to understand the main topic.');
+    if (h1Count === 0) findings.push('Missing main H1 heading');
+    else if (h1Count > 1) findings.push('Multiple H1 headings detected');
 
+    // Hierarchy
     let lastLevel = 0;
     let improperHierarchy = false;
     $('h1, h2, h3, h4, h5, h6').each((_, el) => {
@@ -116,13 +113,9 @@ async function performWebsiteScan(url: string): Promise<string> {
       }
       lastLevel = level;
     });
-    if (improperHierarchy) findings.push('There appears to be an improper heading hierarchy (e.g., skipping from H1 directly to H3), which can confuse search engines.');
+    if (improperHierarchy) findings.push('Improper heading hierarchy (e.g. skipping from H1 to H3)');
 
-    const title = $('title').text();
-    const description = $('meta[name="description"]').attr('content');
-    if (!title || title.length < 5) findings.push('The page seems to be missing a proper meta title tag.');
-    if (!description || description.length < 10) findings.push('The page seems to be missing a proper meta description, which can hurt click-through rates from Google.');
-
+    // Schema
     const scripts = $('script[type="application/ld+json"]').toArray();
     let hasSchema = false;
     for (const el of scripts) {
@@ -132,28 +125,70 @@ async function performWebsiteScan(url: string): Promise<string> {
         break;
       }
     }
-    if (!hasSchema) findings.push("I couldn't detect structured schema markup, which can help search engines understand business information.");
+    if (!hasSchema) findings.push('No structured schema markup found');
 
+    // Mobile viewport
+    const viewport = $('meta[name="viewport"]').attr('content');
+    if (!viewport) findings.push('No mobile viewport tag found, which affects mobile rendering');
+
+    // Assets / Scripts
     let inlineCssLength = 0;
     $('style').each((_, el) => {
        inlineCssLength += $(el).html()?.length || 0;
     });
-    if (inlineCssLength > 50000) findings.push('The page contains a very large amount of inline CSS, which can directly affect performance.');
+    if (inlineCssLength > 50000) { 
+        findings.push('Large amount of inline CSS detected');
+        hasSpeedIssue = true;
+    }
 
     let scriptLength = 0;
     $('script').each((_, el) => {
        scriptLength += $(el).html()?.length || 0;
     });
-    if (scriptLength > 100000) findings.push('The page contains unusually large JavaScript bundles, which can delay the page from becoming interactive for users.');
+    if (scriptLength > 100000) { 
+        findings.push('Large JavaScript files may affect performance');
+        hasSpeedIssue = true;
+    }
 
     const domElements = $('*').length;
-    if (domElements > 1500) findings.push('The page has an excessive DOM size (too many HTML elements), which can significantly slow down rendering on mobile devices.');
-    
+    if (domElements > 1500) { 
+        findings.push('Excessive DOM size detected');
+        hasSpeedIssue = true;
+    }
+
+    if (hasSpeedIssue) {
+        findings.unshift('Page speed appears slower than typical high-ranking sites');
+    }
+
     if (findings.length === 0) {
-      return `\n--- AUTOMATED WEBSITE SCAN RESULTS FOR ${url} ---\nThe user has submitted their website for a review. You just ran a programmatic scan and didn't find any glaring technical issues on the homepage. Everything looks relatively healthy from a high-level view.\n\nUse this information to offer a conversational summary, highlighting that the basics actually look good, and then say: "If you'd like, we can run a full review and outline what we would recommend improving. [RENDER_REVIEW_FORM]"\n-----------------------------------\n`;
+      return `\n--- AUTOMATED WEBSITE SCAN RESULTS FOR ${url} ---\nThe user has submitted their website for a review. You just ran a programmatic scan and didn't find any glaring technical issues on the homepage. Everything looks relatively healthy from a high-level view.
+
+You MUST respond EXACTLY in this format, including the line breaks:
+
+Let me take a quick look at your website.
+
+**Quick Website Check**
+- I couldn't see any obvious issues from a quick check, but deeper analysis often reveals opportunities.
+
+If you'd like, we can run a full review and outline what we would recommend improving.
+[RENDER_REVIEW_FORM]
+-----------------------------------\n`;
     }
     
-    return `\n--- AUTOMATED WEBSITE SCAN RESULTS FOR ${url} ---\nThe user has submitted their website for a review. You just ran a programmatic scan and found the following verified signals:\n\n- ${findings.join('\n- ')}\n\nUse this information to offer a conversational summary of your findings as requested, and then say: "If you'd like, we can run a full review and outline what we would recommend improving. [RENDER_REVIEW_FORM]"\n-----------------------------------\n`;
+    return `\n--- AUTOMATED WEBSITE SCAN RESULTS FOR ${url} ---\nThe user has submitted their website for a review. You just ran a programmatic scan and found verified signals.
+
+You MUST respond EXACTLY in this format, including the line breaks, and DO NOT add extra generic text:
+
+Let me take a quick look at your website.
+
+**Quick Website Check**
+- ${findings.join('\n- ')}
+
+Slow pages or unclear page structure can make it harder for Google to understand and rank the site.
+
+If you'd like, we can run a full review and outline what we would recommend improving.
+[RENDER_REVIEW_FORM]
+-----------------------------------\n`;
   } catch (error) {
     return '';
   }
