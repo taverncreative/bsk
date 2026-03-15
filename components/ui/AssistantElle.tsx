@@ -57,6 +57,22 @@ const InlineFallbackForm = () => {
 
 const InlineReviewForm = ({ messages }: { messages: Message[] }) => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [prefilledUrl, setPrefilledUrl] = useState('');
+
+  useEffect(() => {
+    let foundUrl = '';
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') {
+        const match = messages[i].content.match(/(?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._\+~=]{1,256}\.[a-zA-Z0-9()]{1,6}\b/i);
+        if (match) {
+          foundUrl = match[0];
+          if (!foundUrl.startsWith('http')) foundUrl = 'https://' + foundUrl;
+          break;
+        }
+      }
+    }
+    setPrefilledUrl(foundUrl);
+  }, [messages]);
 
   const requestReview = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -96,7 +112,7 @@ const InlineReviewForm = ({ messages }: { messages: Message[] }) => {
     <form onSubmit={requestReview} className="mt-3 flex flex-col gap-2 animate-in fade-in zoom-in-95 duration-200">
       <input required name="name" type="text" placeholder="Your Name" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
       <input required name="email" type="email" placeholder="Email Address" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
-      <input required name="url" type="url" pattern="https?://.+" title="Include http:// or https://" placeholder="Website URL" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
+      <input required name="url" type="url" defaultValue={prefilledUrl} pattern="https?://.+" title="Include http:// or https://" placeholder="Website URL" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
       <button disabled={status === 'loading'} type="submit" className="w-full mt-1 bg-brand-gold text-black font-bold py-2 rounded-lg text-sm transition-opacity hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2">
         {status === 'loading' ? 'Sending...' : 'Request Review'}
       </button>
@@ -387,12 +403,21 @@ export default function AssistantElle() {
                       <div dangerouslySetInnerHTML={{ __html: segment.replace(/\n/g, '<br/>') }} />
                     </div>
                   ))}
-                  {messages.length === 1 && message.role === 'assistant' && (
+                  {messages[messages.length - 1].id === message.id && message.role === 'assistant' && message.content === "Hi, I'm Elle. How can I help today?" && (
                     <div className="flex flex-col gap-2 w-full mt-2 animate-in fade-in duration-500">
                       <button onClick={() => append({ role: 'user', content: 'Website Help' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Website Help</button>
                       <button onClick={() => append({ role: 'user', content: 'Getting Found On Google' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Getting Found On Google</button>
-                      <button onClick={() => append({ role: 'user', content: 'Website Not Getting Enquiries' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Website Not Getting Enquiries</button>
                       <button onClick={() => append({ role: 'user', content: 'Improve My Current Website' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Improve My Current Website</button>
+                      <button onClick={() => append({ role: 'user', content: 'Something Else' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Something Else</button>
+                    </div>
+                  )}
+                  {messages[messages.length - 1].id === message.id && message.role === 'assistant' && message.content.includes("Sure. What sort of issue are you experiencing with your website?") && (
+                    <div className="flex flex-col gap-2 w-full mt-2 animate-in fade-in duration-500">
+                      <button onClick={() => append({ role: 'user', content: 'Website is slow' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Website is slow</button>
+                      <button onClick={() => append({ role: 'user', content: 'Not getting enquiries' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Not getting enquiries</button>
+                      <button onClick={() => append({ role: 'user', content: 'Design looks outdated' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Design looks outdated</button>
+                      <button onClick={() => append({ role: 'user', content: 'Not appearing on Google' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Not appearing on Google</button>
+                      <button onClick={() => append({ role: 'user', content: 'Something Else' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Something Else</button>
                     </div>
                   )}
                   {hasReviewForm && (
