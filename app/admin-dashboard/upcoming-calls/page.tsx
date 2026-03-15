@@ -123,7 +123,7 @@ export default function UpcomingCallsPage() {
                       {website && (
                         <div className="flex items-center text-sm text-zinc-400 gap-3">
                           <Globe className="w-4 h-4 shrink-0 text-brand-gold/60" />
-                          <a href={website.startsWith('http') ? website : \`https://\${website}\`} target="_blank" rel="noopener noreferrer" className="text-brand-gold/80 hover:text-brand-gold transition-colors break-all">
+                          <a href={website.startsWith('http') ? website : `https://${website}`} target="_blank" rel="noopener noreferrer" className="text-brand-gold/80 hover:text-brand-gold transition-colors break-all">
                              {website}
                           </a>
                         </div>
