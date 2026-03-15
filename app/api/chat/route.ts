@@ -373,6 +373,54 @@ If the user provides this information, you MUST execute the following exact esti
 
         const detectedUrl = urlMatch ? urlMatch[0] : null;
 
+        let detected_problem: string | null = null;
+        let service_interest: string | null = null;
+
+        const msg = userText.toLowerCase();
+
+        if (
+          msg.includes("no traffic") ||
+          msg.includes("not ranking") ||
+          msg.includes("no visitors")
+        ) {
+          detected_problem = "seo_traffic";
+          service_interest = "seo";
+        }
+
+        if (
+          msg.includes("slow") ||
+          msg.includes("speed") ||
+          msg.includes("load")
+        ) {
+          detected_problem = "performance";
+          service_interest = "seo";
+        }
+
+        if (
+          msg.includes("new website") ||
+          msg.includes("build website") ||
+          msg.includes("need a website")
+        ) {
+          detected_problem = "no_website";
+          service_interest = "web_design";
+        }
+
+        if (
+          msg.includes("logo") ||
+          msg.includes("branding")
+        ) {
+          detected_problem = "branding";
+          service_interest = "branding";
+        }
+
+        if (
+          msg.includes("automation") ||
+          msg.includes("crm")
+        ) {
+          detected_problem = "automation";
+          service_interest = "automation";
+        }
+
         try {
           await supabase.from('elle_chat_logs').insert([{
              session_id: 'sess_' + ip.replace(/[^a-zA-Z0-9]/g, ''),
@@ -383,7 +431,9 @@ If the user provides this information, you MUST execute the following exact esti
              action_triggered: action,
              problem_detected: problem,
              lead_intent_score: intent,
-             visitor_ip: ip
+             visitor_ip: ip,
+             detected_problem,
+             service_interest
           }]);
         } catch (e) {
           console.error('Failed to log Elle chat', e);

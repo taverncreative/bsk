@@ -28,11 +28,8 @@ export default function LoginForm() {
         throw error;
       }
 
-      const role = data.user?.user_metadata?.role || 'client';
+      const role = data.user?.app_metadata?.role || 'client';
       
-      // Still set the cookie so existing static middleware logic works without refactoring everything yet
-      document.cookie = `userRole=${role}; path=/`;
-
       if (role === 'admin') {
         router.push('/admin-dashboard');
       } else {

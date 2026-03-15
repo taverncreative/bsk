@@ -26,10 +26,6 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
     const supabase = createClient();
     await supabase.auth.signOut();
     
-    // Clear legacy mocks just in case
-    localStorage.removeItem('userRole');
-    document.cookie = "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    
     router.push('/');
     router.refresh(); // Important for middleware evaluation
   };
