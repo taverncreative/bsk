@@ -54,27 +54,27 @@ export default function Navbar() {
           : 'bg-black/40 backdrop-blur-sm border-[rgba(255,255,255,0.06)] py-3'
       }`}
     >
-      <div className="w-full max-w-[1600px] mx-auto px-4 lg:px-14 xl:px-20 relative">
-        <div className="flex items-center justify-between w-full">
+      <div className="w-full max-w-[1400px] mx-auto px-4 md:px-6 relative">
+        <div className="flex items-center justify-between w-full gap-4 md:gap-8 transition-all duration-200">
           
           {/* Logo */}
-          <div className="flex lg:flex-1 justify-start">
+          <div className="flex shrink-0 min-w-0 md:min-w-[220px]">
             <Link href="/" className="flex items-center gap-3 group relative z-50 shrink-0">
               <Image 
                 src="/logo.png" 
                 alt="Business Sorted Kent Logo" 
                 width={60} 
                 height={40} 
-                className={`object-contain drop-shadow-[0_0_12px_rgba(214,173,103,0.3)] transition-all duration-400 ease-out ${isScrolled ? 'h-8 w-auto' : 'h-10 w-auto'} group-hover:scale-105`}
+                className={`object-contain drop-shadow-[0_0_12px_rgba(214,173,103,0.3)] transition-all duration-400 ease-out ${isScrolled ? 'h-8' : 'h-10'} w-auto group-hover:scale-105`}
               />
-              <span className={`font-bold text-white tracking-tight transition-all duration-400 ${isScrolled ? 'text-lg' : 'text-xl'}`}>
+              <span className={`font-bold text-white tracking-tight transition-all duration-400 ${isScrolled ? 'text-lg' : 'text-xl'} whitespace-nowrap`}>
                 Business Sorted Kent
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex flex-none items-center justify-center space-x-1 xl:space-x-3 whitespace-nowrap text-[0.93em] relative z-50">
+          <div className="hidden md:flex flex-1 items-center justify-center space-x-1 lg:space-x-4 xl:space-x-6 whitespace-nowrap text-[0.93em] relative z-50">
             
             {/* Services Dropdown */}
             <div 
@@ -370,12 +370,12 @@ export default function Navbar() {
           </div>
 
           {/* Right Side: Primary CTA & Mobile Toggle */}
-          <div className="flex lg:flex-1 items-center justify-end shrink-0 gap-4">
+          <div className="flex shrink-0 items-center justify-end gap-4 min-w-[60px] md:min-w-[160px] xl:min-w-[220px]">
             <a
               href="tel:07522388055"
-              className="hidden lg:flex items-center gap-2 text-neutral-300 hover:text-brand-gold font-bold transition-colors group"
+              className="hidden xl:flex items-center gap-2 text-neutral-300 hover:text-brand-gold font-bold transition-colors group whitespace-nowrap"
             >
-              <svg className="w-4 h-4 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 text-brand-gold shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
               07522 388055
@@ -383,7 +383,7 @@ export default function Navbar() {
             
             <Link
               href="/contact"
-              className="hidden md:inline-flex group relative items-center justify-center bg-brand-gold text-black font-extrabold px-7 py-[2.5] h-12 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(214,173,103,0.3)] hover:shadow-[0_0_40px_rgba(214,173,103,0.5)] hover:bg-white active:scale-95 overflow-hidden"
+              className="hidden md:inline-flex group relative items-center justify-center bg-brand-gold text-black font-extrabold px-6 lg:px-7 py-2.5 h-12 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(214,173,103,0.3)] hover:shadow-[0_0_40px_rgba(214,173,103,0.5)] hover:bg-white active:scale-95 overflow-hidden whitespace-nowrap shrink-0"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Get A Free Quote
@@ -392,7 +392,7 @@ export default function Navbar() {
             </Link>
 
             <button 
-              className="lg:hidden p-2 text-white hover:text-brand-gold transition-colors z-50 flex items-center justify-center min-h-[48px] min-w-[48px]"
+              className="md:hidden p-2 text-white hover:text-brand-gold transition-colors z-50 flex items-center justify-center min-h-[48px] min-w-[48px]"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle Mobile Menu"
             >
