@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Users, UserPlus, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { LayoutDashboard, Users, UserPlus, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye } from 'lucide-react';
 
 const navigation = [
   { name: 'Overview', href: '/admin-dashboard', icon: LayoutDashboard },
@@ -18,7 +18,14 @@ const navigation = [
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleSignOut = () => {
+    localStorage.removeItem('userRole');
+    document.cookie = "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    router.push('/');
+  };
 
   return (
     <div className="flex h-screen bg-black overflow-hidden font-sans">
@@ -82,11 +89,15 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                 );
               })}
             </nav>
-            <div className="p-4">
-              <Link href="/" className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-zinc-400 hover:bg-zinc-900 hover:text-white transition-colors">
+            <div className="p-4 border-t border-zinc-800">
+              <Link href="/client-dashboard?preview=true" className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-zinc-400 hover:bg-zinc-900 hover:text-brand-gold transition-colors mb-2">
+                <Eye className="mr-3 h-5 w-5 text-zinc-500 group-hover:text-brand-gold transition-colors" />
+                View As Client
+              </Link>
+              <button onClick={handleSignOut} className="w-full group flex items-center px-3 py-2 text-sm font-medium rounded-md text-zinc-400 hover:bg-zinc-900 hover:text-white transition-colors">
                 <LogOut className="mr-3 h-5 w-5 text-zinc-500 group-hover:text-white transition-colors" />
                 Sign Out
-              </Link>
+              </button>
             </div>
           </div>
         </div>

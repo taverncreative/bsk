@@ -111,6 +111,11 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link href="/login" className="hover:text-brand-gold transition-colors text-brand-gold/80 font-medium">
+                  Client Login
+                </Link>
+              </li>
             </ul>
             
             <h3 className="text-lg font-bold mb-4 mt-8 text-white">Get In Touch</h3>

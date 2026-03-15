@@ -1,8 +1,9 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Home, BarChart2, MessageSquare, FileText, Receipt, User, Menu, X, LogOut } from 'lucide-react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Home, BarChart2, MessageSquare, FileText, Receipt, User, Menu, X, LogOut, Eye } from 'lucide-react';
+import { Suspense } from 'react';
 
 const navigation = [
   { name: 'Overview', href: '/client-dashboard', icon: Home },
@@ -13,12 +14,31 @@ const navigation = [
   { name: 'Account', href: '/client-dashboard/account', icon: User },
 ];
 
-export default function ClientDashboardLayout({ children }: { children: React.ReactNode }) {
+function ClientDashboardLayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const isPreview = searchParams.get('preview') === 'true';
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const handleSignOut = () => {
+    localStorage.removeItem('userRole');
+    document.cookie = "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    router.push('/');
+  };
+
   return (
-    <div className="flex h-screen bg-black overflow-hidden font-sans">
+    <div className="flex flex-col h-screen bg-black overflow-hidden font-sans">
+      {isPreview && (
+        <div className="bg-brand-gold text-black text-sm font-bold py-2 px-4 flex items-center justify-center gap-2 z-[60] w-full shrink-0">
+          <Eye className="w-4 h-4" />
+          Previewing as Client
+          <Link href="/admin-dashboard" className="ml-4 underline hover:text-white transition-colors">
+            Return to Admin
+          </Link>
+        </div>
+      )}
+      <div className="flex flex-1 overflow-hidden relative">
       {/* Mobile sidebar */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 flex md:hidden">
@@ -79,11 +99,11 @@ export default function ClientDashboardLayout({ children }: { children: React.Re
                 );
               })}
             </nav>
-            <div className="p-4">
-              <Link href="/" className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-zinc-400 hover:bg-zinc-900 hover:text-white transition-colors">
+            <div className="p-4 border-t border-zinc-800">
+              <button onClick={handleSignOut} className="w-full group flex items-center px-3 py-2 text-sm font-medium rounded-md text-zinc-400 hover:bg-zinc-900 hover:text-white transition-colors">
                 <LogOut className="mr-3 h-5 w-5 text-zinc-500 group-hover:text-white transition-colors" />
                 Sign Out
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -115,6 +135,15 @@ export default function ClientDashboardLayout({ children }: { children: React.Re
           </div>
         </main>
       </div>
+      </div>
     </div>
   );
+}
+
+export default function ClientDashboardLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense fallback={<div className="h-screen w-full bg-black" />}>
+      <ClientDashboardLayoutContent>{children}</ClientDashboardLayoutContent>
+    </Suspense>
+  )
 }

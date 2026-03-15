@@ -249,7 +249,9 @@ export async function POST(req: Request) {
       return new Response("Unauthorized", { status: 403 });
     }
 
-    const { messages } = await req.json();
+    const body = await req.json();
+    const messages = body.messages || [];
+    const pageUrl = body.pageUrl || 'Unknown';
     const lastMessage = messages[messages.length - 1];
     const userText = lastMessage?.content || '';
 
@@ -349,6 +351,25 @@ If the user provides this information, you MUST execute the following exact esti
       system: finalSystemPrompt,
       messages,
       temperature: 0.7,
+      async onFinish({ text }) {
+        let action = 'None';
+        if (text.includes('[RENDER_REVIEW_FORM]')) action = 'Website Review Requested';
+        else if (text.includes('tel:07522388055') || text.toLowerCase().includes('call')) action = 'Call Offered';
+        else if (text.includes('[RENDER_FALLBACK_FORM]')) action = 'Message Submission Form';
+        
+        try {
+          await supabase.from('elle_chat_logs').insert([{
+             session_id: 'sess_' + ip.replace(/[^a-zA-Z0-9]/g, ''),
+             page_context: pageUrl,
+             visitor_message: userText,
+             elle_response: text,
+             action_triggered: action,
+             visitor_ip: ip
+          }]);
+        } catch (e) {
+          console.error('Failed to log Elle chat', e);
+        }
+      }
     });
 
     return result.toDataStreamResponse();
