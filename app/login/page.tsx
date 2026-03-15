@@ -4,8 +4,8 @@ import LoginForm from './LoginForm';
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-black flex flex-col justify-center items-center px-4 relative">
-      <div className="absolute top-8 left-8">
+    <div className="min-h-screen bg-black flex flex-col justify-center items-center px-4 relative pt-[73px]">
+      <div className="absolute top-[100px] left-8">
         <Link href="/" className="inline-flex items-center text-sm font-bold text-neutral-400 hover:text-white transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to site

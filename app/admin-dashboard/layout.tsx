@@ -31,7 +31,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
   };
 
   return (
-    <div className="flex h-screen bg-black overflow-hidden font-sans">
+    <div className="flex h-screen bg-black overflow-hidden font-sans pt-[73px]">
       {/* Mobile sidebar */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 flex md:hidden">

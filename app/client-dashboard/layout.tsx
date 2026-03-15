@@ -31,7 +31,7 @@ function ClientDashboardLayoutContent({ children }: { children: React.ReactNode 
   };
 
   return (
-    <div className="flex flex-col h-screen bg-black overflow-hidden font-sans">
+    <div className="flex flex-col h-screen bg-black overflow-hidden font-sans pt-[73px]">
       {isPreview && (
         <div className="bg-brand-gold text-black text-sm font-bold py-2 px-4 flex items-center justify-center gap-2 z-[60] w-full shrink-0">
           <Eye className="w-4 h-4" />
