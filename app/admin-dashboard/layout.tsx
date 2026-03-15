@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { LayoutDashboard, Users, UserPlus, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye } from 'lucide-react';
+import { createClient } from '@/lib/supabaseClient';
 
 const navigation = [
   { name: 'Overview', href: '/admin-dashboard', icon: LayoutDashboard },
@@ -21,10 +22,16 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    
+    // Clear legacy mocks just in case
     localStorage.removeItem('userRole');
     document.cookie = "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    
     router.push('/');
+    router.refresh(); // Important for middleware evaluation
   };
 
   return (

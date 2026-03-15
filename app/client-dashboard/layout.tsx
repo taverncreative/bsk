@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Home, BarChart2, MessageSquare, FileText, Receipt, User, Menu, X, LogOut, Eye } from 'lucide-react';
 import { Suspense } from 'react';
+import { createClient } from '@/lib/supabaseClient';
 
 const navigation = [
   { name: 'Overview', href: '/client-dashboard', icon: Home },
@@ -21,10 +22,16 @@ function ClientDashboardLayoutContent({ children }: { children: React.ReactNode 
   const isPreview = searchParams.get('preview') === 'true';
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    
+    // Clear legacy mocks just in case
     localStorage.removeItem('userRole');
     document.cookie = "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    
     router.push('/');
+    router.refresh(); // Important for middleware evaluation
   };
 
   return (

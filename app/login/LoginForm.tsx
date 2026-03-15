@@ -2,32 +2,47 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabaseClient';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
-    // Mock Authentication Logic based on email pattern
-    setTimeout(() => {
-      setLoading(false);
-      // Let's set a simple localStorage flag for our prototype
-      // If email has 'admin', route to admin dashboard
-      if (email.toLowerCase().includes('admin') || email.toLowerCase().includes('nate')) {
-        localStorage.setItem('userRole', 'admin');
-        document.cookie = "userRole=admin; path=/";
+    const supabase = createClient();
+    
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      const role = data.user?.user_metadata?.role || 'client';
+      
+      // Still set the cookie so existing static middleware logic works without refactoring everything yet
+      document.cookie = `userRole=${role}; path=/`;
+
+      if (role === 'admin') {
         router.push('/admin-dashboard');
       } else {
-        localStorage.setItem('userRole', 'client');
-        document.cookie = "userRole=client; path=/";
         router.push('/client-dashboard');
       }
-    }, 800);
+      router.refresh(); // Refresh Next.js context
+    } catch (err: any) {
+      setError(err.message || 'Failed to login');
+      setLoading(false);
+    }
   };
 
   return (
@@ -63,6 +78,12 @@ export default function LoginForm() {
       >
         {loading ? 'Authenticating...' : 'Login'}
       </button>
+
+      {error && (
+        <div className="text-red-400 text-sm text-center bg-red-400/10 py-2 rounded-lg border border-red-400/20">
+          {error}
+        </div>
+      )}
 
       <div className="text-center mt-4">
         <button type="button" onClick={() => alert('Password reset functionally coming soon.')} className="text-sm text-neutral-500 hover:text-brand-gold transition-colors">
