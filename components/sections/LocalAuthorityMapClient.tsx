@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Reveal from '@/components/ui/Reveal';
 import { MapPin, ChevronRight } from 'lucide-react';
 
@@ -75,8 +74,7 @@ export default function LocalAuthorityMapClient({ headlineOverride, towns }: Loc
           
           {/* Left: SVG Map */}
           <Reveal>
-            <div className="relative w-full aspect-video lg:aspect-[4/3] bg-neutral-900/40 rounded-2xl border border-neutral-800 p-4 sm:p-8 flex items-center justify-center shadow-inner overflow-hidden top-0 lg:sticky lg:top-24">
-              <LazyMotion features={domAnimation}>
+            <div className="relative w-full aspect-video lg:aspect-[4/3] bg-neutral-900/40 rounded-2xl border border-neutral-800 p-4 sm:p-8 flex items-center justify-center shadow-inner overflow-hidden top-0 lg:sticky lg:top-24 map-container animate-in fade-in duration-700">
                 <svg viewBox="0 0 400 300" className="w-full h-full drop-shadow-2xl">
                   {/* Abstract Kent Path */}
                   <path 
@@ -96,19 +94,16 @@ export default function LocalAuthorityMapClient({ headlineOverride, towns }: Loc
                     fill="url(#mapGrid)" 
                   />
 
-                  {towns.filter(t => t.latitude && t.longitude).map((town) => {
+                  {towns.filter(t => t.latitude && t.longitude).map((town, index) => {
                     const { x, y } = projectCoordinates(town.latitude!, town.longitude!);
                     return (
-                      <m.g
+                      <g
                         key={town.id}
-                        className="cursor-pointer group outline-none"
+                        className="cursor-pointer group outline-none animate-in fade-in zoom-in duration-500 fill-mode-both"
+                        style={{ animationDelay: `${index * 100}ms` }}
                         onClick={() => handleTownClick(town.id)}
                         onMouseEnter={() => setActiveTown(town.id)}
                         onMouseLeave={() => setActiveTown(null)}
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, type: 'spring' }}
                       >
                         {/* Glow Effect */}
                         <circle 
@@ -145,11 +140,10 @@ export default function LocalAuthorityMapClient({ headlineOverride, towns }: Loc
                         >
                           {town.name}
                         </text>
-                      </m.g>
+                      </g>
                     );
                   })}
                 </svg>
-              </LazyMotion>
             </div>
           </Reveal>
 
