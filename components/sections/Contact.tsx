@@ -25,13 +25,13 @@ export default function Contact() {
                 </div>
                 hello@businesssortedkent.co.uk
               </a>
-              <a href="tel:07700900000" className="flex items-center gap-5 text-neutral-800 font-semibold hover:text-brand-gold transition-colors group">
+              <a href="tel:07522388055" className="flex items-center gap-5 text-neutral-800 font-semibold hover:text-brand-gold transition-colors group">
                 <div className="w-12 h-12 rounded-xl bg-neutral-100 flex items-center justify-center shrink-0 group-hover:bg-brand-gold/10 transition-colors">
                   <svg className="w-5 h-5 text-neutral-600 group-hover:text-brand-gold transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
-                07700 900000
+                07522 388055
               </a>
             </div>
           </div>

@@ -12,13 +12,13 @@ export default function MobileCTA() {
           <Search className="w-5 h-5 text-brand-gold mb-1" />
           <span className="text-[10px] font-semibold text-neutral-300 uppercase tracking-tighter">Review</span>
         </Link>
-        <Link 
-          href="/contact" 
+        <a 
+          href="tel:07522388055" 
           className="flex-1 flex flex-col items-center justify-center py-2.5 px-1 bg-brand-gold rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-[0_0_15px_rgba(214,173,103,0.2)] min-h-[56px] min-w-[48px]"
         >
           <Phone className="w-5 h-5 text-black mb-1" />
           <span className="text-[10px] font-extrabold text-black uppercase tracking-tighter">Book Call</span>
-        </Link>
+        </a>
         <Link 
           href="/contact" 
           className="flex-1 flex flex-col items-center justify-center py-2.5 px-1 bg-[#151515] border border-neutral-800 rounded-lg hover:border-brand-gold/50 active:scale-95 transition-all min-h-[56px] min-w-[48px]"

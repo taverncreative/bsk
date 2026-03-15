@@ -240,7 +240,31 @@ export default function AssistantElle() {
     }
   }, [messages.length, isOpen]);
 
+  useEffect(() => {
+    const handleContextEvent = (e: any) => {
+      setIsOpen(true);
+      setHasActivated(true);
+      
+      const message = e.detail?.message;
+      if (message) {
+        // Prevent duplicate immediate messages
+        const isDuplicate = messages.some(m => m.content === message);
+        if (!isDuplicate) {
+          setMessages([
+            ...messages,
+            {
+              id: Date.now().toString(),
+              role: 'assistant',
+              content: message
+            }
+          ]);
+        }
+      }
+    };
 
+    window.addEventListener('open-elle-context', handleContextEvent);
+    return () => window.removeEventListener('open-elle-context', handleContextEvent);
+  }, [messages, setMessages]);
 
   // Activation behavior (Auto-popup after 5s)
   useEffect(() => {

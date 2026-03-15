@@ -304,6 +304,16 @@ export default function Navbar() {
 
           {/* Right Side: Primary CTA & Mobile Toggle */}
           <div className="flex items-center shrink-0 ml-4 lg:ml-8 gap-4">
+            <a
+              href="tel:07522388055"
+              className="hidden lg:flex items-center gap-2 text-neutral-300 hover:text-brand-gold font-bold transition-colors group"
+            >
+              <svg className="w-4 h-4 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              07522 388055
+            </a>
+            
             <Link
               href="/contact"
               className="hidden md:inline-flex group relative items-center justify-center bg-brand-gold text-black font-extrabold px-7 py-[2.5] h-12 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(214,173,103,0.3)] hover:shadow-[0_0_40px_rgba(214,173,103,0.5)] hover:bg-white active:scale-95 overflow-hidden"

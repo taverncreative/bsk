@@ -14,6 +14,7 @@ import HeroReveal from '@/components/ui/HeroReveal';
 import { Laptop, Search, MousePointerClick, Zap } from 'lucide-react';
 import KentCoverage from '@/components/sections/KentCoverage';
 import WebsiteReviewCTA from '@/components/sections/WebsiteReviewCTA';
+import HomepageAuthoritySection from '@/components/sections/HomepageAuthoritySection';
 
 import { getAllCaseStudies } from '@/lib/queries/caseStudies';
 import { getAllGuides } from '@/lib/queries';
@@ -86,6 +87,9 @@ export default async function Home() {
 
       {/* Free Website Review CTA */}
       <WebsiteReviewCTA />
+
+      {/* Authority Section (New) */}
+      <HomepageAuthoritySection />
 
       {/* 4. Results Section */}
       <CaseStudySection caseStudies={caseStudies} />

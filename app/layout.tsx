@@ -8,6 +8,7 @@ import Footer from '@/components/layout/Footer';
 import MobileCTA from '@/components/ui/MobileCTA';
 import SiteSchema from '@/components/seo/SiteSchema';
 import AssistantElle from '@/components/ui/AssistantElle';
+import MobileScrollCTA from '@/components/ui/MobileScrollCTA';
 import ScrollToTop from '@/components/ui/ScrollToTop';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -31,6 +32,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <MobileCTA />
+        <MobileScrollCTA />
         <AssistantElle />
       </body>
     </html>
