@@ -242,12 +242,16 @@ export default function AssistantElle() {
 
 
 
-  // Activation behavior (Manually only)
+  // Activation behavior (Auto-popup after 5s)
   useEffect(() => {
     if (hasActivated) return;
 
-    // No auto-popup logic. Wait for user to explicitly click the widget.
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+      setHasActivated(true);
+    }, 5000);
 
+    return () => clearTimeout(timer);
   }, [hasActivated]);
 
   const triggerAction = (type: string) => {
