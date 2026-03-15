@@ -50,33 +50,35 @@ export default function Navbar() {
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-400 ease-out border-b ${
         isScrolled 
-          ? 'bg-black/90 backdrop-blur-md border-neutral-800/80 shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2' 
-          : 'bg-black/40 backdrop-blur-sm border-transparent py-4'
+          ? 'bg-black/90 backdrop-blur-md border-[rgba(255,255,255,0.06)] shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2' 
+          : 'bg-black/40 backdrop-blur-sm border-[rgba(255,255,255,0.06)] py-3'
       }`}
     >
-      <div className="w-full max-w-[1600px] mx-auto px-4 lg:px-8 xl:px-16 relative">
-        <div className="flex items-center justify-between">
+      <div className="w-full max-w-[1600px] mx-auto px-4 lg:px-14 xl:px-20 relative">
+        <div className="flex items-center justify-between w-full">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group relative z-50 shrink-0">
-            <Image 
-              src="/logo.png" 
-              alt="Business Sorted Kent Logo" 
-              width={60} 
-              height={40} 
-              className={`object-contain drop-shadow-[0_0_12px_rgba(214,173,103,0.3)] transition-all duration-400 ease-out ${isScrolled ? 'h-8 w-auto' : 'h-10 w-auto'} group-hover:scale-105`}
-            />
-            <span className={`font-bold text-white tracking-tight transition-all duration-400 ${isScrolled ? 'text-lg' : 'text-xl'}`}>
-              Business Sorted Kent
-            </span>
-          </Link>
+          <div className="flex lg:flex-1 justify-start">
+            <Link href="/" className="flex items-center gap-3 group relative z-50 shrink-0">
+              <Image 
+                src="/logo.png" 
+                alt="Business Sorted Kent Logo" 
+                width={60} 
+                height={40} 
+                className={`object-contain drop-shadow-[0_0_12px_rgba(214,173,103,0.3)] transition-all duration-400 ease-out ${isScrolled ? 'h-8 w-auto' : 'h-10 w-auto'} group-hover:scale-105`}
+              />
+              <span className={`font-bold text-white tracking-tight transition-all duration-400 ${isScrolled ? 'text-lg' : 'text-xl'}`}>
+                Business Sorted Kent
+              </span>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center justify-center space-x-2 lg:space-x-4 xl:space-x-6 xl:ml-8">
+          <div className="hidden lg:flex flex-none items-center justify-center space-x-1 xl:space-x-3 whitespace-nowrap text-[0.93em] relative z-50">
             
             {/* Services Dropdown */}
             <div 
-              className="px-3 py-6 -my-6 cursor-pointer megamenu-container"
+              className="px-4 py-3 cursor-pointer megamenu-container"
               onMouseEnter={() => setActiveMenu('services')}
               onMouseLeave={() => setActiveMenu(null)}
             >
@@ -147,7 +149,7 @@ export default function Navbar() {
 
             {/* Locations Dropdown */}
             <div 
-              className="px-3 py-6 -my-6 cursor-pointer megamenu-container"
+              className="px-4 py-3 cursor-pointer megamenu-container"
               onMouseEnter={() => setActiveMenu('towns')}
               onMouseLeave={() => setActiveMenu(null)}
             >
@@ -206,7 +208,7 @@ export default function Navbar() {
 
             {/* Industries Dropdown */}
             <div 
-              className="px-3 py-6 -my-6 cursor-pointer megamenu-container"
+              className="px-4 py-3 cursor-pointer megamenu-container"
               onMouseEnter={() => setActiveMenu('industries')}
               onMouseLeave={() => setActiveMenu(null)}
             >
@@ -264,7 +266,7 @@ export default function Navbar() {
 
             {/* Guides Dropdown */}
             <div 
-              className="px-3 py-6 -my-6 cursor-pointer megamenu-container"
+              className="px-4 py-3 cursor-pointer megamenu-container"
               onMouseEnter={() => setActiveMenu('guides')}
               onMouseLeave={() => setActiveMenu(null)}
             >
@@ -307,7 +309,7 @@ export default function Navbar() {
 
             {/* Case Studies Dropdown - Keeping standard case studies from previous menu since it wasn't mentioned but needs porting back */}
             <div 
-              className="px-3 py-6 -my-6 cursor-pointer megamenu-container"
+              className="px-4 py-3 cursor-pointer megamenu-container"
               onMouseEnter={() => setActiveMenu('case-studies')}
               onMouseLeave={() => setActiveMenu(null)}
             >
@@ -360,15 +362,15 @@ export default function Navbar() {
               </div>
             </div>
 
-            <Link href="/about" className="px-3 py-6 -my-6 relative group">
+            <Link href="/about" className="px-4 py-3 relative group flex items-center">
               <span className="text-neutral-300 font-medium transition-colors hover:text-white group-hover:text-white pb-1">About</span>
-              <span className="absolute bottom-[22px] left-3 right-3 h-[2px] bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full shadow-[0_0_10px_rgba(214,173,103,0.5)]" />
+              <span className="absolute bottom-2 left-4 right-4 h-[2px] bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full shadow-[0_0_10px_rgba(214,173,103,0.5)]" />
             </Link>
 
           </div>
 
           {/* Right Side: Primary CTA & Mobile Toggle */}
-          <div className="flex items-center shrink-0 ml-4 lg:ml-8 gap-4">
+          <div className="flex lg:flex-1 items-center justify-end shrink-0 gap-4">
             <a
               href="tel:07522388055"
               className="hidden lg:flex items-center gap-2 text-neutral-300 hover:text-brand-gold font-bold transition-colors group"
