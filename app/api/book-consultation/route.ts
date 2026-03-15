@@ -36,20 +36,46 @@ const sendEmail = async (to: string, subject: string, html: string, scheduledAt?
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, website, date, time, notes } = body;
+    const { name, email, phone, website, date, time, notes } = body;
     
-    const fullNotes = website ? `Website: ${website}\n\nNotes: ${notes || 'None'}` : notes;
-
     // 1. Insert into Supabase (Bookings & Unified Leads)
     const { data: booking, error: insertError } = await supabase
       .from('bookings')
-      .insert([{ booking_date: date, booking_time: time + ':00', name, email, notes: fullNotes }])
+      .insert([{ 
+        booking_date: date, 
+        booking_time: time + ':00', 
+        name, 
+        email, 
+        phone: phone || null,
+        website_url: website || null,
+        notes 
+      }])
       .select()
       .single();
 
     if (insertError) {
       console.error('Booking Error:', insertError);
-      return NextResponse.json({ error: 'This slot might be already booked or an error occurred. Please try again or select another time.' }, { status: 400 });
+      
+      const errorEmailHTML = `
+        <h2>Booking System Error – Immediate Attention Required</h2>
+        <p>A user just attempted to book a session but the database insert failed.</p>
+        <hr/>
+        <p><strong>Time Attempted:</strong> ${new Date().toISOString()}</p>
+        <p><strong>User Email:</strong> ${email}</p>
+        <p><strong>User Name:</strong> ${name}</p>
+        <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
+        <p><strong>Website:</strong> ${website || 'N/A'}</p>
+        <p><strong>Requested Slot:</strong> ${date} at ${time}</p>
+        <p><strong>Notes:</strong> ${notes || 'None'}</p>
+        <hr/>
+        <h3>Error Details from Supabase:</h3>
+        <pre style="white-space: pre-wrap; background: #f4f4f4; padding: 10px; border-radius: 5px;">${JSON.stringify(insertError, null, 2)}</pre>
+      `;
+      
+      // Dispatch admin error notification immediately. We do NOT wait for this to finish to avoid blocking the user thread more than necessary.
+      sendEmail('hello@businesssortedkent.co.uk', 'Booking System Error – Immediate Attention Required', errorEmailHTML).catch(console.error);
+
+      return NextResponse.json({ error: 'This slot might be already booked, or we encountered a database issue. Our team has been notified.' }, { status: 400 });
     }
 
     await supabase.from('unified_leads').insert({

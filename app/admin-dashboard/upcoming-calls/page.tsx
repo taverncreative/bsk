@@ -36,15 +36,18 @@ export default function UpcomingCallsPage() {
     }
   };
 
-  const getWebsiteFromNotes = (notes: string) => {
-    if (!notes) return null;
-    const match = notes.match(/Website:\s*([^\n]+)/);
+  // Use legacy regex fallback ONLY if new database columns are empty, otherwise use direct columns.
+  const getWebsiteFromCall = (call: any) => {
+    if (call.website_url) return call.website_url;
+    if (!call.notes) return null;
+    const match = call.notes.match(/Website:\s*([^\n]+)/);
     return match ? match[1].trim() : null;
   };
   
-  const cleanNotes = (notes: string) => {
-    if (!notes) return null;
-    return notes.replace(/Website:\s*([^\n]+)\n\nNotes:\s*/, '').trim();
+  const getCleanNotesFromCall = (call: any) => {
+    if (!call.notes) return null;
+    // Strip out regex strings from legacy bookings, otherwise return full notes.
+    return call.notes.replace(/Website:\s*([^\n]+)\n\nNotes:\s*/, '').trim();
   };
 
   if (loading) {
@@ -72,8 +75,9 @@ export default function UpcomingCallsPage() {
         ) : (
           <div className="divide-y divide-zinc-800/60">
             {calls.map((call) => {
-              const website = getWebsiteFromNotes(call.notes);
-              const actualNotes = cleanNotes(call.notes);
+              const website = getWebsiteFromCall(call);
+              const actualNotes = getCleanNotesFromCall(call);
+              const phone = call.phone || null;
               
               const d = new Date(call.booking_date);
               const formattedDate = d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
@@ -120,6 +124,14 @@ export default function UpcomingCallsPage() {
                            {call.email}
                         </a>
                       </div>
+                      {phone && (
+                        <div className="flex items-center text-sm text-zinc-400 gap-3">
+                          <PhoneCall className="w-4 h-4 shrink-0 text-zinc-600" />
+                          <a href={`tel:${phone}`} className="hover:text-white transition-colors break-all">
+                             {phone}
+                          </a>
+                        </div>
+                      )}
                       {website && (
                         <div className="flex items-center text-sm text-zinc-400 gap-3">
                           <Globe className="w-4 h-4 shrink-0 text-brand-gold/60" />
