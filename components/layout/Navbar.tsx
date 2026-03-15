@@ -74,7 +74,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex flex-1 items-center justify-center space-x-1 lg:space-x-4 xl:space-x-6 whitespace-nowrap text-[0.93em] relative z-50">
+          <div className="hidden md:flex flex-1 items-center justify-center space-x-1 lg:space-x-4 xl:space-x-6 whitespace-nowrap text-[0.93em] z-[60]">
             
             {/* Services Dropdown */}
             <div 
@@ -92,7 +92,7 @@ export default function Navbar() {
                 className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[1200px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'services' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
                 onClick={() => setActiveMenu(null)}
               >
-                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8">
+                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8 whitespace-normal text-left">
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
                   
                   <div className="flex-1 grid grid-cols-4 gap-6">
@@ -163,7 +163,7 @@ export default function Navbar() {
                 className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[1000px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'towns' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
                 onClick={() => setActiveMenu(null)}
               >
-                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8">
+                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8 whitespace-normal text-left">
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
                   
                   <div className="flex-1 grid grid-cols-4 gap-6">
@@ -222,7 +222,7 @@ export default function Navbar() {
                 className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[1000px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'industries' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
                 onClick={() => setActiveMenu(null)}
               >
-                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8">
+                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8 whitespace-normal text-left">
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
                   
                   <div className="flex-1 grid grid-cols-4 gap-6">
@@ -280,7 +280,7 @@ export default function Navbar() {
                 className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[800px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'guides' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
                 onClick={() => setActiveMenu(null)}
               >
-                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8">
+                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8 whitespace-normal text-left">
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
                   
                   <div className="flex-1 grid grid-cols-2 gap-6">
@@ -323,7 +323,7 @@ export default function Navbar() {
                 className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[650px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'case-studies' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
                 onClick={() => setActiveMenu(null)}
               >
-                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-8 relative overflow-hidden">
+                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-8 relative overflow-hidden whitespace-normal text-left">
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
                   
                   <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-6">Featured Results</h3>
