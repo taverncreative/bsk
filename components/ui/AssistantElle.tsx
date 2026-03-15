@@ -262,8 +262,17 @@ export default function AssistantElle() {
       }
     };
 
+    const forceOpenHandler = () => {
+      setIsOpen(true);
+      setHasActivated(true);
+    };
+
     window.addEventListener('open-elle-context', handleContextEvent);
-    return () => window.removeEventListener('open-elle-context', handleContextEvent);
+    window.addEventListener('force-open-elle', forceOpenHandler);
+    return () => {
+      window.removeEventListener('open-elle-context', handleContextEvent);
+      window.removeEventListener('force-open-elle', forceOpenHandler);
+    };
   }, [messages, setMessages]);
 
   // Activation behavior (Auto-popup after 5s)

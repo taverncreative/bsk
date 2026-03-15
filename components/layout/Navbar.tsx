@@ -3,22 +3,27 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronDown, ArrowRight, Laptop, Search, MousePointerClick, Zap, MapPin, TrendingUp, Briefcase } from 'lucide-react';
-import IconWrapper from '@/components/ui/IconWrapper';
+import { ChevronDown, ArrowRight, Menu, X, MapPin, TrendingUp, Briefcase } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import MegaMenuCTA from '@/components/ui/MegaMenuCTA';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileLocationsOpen, setMobileLocationsOpen] = useState(false);
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
+  const [mobileGuidesOpen, setMobileGuidesOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     setActiveMenu(null);
     setIsMobileMenuOpen(false);
     setMobileServicesOpen(false);
+    setMobileLocationsOpen(false);
+    setMobileIndustriesOpen(false);
+    setMobileGuidesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -81,160 +86,226 @@ export default function Navbar() {
                 <span className={`absolute -bottom-1 left-0 w-full h-[2px] bg-brand-gold origin-left rounded-full shadow-[0_0_10px_rgba(214,173,103,0.5)] transition-transform duration-300 ${activeMenu === 'services' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
               </div>
               
-              {/* Mega Menu */}
               <div 
-                className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[800px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'services' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
+                className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[1200px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'services' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
                 onClick={() => setActiveMenu(null)}
               >
-                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-8 relative overflow-hidden">
+                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8">
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
                   
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-                    {/* Core Services */}
-                    <div className="flex flex-col gap-6">
-                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Core Growth Services</h3>
-                      
-                      <Link href="/web-design" className="group/item flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-neutral-900/50 transition-colors">
-                        <div className="shrink-0 bg-neutral-950 border border-neutral-800 p-3 rounded-xl group-hover/item:border-brand-gold/50 group-hover/item:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
-                          <Laptop className="w-5 h-5 text-brand-gold" />
-                        </div>
-                        <div>
-                          <h4 className="text-white font-bold mb-1 group-hover/item:text-brand-gold transition-colors">Website Design</h4>
-                          <p className="text-sm text-neutral-400 leading-relaxed">High-performance, conversion-optimised websites for local service businesses.</p>
-                        </div>
-                      </Link>
-
-                      <Link href="/seo" className="group/item flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-neutral-900/50 transition-colors">
-                        <div className="shrink-0 bg-neutral-950 border border-neutral-800 p-3 rounded-xl group-hover/item:border-brand-gold/50 group-hover/item:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
-                          <Search className="w-5 h-5 text-brand-gold" />
-                        </div>
-                        <div>
-                          <h4 className="text-white font-bold mb-1 group-hover/item:text-brand-gold transition-colors">SEO & Google Rankings</h4>
-                          <p className="text-sm text-neutral-400 leading-relaxed">Dominate local search results and capture high-intent commercial traffic.</p>
-                        </div>
-                      </Link>
-
-                      <Link href="/lead-capture" className="group/item flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-neutral-900/50 transition-colors">
-                        <div className="shrink-0 bg-neutral-950 border border-neutral-800 p-3 rounded-xl group-hover/item:border-brand-gold/50 group-hover/item:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
-                          <MousePointerClick className="w-5 h-5 text-brand-gold" />
-                        </div>
-                        <div>
-                          <h4 className="text-white font-bold mb-1 group-hover/item:text-brand-gold transition-colors">Lead Capture Systems</h4>
-                          <p className="text-sm text-neutral-400 leading-relaxed">Funnels and integrated systems engineered specifically to generate daily enquiries.</p>
-                        </div>
-                      </Link>
-
-                      <Link href="/business-automation" className="group/item flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-neutral-900/50 transition-colors">
-                        <div className="shrink-0 bg-neutral-950 border border-neutral-800 p-3 rounded-xl group-hover/item:border-brand-gold/50 group-hover/item:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
-                          <Zap className="w-5 h-5 text-brand-gold" />
-                        </div>
-                        <div>
-                          <h4 className="text-white font-bold mb-1 group-hover/item:text-brand-gold transition-colors">Business Automation</h4>
-                          <p className="text-sm text-neutral-400 leading-relaxed">Streamline operations, automate follow-ups, and manage leads without the manual work.</p>
-                        </div>
-                      </Link>
+                  <div className="flex-1 grid grid-cols-4 gap-6">
+                    {/* Column 1 */}
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-base font-bold text-white tracking-tight">Website Design</h3>
+                      <p className="text-xs text-brand-gold/80 font-medium mb-1">High-performance websites built to rank and convert.</p>
+                      <Link href="/web-design" className="text-sm text-neutral-300 hover:text-white transition-colors">Website Design</Link>
+                      <Link href="/web-design" className="text-sm text-neutral-300 hover:text-white transition-colors">Small Business Websites</Link>
+                      <Link href="/web-design" className="text-sm text-neutral-300 hover:text-white transition-colors">Ecommerce Websites</Link>
+                      <Link href="/web-design" className="text-sm text-neutral-300 hover:text-white transition-colors">Website Redesign</Link>
+                      <Link href="/web-design" className="text-sm text-neutral-300 hover:text-white transition-colors">Mobile Optimised Websites</Link>
                     </div>
 
-                    {/* Supporting Services */}
-                    <div className="flex flex-col gap-6">
-                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Supporting Services</h3>
-
-                      <Link href="/branding" className="group/item flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-neutral-900/50 transition-colors">
-                        <div className="shrink-0 bg-neutral-950 border border-neutral-800 p-3 rounded-xl group-hover/item:border-brand-gold/50 group-hover/item:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
-                          <Briefcase className="w-5 h-5 text-brand-gold" />
-                        </div>
-                        <div>
-                          <h4 className="text-white font-bold mb-1 group-hover/item:text-brand-gold transition-colors">Logo & Branding</h4>
-                          <p className="text-sm text-neutral-400 leading-relaxed">Professional brand identities that make your business stand out and build trust.</p>
-                        </div>
-                      </Link>
-
-                      <Link href="/social-media-setup" className="group/item flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-neutral-900/50 transition-colors">
-                        <div className="shrink-0 bg-neutral-950 border border-neutral-800 p-3 rounded-xl group-hover/item:border-brand-gold/50 group-hover/item:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
-                          <TrendingUp className="w-5 h-5 text-brand-gold" />
-                        </div>
-                        <div>
-                          <h4 className="text-white font-bold mb-1 group-hover/item:text-brand-gold transition-colors">Social Media Setup</h4>
-                          <p className="text-sm text-neutral-400 leading-relaxed">Optimised social media profiles structured to attract and convert local clients.</p>
-                        </div>
-                      </Link>
-
-                      <Link href="/workwear-print" className="group/item flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-neutral-900/50 transition-colors">
-                        <div className="shrink-0 bg-neutral-950 border border-neutral-800 p-3 rounded-xl group-hover/item:border-brand-gold/50 group-hover/item:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
-                          <Briefcase className="w-5 h-5 text-brand-gold" />
-                        </div>
-                        <div>
-                          <h4 className="text-white font-bold mb-1 group-hover/item:text-brand-gold transition-colors">Workwear & Print</h4>
-                          <p className="text-sm text-neutral-400 leading-relaxed">High-quality physical marketing materials matched to your brand identity.</p>
-                        </div>
-                      </Link>
+                    {/* Column 2 */}
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-base font-bold text-white tracking-tight">SEO</h3>
+                      <p className="text-xs text-brand-gold/80 font-medium mb-1">Helping local businesses appear when customers search.</p>
+                      <Link href="/seo" className="text-sm text-neutral-300 hover:text-white transition-colors">SEO Services In Kent</Link>
+                      <Link href="/seo" className="text-sm text-neutral-300 hover:text-white transition-colors">Local SEO</Link>
+                      <Link href="/seo" className="text-sm text-neutral-300 hover:text-white transition-colors">SEO For Trades</Link>
+                      <Link href="/seo" className="text-sm text-neutral-300 hover:text-white transition-colors">Google Business Optimisation</Link>
+                      <Link href="/seo" className="text-sm text-neutral-300 hover:text-white transition-colors">Technical SEO</Link>
                     </div>
 
+                    {/* Column 3 */}
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-base font-bold text-white tracking-tight">Automation</h3>
+                      <p className="text-xs text-brand-gold/80 font-medium mb-1">Streamlining processes to save you time and money.</p>
+                      <Link href="/business-automation" className="text-sm text-neutral-300 hover:text-white transition-colors">Business Automation</Link>
+                      <Link href="/business-automation" className="text-sm text-neutral-300 hover:text-white transition-colors">Automated Lead Handling</Link>
+                      <Link href="/business-automation" className="text-sm text-neutral-300 hover:text-white transition-colors">Email Automation</Link>
+                      <Link href="/business-automation" className="text-sm text-neutral-300 hover:text-white transition-colors">Workflow Automation</Link>
+                    </div>
+
+                    {/* Column 4 */}
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-base font-bold text-white tracking-tight">Lead Capture</h3>
+                      <p className="text-xs text-brand-gold/80 font-medium mb-1">Converting traffic into ready-to-buy enquiries.</p>
+                      <Link href="/lead-capture" className="text-sm text-neutral-300 hover:text-white transition-colors">Lead Capture Systems</Link>
+                      <Link href="/lead-capture" className="text-sm text-neutral-300 hover:text-white transition-colors">Contact Form Optimisation</Link>
+                      <Link href="/lead-capture" className="text-sm text-neutral-300 hover:text-white transition-colors">Conversion Optimisation</Link>
+                      <Link href="/lead-capture" className="text-sm text-neutral-300 hover:text-white transition-colors">Enquiry Automation</Link>
+                    </div>
                   </div>
                   
-                  <div className="mt-8 pt-6 border-t border-neutral-800/50 pb-2">
-                    <Link href="/services" className="inline-flex items-center text-sm font-bold text-brand-gold hover:text-white transition-colors group/link">
-                      View All Services
-                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1" />
-                    </Link>
+                  {/* CTA Panel */}
+                  <div className="w-[320px] shrink-0 border-l border-neutral-800/50 pl-8 pb-2">
+                    <MegaMenuCTA onClick={() => setActiveMenu(null)} />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Towns Dropdown */}
+            {/* Locations Dropdown */}
             <div 
               className="px-3 py-6 -my-6 cursor-pointer megamenu-container"
               onMouseEnter={() => setActiveMenu('towns')}
               onMouseLeave={() => setActiveMenu(null)}
             >
               <div className="flex items-center gap-1.5 text-neutral-300 font-medium transition-colors hover:text-white group relative pb-1">
-                Towns
+                Locations
                 <ChevronDown className={`w-4 h-4 text-neutral-500 transition-transform duration-300 ${activeMenu === 'towns' ? '-rotate-180 text-brand-gold' : 'group-hover:text-brand-gold group-hover:-rotate-180'}`} />
                 <span className={`absolute -bottom-1 left-0 w-full h-[2px] bg-brand-gold origin-left rounded-full shadow-[0_0_10px_rgba(214,173,103,0.5)] transition-transform duration-300 ${activeMenu === 'towns' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
               </div>
 
-              {/* Mega Menu */}
               <div 
-                className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[600px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'towns' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
+                className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[1000px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'towns' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
                 onClick={() => setActiveMenu(null)}
               >
-                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-8 relative overflow-hidden">
+                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8">
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
                   
-                  <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-6">Core Kent Coverage</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    {['Ashford', 'Canterbury', 'Maidstone', 'Folkestone', 'Tunbridge Wells'].map((town) => (
-                      <Link 
-                        key={town} 
-                        href={`/towns/${town.toLowerCase().replace(' ', '-')}`}
-                        className="flex items-center gap-3 p-3 -mx-3 rounded-lg hover:bg-neutral-900/60 transition-colors group/town"
-                      >
-                        <div className="w-8 h-8 rounded-full bg-neutral-950 border border-neutral-800 flex items-center justify-center group-hover/town:border-brand-gold/40 group-hover/town:shadow-[0_0_10px_rgba(214,173,103,0.1)] transition-all">
-                          <MapPin className="w-3.5 h-3.5 text-brand-gold" />
-                        </div>
-                        <span className="text-neutral-300 group-hover/town:text-brand-gold font-medium transition-colors">{town}</span>
+                  <div className="flex-1 grid grid-cols-4 gap-6">
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">East Kent</h3>
+                      <Link href="/towns/ashford" className="text-sm text-neutral-300 hover:text-white transition-colors">Ashford</Link>
+                      <Link href="/towns/canterbury" className="text-sm text-neutral-300 hover:text-white transition-colors">Canterbury</Link>
+                      <Link href="/towns/folkestone" className="text-sm text-neutral-300 hover:text-white transition-colors">Folkestone</Link>
+                      <Link href="/towns/hythe" className="text-sm text-neutral-300 hover:text-white transition-colors">Hythe</Link>
+                    </div>
+                    
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Central Kent</h3>
+                      <Link href="/towns/maidstone" className="text-sm text-neutral-300 hover:text-white transition-colors">Maidstone</Link>
+                      <Link href="/towns/medway" className="text-sm text-neutral-300 hover:text-white transition-colors">Medway</Link>
+                      <Link href="/towns/sittingbourne" className="text-sm text-neutral-300 hover:text-white transition-colors">Sittingbourne</Link>
+                      <Link href="/towns/faversham" className="text-sm text-neutral-300 hover:text-white transition-colors">Faversham</Link>
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Thanet & Coast</h3>
+                      <Link href="/towns/margate" className="text-sm text-neutral-300 hover:text-white transition-colors">Margate</Link>
+                      <Link href="/towns/ramsgate" className="text-sm text-neutral-300 hover:text-white transition-colors">Ramsgate</Link>
+                      <Link href="/towns/broadstairs" className="text-sm text-neutral-300 hover:text-white transition-colors">Broadstairs</Link>
+                      <Link href="/towns/deal" className="text-sm text-neutral-300 hover:text-white transition-colors">Deal</Link>
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Explore Locations</h3>
+                      <Link href="/towns" className="text-sm text-brand-gold hover:text-white font-bold transition-colors inline-flex items-center group">
+                        All Kent Locations <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                       </Link>
-                    ))}
+                    </div>
                   </div>
 
-                  <div className="mt-8 pt-6 border-t border-neutral-800/50 pb-2">
-                    <Link href="/towns" className="inline-flex items-center text-sm font-bold text-brand-gold hover:text-white transition-colors group/link">
-                      View All Kent Locations
-                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1" />
-                    </Link>
+                  <div className="w-[300px] shrink-0 border-l border-neutral-800/50 pl-8 pb-2">
+                    <MegaMenuCTA onClick={() => setActiveMenu(null)} />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Standard Links */}
-            <Link href="/industries" className="px-3 py-6 -my-6 relative group">
-              <span className="text-neutral-300 font-medium transition-colors hover:text-white group-hover:text-white pb-1">Industries</span>
-              <span className="absolute bottom-[22px] left-3 right-3 h-[2px] bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full shadow-[0_0_10px_rgba(214,173,103,0.5)]" />
-            </Link>
+            {/* Industries Dropdown */}
+            <div 
+              className="px-3 py-6 -my-6 cursor-pointer megamenu-container"
+              onMouseEnter={() => setActiveMenu('industries')}
+              onMouseLeave={() => setActiveMenu(null)}
+            >
+              <div className="flex items-center gap-1.5 text-neutral-300 font-medium transition-colors hover:text-white group relative pb-1">
+                Industries
+                <ChevronDown className={`w-4 h-4 text-neutral-500 transition-transform duration-300 ${activeMenu === 'industries' ? '-rotate-180 text-brand-gold' : 'group-hover:text-brand-gold group-hover:-rotate-180'}`} />
+                <span className={`absolute -bottom-1 left-0 w-full h-[2px] bg-brand-gold origin-left rounded-full shadow-[0_0_10px_rgba(214,173,103,0.5)] transition-transform duration-300 ${activeMenu === 'industries' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
+              </div>
 
-            {/* Case Studies Dropdown */}
+              <div 
+                className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[1000px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'industries' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
+                onClick={() => setActiveMenu(null)}
+              >
+                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8">
+                  <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
+                  
+                  <div className="flex-1 grid grid-cols-4 gap-6">
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Trades</h3>
+                      <Link href="/industries/electricians" className="text-sm text-neutral-300 hover:text-white transition-colors">Electricians</Link>
+                      <Link href="/industries/plumbers" className="text-sm text-neutral-300 hover:text-white transition-colors">Plumbers</Link>
+                      <Link href="/industries/roofers" className="text-sm text-neutral-300 hover:text-white transition-colors">Roofers</Link>
+                      <Link href="/industries/builders" className="text-sm text-neutral-300 hover:text-white transition-colors">Builders</Link>
+                    </div>
+                    
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Local Services</h3>
+                      <Link href="/industries/cleaning-companies" className="text-sm text-neutral-300 hover:text-white transition-colors">Cleaning Companies</Link>
+                      <Link href="/industries/landscapers" className="text-sm text-neutral-300 hover:text-white transition-colors">Landscapers</Link>
+                      <Link href="/industries/removal-companies" className="text-sm text-neutral-300 hover:text-white transition-colors">Removal Companies</Link>
+                      <Link href="/industries/property-services" className="text-sm text-neutral-300 hover:text-white transition-colors">Property Services</Link>
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Professional Services</h3>
+                      <Link href="/industries/consultants" className="text-sm text-neutral-300 hover:text-white transition-colors">Consultants</Link>
+                      <Link href="/industries/accountants" className="text-sm text-neutral-300 hover:text-white transition-colors">Accountants</Link>
+                      <Link href="/industries/estate-agents" className="text-sm text-neutral-300 hover:text-white transition-colors">Estate Agents</Link>
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Explore Industries</h3>
+                      <Link href="/industries" className="text-sm text-brand-gold hover:text-white font-bold transition-colors inline-flex items-center group">
+                        All Industries <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="w-[300px] shrink-0 border-l border-neutral-800/50 pl-8 pb-2">
+                    <MegaMenuCTA onClick={() => setActiveMenu(null)} />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Guides Dropdown */}
+            <div 
+              className="px-3 py-6 -my-6 cursor-pointer megamenu-container"
+              onMouseEnter={() => setActiveMenu('guides')}
+              onMouseLeave={() => setActiveMenu(null)}
+            >
+              <div className="flex items-center gap-1.5 text-neutral-300 font-medium transition-colors hover:text-white group relative pb-1">
+                Guides
+                <ChevronDown className={`w-4 h-4 text-neutral-500 transition-transform duration-300 ${activeMenu === 'guides' ? '-rotate-180 text-brand-gold' : 'group-hover:text-brand-gold group-hover:-rotate-180'}`} />
+                <span className={`absolute -bottom-1 left-0 w-full h-[2px] bg-brand-gold origin-left rounded-full shadow-[0_0_10px_rgba(214,173,103,0.5)] transition-transform duration-300 ${activeMenu === 'guides' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
+              </div>
+
+              <div 
+                className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[800px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'guides' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
+                onClick={() => setActiveMenu(null)}
+              >
+                <div className="bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 relative overflow-hidden flex gap-8">
+                  <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
+                  
+                  <div className="flex-1 grid grid-cols-2 gap-6">
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Featured Guides</h3>
+                      <Link href="/guides" className="text-sm text-neutral-300 hover:text-white transition-colors">How To Rank On Google</Link>
+                      <Link href="/guides" className="text-sm text-neutral-300 hover:text-white transition-colors">Website Speed Guide</Link>
+                      <Link href="/guides" className="text-sm text-neutral-300 hover:text-white transition-colors">Local SEO Guide</Link>
+                      <Link href="/guides" className="text-sm text-neutral-300 hover:text-white transition-colors">How To Get More Enquiries</Link>
+                    </div>
+                    
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Explore</h3>
+                      <Link href="/guides" className="text-sm text-brand-gold hover:text-white font-bold transition-colors inline-flex items-center group">
+                        View All Guides <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="w-[300px] shrink-0 border-l border-neutral-800/50 pl-8 pb-2">
+                    <MegaMenuCTA onClick={() => setActiveMenu(null)} />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Case Studies Dropdown - Keeping standard case studies from previous menu since it wasn't mentioned but needs porting back */}
             <div 
               className="px-3 py-6 -my-6 cursor-pointer megamenu-container"
               onMouseEnter={() => setActiveMenu('case-studies')}
@@ -246,7 +317,6 @@ export default function Navbar() {
                 <span className={`absolute -bottom-1 left-0 w-full h-[2px] bg-brand-gold origin-left rounded-full shadow-[0_0_10px_rgba(214,173,103,0.5)] transition-transform duration-300 ${activeMenu === 'case-studies' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
               </div>
 
-              {/* Mega Menu */}
               <div 
                 className={`absolute top-full left-1/2 -translate-x-1/2 w-full max-w-[650px] pt-4 transition-all duration-300 ease-out ${activeMenu === 'case-studies' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}
                 onClick={() => setActiveMenu(null)}
@@ -289,11 +359,6 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-
-            <Link href="/guides" className="px-3 py-6 -my-6 relative group">
-              <span className="text-neutral-300 font-medium transition-colors hover:text-white group-hover:text-white pb-1">Guides</span>
-              <span className="absolute bottom-[22px] left-3 right-3 h-[2px] bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full shadow-[0_0_10px_rgba(214,173,103,0.5)]" />
-            </Link>
 
             <Link href="/about" className="px-3 py-6 -my-6 relative group">
               <span className="text-neutral-300 font-medium transition-colors hover:text-white group-hover:text-white pb-1">About</span>
@@ -358,7 +423,7 @@ export default function Navbar() {
             <div 
               className={`overflow-hidden transition-all duration-300 ease-in-out pl-4 ${mobileServicesOpen ? 'max-h-[500px] opacity-100 pb-4' : 'max-h-0 opacity-0'}`}
             >
-              <Link href="/services" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">All Services Overview</Link>
+              <Link href="/services" className="text-lg font-medium text-brand-gold hover:text-white py-2.5 min-h-[48px] flex items-center">All Services Overview</Link>
               <Link href="/web-design" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Website Design</Link>
               <Link href="/seo" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">SEO & Rankings</Link>
               <Link href="/lead-capture" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Lead Capture</Link>
@@ -366,15 +431,62 @@ export default function Navbar() {
             </div>
           </div>
 
-          <Link href="/towns" className="text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center border-b border-neutral-800/60">
-            Locations
-          </Link>
-          <Link href="/industries" className="text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center border-b border-neutral-800/60">
-            Industries
-          </Link>
-          <Link href="/guides" className="text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center border-b border-neutral-800/60">
-            Guides
-          </Link>
+          <div className="border-b border-neutral-800/60">
+            <button 
+              onClick={() => setMobileLocationsOpen(!mobileLocationsOpen)}
+              className="w-full text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center justify-between transition-colors"
+            >
+              Locations
+              <ChevronDown className={`w-6 h-6 transition-transform duration-300 ${mobileLocationsOpen ? '-rotate-180 text-brand-gold' : 'text-neutral-500'}`} />
+            </button>
+            <div 
+              className={`overflow-hidden transition-all duration-300 ease-in-out pl-4 ${mobileLocationsOpen ? 'max-h-[500px] opacity-100 pb-4' : 'max-h-0 opacity-0'}`}
+            >
+              <Link href="/towns" className="text-lg font-medium text-brand-gold hover:text-white py-2.5 min-h-[48px] flex items-center">All Kent Locations</Link>
+              <Link href="/towns/ashford" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Ashford</Link>
+              <Link href="/towns/canterbury" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Canterbury</Link>
+              <Link href="/towns/maidstone" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Maidstone</Link>
+              <Link href="/towns/margate" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Margate</Link>
+            </div>
+          </div>
+
+          <div className="border-b border-neutral-800/60">
+            <button 
+              onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
+              className="w-full text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center justify-between transition-colors"
+            >
+              Industries
+              <ChevronDown className={`w-6 h-6 transition-transform duration-300 ${mobileIndustriesOpen ? '-rotate-180 text-brand-gold' : 'text-neutral-500'}`} />
+            </button>
+            <div 
+              className={`overflow-hidden transition-all duration-300 ease-in-out pl-4 ${mobileIndustriesOpen ? 'max-h-[500px] opacity-100 pb-4' : 'max-h-0 opacity-0'}`}
+            >
+              <Link href="/industries" className="text-lg font-medium text-brand-gold hover:text-white py-2.5 min-h-[48px] flex items-center">All Industries</Link>
+              <Link href="/industries/builders" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Builders</Link>
+              <Link href="/industries/electricians" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Electricians</Link>
+              <Link href="/industries/plumbers" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Plumbers</Link>
+              <Link href="/industries/accountants" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Accountants</Link>
+            </div>
+          </div>
+
+          <div className="border-b border-neutral-800/60">
+            <button 
+              onClick={() => setMobileGuidesOpen(!mobileGuidesOpen)}
+              className="w-full text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center justify-between transition-colors"
+            >
+              Guides
+              <ChevronDown className={`w-6 h-6 transition-transform duration-300 ${mobileGuidesOpen ? '-rotate-180 text-brand-gold' : 'text-neutral-500'}`} />
+            </button>
+            <div 
+              className={`overflow-hidden transition-all duration-300 ease-in-out pl-4 ${mobileGuidesOpen ? 'max-h-[500px] opacity-100 pb-4' : 'max-h-0 opacity-0'}`}
+            >
+              <Link href="/guides" className="text-lg font-medium text-brand-gold hover:text-white py-2.5 min-h-[48px] flex items-center">View All Guides</Link>
+              <Link href="/guides" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">How To Rank On Google</Link>
+              <Link href="/guides" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Website Speed Guide</Link>
+              <Link href="/guides" className="text-lg font-medium text-neutral-300 hover:text-brand-gold py-2.5 min-h-[48px] flex items-center">Local SEO Guide</Link>
+            </div>
+          </div>
+
           <Link href="/about" className="text-2xl font-medium text-white hover:text-brand-gold py-3 min-h-[48px] flex items-center border-b border-neutral-800/60">
             About
           </Link>
@@ -382,6 +494,10 @@ export default function Navbar() {
             Contact
           </Link>
           
+          <div className="mt-8">
+            <MegaMenuCTA onClick={() => setIsMobileMenuOpen(false)} />
+          </div>
+
           <div className="mt-8 pt-4 pb-20">
             <Link
               href="/contact"
