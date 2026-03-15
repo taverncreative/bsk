@@ -56,49 +56,19 @@ const InlineFallbackForm = () => {
 };
 
 const InlineReviewForm = ({ messages }: { messages: Message[] }) => {
-  const [status, setStatus] = useState<'idle' | 'generating' | 'confirm' | 'editing' | 'loading' | 'success' | 'error'>('idle');
-  const [summary, setSummary] = useState('');
-  const [businessType, setBusinessType] = useState('Unknown');
-  const [formDataCache, setFormDataCache] = useState<any>(null);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const requestSummary = async (e: React.FormEvent<HTMLFormElement>) => {
+  const requestReview = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus('generating');
+    setStatus('loading');
     const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
       url: formData.get('url'),
       pageUrl: window.location.href,
-      timestamp: new Date().toISOString()
-    };
-    setFormDataCache(data);
-
-    try {
-      const res = await fetch('/api/generate-summary', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages })
-      });
-      const json = await res.json();
-      if (res.ok && json.summary) {
-        setSummary(json.summary);
-        setBusinessType(json.businessType || 'Unknown');
-        setStatus('confirm');
-      } else {
-        submitFinal(data, 'Summary generation failed', 'Unknown');
-      }
-    } catch {
-      submitFinal(data, 'Summary generation failed', 'Unknown');
-    }
-  };
-
-  const submitFinal = async (overrideData?: any, overrideSummary?: string, overrideBusiness?: string) => {
-    setStatus('loading');
-    const data = overrideData || {
-      ...formDataCache,
-      summary: overrideSummary || summary,
-      businessType: overrideBusiness || businessType
+      timestamp: new Date().toISOString(),
+      messages
     };
 
     try {
@@ -117,55 +87,18 @@ const InlineReviewForm = ({ messages }: { messages: Message[] }) => {
   if (status === 'success') {
     return (
       <div className="mt-3 p-3 bg-[#D6AD67]/10 border border-[#D6AD67] text-[#D6AD67] rounded-xl text-sm leading-relaxed">
-        Thanks — we've received your request and will be in touch shortly.
-      </div>
-    );
-  }
-
-  if (status === 'confirm' || status === 'editing') {
-    return (
-      <div className="mt-3 flex flex-col gap-3 bg-neutral-900 border border-neutral-700 p-4 rounded-xl animate-in fade-in zoom-in-95 duration-200">
-        <p className="text-neutral-300 text-sm leading-relaxed">Here's a quick summary of our conversation. You can confirm or edit anything before sending.</p>
-        
-        {status === 'editing' ? (
-          <textarea 
-            className="w-full bg-neutral-950 border border-neutral-700 text-neutral-300 text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none min-h-[120px]"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
-            autoFocus
-          />
-        ) : (
-          <div className="w-full bg-neutral-950 border border-neutral-800 text-neutral-300 text-sm rounded-lg py-3 px-3 min-h-[120px] whitespace-pre-wrap">
-            {summary}
-          </div>
-        )}
-        
-        <div className="flex gap-2 w-full">
-          <button onClick={() => setStatus('idle')} className="flex-1 border border-neutral-700 text-neutral-400 font-semibold py-2 rounded-lg text-xs hover:bg-neutral-800 transition-colors hidden sm:block">Cancel</button>
-          {status === 'confirm' && (
-            <button onClick={() => setStatus('editing')} className="flex-1 bg-neutral-800 text-white font-semibold py-2 rounded-lg text-xs hover:bg-neutral-700 transition-colors">Edit</button>
-          )}
-          <button onClick={() => submitFinal()} className="flex-[2] bg-brand-gold text-black font-semibold py-2 rounded-lg text-xs hover:opacity-90 transition-opacity">
-            {status === 'editing' ? 'Save & Confirm' : 'Confirm'}
-          </button>
-        </div>
-        <button onClick={() => setStatus('idle')} className="w-full border border-neutral-700 text-neutral-400 font-semibold py-1.5 rounded-lg text-xs hover:bg-neutral-800 transition-colors sm:hidden mt-2">Cancel</button>
+        Thanks — we've received your request. We'll review the details and get back to you shortly.
       </div>
     );
   }
 
   return (
-    <form onSubmit={requestSummary} className="mt-3 flex flex-col gap-2">
+    <form onSubmit={requestReview} className="mt-3 flex flex-col gap-2 animate-in fade-in zoom-in-95 duration-200">
       <input required name="name" type="text" placeholder="Your Name" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
       <input required name="email" type="email" placeholder="Email Address" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
       <input required name="url" type="url" pattern="https?://.+" title="Include http:// or https://" placeholder="Website URL" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
-      <button disabled={status === 'generating' || status === 'loading'} type="submit" className="w-full mt-1 bg-brand-gold text-black font-bold py-2 rounded-lg text-sm transition-opacity hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2">
-        {status === 'generating' || status === 'loading' ? (
-           <>
-             <span className="w-4 h-4 rounded-full border-2 border-black/30 border-t-black animate-spin" />
-             {status === 'generating' ? 'Generating Summary...' : 'Sending...'}
-           </>
-        ) : 'Request Review'}
+      <button disabled={status === 'loading'} type="submit" className="w-full mt-1 bg-brand-gold text-black font-bold py-2 rounded-lg text-sm transition-opacity hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2">
+        {status === 'loading' ? 'Sending...' : 'Request Review'}
       </button>
       {status === 'error' && <p className="text-red-400 text-xs text-center mt-1">Something went wrong. Please try again.</p>}
     </form>
@@ -173,14 +106,11 @@ const InlineReviewForm = ({ messages }: { messages: Message[] }) => {
 };
 
 const InlineCallForm = ({ messages }: { messages: Message[] }) => {
-  const [status, setStatus] = useState<'idle' | 'generating' | 'confirm' | 'editing' | 'loading' | 'success' | 'error'>('idle');
-  const [summary, setSummary] = useState('');
-  const [businessType, setBusinessType] = useState('Unknown');
-  const [formDataCache, setFormDataCache] = useState<any>(null);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const requestSummary = async (e: React.FormEvent<HTMLFormElement>) => {
+  const requestCall = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus('generating');
+    setStatus('loading');
     const formData = new FormData(e.currentTarget);
     const data = {
       type: 'call',
@@ -188,35 +118,8 @@ const InlineCallForm = ({ messages }: { messages: Message[] }) => {
       email: formData.get('email'),
       preferredTime: formData.get('preferredTime'),
       pageUrl: window.location.href,
-      timestamp: new Date().toISOString()
-    };
-    setFormDataCache(data);
-
-    try {
-      const res = await fetch('/api/generate-summary', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages })
-      });
-      const json = await res.json();
-      if (res.ok && json.summary) {
-        setSummary(json.summary);
-        setBusinessType(json.businessType || 'Unknown');
-        setStatus('confirm');
-      } else {
-        submitFinal(data, 'Summary generation failed', 'Unknown');
-      }
-    } catch {
-      submitFinal(data, 'Summary generation failed', 'Unknown');
-    }
-  };
-
-  const submitFinal = async (overrideData?: any, overrideSummary?: string, overrideBusiness?: string) => {
-    setStatus('loading');
-    const data = overrideData || {
-      ...formDataCache,
-      summary: overrideSummary || summary,
-      businessType: overrideBusiness || businessType
+      timestamp: new Date().toISOString(),
+      messages
     };
 
     try {
@@ -235,55 +138,18 @@ const InlineCallForm = ({ messages }: { messages: Message[] }) => {
   if (status === 'success') {
     return (
       <div className="mt-3 p-3 bg-[#D6AD67]/10 border border-[#D6AD67] text-[#D6AD67] rounded-xl text-sm leading-relaxed">
-        Thanks — we've received your request and will be in touch shortly.
-      </div>
-    );
-  }
-
-  if (status === 'confirm' || status === 'editing') {
-    return (
-      <div className="mt-3 flex flex-col gap-3 bg-neutral-900 border border-neutral-700 p-4 rounded-xl animate-in fade-in zoom-in-95 duration-200">
-        <p className="text-neutral-300 text-sm leading-relaxed">Here's a quick summary of our conversation. You can confirm or edit anything before sending.</p>
-        
-        {status === 'editing' ? (
-          <textarea 
-            className="w-full bg-neutral-950 border border-neutral-700 text-neutral-300 text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none min-h-[120px]"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
-            autoFocus
-          />
-        ) : (
-          <div className="w-full bg-neutral-950 border border-neutral-800 text-neutral-300 text-sm rounded-lg py-3 px-3 min-h-[120px] whitespace-pre-wrap">
-            {summary}
-          </div>
-        )}
-        
-        <div className="flex gap-2 w-full">
-          <button onClick={() => setStatus('idle')} className="flex-1 border border-neutral-700 text-neutral-400 font-semibold py-2 rounded-lg text-xs hover:bg-neutral-800 transition-colors hidden sm:block">Cancel</button>
-          {status === 'confirm' && (
-            <button onClick={() => setStatus('editing')} className="flex-1 bg-neutral-800 text-white font-semibold py-2 rounded-lg text-xs hover:bg-neutral-700 transition-colors">Edit</button>
-          )}
-          <button onClick={() => submitFinal()} className="flex-[2] bg-brand-gold text-black font-semibold py-2 rounded-lg text-xs hover:opacity-90 transition-opacity">
-            {status === 'editing' ? 'Save & Confirm' : 'Confirm'}
-          </button>
-        </div>
-        <button onClick={() => setStatus('idle')} className="w-full border border-neutral-700 text-neutral-400 font-semibold py-1.5 rounded-lg text-xs hover:bg-neutral-800 transition-colors sm:hidden mt-2">Cancel</button>
+        Thanks — we've received your request. We'll review the details and get back to you shortly.
       </div>
     );
   }
 
   return (
-    <form onSubmit={requestSummary} className="mt-3 flex flex-col gap-2">
+    <form onSubmit={requestCall} className="mt-3 flex flex-col gap-2 animate-in fade-in zoom-in-95 duration-200">
       <input required name="name" type="text" placeholder="Your Name" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
       <input required name="email" type="email" placeholder="Email Address" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
       <input required name="preferredTime" type="text" placeholder="Preferred time (e.g., Tomorrow morning)" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
-      <button disabled={status === 'generating' || status === 'loading'} type="submit" className="w-full mt-1 bg-brand-gold text-black font-bold py-2 rounded-lg text-sm transition-opacity hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2">
-        {status === 'generating' || status === 'loading' ? (
-           <>
-             <span className="w-4 h-4 rounded-full border-2 border-black/30 border-t-black animate-spin" />
-             {status === 'generating' ? 'Generating Summary...' : 'Sending...'}
-           </>
-        ) : 'Request Call'}
+      <button disabled={status === 'loading'} type="submit" className="w-full mt-1 bg-brand-gold text-black font-bold py-2 rounded-lg text-sm transition-opacity hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2">
+        {status === 'loading' ? 'Sending...' : 'Request Call'}
       </button>
       {status === 'error' && <p className="text-red-400 text-xs text-center mt-1">Something went wrong. Please try again.</p>}
     </form>
@@ -291,14 +157,11 @@ const InlineCallForm = ({ messages }: { messages: Message[] }) => {
 };
 
 const InlineMessageForm = ({ messages }: { messages: Message[] }) => {
-  const [status, setStatus] = useState<'idle' | 'generating' | 'confirm' | 'editing' | 'loading' | 'success' | 'error'>('idle');
-  const [summary, setSummary] = useState('');
-  const [businessType, setBusinessType] = useState('Unknown');
-  const [formDataCache, setFormDataCache] = useState<any>(null);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const requestSummary = async (e: React.FormEvent<HTMLFormElement>) => {
+  const requestMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus('generating');
+    setStatus('loading');
     const formData = new FormData(e.currentTarget);
     const data = {
       type: 'message',
@@ -306,35 +169,8 @@ const InlineMessageForm = ({ messages }: { messages: Message[] }) => {
       email: formData.get('email'),
       message: formData.get('message'),
       pageUrl: window.location.href,
-      timestamp: new Date().toISOString()
-    };
-    setFormDataCache(data);
-
-    try {
-      const res = await fetch('/api/generate-summary', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages })
-      });
-      const json = await res.json();
-      if (res.ok && json.summary) {
-        setSummary(json.summary);
-        setBusinessType(json.businessType || 'Unknown');
-        setStatus('confirm');
-      } else {
-        submitFinal(data, 'Summary generation failed', 'Unknown');
-      }
-    } catch {
-      submitFinal(data, 'Summary generation failed', 'Unknown');
-    }
-  };
-
-  const submitFinal = async (overrideData?: any, overrideSummary?: string, overrideBusiness?: string) => {
-    setStatus('loading');
-    const data = overrideData || {
-      ...formDataCache,
-      summary: overrideSummary || summary,
-      businessType: overrideBusiness || businessType
+      timestamp: new Date().toISOString(),
+      messages
     };
 
     try {
@@ -353,55 +189,18 @@ const InlineMessageForm = ({ messages }: { messages: Message[] }) => {
   if (status === 'success') {
     return (
       <div className="mt-3 p-3 bg-[#D6AD67]/10 border border-[#D6AD67] text-[#D6AD67] rounded-xl text-sm leading-relaxed">
-        Thanks — we've received your request and will be in touch shortly.
-      </div>
-    );
-  }
-
-  if (status === 'confirm' || status === 'editing') {
-    return (
-      <div className="mt-3 flex flex-col gap-3 bg-neutral-900 border border-neutral-700 p-4 rounded-xl animate-in fade-in zoom-in-95 duration-200">
-        <p className="text-neutral-300 text-sm leading-relaxed">Here's a quick summary of our conversation. You can confirm or edit anything before sending.</p>
-        
-        {status === 'editing' ? (
-          <textarea 
-            className="w-full bg-neutral-950 border border-neutral-700 text-neutral-300 text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none min-h-[120px]"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
-            autoFocus
-          />
-        ) : (
-          <div className="w-full bg-neutral-950 border border-neutral-800 text-neutral-300 text-sm rounded-lg py-3 px-3 min-h-[120px] whitespace-pre-wrap">
-            {summary}
-          </div>
-        )}
-        
-        <div className="flex gap-2 w-full">
-          <button onClick={() => setStatus('idle')} className="flex-1 border border-neutral-700 text-neutral-400 font-semibold py-2 rounded-lg text-xs hover:bg-neutral-800 transition-colors hidden sm:block">Cancel</button>
-          {status === 'confirm' && (
-            <button onClick={() => setStatus('editing')} className="flex-1 bg-neutral-800 text-white font-semibold py-2 rounded-lg text-xs hover:bg-neutral-700 transition-colors">Edit</button>
-          )}
-          <button onClick={() => submitFinal()} className="flex-[2] bg-brand-gold text-black font-semibold py-2 rounded-lg text-xs hover:opacity-90 transition-opacity">
-            {status === 'editing' ? 'Save & Confirm' : 'Confirm'}
-          </button>
-        </div>
-        <button onClick={() => setStatus('idle')} className="w-full border border-neutral-700 text-neutral-400 font-semibold py-1.5 rounded-lg text-xs hover:bg-neutral-800 transition-colors sm:hidden mt-2">Cancel</button>
+        Thanks — we've received your request. We'll review the details and get back to you shortly.
       </div>
     );
   }
 
   return (
-    <form onSubmit={requestSummary} className="mt-3 flex flex-col gap-2">
+    <form onSubmit={requestMessage} className="mt-3 flex flex-col gap-2 animate-in fade-in zoom-in-95 duration-200">
       <input required name="name" type="text" placeholder="Your Name" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
       <input required name="email" type="email" placeholder="Email Address" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none" />
       <textarea required name="message" placeholder="Your Message" className="w-full bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg py-2 px-3 focus:border-brand-gold outline-none min-h-[80px]" />
-      <button disabled={status === 'generating' || status === 'loading'} type="submit" className="w-full mt-1 bg-brand-gold text-black font-bold py-2 rounded-lg text-sm transition-opacity hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2">
-        {status === 'generating' || status === 'loading' ? (
-           <>
-             <span className="w-4 h-4 rounded-full border-2 border-black/30 border-t-black animate-spin" />
-             {status === 'generating' ? 'Generating Summary...' : 'Sending...'}
-           </>
-        ) : 'Send Message'}
+      <button disabled={status === 'loading'} type="submit" className="w-full mt-1 bg-brand-gold text-black font-bold py-2 rounded-lg text-sm transition-opacity hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2">
+        {status === 'loading' ? 'Sending...' : 'Send Message'}
       </button>
       {status === 'error' && <p className="text-red-400 text-xs text-center mt-1">Something went wrong. Please try again.</p>}
     </form>
