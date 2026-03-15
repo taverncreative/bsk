@@ -56,14 +56,14 @@ export async function POST(req: Request) {
     const locationMatch = aiSummary.match(/Business Location\s*\n(.*)/);
     const location = locationMatch ? locationMatch[1] : 'Unknown';
 
-    const { error: insertError } = await supabase.from('leads').insert({
-      business_name: name || (type === 'call' ? 'Call Booking' : 'Message Request'),
+    const { error: insertError } = await supabase.from('unified_leads').insert({
+      name: name || (type === 'call' ? 'Call Booking' : 'Message Request'),
       email: email,
-      industry: businessType !== 'Unknown' ? businessType : null,
-      location: location !== 'Unknown' ? location : null,
-      source: 'Elle chatbot',
-      notes: aiSummary + (preferredTime ? `\n\nPreferred Time: ${preferredTime}` : '') + (message ? `\n\nUser Message: ${message}` : ''),
-      stage: 'New Lead'
+      phone: null,
+      website_url: aiSummary.match(/Website Analysed\s*\n(.*)/)?.[1] || null,
+      page_context: pageUrl || 'Unknown',
+      submission_type: type === 'call' ? 'Elle Call Booking' : 'Elle Chat Message',
+      message: `Preferred Time: ${preferredTime || 'N/A'}\nMessage: ${message || 'N/A'}\n\nAI Summary:\n${aiSummary}`,
     });
     
     if (insertError) {
@@ -77,6 +77,35 @@ export async function POST(req: Request) {
       lead_converted: true,
       transcript: JSON.stringify(messages)
     });
+
+    // Send Admin Email
+    const apiKey = process.env.RESEND_API_KEY;
+    if (apiKey) {
+      const adminEmailHTML = `
+        <h2>New Chatbot Lead (${type.toUpperCase()})</h2>
+        <p><strong>Name:</strong> ${name || 'N/A'}</p>
+        <p><strong>Email:</strong> ${email || 'N/A'}</p>
+        <hr />
+        <h3>Lead Details:</h3>
+        <p><strong>Preferred Time:</strong> ${preferredTime || 'N/A'}</p>
+        <p><strong>Message Context:</strong> ${message || 'N/A'}</p>
+        <hr />
+        <h3>AI Extraction Summary:</h3>
+        <pre style="white-space: pre-wrap;">${aiSummary}</pre>
+        <hr />
+        <p><a href="https://businesssortedkent.co.uk/admin-dashboard/lead-inbox">View in Admin Dashboard</a></p>
+      `;
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({
+          from: 'Business Sorted Kent <hello@businesssortedkent.co.uk>',
+          to: 'hello@businesssortedkent.co.uk',
+          subject: `Elle Chat Lead: ${name} (${type})`,
+          html: adminEmailHTML
+        })
+      });
+    }
 
     if (type === 'call') {
       console.log(`[CRM PIPELINE INGESTION] NEW CALL BOOKING REQUEST:

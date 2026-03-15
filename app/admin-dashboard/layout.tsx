@@ -2,11 +2,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, Users, UserPlus, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye } from 'lucide-react';
+import { LayoutDashboard, Users, UserPlus, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail } from 'lucide-react';
 import { createClient } from '@/lib/supabaseClient';
 
 const navigation = [
   { name: 'Overview', href: '/admin-dashboard', icon: LayoutDashboard },
+  { name: 'Lead Inbox', href: '/admin-dashboard/lead-inbox', icon: Mail },
   { name: 'Leads', href: '/admin-dashboard/leads', icon: UserPlus },
   { name: 'CRM Pipeline', href: '/admin-dashboard/pipeline', icon: KanbanSquare },
   { name: 'Clients', href: '/admin-dashboard/clients', icon: Users },

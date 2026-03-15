@@ -56,15 +56,13 @@ export async function POST(req: Request) {
     const locationMatch = aiSummary.match(/Business Location\s*\n(.*)/);
     const location = locationMatch ? locationMatch[1] : 'Unknown';
 
-    const { error: insertError } = await supabase.from('leads').insert({
-      business_name: name || 'Website Review Request',
-      website_url: url,
+    const { error: insertError } = await supabase.from('unified_leads').insert({
+      name: name || 'Website Review Request',
       email: email,
-      industry: businessType !== 'Unknown' ? businessType : null,
-      location: location !== 'Unknown' ? location : null,
-      source: 'Elle chatbot',
-      notes: aiSummary,
-      stage: 'New Lead'
+      website_url: url,
+      page_context: pageUrl || 'Unknown',
+      submission_type: 'Website Review',
+      message: `Industry: ${businessType !== 'Unknown' ? businessType : 'Unknown'}, Location: ${location !== 'Unknown' ? location : 'Unknown'}\n\nAI Diagnostic Output:\n${aiSummary}`,
     });
     
     if (insertError) {
@@ -78,6 +76,31 @@ export async function POST(req: Request) {
       lead_converted: true,
       transcript: JSON.stringify(messages)
     });
+
+    // Send Admin Email
+    const apiKey = process.env.RESEND_API_KEY;
+    if (apiKey) {
+      const adminEmailHTML = `
+        <h2>New Website Review Request</h2>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Website:</strong> ${url}</p>
+        <hr />
+        <h3>AI Initial Diagnostic:</h3>
+        <pre style="white-space: pre-wrap;">${aiSummary}</pre>
+        <hr />
+        <p><a href="https://businesssortedkent.co.uk/admin-dashboard/lead-inbox">View in Admin Dashboard</a></p>
+      `;
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({
+          from: 'Business Sorted Kent <hello@businesssortedkent.co.uk>',
+          to: 'hello@businesssortedkent.co.uk',
+          subject: `Website Review Request: ${url}`,
+          html: adminEmailHTML
+        })
+      });
+    }
 
     console.log(`[CRM PIPELINE INGESTION] NEW WEBSITE REVIEW REQUEST:
 Name: ${name || 'Not provided'}

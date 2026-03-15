@@ -20,16 +20,46 @@ export default function QuoteForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError('');
     
     // Fire the analytics payload BEFORE executing form submission logic
     trackLead("quote_request", {
       service: formData.service
     });
 
-    console.log('Form submitted with data:', formData);
-    // Future API processing logic goes here
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          website_url: null,
+          message: `Service Required: ${formData.service}\n\nMessage: ${formData.message}`,
+          page_context: window.location.pathname,
+          submission_type: 'Quote Request',
+        }),
+      });
+      
+      if (!res.ok) {
+        throw new Error('Failed to submit');
+      }
+      
+      setSuccess(true);
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+    } catch (err) {
+      setError('An error occurred. Please try again or call us.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -120,12 +150,26 @@ export default function QuoteForm() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full py-4 px-6 bg-brand-gold text-black font-extrabold text-lg rounded-xl hover:bg-white hover:shadow-[0_0_30px_rgba(214,173,103,0.4)] active:scale-[0.98] transition-all shadow-[0_0_15px_rgba(214,173,103,0.2)] mt-6"
-        >
-          Request Quote
-        </button>
+        {error && (
+          <div className="p-4 bg-red-900/30 border border-red-500 rounded-xl text-red-200 text-sm font-medium">
+            {error}
+          </div>
+        )}
+
+        {success ? (
+          <div className="p-6 bg-green-900/20 border border-brand-gold rounded-xl text-center">
+            <h3 className="text-xl font-bold text-brand-gold mb-2">Quote Request Sent!</h3>
+            <p className="text-neutral-300">We will review your details and aim to contact you within 24 hours.</p>
+          </div>
+        ) : (
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-4 px-6 bg-brand-gold text-black font-extrabold text-lg rounded-xl hover:bg-white hover:shadow-[0_0_30px_rgba(214,173,103,0.4)] active:scale-[0.98] transition-all shadow-[0_0_15px_rgba(214,173,103,0.2)] mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? 'Sending Request...' : 'Request Quote'}
+          </button>
+        )}
       </form>
     </div>
   );

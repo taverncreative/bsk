@@ -39,8 +39,16 @@ export async function POST(req: Request) {
 
     // 1. Insert into Supabase
     const { data: enquiry, error: insertError } = await supabase
-      .from('enquiries')
-      .insert([{ name, email, service_required, preferred_day, preferred_time, message }])
+      .from('unified_leads')
+      .insert([{ 
+        name, 
+        email, 
+        phone: null,
+        website_url: null,
+        message: `Service Required: ${service_required}\nPreferred Day: ${preferred_day}\nPreferred Time: ${preferred_time}\nNotes: ${message}`,
+        page_context: 'Primary Enquiry Form',
+        submission_type: 'General Enquiry'
+      }])
       .select()
       .single();
 

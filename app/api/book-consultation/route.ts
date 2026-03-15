@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { name, email, date, time, notes } = body;
 
-    // 1. Insert into Supabase
+    // 1. Insert into Supabase (Bookings & Unified Leads)
     const { data: booking, error: insertError } = await supabase
       .from('bookings')
       .insert([{ booking_date: date, booking_time: time + ':00', name, email, notes }])
@@ -48,6 +48,16 @@ export async function POST(req: Request) {
       console.error('Booking Error:', insertError);
       return NextResponse.json({ error: 'This slot might be already booked or an error occurred. Please try again or select another time.' }, { status: 400 });
     }
+
+    await supabase.from('unified_leads').insert({
+      name,
+      email,
+      phone: null,
+      website_url: null,
+      message: `Booking on ${date} at ${time}. Notes: ${notes}`,
+      page_context: 'Booking Calendar',
+      submission_type: 'Booking Calendar'
+    });
 
     // 2. Send emails
     const formattedDate = new Date(date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
