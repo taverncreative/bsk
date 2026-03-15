@@ -253,10 +253,9 @@ export default function ConsultationCalendar() {
             <button 
               type="submit" 
               disabled={isSubmitting}
-              className="w-full bg-brand-gold text-black font-extrabold py-5 rounded-xl text-lg flex items-center justify-center gap-3 transition-transform active:scale-[0.98] shadow-[0_0_20px_rgba(214,173,103,0.2)] hover:shadow-[0_0_40px_rgba(214,173,103,0.4)] hover:bg-white disabled:opacity-50 disabled:pointer-events-none mt-4 group"
+              className="w-full bg-brand-gold text-black font-extrabold py-5 rounded-xl text-lg flex items-center justify-center gap-3 transition-all hover:bg-white active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none shadow-[0_0_20px_rgba(214,173,103,0.15)] hover:shadow-[0_0_30px_rgba(214,173,103,0.3)] mt-4"
             >
               {isSubmitting ? 'Confirming...' : 'Confirm Consultation Booking'}
-              {!isSubmitting && <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
             </button>
           </form>
         </div>
