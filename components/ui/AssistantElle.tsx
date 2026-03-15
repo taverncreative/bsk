@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useChat, Message } from 'ai/react';
+import { usePathname } from 'next/navigation';
 
 const InlineFallbackForm = () => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -224,22 +225,44 @@ const InlineMessageForm = ({ messages }: { messages: Message[] }) => {
 };
 
 export default function AssistantElle() {
+  const pathname = usePathname() || '';
   const [isOpen, setIsOpen] = useState(false);
   const [hasActivated, setHasActivated] = useState(false);
   const [lastAction, setLastAction] = useState<{ type: string, time: number } | null>(null);
   const [shownDuplicateWarning, setShownDuplicateWarning] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const getPagePrompt = () => {
+    if (pathname.includes('/seo') || pathname.includes('/rank')) return "If you're looking at SEO, are you trying to get your business found on Google?";
+    if (pathname.includes('/web-design') || pathname.includes('/website')) return "Thinking about improving your website or starting a new one?";
+    if (pathname.includes('/towns') || pathname.includes('/locations') || pathname.includes('/commercial')) return "Are you trying to get more enquiries in this area?";
+    if (pathname.includes('/guides')) return "If you'd like, I can take a quick look at your website and highlight anything similar to what you're reading about.";
+    if (pathname.includes('/business-automation') || pathname.includes('/automation')) return "Are you spending too much time on manual admin tasks?";
+    if (pathname.includes('/lead-capture')) return "Are you looking for ways to capture more leads from your website?";
+    if (pathname.includes('/industries')) return "Are you looking for ways to scale your business in this industry?";
+    return "Hi, I'm Elle. How can I help today?";
+  };
+
+  const initialPrompt = getPagePrompt();
+
   const { messages, input, handleInputChange, handleSubmit, isLoading, append, error, setMessages } = useChat({
     api: '/api/chat',
+    body: { pageUrl: pathname },
     initialMessages: [
       {
         id: 'welcome',
         role: 'assistant',
-        content: "Hi, I'm Elle. How can I help today?"
+        content: initialPrompt
       }
     ]
   });
+
+  // Hot reload prompt if page changes before chat begins
+  useEffect(() => {
+    if (messages.length === 1 && messages[0].role === 'assistant') {
+      setMessages([{ id: 'welcome', role: 'assistant', content: getPagePrompt() }]);
+    }
+  }, [pathname]);
 
   const lastMessageCount = useRef(messages.length);
 
@@ -408,6 +431,58 @@ export default function AssistantElle() {
                       <button onClick={() => append({ role: 'user', content: 'Website Help' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Website Help</button>
                       <button onClick={() => append({ role: 'user', content: 'Getting Found On Google' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Getting Found On Google</button>
                       <button onClick={() => append({ role: 'user', content: 'Improve My Current Website' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Improve My Current Website</button>
+                      <button onClick={() => append({ role: 'user', content: 'Something Else' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Something Else</button>
+                    </div>
+                  )}
+                  {messages[messages.length - 1].id === message.id && message.role === 'assistant' && message.content === "If you're looking at SEO, are you trying to get your business found on Google?" && (
+                    <div className="flex flex-col gap-2 w-full mt-2 animate-in fade-in duration-500">
+                      <button onClick={() => append({ role: 'user', content: 'My site gets no traffic' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">My site gets no traffic</button>
+                      <button onClick={() => append({ role: 'user', content: 'I want to rank locally' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">I want to rank locally</button>
+                      <button onClick={() => append({ role: 'user', content: 'My competitor ranks above me' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">My competitor ranks above me</button>
+                      <button onClick={() => append({ role: 'user', content: 'Something Else' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Something Else</button>
+                    </div>
+                  )}
+                  {messages[messages.length - 1].id === message.id && message.role === 'assistant' && message.content === "Thinking about improving your website or starting a new one?" && (
+                    <div className="flex flex-col gap-2 w-full mt-2 animate-in fade-in duration-500">
+                      <button onClick={() => append({ role: 'user', content: 'I need a new website' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">I need a new website</button>
+                      <button onClick={() => append({ role: 'user', content: 'My site looks outdated' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">My site looks outdated</button>
+                      <button onClick={() => append({ role: 'user', content: 'My website isn\'t converting visitors' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">My website isn't converting visitors</button>
+                      <button onClick={() => append({ role: 'user', content: 'Something Else' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Something Else</button>
+                    </div>
+                  )}
+                  {messages[messages.length - 1].id === message.id && message.role === 'assistant' && message.content === "Are you trying to get more enquiries in this area?" && (
+                    <div className="flex flex-col gap-2 w-full mt-2 animate-in fade-in duration-500">
+                      <button onClick={() => append({ role: 'user', content: 'I want to rank in this town' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">I want to rank in this town</button>
+                      <button onClick={() => append({ role: 'user', content: 'My competitors show up but I don\'t' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">My competitors show up but I don't</button>
+                      <button onClick={() => append({ role: 'user', content: 'I want more local enquiries' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">I want more local enquiries</button>
+                      <button onClick={() => append({ role: 'user', content: 'Something Else' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Something Else</button>
+                    </div>
+                  )}
+                  {messages[messages.length - 1].id === message.id && message.role === 'assistant' && message.content === "If you'd like, I can take a quick look at your website and highlight anything similar to what you're reading about." && (
+                    <div className="flex flex-col gap-2 w-full mt-2 animate-in fade-in duration-500">
+                      <button onClick={() => append({ role: 'user', content: 'Check my website' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Check my website</button>
+                      <button onClick={() => append({ role: 'user', content: 'I have a question about this' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">I have a question about this</button>
+                      <button onClick={() => append({ role: 'user', content: 'Something Else' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Something Else</button>
+                    </div>
+                  )}
+                  {messages[messages.length - 1].id === message.id && message.role === 'assistant' && message.content === "Are you spending too much time on manual admin tasks?" && (
+                    <div className="flex flex-col gap-2 w-full mt-2 animate-in fade-in duration-500">
+                      <button onClick={() => append({ role: 'user', content: 'Yes, too much paperwork' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Yes, too much paperwork</button>
+                      <button onClick={() => append({ role: 'user', content: 'I need to automate emails' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">I need to automate emails</button>
+                      <button onClick={() => append({ role: 'user', content: 'Something Else' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Something Else</button>
+                    </div>
+                  )}
+                  {messages[messages.length - 1].id === message.id && message.role === 'assistant' && message.content === "Are you looking for ways to capture more leads from your website?" && (
+                    <div className="flex flex-col gap-2 w-full mt-2 animate-in fade-in duration-500">
+                      <button onClick={() => append({ role: 'user', content: 'I get traffic but no enquiries' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">I get traffic but no enquiries</button>
+                      <button onClick={() => append({ role: 'user', content: 'I need better forms' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">I need better forms</button>
+                      <button onClick={() => append({ role: 'user', content: 'Something Else' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Something Else</button>
+                    </div>
+                  )}
+                  {messages[messages.length - 1].id === message.id && message.role === 'assistant' && message.content === "Are you looking for ways to scale your business in this industry?" && (
+                    <div className="flex flex-col gap-2 w-full mt-2 animate-in fade-in duration-500">
+                      <button onClick={() => append({ role: 'user', content: 'How do you help my industry?' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">How do you help my industry?</button>
+                      <button onClick={() => append({ role: 'user', content: 'I need more customers' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">I need more customers</button>
                       <button onClick={() => append({ role: 'user', content: 'Something Else' })} className="text-left w-fit text-sm text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-4 py-2.5 rounded-xl transition-all border border-brand-gold/20">Something Else</button>
                     </div>
                   )}
