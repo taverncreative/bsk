@@ -357,13 +357,32 @@ If the user provides this information, you MUST execute the following exact esti
         else if (text.includes('tel:07522388055') || text.toLowerCase().includes('call')) action = 'Call Offered';
         else if (text.includes('[RENDER_FALLBACK_FORM]')) action = 'Message Submission Form';
         
+        let problem = 'unknown';
+        const searchUserText = userText.toLowerCase();
+        if (searchUserText.includes('traffic') || searchUserText.includes('rank') || searchUserText.includes('seo') || searchUserText.includes('google')) problem = 'seo';
+        else if (searchUserText.includes('slow') || searchUserText.includes('speed') || searchUserText.includes('load')) problem = 'performance';
+        else if (searchUserText.includes('design') || searchUserText.includes('look') || searchUserText.includes('ugly')) problem = 'design';
+        else if (searchUserText.includes('lead') || searchUserText.includes('enquiry') || searchUserText.includes('enquiries')) problem = 'leads';
+
+        let intent = 'cold';
+        if (action === 'Website Review Requested' || action === 'Call Offered' || action === 'Message Submission Form') {
+          intent = 'hot';
+        } else if (urlMatch || searchUserText.includes('my website') || searchUserText.includes('our website') || searchUserText.includes('review')) {
+          intent = 'warm';
+        }
+
+        const detectedUrl = urlMatch ? urlMatch[0] : null;
+
         try {
           await supabase.from('elle_chat_logs').insert([{
              session_id: 'sess_' + ip.replace(/[^a-zA-Z0-9]/g, ''),
              page_context: pageUrl,
+             detected_url: detectedUrl,
              visitor_message: userText,
              elle_response: text,
              action_triggered: action,
+             problem_detected: problem,
+             lead_intent_score: intent,
              visitor_ip: ip
           }]);
         } catch (e) {

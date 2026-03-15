@@ -230,6 +230,7 @@ export default function AssistantElle() {
   const [hasActivated, setHasActivated] = useState(false);
   const [lastAction, setLastAction] = useState<{ type: string, time: number } | null>(null);
   const [shownDuplicateWarning, setShownDuplicateWarning] = useState(false);
+  const [hasLoggedStart, setHasLoggedStart] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const getPagePrompt = () => {
@@ -278,6 +279,17 @@ export default function AssistantElle() {
       lastMessageCount.current = messages.length;
     }
   }, [messages.length, isOpen]);
+
+  useEffect(() => {
+    if (isOpen && !hasLoggedStart) {
+      setHasLoggedStart(true);
+      fetch('/api/elle-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event: 'conversation_started', pageUrl: pathname })
+      }).catch(console.error);
+    }
+  }, [isOpen, hasLoggedStart, pathname]);
 
   useEffect(() => {
     const handleContextEvent = (e: any) => {
