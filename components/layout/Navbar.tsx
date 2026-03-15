@@ -54,7 +54,7 @@ export default function Navbar() {
           : 'bg-black/40 backdrop-blur-sm border-transparent py-4'
       }`}
     >
-      <div className="container mx-auto px-4 lg:px-8 max-w-[1400px] relative">
+      <div className="w-full max-w-[1600px] mx-auto px-4 lg:px-8 xl:px-16 relative">
         <div className="flex items-center justify-between">
           
           {/* Logo */}
@@ -72,7 +72,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center justify-center flex-1 space-x-1 xl:space-x-2">
+          <div className="hidden lg:flex items-center justify-center space-x-2 lg:space-x-4 xl:space-x-6 xl:ml-8">
             
             {/* Services Dropdown */}
             <div 
