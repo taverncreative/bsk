@@ -14,7 +14,7 @@ export default function FinalCTA() {
         
         <div className="flex justify-center">
           <MagneticButton href="/contact" className="text-lg px-8 md:px-10 py-5">
-            Get a Free Quote
+            Get A Free Quote
           </MagneticButton>
         </div>
       </div>

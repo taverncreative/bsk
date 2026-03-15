@@ -134,7 +134,7 @@ export default function Navbar() {
                     <div className="flex flex-col gap-6">
                       <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-2">Supporting Services</h3>
 
-                      <Link href="/logo-branding" className="group/item flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-neutral-900/50 transition-colors">
+                      <Link href="/branding" className="group/item flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-neutral-900/50 transition-colors">
                         <div className="shrink-0 bg-neutral-950 border border-neutral-800 p-3 rounded-xl group-hover/item:border-brand-gold/50 group-hover/item:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
                           <Briefcase className="w-5 h-5 text-brand-gold" />
                         </div>
@@ -304,7 +304,7 @@ export default function Navbar() {
               className="group relative inline-flex items-center justify-center bg-brand-gold text-black font-extrabold px-7 py-[2.5] h-12 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(214,173,103,0.3)] hover:shadow-[0_0_40px_rgba(214,173,103,0.5)] hover:bg-white active:scale-95 overflow-hidden"
             >
               <span className="relative z-10 flex items-center gap-2">
-                Get a Free Quote
+                Get A Free Quote
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
             </Link>

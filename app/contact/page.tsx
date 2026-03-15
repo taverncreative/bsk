@@ -3,7 +3,7 @@ import Contact from '@/components/sections/Contact';
 
 export const metadata: Metadata = {
   title: 'Contact Us | Business Sorted Kent',
-  description: 'Get a free quote for web design, SEO, and business automation in Kent. Contact the team at Business Sorted today.',
+  description: 'Get A Free Quote for web design, SEO, and business automation in Kent. Contact the team at Business Sorted today.',
   alternates: {
     canonical: 'https://businesssortedkent.co.uk/contact',
   },

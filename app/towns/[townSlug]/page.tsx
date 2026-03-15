@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getTownBySlug, getAllTowns, getAllServices, getNearbyTowns } from '@/lib/queries';
+import { getTownBySlug, getAllTowns, getAllServices, getNearbyTowns, getAllGuides } from '@/lib/queries';
 import type { Town } from '@/types';
 import TownPage from '@/components/templates/TownPage';
 
@@ -37,9 +37,10 @@ export default async function TownHubPage({ params }: Props) {
   const { townSlug } = await params;
   
   // Parallel fetch for speed
-  const [town, allServices] = await Promise.all([
+  const [town, allServices, allGuides] = await Promise.all([
     getTownBySlug(townSlug),
     getAllServices(),
+    getAllGuides(),
   ]);
 
   if (!town) {
@@ -55,6 +56,7 @@ export default async function TownHubPage({ params }: Props) {
     <TownPage 
       town={{ name: town.name, slug: town.slug }} 
       services={allServices.map(s => ({ name: s.name, slug: s.slug }))} 
+      guides={allGuides}
     />
   );
 }

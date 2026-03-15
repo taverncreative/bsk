@@ -20,7 +20,7 @@ export default function NotFound() {
 
       <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
         <Button href="/contact" className="text-lg px-8 py-3 shadow-md w-full sm:w-auto">
-          Get a Free Quote
+          Get A Free Quote
         </Button>
       </div>
 

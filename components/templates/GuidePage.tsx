@@ -2,7 +2,9 @@ import Link from 'next/link';
 import LocalServiceHero from '@/components/sections/LocalServiceHero';
 import Button from '@/components/ui/Button';
 import LeadMagnet from '@/components/sections/LeadMagnet';
+import KentCoverage from '@/components/sections/KentCoverage';
 import { leadMagnets } from '@/lib/content/leadMagnets';
+import { injectContextualLinks } from '@/lib/contextual-linker';
 
 interface BaseEntity {
   name: string;
@@ -61,6 +63,12 @@ export default function GuidePage({ title, content }: GuidePageProps) {
     }
   }
 
+  // Inject deep linked contextual links (3-6 max limit per article)
+  part1 = injectContextualLinks(part1);
+  if (part2) {
+    part2 = injectContextualLinks(part2);
+  }
+
   const websiteCostGuide = leadMagnets.find(lm => lm.title === 'Website Cost Guide') || leadMagnets[1];
 
   return (
@@ -70,7 +78,7 @@ export default function GuidePage({ title, content }: GuidePageProps) {
         title={title}
         subtitle="Practical advice for growing your business online."
         primaryCTA={{
-          text: 'Get a Free Quote',
+          text: 'Get A Free Quote',
           href: '/contact',
         }}
         secondaryCTA={{
@@ -186,43 +194,10 @@ export default function GuidePage({ title, content }: GuidePageProps) {
         </div>
       </section>
 
-      {/* SECTION 4: AREAS WE SERVE */}
-      <section className="py-24 bg-white border-t border-slate-200">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Areas We Serve
-            </h2>
-            <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-              Find localized digital growth services spanning across key Kent territories.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {[
-              { name: 'Ashford', slug: 'ashford' },
-              { name: 'Canterbury', slug: 'canterbury' },
-              { name: 'Maidstone', slug: 'maidstone' },
-            ].map((town) => (
-              <Link
-                key={town.slug}
-                href={`/towns/${town.slug}`}
-                className="group flex items-center p-6 bg-slate-50 border border-slate-200 rounded-xl hover:border-brand hover:shadow-md transition-all duration-300"
-              >
-                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-slate-100 shadow-sm mr-4">
-                  <svg className="w-5 h-5 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 group-hover:text-brand transition-colors">{town.name}</h3>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* SECTION 4: KENT COVERAGE */}
+      <KentCoverage pageType={title} />
 
-      {/* SECTION 4: FINAL CTA */}
+      {/* SECTION 5: FINAL CTA */}
       <section className="section-dark py-24 flex items-center justify-center">
         <div className="container mx-auto px-4 text-center max-w-4xl">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8">
@@ -233,7 +208,7 @@ export default function GuidePage({ title, content }: GuidePageProps) {
           </p>
           <div className="flex justify-center">
             <Button href="/contact" className="text-lg px-10 py-4 shadow-lg">
-              Get a Free Quote
+              Get A Free Quote
             </Button>
           </div>
         </div>

@@ -2,6 +2,8 @@ import Link from 'next/link';
 import LocalServiceHero from '@/components/sections/LocalServiceHero';
 import Button from '@/components/ui/Button';
 import Contact from '@/components/sections/Contact';
+import EducationalGuides from '@/components/sections/EducationalGuides';
+import KentCoverage from '@/components/sections/KentCoverage';
 
 interface BaseEntity {
   name: string;
@@ -11,17 +13,48 @@ interface BaseEntity {
 interface TownPageProps {
   town: BaseEntity;
   services: BaseEntity[];
+  guides?: any[];
 }
 
-export default function TownPage({ town, services }: TownPageProps) {
+export default function TownPage({ town, services, guides }: TownPageProps) {
+  const seed = town.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  
+  const subtitles = [
+    `Helping businesses across ${town.name} generate leads with web design, SEO and automation.`,
+    `Delivering professional digital systems to help companies in ${town.name} scale securely.`,
+    `Local SEO and lead capture infrastructure engineered for the ${town.name} market.`,
+    `Comprehensive digital growth strategies designed exclusively for businesses operating in ${town.name}.`
+  ];
+
+  const p1Variations = [
+    `${town.name} has a thriving local economy with intense competition across key sectors like trades, professional services, and retail. As more consumers shift to searching online, ${town.name} businesses that lack a fast, optimized digital presence are actively losing market share to competitors who rank higher on Google.`,
+    `The business community in ${town.name} is evolving rapidly. Traditional marketing methods are proving less effective as local consumers rely almost entirely on search engines to find services. Adapting to this shift is essential for survival.`,
+    `Operating a business in ${town.name} means facing strict local competition. Companies that invest in high-performance digital infrastructure consistently outmanoeuvre those relying on outdated platforms or simple word-of-mouth.`,
+    `As ${town.name} expands, so does the commercial landscape. Establishing a dominant online footprint is no longer optional; it's a fundamental requirement to capture the steady stream of local search traffic.`,
+  ];
+
+  const p2Variations = [
+    `We analyze local search trends specifically in ${town.name} to ensure our clients don't just get a website—they get an active lead generation asset that captures localized search volume securely.`,
+    `Our approach bypasses generic design. We engineer systematic lead capture frameworks directly tailored directly to the specific demographics and search behaviors of ${town.name} residents.`,
+    `By tracking precisely how people in ${town.name} look for services, we build digital assets that intersect those high-intent searches automatically and convert them to secure enquiries.`,
+    `We treat web presence as a mathematical engine. Our focus is ensuring your ${town.name} business ranks precisely when potential customers need you the most.`
+  ];
+
+  const ctaVariations = [
+    "Get A Free Quote",
+    "Request A Website Review",
+    "Book An Automation Consultation",
+    "Start Enhancing Your Growth"
+  ];
+
   return (
     <>
       {/* SECTION 1: HERO */}
       <LocalServiceHero
         title={`Digital Growth Services for ${town.name} Businesses`}
-        subtitle={`Helping businesses across ${town.name} generate leads with web design, SEO and automation.`}
+        subtitle={subtitles[seed % subtitles.length]}
         primaryCTA={{
-          text: 'Get a Free Quote',
+          text: 'Get A Free Quote',
           href: '/contact',
         }}
       />
@@ -71,10 +104,10 @@ export default function TownPage({ town, services }: TownPageProps) {
                 The Business Landscape in {town.name}
               </h2>
               <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-                {town.name} has a thriving local economy with intense competition across key sectors like trades, professional services, and retail. As more consumers shift to searching online, {town.name} businesses that lack a fast, optimized digital presence are actively losing market share to competitors who rank higher on Google.
+                {p1Variations[(seed + 1) % p1Variations.length]}
               </p>
               <p className="text-lg text-neutral-700 leading-relaxed">
-                We analyze local search trends specifically in {town.name} to ensure our clients don't just get a website—they get an active lead generation asset that captures localized search volume securely.
+                {p2Variations[(seed + 2) % p2Variations.length]}
               </p>
             </div>
             <div>
@@ -131,6 +164,12 @@ export default function TownPage({ town, services }: TownPageProps) {
       {/* SECTION 3.5: CONTACT FORM */}
       <Contact />
 
+      <KentCoverage pageType={town.slug} />
+
+      {guides && guides.length > 0 && (
+         <EducationalGuides guides={guides} headlineOverride={`Growth Guides for ${town.name} Businesses`} />
+      )}
+
       {/* SECTION 4: FINAL CTA */}
       <section className="section-dark py-24 flex items-center justify-center">
         <div className="container mx-auto px-4 text-center max-w-4xl">
@@ -142,7 +181,7 @@ export default function TownPage({ town, services }: TownPageProps) {
           </p>
           <div className="flex justify-center">
             <Button href="#quote" className="text-lg px-10 py-4 shadow-lg">
-              Get a Free Quote
+              {ctaVariations[(seed + 3) % ctaVariations.length]}
             </Button>
           </div>
         </div>

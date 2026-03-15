@@ -9,7 +9,7 @@ export default function Contact() {
           {/* LEFT SIDE: Text Payload */}
           <div className="text-left">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6 mt-4">
-              Get a Free Quote
+              Get A Free Quote
             </h2>
             <p className="text-xl md:text-2xl text-neutral-400 leading-relaxed mb-10 max-w-lg">
               Tell us about your project and we will get back to you with a custom strategy.

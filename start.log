@@ -1,0 +1,18 @@
+
+> business-sorted-kent@0.1.0 start
+> next start
+
+▲ Next.js 16.1.6
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.198:3000
+
+✓ Starting...
+✓ Ready in 374ms
+Error: You cannot use different slug names for the same dynamic path ('serviceTown' !== 'townSlug').
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: You cannot use different slug names for the same dynamic path ('serviceTown' !== 'townSlug').
+    at ignore-listed frames
+⨯ Error: You cannot use different slug names for the same dynamic path ('serviceTown' !== 'townSlug').
+    at ignore-listed frames
+⨯ Error: You cannot use different slug names for the same dynamic path ('serviceTown' !== 'townSlug').
+    at ignore-listed frames

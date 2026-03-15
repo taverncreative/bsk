@@ -1,0 +1,21 @@
+
+> business-sorted-kent@0.1.0 dev
+> next dev
+
+⚠ Port 3000 is in use by process 12166, using available port 3004 instead.
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3004
+- Network:       http://192.168.1.198:3004
+- Environments: .env.local
+
+✓ Starting...
+
+thread 'tokio-runtime-worker' (1439437) panicked at /Users/vercel/dev/actions-runner/_work/next.js/next.js/turbopack/crates/turbo-tasks-backend/src/backend/operation/mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Meta for NextConfig::from_string (TaskId 3))
+
+Caused by:
+    0: Looking up data for TaskId 3 from database failed
+    1: Unable to open static sorted file referenced from 00000020.meta
+    2: Unable to open static sorted file 00000015.sst
+    3: No such file or directory (os error 2)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

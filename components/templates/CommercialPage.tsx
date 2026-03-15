@@ -38,7 +38,7 @@ export default function CommercialPage({
         title={`${keyword.title} in ${town.name}`}
         subtitle={`Everything you need to know about ${keyword.title.toLowerCase()} for businesses in ${town.name}.`}
         primaryCTA={{
-          text: 'Get a Free Quote',
+          text: 'Get A Free Quote',
           href: '#quote',
         }}
       />
@@ -199,7 +199,7 @@ export default function CommercialPage({
           </p>
           <div className="flex justify-center">
             <Button href="/contact" className="text-lg px-10 py-4 shadow-lg">
-              Get a Free Quote
+              Get A Free Quote
             </Button>
           </div>
         </div>

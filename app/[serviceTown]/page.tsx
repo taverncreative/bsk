@@ -10,8 +10,9 @@ import {
   getNearbyTowns,
   getReviewsByTown,
   getAllCaseStudies,
+  getAllGuides,
 } from '@/lib/queries';
-import type { Service, Town } from '@/types';
+import type { Service, Town, Guide } from '@/types';
 import ServicePage from '@/components/templates/ServicePage';
 import ServiceTownPage from '@/components/templates/ServiceTownPage';
 import MicroLocationPage from '@/components/templates/MicroLocationPage';
@@ -38,7 +39,7 @@ export async function generateStaticParams() {
     }
   });
 
-  const CORE_SERVICES = ['web-design', 'seo', 'lead-capture', 'business-automation', 'branding', 'logo-branding', 'social-media-setup', 'digital-marketing', 'workwear-print'];
+  const CORE_SERVICES = ['web-design', 'seo', 'lead-capture', 'business-automation', 'branding', 'social-media-setup', 'digital-marketing', 'workwear-print'];
 
   // Generate Service x Town Pages (/web-design-ashford) and Micro Locations (/web-design-near-ashford)
   services.forEach((service) => {
@@ -105,7 +106,7 @@ async function parseServiceOrTown(slug: string) {
     }
   }
 
-  const CORE_SERVICES = ['web-design', 'seo', 'lead-capture', 'business-automation', 'branding', 'logo-branding', 'social-media-setup', 'digital-marketing', 'workwear-print'];
+  const CORE_SERVICES = ['web-design', 'seo', 'lead-capture', 'business-automation', 'branding', 'social-media-setup', 'digital-marketing', 'workwear-print'];
 
   if (matchedService && matchedTown) {
     if (!CORE_SERVICES.includes(matchedService.slug)) {
@@ -256,7 +257,10 @@ export default async function ProgrammaticPage({ params }: Props) {
   // ==========================================
   if (route.type === 'serviceHub' && route.service) {
     const service = route.service;
-    const allTowns = await getAllTowns();
+    const [allTowns, allGuides] = await Promise.all([
+      getAllTowns(),
+      getAllGuides()
+    ]);
 
     return (
       <>
@@ -305,7 +309,8 @@ export default async function ProgrammaticPage({ params }: Props) {
           serviceName={service.name}
           serviceSlug={service.slug}
           description={service.description || `Professional ${service.name} solutions designed to help your business scale.`}
-          towns={allTowns.map(t => ({ name: t.name, slug: t.slug }))}
+          towns={allTowns.map((t: Town) => ({ name: t.name, slug: t.slug }))}
+          guides={allGuides}
         />
       </>
     );
@@ -374,26 +379,7 @@ export default async function ProgrammaticPage({ params }: Props) {
           }}
         />
         
-        {/* JSON-LD LocalBusiness Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              "name": "Business Sorted Kent",
-              "url": `https://businesssortedkent.co.uk`,
-              "areaServed": {
-                "@type": "City",
-                "name": town.name
-              },
-              "makesOffer": {
-                "@type": "Service",
-                "name": `${service.name} in ${town.name}`
-              }
-            })
-          }}
-        />
+
 
         {/* Modular ServiceTown Template Rendering */}
         <ServiceTownPage 
@@ -425,31 +411,7 @@ export default async function ProgrammaticPage({ params }: Props) {
 
     return (
       <>
-        {/* JSON-LD LocalBusiness Schema for Micro Location */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              "name": "Business Sorted Kent",
-              "url": `https://businesssortedkent.co.uk`,
-              "areaServed": {
-                "@type": "GeoCircle",
-                "geoMidpoint": {
-                  "@type": "GeoCoordinates",
-                  "latitude": town.latitude,
-                  "longitude": town.longitude
-                },
-                "geoRadius": "10000"
-              },
-              "makesOffer": {
-                "@type": "Service",
-                "name": `${service.name} Near ${town.name}`
-              }
-            })
-          }}
-        />
+
 
         <MicroLocationPage 
           service={service as Service} 

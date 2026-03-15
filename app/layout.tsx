@@ -6,6 +6,8 @@ import Navbar from '@/components/layout/Navbar';
 
 import Footer from '@/components/layout/Footer';
 import MobileCTA from '@/components/ui/MobileCTA';
+import SiteSchema from '@/components/seo/SiteSchema';
+import AssistantElle from '@/components/ui/AssistantElle';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,10 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} pb-20 md:pb-0`}>
+        <SiteSchema />
         <Navbar />
         <main>{children}</main>
         <Footer />
         <MobileCTA />
+        <AssistantElle />
       </body>
     </html>
   );

@@ -70,32 +70,36 @@ export default function ServiceTownPage({
 
 
   // Core Services Constants (Rotated Programmatically)
-  const seed = town.name.length;
+  const seed = town.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
   const intros = [
     `Businesses in ${town.name} rely heavily on their online presence to attract new customers. A professionally designed website helps local businesses present their services clearly and generate enquiries.`,
     `When customers search for services in ${town.name}, the businesses that appear first often receive the most enquiries. A well structured online presence helps ensure your business is visible when it matters most.`,
     `As businesses in ${town.name} grow, having the right online systems becomes increasingly important. A strong website, clear messaging and efficient enquiry systems help businesses manage growth effectively.`,
     `Many businesses in ${town.name} compete for the same customers online. Businesses with stronger websites and better online visibility often stand out and attract more enquiries.`,
-    `Most customers now research businesses online before making contact. A well structured online presence helps businesses in ${town.name} build trust and encourage enquiries.`
+    `Most customers now research businesses online before making contact. A well structured online presence helps businesses in ${town.name} build trust and encourage enquiries.`,
+    `A strong digital footprint is essential for companies operating in ${town.name}. By investing in professional digital infrastructure, you can capture attention and convert local traffic into loyal clients.`,
+    `Standing out in the ${town.name} business community requires more than word of mouth. It requires a strategic digital approach that systematically turns online searches into steady revenue.`,
   ];
   const selectedIntro = intros[seed % intros.length];
 
   const locationContexts = [
     `Businesses in ${town.name} operate in a competitive local market where visibility and strong presentation can make a significant difference.`,
     `Many businesses in ${town.name} rely on local customers finding them online when searching for services.`,
-    `As ${town.name} continues to grow, businesses increasingly rely on professional online systems to attract new customers.`
+    `As ${town.name} continues to grow, businesses increasingly rely on professional online systems to attract new customers.`,
+    `The local economy in ${town.name} rewards businesses that establish authority and trust through a cohesive digital brand.`,
+    `For trades and services located around ${town.name}, consistent digital lead generation is the key to escaping the feast-and-famine cycle.`
   ];
   const selectedLocationContext = locationContexts[(seed * 2) % locationContexts.length];
   const combinedIntro = `${selectedIntro} ${selectedLocationContext}`;
 
-  const ctas = ["Get a Free Quote", "Book a Consultation", "Request a Website Review", "Speak With Our Team"];
+  const ctas = ["Get A Free Quote", "Request A Website Review", "Book An Automation Consultation", "Start Enhancing Your Growth"];
   const selectedCTA = ctas[(seed * 3) % ctas.length];
 
-  const webDesignTerms = ["business website", "mobile friendly website", "professional website design", "service business website", "modern website design"];
-  const seoTerms = ["local search results", "Google Business profile", "search rankings", "website visibility", "local search optimisation"];
-  const leadCaptureTerms = ["website enquiries", "conversion optimisation", "quote request forms", "contact forms", "customer enquiries"];
-  const automationTerms = ["workflow automation", "automated follow ups", "CRM systems", "customer management", "process automation"];
+  const webDesignTerms = ["website design", "business websites", "professional website development", "mobile friendly website", "modern website architecture"];
+  const seoTerms = ["local search visibility", "Google rankings", "local search optimisation", "search rankings", "Google Business profile"];
+  const leadCaptureTerms = ["lead generation", "customer enquiries", "conversion optimisation", "quote request forms", "contact forms"];
+  const automationTerms = ["workflow automation", "business systems", "customer management", "automated follow ups", "process automation"];
 
   // Web Design Data
   const isWebDesign = service.slug === 'web-design';
@@ -106,7 +110,7 @@ export default function ServiceTownPage({
     { title: "Slow loading pages", pain_point: `Performance issues reduce engagement.` },
     { title: "Weak enquiry pathways", pain_point: `Visitors cannot easily contact the business.` }
   ];
-  const rotatedWebDesignPainPoints = [webDesignPainPointsBank[seed % 5], webDesignPainPointsBank[(seed + 1) % 5]];
+  const rotatedWebDesignPainPoints = [webDesignPainPointsBank[seed % 5], webDesignPainPointsBank[(seed + 1) % 5], webDesignPainPointsBank[(seed + 2) % 5]];
   const webDesignFaqsBank = [
     { question: `How long does it take to build a website?`, answer: `A typical website takes between 4 to 8 weeks depending on the complexity of the project.` },
     { question: `Can you improve my existing website?`, answer: `Yes, we often redesign outdated sites to improve their performance and ability to generate local enquiries.` },
@@ -124,7 +128,7 @@ export default function ServiceTownPage({
     { title: "Limited local optimisation", pain_point: `Google Business profiles and location signals are missing.` },
     { title: "Poor content coverage", pain_point: `Important services or locations are not represented by pages.` }
   ];
-  const rotatedSeoPainPoints = [seoPainPointsBank[seed % 5], seoPainPointsBank[(seed + 1) % 5]];
+  const rotatedSeoPainPoints = [seoPainPointsBank[seed % 5], seoPainPointsBank[(seed + 1) % 5], seoPainPointsBank[(seed + 2) % 5]];
   const seoFaqsBank = [
     { question: `How long does SEO take to work?`, answer: `SEO is a long-term strategy. Typically, noticeable improvements in map rankings occur within 90 days.` },
     { question: `How do you choose keywords?`, answer: `We perform deep search engine opportunity analysis to target the exact transactional terms your local customers use.` },
@@ -143,7 +147,7 @@ export default function ServiceTownPage({
     { title: "Important information buried", pain_point: `Customers in ${town.name} cannot quickly understand services.` },
     { title: "Lack of contact pathways", pain_point: `Phone, form and messaging options are unclear.` }
   ];
-  const rotatedLeadCapturePainPoints = [leadCapturePainPointsBank[seed % 5], leadCapturePainPointsBank[(seed + 1) % 5]];
+  const rotatedLeadCapturePainPoints = [leadCapturePainPointsBank[seed % 5], leadCapturePainPointsBank[(seed + 1) % 5], leadCapturePainPointsBank[(seed + 2) % 5]];
   const leadCaptureFaqsBank = [
     { question: `How can I get more enquiries from my website?`, answer: `By improving site structure, adding clear calls to action, and streamlining contact forms.` },
     { question: `Do I need a new website for lead capture?`, answer: `Not necessarily. We can often optimise existing pages to improve the user journey and conversion rates.` },
@@ -162,7 +166,7 @@ export default function ServiceTownPage({
     { title: "Admin workload", pain_point: `Businesses spend hours on repetitive tasks.` },
     { title: "Scaling challenges", pain_point: `Growth becomes harder without systems.` }
   ];
-  const rotatedBusinessAutomationPainPoints = [businessAutomationPainPointsBank[seed % 5], businessAutomationPainPointsBank[(seed + 1) % 5]];
+  const rotatedBusinessAutomationPainPoints = [businessAutomationPainPointsBank[seed % 5], businessAutomationPainPointsBank[(seed + 1) % 5], businessAutomationPainPointsBank[(seed + 2) % 5]];
   const businessAutomationFaqsBank = [
     { question: `What business tasks can be automated?`, answer: `We automate enquiry routing, follow-up emails, CRM data logging, and review requests.` },
     { question: `Do I need special software for automation?`, answer: `We specialise in integrations, connecting the tools you already use like your email, website, and basic CRM.` },
@@ -173,7 +177,7 @@ export default function ServiceTownPage({
   const usedAutomationTerms = [automationTerms[seed % 5], automationTerms[(seed + 1) % 5], automationTerms[(seed + 2) % 5]];
 
   // Branding Data
-  const isBranding = service.slug === 'branding' || service.slug === 'logo-branding';
+  const isBranding = service.slug === 'branding';
   const brandingPainPointsBank = [
     { title: "Inconsistent branding", pain_point: `Different colours, fonts and styles appear across your website, vehicles and social media in ${town.name}.` },
     { title: "Outdated logos", pain_point: `An old or poorly designed logo can make your business appear less professional.` },
@@ -225,7 +229,7 @@ export default function ServiceTownPage({
         <LocalServiceHero
           title={<>SEO Services in {town.name}</>}
           subtitle={`If your business is not appearing in local search results, potential customers are finding your competitors instead. We help ${town.name} businesses improve visibility and turn searches into direct enquiries.`}
-          primaryCTA={{ text: 'Get a Free SEO Review', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         
         <ParentLinks service={service} town={town} />
@@ -288,7 +292,7 @@ export default function ServiceTownPage({
         <LocalServiceHero
           title={<>Web Design in {town.name}</>}
           subtitle={`If your current website feels outdated or is not generating enquiries, a professionally designed site can transform how customers see your business in ${town.name}.`}
-          primaryCTA={{ text: 'Get a Free Website Quote', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Website Review', href: '/contact' }}
         />
         
         <ParentLinks service={service} town={town} />
@@ -351,7 +355,7 @@ export default function ServiceTownPage({
         <LocalServiceHero
           title={<>Logo & Branding Services in {town.name}</>}
           subtitle={`Whether you need a completely new logo or a full branding system, we can help your business present a clear and professional image across ${town.name}.`}
-          primaryCTA={{ text: 'Get a Branding Quote', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         
         <ParentLinks service={service} town={town} />
@@ -413,7 +417,7 @@ export default function ServiceTownPage({
         <LocalServiceHero
           title={<>Lead Capture Systems in {town.name}</>}
           subtitle={`If your website receives traffic but generates few enquiries, improving lead capture can dramatically increase results for your business in ${town.name}.`}
-          primaryCTA={{ text: 'Get a Free Website Review', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Website Review', href: '/contact' }}
         />
         
         <ParentLinks service={service} town={town} />
@@ -527,7 +531,7 @@ export default function ServiceTownPage({
         <CTA 
           titleOverride="Streamline Your Business With Automation" 
           paragraphOverride={`Automation systems can help your business respond faster, organise enquiries and reduce repetitive admin work.`} 
-          buttonOverride={selectedCTA}
+          buttonOverride="Book An Automation Consultation"
         />
       </>
     );
@@ -539,7 +543,7 @@ export default function ServiceTownPage({
         <LocalServiceHero
           title={<>Social Media Setup in {town.name}</>}
           subtitle={`A well structured social media profile helps potential customers in ${town.name} understand your business quickly and builds trust before they contact you.`}
-          primaryCTA={{ text: 'Get Social Media Setup', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         
         <ParentLinks service={service} town={town} />
@@ -590,7 +594,7 @@ export default function ServiceTownPage({
         <CTA 
           titleOverride="Create A Professional Social Media Presence" 
           paragraphOverride={`A well structured profile helps customers understand your business and builds trust before they contact you.`} 
-          buttonOverride="Get Social Media Setup"
+          buttonOverride="Get A Free Quote"
         />
       </>
     );
@@ -602,7 +606,7 @@ export default function ServiceTownPage({
         <LocalServiceHero
           title={<>Workwear & Print in {town.name}</>}
           subtitle={`Consistent branding across workwear, vehicles and printed materials helps customers in ${town.name} recognise and trust your business instantly.`}
-          primaryCTA={{ text: 'Get A Quote', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         
         <ParentLinks service={service} town={town} />
@@ -660,7 +664,7 @@ export default function ServiceTownPage({
         <CTA 
           titleOverride="Promote Your Business With Professional Branding" 
           paragraphOverride={`Branded workwear and printed materials help your ${town.name} business look professional and increase visibility in everyday situations.`} 
-          buttonOverride="Get A Quote"
+          buttonOverride="Get A Free Quote"
         />
       </>
     );
@@ -673,7 +677,7 @@ export default function ServiceTownPage({
         title={messaging.title}
         subtitle={localIntro || messaging.subtitle}
         primaryCTA={{
-          text: 'Get a Free Quote',
+          text: 'Get A Free Quote',
           href: '/contact',
         }}
       />

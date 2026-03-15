@@ -11,6 +11,33 @@ interface MicroLocationPageProps {
 }
 
 export default function MicroLocationPage({ service, town, nearbyTowns }: MicroLocationPageProps) {
+  const seed = town.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + service.name.length;
+
+  const subtitles = [
+    `Local, professional ${service.name.toLowerCase()} services tailored for businesses close to ${town.name}. We help you grow online.`,
+    `Expert ${service.name.toLowerCase()} for companies located just outside ${town.name}. Attract more local enquiries today.`,
+    `Supporting businesses around ${town.name} with reliable ${service.name.toLowerCase()} systems engineered to capture local traffic.`,
+    `Looking for trusted ${service.name.toLowerCase()} near ${town.name}? We specialise in digital solutions for Kent-based trades and service companies.`,
+    `A dedicated approach to ${service.name.toLowerCase()} for businesses operating in the immediate ${town.name} area.`
+  ];
+  const selectedSubtitle = subtitles[seed % subtitles.length];
+
+  const p1Variations = [
+    `Finding the right digital partner near ${town.name} shouldn't be difficult. Whether you need a simple online presence or a complete growth system, our ${service.name.toLowerCase()} strategies are engineered to capture local traffic and convert it into real enquiries.`,
+    `If you operate close to ${town.name}, standing out from the local competition is crucial. Our custom ${service.name.toLowerCase()} services are built specifically to put your business in front of the customers actively searching for what you do.`,
+    `Businesses on the outskirts of ${town.name} often struggle to compete with central companies. We level the playing field by providing highly optimised ${service.name.toLowerCase()} frameworks that dominate the surrounding search results.`,
+    `We understand the ${town.name} market. Providing actionable ${service.name.toLowerCase()} isn’t just about making things look good; it’s about deploying strategic digital assets that make your phone ring locally.`
+  ];
+  const selectedP1 = p1Variations[(seed + 1) % p1Variations.length];
+
+  const p2Variations = [
+    `As a locally-focused team, we understand the Kent market intimately. We don't just build websites; we build scalable digital assets designed to position your business as the leading authority in your area. Avoid working with generic national agencies and partner with specialists who know the region.`,
+    `When you choose a partner physically aware of the Kent demographic, you get better results. We bypass generic templates and implement proven ${service.name.toLowerCase()} workflows tailored directly for the residents searching for services near ${town.name}.`,
+    `We believe local businesses deserve enterprise-grade technology. Working directly with companies near ${town.name}, we deploy systematic ${service.name.toLowerCase()} upgrades designed strictly around generating a clear return on investment.`,
+    `Your digital infrastructure represents your reputation in ${town.name}. By trusting a dedicated local agency, you circumvent the slow communication and cookie-cutter approaches of large firms, securing a tailor-made digital footprint.`
+  ];
+  const selectedP2 = p2Variations[(seed + 2) % p2Variations.length];
+
   return (
     <main className="min-h-screen bg-neutral-950 pt-32 lg:pt-40">
       
@@ -25,7 +52,7 @@ export default function MicroLocationPage({ service, town, nearbyTowns }: MicroL
             {service.name} Near {town.name}
           </h1>
           <p className="text-xl md:text-2xl text-neutral-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Local, professional {service.name.toLowerCase()} services tailored for businesses close to {town.name}. We help you grow online.
+            {selectedSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link 
@@ -51,12 +78,8 @@ export default function MicroLocationPage({ service, town, nearbyTowns }: MicroL
             <div className="bg-neutral-900/50 border border-neutral-800 rounded-3xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-bold text-white mb-6">Expert {service.name} Near You</h2>
               <div className="text-lg text-neutral-300 leading-relaxed max-w-3xl mx-auto space-y-6">
-                <p>
-                  Finding the right digital partner near {town.name} shouldn't be difficult. Whether you need a simple online presence or a complete growth system, our {service.name.toLowerCase()} strategies are engineered to capture local traffic and convert it into real enquiries.
-                </p>
-                <p>
-                  As a locally-focused team, we understand the Kent market intimately. We don't just build websites; we build scalable digital assets designed to position your business as the leading authority in your area. Avoid working with generic national agencies and partner with specialists who know the region.
-                </p>
+                <p>{selectedP1}</p>
+                <p>{selectedP2}</p>
               </div>
             </div>
           </Reveal>

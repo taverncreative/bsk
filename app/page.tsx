@@ -1,7 +1,9 @@
 import HomepageHero from '@/components/sections/HomepageHero';
+import ProofBand from '@/components/sections/ProofBand';
 import ProblemSection from '@/components/sections/ProblemSection';
 import SolutionSection from '@/components/sections/SolutionSection';
 import Services from '@/components/sections/Services';
+import WhoWeHelp from '@/components/sections/WhoWeHelp';
 import CaseStudySection from '@/components/sections/CaseStudySection';
 import ProcessAuthority from '@/components/sections/ProcessAuthority';
 import Authority from '@/components/sections/Authority';
@@ -10,6 +12,8 @@ import EducationalGuides from '@/components/sections/EducationalGuides';
 import CTA from '@/components/sections/CTA';
 import HeroReveal from '@/components/ui/HeroReveal';
 import { Laptop, Search, MousePointerClick, Zap } from 'lucide-react';
+import KentCoverage from '@/components/sections/KentCoverage';
+import WebsiteReviewCTA from '@/components/sections/WebsiteReviewCTA';
 
 import { getAllCaseStudies } from '@/lib/queries/caseStudies';
 import { getAllGuides } from '@/lib/queries';
@@ -31,50 +35,6 @@ export default async function Home() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
-            {
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Business Sorted Kent",
-              "url": "https://businesssortedkent.co.uk",
-              "logo": "https://businesssortedkent.co.uk/logo.png"
-            },
-            {
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "Business Sorted Kent",
-              "url": "https://businesssortedkent.co.uk",
-              "areaServed": "Kent",
-              "makesOffer": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Web Design"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Local SEO"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Business Automation"
-                  }
-                }
-              ]
-            }
-          ])
-        }}
-      />
       <HomepageHero
         title={
           <>
@@ -88,7 +48,7 @@ export default async function Home() {
         }
         subtitle="We help trades and small businesses across Kent look professional online, get found on Google, and turn website visitors into real enquiries."
         primaryCTA={{
-          text: 'Get a Free Quote',
+          text: 'Get A Free Quote',
           href: '/contact',
         }}
         secondaryCTA={{
@@ -97,6 +57,9 @@ export default async function Home() {
         }}
       />
       
+      {/* Proof Band / Credibility Section */}
+      <ProofBand />
+
       {/* 1. Problem Section */}
       <ProblemSection 
         headlineOverride="Why Many Kent Businesses Struggle Online" 
@@ -118,6 +81,12 @@ export default async function Home() {
       {/* 3. Services Section */}
       <Services />
 
+      {/* Who We Help Section */}
+      <WhoWeHelp />
+
+      {/* Free Website Review CTA */}
+      <WebsiteReviewCTA />
+
       {/* 4. Results Section */}
       <CaseStudySection caseStudies={caseStudies} />
 
@@ -127,7 +96,10 @@ export default async function Home() {
       {/* 6. Authority Section */}
       <Authority />
 
-      {/* 7. Kent Coverage Section */}
+      {/* 7. Kent Coverage Paragraph */}
+      <KentCoverage pageType="homepage" />
+
+      {/* 8. Kent Coverage Map Section */}
       <LocalAuthorityMap />
 
       {/* 8. Guides Section */}

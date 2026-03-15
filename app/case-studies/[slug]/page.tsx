@@ -13,7 +13,8 @@ interface PageProps {
 
 // 1. Generate Static Metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const caseStudy = await getCaseStudyBySlug(params.slug);
+  const { slug } = await params;
+  const caseStudy = await getCaseStudyBySlug(slug);
 
   if (!caseStudy) {
     return {
@@ -22,11 +23,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   // Capitalize properly if stored as lower-case
-  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+  const capitalize = (s?: string) => s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
 
   return {
     title: `${caseStudy.title} | Case Study | Business Sorted Kent`,
-    description: `See how we helped a ${caseStudy.industry} business in ${capitalize(caseStudy.town)} grow using ${capitalize(caseStudy.services_used || 'our services')}.`,
+    description: `See how we helped a ${caseStudy.industry || 'local'} business in ${capitalize(caseStudy.town || 'Kent')} grow using ${capitalize(caseStudy.services_used || 'our services')}.`,
     alternates: {
       canonical: `https://businesssortedkent.co.uk/case-studies/${caseStudy.slug}`,
     },
@@ -43,7 +44,8 @@ export async function generateStaticParams() {
 
 // 3. Page Component Rendering
 export default async function CaseStudyRoute({ params }: PageProps) {
-  const caseStudy = await getCaseStudyBySlug(params.slug);
+  const { slug } = await params;
+  const caseStudy = await getCaseStudyBySlug(slug);
 
   if (!caseStudy) {
     notFound();

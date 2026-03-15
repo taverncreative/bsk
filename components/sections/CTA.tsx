@@ -22,7 +22,7 @@ export default function CTA({ titleOverride, paragraphOverride, buttonOverride }
           
           <div className="flex justify-center">
             <MagneticButton href="/contact" className="text-lg px-8 md:px-10 py-4">
-              {buttonOverride || "Get a Free Quote"}
+              {buttonOverride || "Get A Free Quote"}
             </MagneticButton>
           </div>
         </Reveal>

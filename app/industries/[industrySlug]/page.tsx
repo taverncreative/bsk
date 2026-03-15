@@ -9,7 +9,9 @@ import InternalLinks from '@/components/seo/InternalLinks';
 import CTA from '@/components/sections/CTA';
 
 // Need additional queries for the hub page extensions
-import { getPainPointsByIndustry, getAllCaseStudies } from '@/lib/queries';
+import { getPainPointsByIndustry, getAllCaseStudies, getAllGuides } from '@/lib/queries';
+import EducationalGuides from '@/components/sections/EducationalGuides';
+import KentCoverage from '@/components/sections/KentCoverage';
 
 type Props = {
   params: Promise<{
@@ -49,14 +51,15 @@ export default async function IndustryHubPage({ params }: Props) {
     notFound();
   }
 
-  const [allServices, painPoints, allCaseStudies] = await Promise.all([
+  const [allServices, painPoints, allCaseStudies, allGuides] = await Promise.all([
      getAllServices(),
      industry.id ? getPainPointsByIndustry(industry.id) : Promise.resolve([]),
-     getAllCaseStudies()
+     getAllCaseStudies(),
+     getAllGuides()
   ]);
 
   const industryCaseStudies = allCaseStudies.filter(c => 
-     c.industry.toLowerCase() === industry.name.toLowerCase()
+     c.industry && c.industry.toLowerCase() === industry.name.toLowerCase()
   );
 
   return (
@@ -66,7 +69,7 @@ export default async function IndustryHubPage({ params }: Props) {
         title={`Digital Growth Services for ${industry.name}`}
         subtitle={`Helping ${industry.name.toLowerCase()} businesses generate more leads online.`}
         primaryCTA={{
-          text: 'Get a Free Quote',
+          text: 'Get A Free Quote',
           href: '/contact',
         }}
       />
@@ -87,11 +90,11 @@ export default async function IndustryHubPage({ params }: Props) {
             <div>
               <h3 className="text-2xl font-bold text-white mb-4">Industry Overview & Competition</h3>
               <p className="text-neutral-400 leading-relaxed mb-6">
-                The {industry.name.toLowerCase()} sector in Kent is highly competitive. Many established {industry.name.toLowerCase()} rely heavily on legacy word-of-mouth or expensive aggregators. However, consumer behavior has fundamentally shifted. When a customer needs a {industry.name.substring(0, industry.name.length - 1).toLowerCase()}, they turn immediately to Google.
+                The {industry?.name?.toLowerCase() || 'service'} sector in Kent is highly competitive. Many established {industry?.name?.toLowerCase() || 'services'} rely heavily on legacy word-of-mouth or expensive aggregators. However, consumer behavior has fundamentally shifted. When a customer needs a {industry?.name?.substring(0, industry.name.length - 1).toLowerCase() || 'service provider'}, they turn immediately to Google.
               </p>
               <h3 className="text-2xl font-bold text-white mb-4">Website Strategy</h3>
               <p className="text-neutral-400 leading-relaxed">
-                Most {industry.name.toLowerCase()} websites act as static digital business cards. They load slowly and fail to convert traffic into phone calls or form fills. By deploying a high-performance, conversion-focused website, you instantly differentiate your brand from the local competition.
+                Most {industry?.name?.toLowerCase() || 'business'} websites act as static digital business cards. They load slowly and fail to convert traffic into phone calls or form fills. By deploying a high-performance, conversion-focused website, you instantly differentiate your brand from the local competition.
               </p>
             </div>
             
@@ -100,7 +103,7 @@ export default async function IndustryHubPage({ params }: Props) {
               <ul className="space-y-6">
                 <li>
                   <strong className="block text-brand-gold text-lg mb-1">SEO Dominance</strong>
-                  <p className="text-neutral-400 text-sm leading-relaxed">Most local {industry.name.toLowerCase()} have zero technical SEO. Securing the top 3 spots in the Google Local Desktop pack guarantees consistent daily enquiries.</p>
+                  <p className="text-neutral-400 text-sm leading-relaxed">Most local {industry?.name?.toLowerCase() || 'businesses'} have zero technical SEO. Securing the top 3 spots in the Google Local Desktop pack guarantees consistent daily enquiries.</p>
                 </li>
                 <li>
                   <strong className="block text-brand-gold text-lg mb-1">Automation Systems</strong>
@@ -117,10 +120,10 @@ export default async function IndustryHubPage({ params }: Props) {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Services for {industry.name}
+              Services for {industry?.name || 'Your Industry'}
             </h2>
             <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-              Our core operational packages, customized natively for the {industry.name.toLowerCase()} sector.
+              Our core operational packages, customized natively for the {industry?.name?.toLowerCase() || 'service'} sector.
             </p>
           </div>
 
@@ -150,6 +153,12 @@ export default async function IndustryHubPage({ params }: Props) {
            townSlug="" 
         />
       </div>
+
+      <KentCoverage pageType={industry.slug} />
+
+      {allGuides && allGuides.length > 0 && (
+         <EducationalGuides guides={allGuides} headlineOverride={`Growth Guides for ${industry.name}`} />
+      )}
 
       {/* SECTION 3: CTA */}
       <CTA />

@@ -15,8 +15,11 @@ import { getServiceFAQs } from '@/components/content/ServiceFAQs';
 import GrowthSystem from '@/components/sections/GrowthSystem';
 
 import LocalAuthorityMap from '@/components/sections/LocalAuthorityMap';
+import KentCoverage from '@/components/sections/KentCoverage';
+import EducationalGuides from '@/components/sections/EducationalGuides';
 import Services from '@/components/sections/Services';
 import CredibilityMetrics from '@/components/sections/CredibilityMetrics';
+import WebsiteReviewCTA from '@/components/sections/WebsiteReviewCTA';
 import Reveal from '@/components/ui/Reveal';
 import { Search, Laptop, FileText, Link as LinkIcon, MapPin, TrendingUp, Palette, Zap, Share2, MousePointerClick } from 'lucide-react';
 
@@ -38,6 +41,7 @@ interface ServicePageProps {
   description: string;
   towns: TownRef[];
   caseStudies?: CaseStudyRef[];
+  guides?: any[];
 }
 
 export default async function ServicePage({
@@ -46,6 +50,7 @@ export default async function ServicePage({
   description,
   towns,
   caseStudies,
+  guides,
 }: ServicePageProps) {
   const messaging = getServiceHubMessaging(serviceSlug);
 
@@ -56,7 +61,7 @@ export default async function ServicePage({
   const displayStudies = serviceCaseStudies.length > 0 ? serviceCaseStudies : allCaseStudies.slice(0, 3);
   const isSEO = serviceSlug === 'seo';
   const isWebDesign = serviceSlug === 'web-design';
-  const isBranding = serviceSlug === 'branding' || serviceSlug === 'logo-branding';
+  const isBranding = serviceSlug === 'branding';
   const isLeadCapture = serviceSlug === 'lead-capture';
   const isBusinessAutomation = serviceSlug === 'business-automation';
   const isSocialMedia = serviceSlug === 'social-media-setup' || serviceSlug === 'digital-marketing';
@@ -68,7 +73,7 @@ export default async function ServicePage({
         <ServiceHero
           title={<>SEO Services That Help Your Business<br />Get Found On Google</>}
           subtitle="If your business is not appearing in local search results, potential customers are finding your competitors instead. Our SEO services help businesses across Kent improve visibility, attract the right traffic, and turn searches into enquiries."
-          primaryCTA={{ text: 'Get a Free SEO Review', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         
         <ProblemSection 
@@ -121,6 +126,8 @@ export default async function ServicePage({
 
         <LocalAuthorityMap headlineOverride="SEO Support For Businesses Across Kent" />
         
+        <WebsiteReviewCTA />
+
         <Services 
           headlineOverride="Supporting Services That Improve SEO Results"
           descriptionOverride="Our fully connected digital growth ecosystem integrates seamlessly to improve your search visibility and overall conversion rates."
@@ -132,13 +139,14 @@ export default async function ServicePage({
         />
         
         <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+        <KentCoverage pageType={serviceSlug} />
         <GrowthSystem currentService={serviceSlug} />
         <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions about SEO in Kent`} />
         
         <CTA 
           titleOverride="Start Improving Your Google Visibility" 
           paragraphOverride="If your business is not appearing in search results, the right SEO strategy can change that. We help businesses across Kent improve visibility and generate more enquiries." 
-          buttonOverride="Get A Free SEO Review"
+          buttonOverride="Get A Free Quote"
         />
       </>
     );
@@ -150,7 +158,7 @@ export default async function ServicePage({
         <ServiceHero
           title={<>Website Design That Turns<br />Visitors Into Customers</>}
           subtitle="Your website should be more than an online brochure. It should showcase your business professionally, appear in search results, and convert visitors into real enquiries. We design modern, high-performing websites for businesses across Kent."
-          primaryCTA={{ text: 'Get a Free Website Quote', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Website Review', href: '/contact' }}
         />
         
         <ProblemSection 
@@ -220,6 +228,8 @@ export default async function ServicePage({
 
         <LocalAuthorityMap headlineOverride="Website Design For Businesses Across Kent" />
         
+        <WebsiteReviewCTA />
+
         <Services 
           headlineOverride="More Than Just Website Design"
           descriptionOverride="Successful websites also benefit from our fully connected digital growth ecosystem."
@@ -231,13 +241,14 @@ export default async function ServicePage({
         />
         
         <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+        <KentCoverage pageType={serviceSlug} />
         <GrowthSystem currentService={serviceSlug} />
         <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions about Web Design`} />
         
         <CTA 
           titleOverride="Ready For A Website That Works For Your Business?" 
           paragraphOverride="If your current website feels outdated or is not generating enquiries, a professionally designed site can transform how customers see your business." 
-          buttonOverride="Get A Website Quote"
+          buttonOverride="Get A Free Website Review"
         />
       </>
     );
@@ -249,7 +260,7 @@ export default async function ServicePage({
         <ServiceHero
           title={<>Professional Logo & Branding<br />That Makes Your Business Look Established</>}
           subtitle="Your brand is often the first impression customers have of your business. A clear, professional identity helps you build trust, stand out from competitors and look established from the very first interaction. We create logos and branding systems for businesses across Kent that work consistently across websites, vehicles, workwear and marketing materials."
-          primaryCTA={{ text: 'Get a Branding Quote', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         
         <ProblemSection 
@@ -335,6 +346,7 @@ export default async function ServicePage({
         />
         
         <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+        <KentCoverage pageType={serviceSlug} />
         <GrowthSystem currentService={serviceSlug} />
         <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions about Branding`} />
         
@@ -352,7 +364,7 @@ export default async function ServicePage({
         <ServiceHero
           title={<>Lead Capture Systems That Turn<br />Visitors Into Enquiries</>}
           subtitle="Many websites receive visitors but fail to convert them into enquiries. We build lead capture systems that guide visitors toward action, making it easier for potential customers to contact your business."
-          primaryCTA={{ text: 'Get a Free Website Review', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Website Review', href: '/contact' }}
         />
         
         <ProblemSection 
@@ -429,13 +441,14 @@ export default async function ServicePage({
         />
         
         <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+        <KentCoverage pageType={serviceSlug} />
         <GrowthSystem currentService={serviceSlug} />
         <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions`} />
         
         <CTA 
           titleOverride="Turn Website Visitors Into Real Enquiries" 
           paragraphOverride="If your website receives traffic but generates few enquiries, improving lead capture can dramatically increase results." 
-          buttonOverride="Get A Website Review"
+          buttonOverride="Get A Free Website Review"
         />
       </>
     );
@@ -531,6 +544,7 @@ export default async function ServicePage({
         />
         
         <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+        <KentCoverage pageType={serviceSlug} />
         <GrowthSystem currentService={serviceSlug} />
         <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions`} />
         
@@ -549,7 +563,7 @@ export default async function ServicePage({
         <ServiceHero
           title={<>Professional Social Media Setup<br />Build A Consistent Online Presence</>}
           subtitle="A well structured social media profile helps potential customers understand your business quickly and builds trust before they contact you. We set up and optimise social media profiles so they align with your branding and support your wider online presence."
-          primaryCTA={{ text: 'Get Social Media Setup', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         
         <ProblemSection 
@@ -631,13 +645,14 @@ export default async function ServicePage({
         />
         
         <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+        <KentCoverage pageType={serviceSlug} />
         <GrowthSystem currentService={serviceSlug} />
         <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions`} />
         
         <CTA 
           titleOverride="Create A Professional Social Media Presence" 
           paragraphOverride="A well structured profile helps customers understand your business and builds trust before they contact you." 
-          buttonOverride="Get Social Media Setup"
+          buttonOverride="Get A Free Quote"
         />
       </>
     );
@@ -649,7 +664,7 @@ export default async function ServicePage({
         <ServiceHero
           title={<>Workwear & Print<br />Professional Branding In The Real World</>}
           subtitle="Consistent branding across workwear, vehicles and printed materials helps customers recognise and trust your business. We provide high quality branded workwear and printed materials designed to match your business identity."
-          primaryCTA={{ text: 'Get A Quote', href: '/contact' }}
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         
         <ProblemSection 
@@ -736,7 +751,7 @@ export default async function ServicePage({
         <CTA 
           titleOverride="Promote Your Business With Professional Branding" 
           paragraphOverride="Branded workwear and printed materials help your business look professional and increase visibility in everyday situations." 
-          buttonOverride="Get A Quote"
+          buttonOverride="Get A Free Quote"
         />
       </>
     );
@@ -748,7 +763,7 @@ export default async function ServicePage({
         title={messaging.title}
         subtitle={messaging.subtitle}
         primaryCTA={{
-          text: 'Get a Free Quote',
+          text: 'Get A Free Quote',
           href: '/contact',
         }}
       />
@@ -761,8 +776,14 @@ export default async function ServicePage({
       <InternalLinks 
         serviceSlug={serviceSlug} 
       />
-      <GrowthSystem currentService={serviceSlug} />
+      <KentCoverage pageType={serviceSlug} />
+        <GrowthSystem currentService={serviceSlug} />
       <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions about ${serviceName}`} />
+      
+      {guides && guides.length > 0 && (
+        <EducationalGuides guides={guides} headlineOverride={`Guides About ${serviceName}`} />
+      )}
+
       <FinalCTA />
     </>
   );

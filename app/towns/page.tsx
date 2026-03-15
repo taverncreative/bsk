@@ -3,6 +3,7 @@ import Link from 'next/link';
 import LocalAuthorityMap from '@/components/sections/LocalAuthorityMap';
 import CTA from '@/components/sections/CTA';
 import Reveal from '@/components/ui/Reveal';
+import KentCoverage from '@/components/sections/KentCoverage';
 import { getAllTowns } from '@/lib/queries';
 import { MapPin, Briefcase, Zap, TrendingUp, ChevronRight } from 'lucide-react';
 
@@ -42,6 +43,8 @@ export default async function TownsPage() {
           </p>
         </Reveal>
       </div>
+
+      <KentCoverage pageType="locations" />
 
       {/* 2. Kent Coverage Map */}
       <section className="py-24 border-y border-neutral-900 bg-neutral-950/50">
