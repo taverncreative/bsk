@@ -102,8 +102,14 @@ export default function ConsultationCalendar() {
   const times = selectedDayData?.times || [];
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-3xl shadow-2xl overflow-hidden shadow-black/50">
-      <div className="bg-neutral-950 px-8 py-6 border-b border-neutral-800 flex justify-between items-center">
+    <div className="flex flex-col gap-6">
+      <div className="text-center w-full px-4">
+        <p className="text-brand-gold font-bold md:text-lg">
+          Most businesses we speak to uncover quick wins within the first 15 minutes.
+        </p>
+      </div>
+      <div className="bg-neutral-900 border border-neutral-800 rounded-3xl shadow-2xl overflow-hidden shadow-black/50">
+        <div className="bg-neutral-950 px-8 py-6 border-b border-neutral-800 flex justify-between items-center">
         <div>
           <h3 className="text-xl font-bold text-white tracking-tight">Select A Date & Time</h3>
           <p className="text-sm text-neutral-400 mt-1 flex items-center gap-2">
@@ -255,6 +261,7 @@ export default function ConsultationCalendar() {
           </form>
         </div>
       )}
+      </div>
     </div>
   );
 }

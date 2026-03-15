@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ConsultationCalendar from '@/components/ui/ConsultationCalendar';
+import ConsultationReassurance from '@/components/ui/ConsultationReassurance';
 import SecondaryContactForm from '@/components/ui/SecondaryContactForm';
 import { Star, Mail, Phone, MapPin } from 'lucide-react';
 import Reveal from '@/components/ui/Reveal';
@@ -46,6 +47,9 @@ export default function ContactPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* 2.5 Reassurance Block */}
+      <ConsultationReassurance />
 
       {/* Split Section: Secondary Contact Form & Contact Details */}
       <section id="message" className="py-24 bg-black">
