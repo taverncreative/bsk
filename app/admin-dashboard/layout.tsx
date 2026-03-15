@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabaseClient';
 
 const navigation = [
   { name: 'Overview', href: '/admin-dashboard', icon: LayoutDashboard },
+  { name: 'Upcoming Calls', href: '/admin-dashboard/upcoming-calls', icon: FileText },
   { name: 'Lead Inbox', href: '/admin-dashboard/lead-inbox', icon: Mail },
   { name: 'Leads', href: '/admin-dashboard/leads', icon: UserPlus },
   { name: 'CRM Pipeline', href: '/admin-dashboard/pipeline', icon: KanbanSquare },

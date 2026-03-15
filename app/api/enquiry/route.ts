@@ -35,7 +35,7 @@ const sendEmail = async (to: string, subject: string, html: string) => {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, service_required, preferred_day, preferred_time, message } = body;
+    const { name, email, website, service_required, preferred_day, preferred_time, message } = body;
 
     // 1. Insert into Supabase
     const { data: enquiry, error: insertError } = await supabase
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
         name, 
         email, 
         phone: null,
-        website_url: null,
+        website_url: website || null,
         message: `Service Required: ${service_required}\nPreferred Day: ${preferred_day}\nPreferred Time: ${preferred_time}\nNotes: ${message}`,
         page_context: 'Primary Enquiry Form',
         submission_type: 'General Enquiry'
@@ -62,6 +62,7 @@ export async function POST(req: Request) {
       <h2>New Enquiry / Message</h2>
       <p><strong>Name:</strong> ${name || 'N/A'}</p>
       <p><strong>Email:</strong> ${email || 'N/A'}</p>
+      <p><strong>Website:</strong> ${website || 'N/A'}</p>
       <p><strong>Service Required:</strong> ${service_required || 'N/A'}</p>
       <p><strong>Preferred Day:</strong> ${preferred_day || 'N/A'}</p>
       <p><strong>Preferred Time:</strong> ${preferred_time || 'N/A'}</p>

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 
 // Helper to send email via Resend
-const sendEmail = async (to: string, subject: string, html: string) => {
+const sendEmail = async (to: string, subject: string, html: string, scheduledAt?: string) => {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn('RESEND_API_KEY is not set. Emails will not be sent.');
@@ -21,6 +21,7 @@ const sendEmail = async (to: string, subject: string, html: string) => {
         to,
         subject,
         html,
+        ...(scheduledAt && { scheduled_at: scheduledAt })
       }),
     });
 
@@ -35,12 +36,14 @@ const sendEmail = async (to: string, subject: string, html: string) => {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, date, time, notes } = body;
+    const { name, email, website, date, time, notes } = body;
+    
+    const fullNotes = website ? `Website: ${website}\n\nNotes: ${notes || 'None'}` : notes;
 
     // 1. Insert into Supabase (Bookings & Unified Leads)
     const { data: booking, error: insertError } = await supabase
       .from('bookings')
-      .insert([{ booking_date: date, booking_time: time + ':00', name, email, notes }])
+      .insert([{ booking_date: date, booking_time: time + ':00', name, email, notes: fullNotes }])
       .select()
       .single();
 
@@ -53,8 +56,8 @@ export async function POST(req: Request) {
       name,
       email,
       phone: null,
-      website_url: null,
-      message: `Booking on ${date} at ${time}. Notes: ${notes}`,
+      website_url: website || null,
+      message: `Booking on ${date} at ${time}. Notes: ${notes || 'None'}`,
       page_context: 'Booking Calendar',
       submission_type: 'Booking Calendar'
     });
@@ -85,6 +88,22 @@ export async function POST(req: Request) {
       <p>Best regards,<br>Business Sorted Kent Team</p>
     `;
     await sendEmail(email, `Booking Confirmed: Consultation with Business Sorted Kent`, clientEmailHTML);
+    
+    // Schedule 24 hour client reminder
+    const bookingDateObj = new Date(`${date}T${time}:00`);
+    const reminderDateObj = new Date(bookingDateObj.getTime() - 24 * 60 * 60 * 1000);
+    
+    if (reminderDateObj > new Date()) {
+      const reminderEmailHTML = `
+        <h2>Reminder: Your consultation is tomorrow</h2>
+        <p>Hi ${name},</p>
+        <p>This is a quick reminder about your consultation tomorrow at ${time}.</p>
+        <p>A Google Meet link will be provided shortly before we connect.</p>
+        <p>Best regards,<br>Business Sorted Kent Team</p>
+      `;
+      // Run asynchronously to prevent delaying the user's UI confirmation
+      sendEmail(email, `Reminder: Consultation tomorrow at ${time}`, reminderEmailHTML, reminderDateObj.toISOString()).catch(console.error);
+    }
 
     return NextResponse.json({ success: true, booking });
   } catch (error) {

@@ -15,7 +15,7 @@ export default function ConsultationCalendar() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   
-  const [formData, setFormData] = useState({ name: '', email: '', notes: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', website: '', notes: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -215,7 +215,7 @@ export default function ConsultationCalendar() {
           )}
 
           <form onSubmit={handleBookingSubmit} className="space-y-5 max-w-2xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 gap-5">
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
                 <input 
@@ -227,16 +227,29 @@ export default function ConsultationCalendar() {
                   className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
                 />
               </div>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
-                <input 
-                  required
-                  type="email" 
-                  placeholder="Email Address" 
-                  value={formData.email}
-                  onChange={e => setFormData({...formData, email: e.target.value})}
-                  className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
-                />
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
+                  <input 
+                    required
+                    type="email" 
+                    placeholder="Email Address" 
+                    value={formData.email}
+                    onChange={e => setFormData({...formData, email: e.target.value})}
+                    className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
+                  />
+                </div>
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500 font-bold">www</span>
+                  <input 
+                    type="url" 
+                    placeholder="Website URL (e.g. example.com)" 
+                    value={formData.website || ''}
+                    onChange={e => setFormData({...formData, website: e.target.value})}
+                    className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
+                  />
+                </div>
               </div>
             </div>
             
@@ -267,7 +280,7 @@ export default function ConsultationCalendar() {
 
 // Internal fallback form component logic included smoothly
 function FallbackEnquiryForm() {
-  const [formData, setFormData] = useState({ name: '', email: '', preferred_day: '', preferred_time: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', website: '', preferred_day: '', preferred_time: '', message: '' });
   const [status, setStatus] = useState<'' | 'loading' | 'success' | 'error'>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
