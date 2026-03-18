@@ -47,15 +47,16 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-400 ease-out border-b ${
-        isScrolled 
-          ? 'bg-black/90 backdrop-blur-md border-[rgba(255,255,255,0.06)] shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2' 
-          : 'bg-black/40 backdrop-blur-sm border-[rgba(255,255,255,0.06)] py-3'
-      }`}
-    >
-      <div className="w-full max-w-[1400px] mx-auto px-4 md:px-6 relative">
-        <div className="flex items-center justify-between w-full gap-4 md:gap-8 transition-all duration-200">
+    <>
+      <nav 
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-400 ease-out border-b ${
+          isScrolled 
+            ? 'bg-black/90 backdrop-blur-md border-[rgba(255,255,255,0.06)] shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2' 
+            : 'bg-black/40 backdrop-blur-sm border-[rgba(255,255,255,0.06)] py-3'
+        }`}
+      >
+        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-6 relative">
+          <div className="flex items-center justify-between w-full gap-4 md:gap-8 transition-all duration-200">
           
           {/* Logo */}
           <div className="flex shrink-0 min-w-0 md:min-w-[220px]">
@@ -402,10 +403,11 @@ export default function Navbar() {
 
         </div>
       </div>
+    </nav>
 
       {/* Mobile Navigation Drawer */}
       <div 
-        className={`fixed inset-0 bg-black z-40 transform transition-transform duration-500 ease-in-out lg:hidden flex flex-col pt-24 px-6 pb-6 overflow-y-auto ${
+        className={`fixed inset-0 bg-black z-40 transform transition-transform duration-500 ease-in-out md:hidden flex flex-col pt-24 px-6 pb-6 overflow-y-auto ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -510,6 +512,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 }
