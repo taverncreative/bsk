@@ -282,12 +282,16 @@ export default function AssistantElle() {
 
   useEffect(() => {
     if (isOpen && !hasLoggedStart) {
+      const alreadyLogged = sessionStorage.getItem('elle_logged_start');
+      if (!alreadyLogged) {
+        sessionStorage.setItem('elle_logged_start', 'true');
+        fetch('/api/elle-event', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ event: 'conversation_started', pageUrl: pathname })
+        }).catch(console.error);
+      }
       setHasLoggedStart(true);
-      fetch('/api/elle-event', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ event: 'conversation_started', pageUrl: pathname })
-      }).catch(console.error);
     }
   }, [isOpen, hasLoggedStart, pathname]);
 
@@ -330,6 +334,11 @@ export default function AssistantElle() {
   useEffect(() => {
     if (hasActivated) return;
 
+    // Check if auto-popup already fired in this session
+    if (typeof window !== 'undefined' && sessionStorage.getItem('elle_has_activated')) {
+      return; 
+    }
+
     if (typeof window !== 'undefined' && window.innerWidth < 768) {
       return; // Do not auto-open on mobile
     }
@@ -337,6 +346,9 @@ export default function AssistantElle() {
     const timer = setTimeout(() => {
       setIsOpen(true);
       setHasActivated(true);
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('elle_has_activated', 'true');
+      }
     }, 5000);
 
     return () => clearTimeout(timer);
