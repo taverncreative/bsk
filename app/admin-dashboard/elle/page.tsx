@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { Search, Filter, Loader2, Calendar, MessageSquare, Target, PhoneCall, AlertTriangle } from 'lucide-react';
+import { Search, Filter, Loader2, Calendar, MessageSquare, Target, PhoneCall, AlertTriangle, X } from 'lucide-react';
 
 interface ChatLog {
   id: string;
@@ -25,6 +25,10 @@ export default function ElleLogsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterAction, setFilterAction] = useState('All');
   const [filterDate, setFilterDate] = useState('All'); // Today, 7Days, 30Days, All
+
+  const [selectedSessionId, setSelectedSessionId] = useState<string | null>(null);
+  const [transcriptLogs, setTranscriptLogs] = useState<ChatLog[]>([]);
+  const [loadingTranscript, setLoadingTranscript] = useState(false);
 
   useEffect(() => {
     fetch('/api/elle-logs')
@@ -105,6 +109,23 @@ export default function ElleLogsPage() {
 
     return { totalConversationsToday, reviewsRequested, callsBooked, topProblem };
   }, [logs, filteredLogs]);
+
+  const fetchTranscript = async (sessionId: string) => {
+    setSelectedSessionId(sessionId);
+    setLoadingTranscript(true);
+    setTranscriptLogs([]);
+    try {
+      const res = await fetch(`/api/elle-logs/${sessionId}`);
+      const data = await res.json();
+      if (!data.error) {
+        setTranscriptLogs(data || []);
+      }
+    } catch (err) {
+      console.error('Failed to load transcript', err);
+    } finally {
+      setLoadingTranscript(false);
+    }
+  };
 
   return (
     <div>
@@ -217,7 +238,11 @@ export default function ElleLogsPage() {
               </thead>
               <tbody className="divide-y divide-zinc-800">
                 {filteredLogs.map((log) => (
-                  <tr key={log.id} className="hover:bg-zinc-900/30 transition-colors cursor-pointer group">
+                  <tr 
+                    key={log.id} 
+                    className="hover:bg-zinc-900/30 transition-colors cursor-pointer group"
+                    onClick={() => fetchTranscript(log.session_id)}
+                  >
                     <td className="px-6 py-4 whitespace-nowrap text-zinc-400">
                       {new Date(log.created_at).toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
                     </td>
@@ -266,6 +291,73 @@ export default function ElleLogsPage() {
           )}
         </div>
       </div>
+
+      {/* Transcript Modal */}
+      {selectedSessionId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between p-5 border-b border-zinc-800 bg-zinc-900/50">
+              <div>
+                <h2 className="text-xl font-bold text-white">Chat Transcript</h2>
+                <p className="text-sm text-zinc-500 mt-1 flex items-center gap-2">
+                  Session ID: <span className="font-mono text-zinc-400">{selectedSessionId.slice(0, 8)}...</span>
+                </p>
+              </div>
+              <button 
+                onClick={() => setSelectedSessionId(null)}
+                className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto p-5 space-y-6">
+              {loadingTranscript ? (
+                <div className="flex flex-col items-center justify-center h-40 text-zinc-500 space-y-3">
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                  <p className="text-sm">Loading full transcript...</p>
+                </div>
+              ) : transcriptLogs.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-40 text-zinc-500">
+                  <p className="text-sm">No transcript found.</p>
+                </div>
+              ) : (
+                transcriptLogs.map((entry, i) => (
+                  <div key={entry.id} className="space-y-4">
+                    {/* Visitor Message */}
+                    {entry.visitor_message && (
+                      <div className="flex justify-end pl-12">
+                        <div className="bg-zinc-800 text-white px-4 py-3 rounded-2xl rounded-tr-sm text-sm shadow-sm inline-block">
+                          {entry.visitor_message}
+                          <div className="text-[10px] text-zinc-400 mt-1.5 font-medium border-t border-zinc-700/50 pt-1.5 flex justify-between items-center gap-4">
+                            <span>Visitor</span>
+                            <span>{new Date(entry.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Elle Response */}
+                    {entry.elle_response && (
+                      <div className="flex justify-start pr-12">
+                        <div className="bg-brand-gold/10 border border-brand-gold/20 text-white px-4 py-3 rounded-2xl rounded-tl-sm text-sm shadow-sm inline-block">
+                          {entry.elle_response}
+                          <div className="text-[10px] text-brand-gold/70 mt-1.5 font-bold tracking-wide border-t border-brand-gold/10 pt-1.5 flex justify-between items-center gap-4">
+                            <span>Elle AI</span>
+                            <span className="text-brand-gold/50 font-medium">
+                              {new Date(entry.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
