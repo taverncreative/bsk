@@ -22,7 +22,6 @@ interface FormField {
   placeholder?: string
   options?: string[]
   helpText?: string
-  required?: boolean
 }
 
 interface FormSection {
@@ -53,8 +52,8 @@ const SECTIONS: FormSection[] = [
       { id: 'differentiators', label: 'What Makes You Different', type: 'textarea', prefilled: 'Large stockholding (7,500–10,000 tonnes)\nAbility to convert paper to bespoke sizes quickly\nLong-established (50+ years)\nExclusive UK/Ireland distribution partnerships (recent 2025 deal)' },
       { id: 'founded', label: 'Year Founded', type: 'text', prefilled: '1973' },
       { id: 'familyBusiness', label: 'Family Business / History', type: 'textarea', prefilled: 'Yes, multi-generation family business (now third generation). Built from paper trading into large-scale stockholding and conversion operation.' },
-      { id: 'businessGoals', label: 'Key Business Goals (next 12 months)', type: 'textarea', placeholder: 'What are the most important business objectives you\'re working towards?', required: true },
-      { id: 'artinovaRole', label: 'Artinova / Antinova — Please Clarify', type: 'textarea', placeholder: 'What is the role of Artinova/Antinova? (e.g. agents, partner brand, product line)', required: true, helpText: 'This came up in our meeting — we need to understand this relationship to position it correctly on the website.' },
+      { id: 'businessGoals', label: 'Key Business Goals (next 12 months)', type: 'textarea', placeholder: 'What are the most important business objectives you\'re working towards?' },
+      { id: 'artinovaRole', label: 'Artinova / Antinova — Please Clarify', type: 'textarea', placeholder: 'What is the role of Artinova/Antinova? (e.g. agents, partner brand, product line)', helpText: 'This came up in our meeting — we need to understand this relationship to position it correctly on the website.' },
     ]
   },
   {
@@ -65,10 +64,10 @@ const SECTIONS: FormSection[] = [
     infoNote: 'Strong branding builds trust with buyers. Even if you don\'t have formal guidelines, your preferences here will shape the website\'s look and feel.',
     fields: [
       { id: 'currentTone', label: 'Current Brand Perception (our assessment)', type: 'textarea', prefilled: 'Currently basic / outdated. Recommended direction: Clean + premium + industrial credibility + strong product clarity.' },
-      { id: 'brandGuidelines', label: 'Do you have formal brand guidelines?', type: 'radio', options: ['Yes', 'No', 'Partially — some elements exist'], required: true },
+      { id: 'brandGuidelines', label: 'Do you have formal brand guidelines?', type: 'radio', options: ['Yes', 'No', 'Partially — some elements exist'] },
       { id: 'guidelinesDetail', label: 'If yes, please describe what\'s available', type: 'textarea', placeholder: 'e.g. colour palette, fonts, logo usage rules, tone of voice document...' },
-      { id: 'logoFiles', label: 'Do you have vector logo files? (SVG, AI, EPS)', type: 'radio', options: ['Yes', 'No', 'Not sure'], required: true, helpText: 'Vector files are essential for sharp rendering at any size. If you only have a JPG/PNG, we\'ll need to vectorise your logo.' },
-      { id: 'preferredTone', label: 'How do you want to be perceived?', type: 'select', options: ['Corporate & Professional', 'Technical & Authoritative', 'Approachable & Friendly', 'Premium & Exclusive', 'Industrial & Reliable', 'Other — describe below'], required: true },
+      { id: 'logoFiles', label: 'Do you have vector logo files? (SVG, AI, EPS)', type: 'radio', options: ['Yes', 'No', 'Not sure'], helpText: 'Vector files are essential for sharp rendering at any size. If you only have a JPG/PNG, we\'ll need to vectorise your logo.' },
+      { id: 'preferredTone', label: 'How do you want to be perceived?', type: 'select', options: ['Corporate & Professional', 'Technical & Authoritative', 'Approachable & Friendly', 'Premium & Exclusive', 'Industrial & Reliable', 'Other — describe below'] },
       { id: 'brandColors', label: 'Brand Colours', type: 'text', placeholder: 'Hex codes, Pantone references, or descriptions (e.g. "navy blue and silver")' },
       { id: 'toneNotes', label: 'Any other branding notes or preferences?', type: 'textarea', placeholder: 'Anything else about how you\'d like the brand to come across...' },
     ]
@@ -83,12 +82,12 @@ const SECTIONS: FormSection[] = [
       { id: 'boardTypes', label: 'Types of Board Supplied', type: 'textarea', prefilled: 'Folding box board (GC1 / GC2 confirmed via partnership)\nPaper and board in reels and sheets' },
       { id: 'conversionServices', label: 'Conversion Services', type: 'textarea', prefilled: 'Cutting reels into sheets\nBespoke sizing\nPaper conversion services' },
       { id: 'warehousingCapacity', label: 'Warehousing Capacity', type: 'textarea', prefilled: 'Large-scale stockholding (7,500–10,000 tonnes)\nPrimary site: Kent' },
-      { id: 'fullProductList', label: 'Full Product Catalogue', type: 'textarea', placeholder: 'Please list all product types/categories you supply — be as detailed as possible', required: true },
-      { id: 'productUSPs', label: 'Unique Selling Points Per Product', type: 'textarea', placeholder: 'For each product category, what makes your offering stand out?', required: true },
-      { id: 'primingExplanation', label: 'The "Priming" Process — Please Explain', type: 'textarea', placeholder: 'We\'d like to feature this on the website. How does the priming process work? What are the benefits?', required: true, helpText: 'This is a key differentiator we want to highlight.' },
+      { id: 'fullProductList', label: 'Full Product Catalogue', type: 'textarea', placeholder: 'Please list all product types/categories you supply — be as detailed as possible' },
+      { id: 'productUSPs', label: 'Unique Selling Points Per Product', type: 'textarea', placeholder: 'For each product category, what makes your offering stand out?' },
+      { id: 'primingExplanation', label: 'The "Priming" Process — Please Explain', type: 'textarea', placeholder: 'We\'d like to feature this on the website. How does the priming process work? What are the benefits?', helpText: 'This is a key differentiator we want to highlight.' },
       { id: 'machineryDetails', label: 'Machinery & Equipment', type: 'textarea', placeholder: 'What machinery do you use for conversion? (names, capabilities, capacity)' },
       { id: 'capacityScale', label: 'Conversion Capacity & Turnaround', type: 'textarea', placeholder: 'Volume capacity, typical turnaround times, minimum/maximum order sizes' },
-      { id: 'boardOneInfo', label: 'Board One — Exclusivity Details', type: 'textarea', placeholder: 'Please provide details about Board One and the exclusivity arrangement', required: true },
+      { id: 'boardOneInfo', label: 'Board One — Exclusivity Details', type: 'textarea', placeholder: 'Please provide details about Board One and the exclusivity arrangement' },
     ]
   },
   {
@@ -102,8 +101,8 @@ const SECTIONS: FormSection[] = [
       { id: 'idealCustomers', label: 'Ideal Customer Types', type: 'textarea', prefilled: 'Packaging manufacturers\nPrinters\nTrade resellers\nIndustrial buyers requiring bulk paper/board' },
       { id: 'keyClients', label: 'Key Clients or Brands', type: 'textarea', placeholder: 'Names of notable clients we could feature (with permission) as social proof', helpText: 'Even anonymous examples help — e.g. "a major UK fast food chain"' },
       { id: 'caseStudies', label: 'Case Studies Available?', type: 'textarea', placeholder: 'Do you have any success stories, testimonials, or projects we can feature?' },
-      { id: 'industriesBreakdown', label: 'Detailed Industry Breakdown', type: 'textarea', placeholder: 'Break down the industries you serve with approximate % of business each represents', required: true },
-      { id: 'foodPackagingExamples', label: 'Food Packaging Examples', type: 'textarea', placeholder: 'Specific examples — e.g. KFC-style popcorn chicken boxes, bakery cartons, etc.', required: true, helpText: 'Food packaging is a strong proof point. Specific examples make your website more convincing.' },
+      { id: 'industriesBreakdown', label: 'Detailed Industry Breakdown', type: 'textarea', placeholder: 'Break down the industries you serve with approximate % of business each represents' },
+      { id: 'foodPackagingExamples', label: 'Food Packaging Examples', type: 'textarea', placeholder: 'Specific examples — e.g. KFC-style popcorn chicken boxes, bakery cartons, etc.', helpText: 'Food packaging is a strong proof point. Specific examples make your website more convincing.' },
     ]
   },
   {
@@ -113,10 +112,10 @@ const SECTIONS: FormSection[] = [
     icon: ShieldCheck,
     infoNote: 'B2B buyers specifically look for certifications and technical specs. These are also excellent for search engine rankings.',
     fields: [
-      { id: 'fscCertified', label: 'Are you FSC certified?', type: 'radio', options: ['Yes', 'No', 'In progress'], required: true },
-      { id: 'pefcCertified', label: 'Are you PEFC certified?', type: 'radio', options: ['Yes', 'No', 'In progress'], required: true },
+      { id: 'fscCertified', label: 'Are you FSC certified?', type: 'radio', options: ['Yes', 'No', 'In progress'], prefilled: 'Yes' },
+      { id: 'pefcCertified', label: 'Are you PEFC certified?', type: 'radio', options: ['Yes', 'No', 'In progress'], prefilled: 'Yes' },
       { id: 'otherCertifications', label: 'Other Certifications or Compliance', type: 'textarea', placeholder: 'ISO standards, environmental certifications, food safety, etc.' },
-      { id: 'specSheets', label: 'Do you have product spec sheets or data sheets?', type: 'radio', options: ['Yes — ready to share', 'Yes — need updating', 'No — need creating', 'Not sure'], required: true },
+      { id: 'specSheets', label: 'Do you have product spec sheets or data sheets?', type: 'radio', options: ['Yes — ready to share', 'Yes — need updating', 'No — need creating', 'Not sure'] },
       { id: 'specSheetsDetail', label: 'Spec Sheet Details', type: 'textarea', placeholder: 'What format are they in? How many products do they cover? Can you share them with us?' },
       { id: 'technicalDocs', label: 'Other Technical Documentation', type: 'textarea', placeholder: 'Any other downloadable resources (product guides, compliance docs, brochures)?' },
     ]
@@ -130,9 +129,9 @@ const SECTIONS: FormSection[] = [
       { id: 'currentStructure', label: 'Current Website Structure', type: 'textarea', prefilled: 'Home\nAbout\nProducts/services (limited detail)\nContact' },
       { id: 'recommendedStructure', label: 'Our Recommended Structure (SEO-led)', type: 'textarea', prefilled: '1. Home — value proposition, certifications, services, trust signals\n2. Board & Packaging — core offering, types, food packaging, priming\n3. Conversion — capabilities, machinery, applications\n4. Warehousing & Logistics — storage, distribution, HGV access\n5. Industries — food packaging (hero), retail, other sectors\n6. Technical / Resources — data sheets, spec sheets, downloads\n7. About — family story, history, certifications\n8. Contact — enquiry form, locations, HGV directions' },
       { id: 'competitors', label: 'Competitors & Inspiration', type: 'textarea', prefilled: 'Colombier Paper → clean, premium, editorial feel\nVarsity Packaging → structured, commercial\nChapelton Board → industrial + technical clarity' },
-      { id: 'structureApproval', label: 'Do you approve the recommended structure?', type: 'radio', options: ['Yes — looks great', 'Yes — with some changes', 'No — I\'d prefer something different'], required: true },
+      { id: 'structureApproval', label: 'Do you approve the recommended structure?', type: 'radio', options: ['Yes — looks great', 'Yes — with some changes', 'No — I\'d prefer something different'] },
       { id: 'structureChanges', label: 'Structure Changes / Additions', type: 'textarea', placeholder: 'What would you change, add, or remove from the recommended structure?' },
-      { id: 'keyMessages', label: 'Top 3 Messages for Website Visitors', type: 'textarea', placeholder: 'What are the 3 most important things a visitor should understand about your business?', required: true },
+      { id: 'keyMessages', label: 'Top 3 Messages for Website Visitors', type: 'textarea', placeholder: 'What are the 3 most important things a visitor should understand about your business?' },
       { id: 'existingContent', label: 'Existing Content to Repurpose', type: 'textarea', placeholder: 'Brochures, PDFs, old website copy, presentations — anything we can use as a starting point' },
     ]
   },
@@ -145,8 +144,8 @@ const SECTIONS: FormSection[] = [
       { id: 'domain', label: 'Domain Name', type: 'text', prefilled: 'scalderhurst.co.uk' },
       { id: 'inferredKeywords', label: 'Suggested Target Keywords', type: 'textarea', prefilled: 'Paper merchant UK\nPaper converter UK\nFolding box board supplier\nBespoke paper cutting\nBulk paper supplier' },
       { id: 'targetLocations', label: 'Target Locations', type: 'textarea', prefilled: 'UK\nIreland\nNorthern Europe\nGlobal export' },
-      { id: 'targetKeywords', label: 'Your Target Keywords', type: 'textarea', placeholder: 'What words or phrases would your ideal customers type into Google to find you?', required: true },
-      { id: 'targetMarketsPriority', label: 'Market Priority Ranking', type: 'textarea', placeholder: 'Rank your target markets in order of priority (e.g. 1. UK, 2. Ireland, 3. Europe...)', required: true },
+      { id: 'targetKeywords', label: 'Your Target Keywords', type: 'textarea', placeholder: 'What words or phrases would your ideal customers type into Google to find you?' },
+      { id: 'targetMarketsPriority', label: 'Market Priority Ranking', type: 'textarea', placeholder: 'Rank your target markets in order of priority (e.g. 1. UK, 2. Ireland, 3. Europe...)' },
       { id: 'currentMarketing', label: 'Current Marketing Activity', type: 'textarea', placeholder: 'Trade shows, print advertising, digital campaigns, referrals, etc.' },
       { id: 'socialMedia', label: 'Social Media Accounts', type: 'textarea', placeholder: 'Which platforms are you on? Please share links if possible.' },
     ]
@@ -158,10 +157,10 @@ const SECTIONS: FormSection[] = [
     icon: Camera,
     infoNote: 'Professional photography of your facility, products, and team can dramatically improve credibility. We can discuss options that work for your budget.',
     fields: [
-      { id: 'existingPhotos', label: 'Do you have professional photography?', type: 'radio', options: ['Yes — facility, products, and team', 'Some — but needs updating', 'No — nothing suitable'], required: true },
+      { id: 'existingPhotos', label: 'Do you have professional photography?', type: 'radio', options: ['Yes — facility, products, and team', 'Some — but needs updating', 'No — nothing suitable'] },
       { id: 'photosDetail', label: 'Photo Details', type: 'textarea', placeholder: 'What photos do you have? (facility shots, product images, team photos, machinery, warehouse, etc.)' },
-      { id: 'photoPreference', label: 'Photography Preference', type: 'radio', options: ['We\'ll supply our own photos', 'Arrange a professional shoot', 'Mix of both'], required: true },
-      { id: 'videoContent', label: 'Do you have video content?', type: 'radio', options: ['Yes', 'No'], required: true },
+      { id: 'photoPreference', label: 'Photography Preference', type: 'radio', options: ['We\'ll supply our own photos', 'Arrange a professional shoot', 'Mix of both'] },
+      { id: 'videoContent', label: 'Do you have video content?', type: 'radio', options: ['Yes', 'No'] },
       { id: 'videoInterest', label: 'Interested in video for the website?', type: 'radio', options: ['Yes — definitely', 'Maybe — tell me more', 'No — not right now'] },
       { id: 'teamPhotos', label: 'Team photos on the website?', type: 'radio', options: ['Yes — individual and/or group', 'Maybe — need to discuss', 'No — prefer not to'] },
     ]
@@ -174,14 +173,14 @@ const SECTIONS: FormSection[] = [
     fields: [
       { id: 'targetLaunch', label: 'Target Launch Date', type: 'text', prefilled: '1st May 2025' },
       { id: 'currentHosting', label: 'Current Hosting', type: 'text', prefilled: 'GoDaddy (~£500/year)' },
-      { id: 'decisionMaker', label: 'Primary Decision Maker', type: 'text', placeholder: 'Name and role of the person signing off on the website', required: true },
+      { id: 'decisionMaker', label: 'Primary Decision Maker', type: 'text', placeholder: 'Name and role of the person signing off on the website' },
       { id: 'approvalProcess', label: 'Approval Process', type: 'textarea', placeholder: 'How do decisions get made? Single sign-off, committee, multiple stakeholders?' },
-      { id: 'timelineConfirm', label: 'Can you meet the 1st May launch target?', type: 'radio', options: ['Yes — let\'s do it', 'Tight — but we\'ll try', 'Need more time', 'Prefer earlier'], required: true },
-      { id: 'hostingAccess', label: 'Do you have access to your hosting account?', type: 'radio', options: ['Yes', 'No', 'Not sure'], required: true },
-      { id: 'domainAccess', label: 'Do you have access to your domain registrar?', type: 'radio', options: ['Yes', 'No', 'Not sure'], required: true },
-      { id: 'hostingPreference', label: 'Would you like us to manage hosting?', type: 'radio', options: ['Yes — manage everything', 'No — we\'ll handle it', 'Let\'s discuss'], required: true, helpText: 'We offer managed hosting at £20/month — faster, more secure, and we handle all maintenance.' },
-      { id: 'privacyPolicy', label: 'Do you have a privacy policy?', type: 'radio', options: ['Yes — up to date', 'Yes — needs updating', 'No'], required: true },
-      { id: 'cookieCompliance', label: 'Cookie compliance in place?', type: 'radio', options: ['Yes', 'No', 'Not sure'], required: true },
+      { id: 'timelineConfirm', label: 'Can you meet the 1st May launch target?', type: 'radio', options: ['Yes — let\'s do it', 'Tight — but we\'ll try', 'Need more time', 'Prefer earlier'] },
+      { id: 'hostingAccess', label: 'Do you have access to your hosting account?', type: 'radio', options: ['Yes', 'No', 'Not sure'] },
+      { id: 'domainAccess', label: 'Do you have access to your domain registrar?', type: 'radio', options: ['Yes', 'No', 'Not sure'] },
+      { id: 'hostingPreference', label: 'Would you like us to manage hosting?', type: 'radio', options: ['Yes — manage everything', 'No — we\'ll handle it', 'Let\'s discuss'], helpText: 'We offer managed hosting at £20/month — faster, more secure, and we handle all maintenance.' },
+      { id: 'privacyPolicy', label: 'Do you have a privacy policy?', type: 'radio', options: ['Yes — up to date', 'Yes — needs updating', 'No'] },
+      { id: 'cookieCompliance', label: 'Cookie compliance in place?', type: 'radio', options: ['Yes', 'No', 'Not sure'] },
       { id: 'otherLegal', label: 'Other Legal / Compliance Requirements', type: 'textarea', placeholder: 'Anything else we should know — industry regulations, data handling, etc.' },
     ]
   },
@@ -463,7 +462,6 @@ function FormFieldInput({ field, value, onChange }: {
     <div>
       <label className="flex items-center gap-2 text-sm font-medium text-neutral-200 mb-1.5">
         {field.label}
-        {field.required && <span className="text-brand-gold text-xs">Required</span>}
       </label>
       {field.helpText && (
         <p className="text-xs text-neutral-500 mb-2">{field.helpText}</p>
@@ -562,7 +560,7 @@ function SectionRenderer({ section, values, onChange }: {
 
       <div className="space-y-5">
         {section.fields.map(field => (
-          field.prefilled ? (
+          field.prefilled && field.type !== 'radio' && field.type !== 'select' ? (
             <PrefilledField
               key={field.id}
               field={field}
@@ -573,7 +571,7 @@ function SectionRenderer({ section, values, onChange }: {
             <FormFieldInput
               key={field.id}
               field={field}
-              value={values[field.id] ?? ''}
+              value={values[field.id] ?? field.prefilled ?? ''}
               onChange={v => onChange(field.id, v)}
             />
           )
@@ -764,10 +762,6 @@ export default function DiscoveryClient() {
     }
   }, [currentSection, goToSection])
 
-  // Count filled required fields for current section
-  const currentSectionFields = SECTIONS[currentSection]?.fields ?? []
-  const requiredFields = currentSectionFields.filter(f => f.required && !f.prefilled)
-  const filledRequired = requiredFields.filter(f => formData[f.id]?.trim())
 
   if (!unlocked) {
     return (
@@ -828,6 +822,12 @@ export default function DiscoveryClient() {
       {/* Body */}
       <div className="flex">
         <main className="flex-1 max-w-3xl mx-auto px-4 sm:px-6 py-8">
+          {currentSection === 0 && (
+            <div className="mb-8 px-5 py-4 bg-brand-gold/5 border border-brand-gold/15 rounded-xl">
+              <p className="text-sm text-brand-gold/90 font-medium mb-1">Welcome to your discovery form</p>
+              <p className="text-sm text-neutral-400">Include as much or as little information as you can. The more you provide, the better Business Sorted Kent can understand your business and build a website that truly represents you.</p>
+            </div>
+          )}
           <AnimatePresence mode="wait">
             <SectionRenderer
               section={SECTIONS[currentSection]}
@@ -836,12 +836,6 @@ export default function DiscoveryClient() {
             />
           </AnimatePresence>
 
-          {/* Section progress hint */}
-          {requiredFields.length > 0 && (
-            <div className="mt-6 text-xs text-neutral-500">
-              {filledRequired.length} of {requiredFields.length} required fields completed in this section
-            </div>
-          )}
 
           {/* Navigation */}
           <div className="flex items-center justify-between mt-8 pt-6 border-t border-neutral-800">
