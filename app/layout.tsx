@@ -13,8 +13,14 @@ import ScrollToTop from '@/components/ui/ScrollToTop';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://businesssortedkent.co.uk'),
   title: 'Business Sorted Kent | Web Design & SEO',
   description: 'High-Performance Web Design, SEO & Business Automation for Kent SMEs',
+  openGraph: {
+    title: 'Business Sorted Kent | Web Design & SEO',
+    description: 'High-Performance Web Design, SEO & Business Automation for Kent SMEs',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+  },
 };
 
 export default function RootLayout({

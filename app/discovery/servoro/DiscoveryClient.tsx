@@ -45,133 +45,82 @@ const SECTIONS: FormSection[] = [
     icon: Building2,
     infoNote: 'We\'ve pre-filled what we know — please review each field and update anything that\'s inaccurate or needs more detail.',
     fields: [
-      { id: 'companyName', label: 'Full Company Name', type: 'text', prefilled: 'Scalderhurst Ltd' },
-      { id: 'registeredAddress', label: 'Registered Address', type: 'text', prefilled: 'Little Chart, Ashford, Kent, United Kingdom' },
-      { id: 'description', label: 'One-Sentence Description', type: 'textarea', prefilled: 'A UK-based paper merchant and converter supplying paper, board, and bespoke cutting services to packaging and print industries.' },
-      { id: 'coreServices', label: 'Core Services / Products', type: 'textarea', prefilled: 'Paper and board supply (reels and sheets)\nPaper conversion (cutting, resizing, bespoke formats)\nStockholding and distribution\nFolding box board supply (including exclusive distribution agreements)' },
-      { id: 'differentiators', label: 'What Makes You Different', type: 'textarea', prefilled: 'Large stockholding (7,500–10,000 tonnes)\nAbility to convert paper to bespoke sizes quickly\nLong-established (50+ years)\nExclusive UK/Ireland distribution partnerships (recent 2025 deal)' },
-      { id: 'founded', label: 'Year Founded', type: 'text', prefilled: '1973' },
-      { id: 'familyBusiness', label: 'Family Business / History', type: 'textarea', prefilled: 'Yes, multi-generation family business (now third generation). Built from paper trading into large-scale stockholding and conversion operation.' },
+      { id: 'companyName', label: 'Company Name', type: 'text', prefilled: 'Servoro' },
+      { id: 'registeredAddress', label: 'Business Address / Location', type: 'text', prefilled: 'Central London' },
+      { id: 'specificBoroughs', label: 'Key Boroughs / Areas You Serve', type: 'textarea', placeholder: 'e.g. Westminster, City of London, Camden, Islington, Kensington & Chelsea, etc.' },
+      { id: 'contactName', label: 'Primary Contact Name', type: 'text', prefilled: 'Alan Benfield' },
+      { id: 'contactEmail', label: 'Contact Email', type: 'text', placeholder: 'Your email address' },
+      { id: 'contactPhone', label: 'Contact Phone', type: 'text', placeholder: 'Your phone number' },
+      { id: 'currentWebsite', label: 'Current Website', type: 'text', prefilled: 'servoro.co.uk' },
+      { id: 'businessSummary', label: 'Business Summary', type: 'textarea', prefilled: 'London-based cleaning company specialising in commercial, public sector, and residential cleaning services. Positioning for broader building services including security and lift maintenance in the future.' },
       { id: 'businessGoals', label: 'Key Business Goals (next 12 months)', type: 'textarea', placeholder: 'What are the most important business objectives you\'re working towards?' },
-      { id: 'artinovaRole', label: 'Artinova / Antinova — Please Clarify', type: 'textarea', placeholder: 'Please confirm the correct name/spelling and explain the significance to your business (e.g. exclusive UK distribution, card stock brand, product line)', helpText: 'This came up in our meeting — we need to understand the correct name, what it is (e.g. a card stock), and your relationship with it (e.g. exclusivity in the UK) to position it correctly on the website.' },
+    ]
+  },
+  {
+    id: 'services',
+    title: 'Services & Positioning',
+    subtitle: 'Help us understand your service offering and how to present it',
+    icon: Package,
+    infoNote: 'We understand cleaning is the initial focus, with full building services to follow. Please help us clarify how to position this on the website.',
+    fields: [
+      { id: 'currentServices', label: 'Current Services (launching with)', type: 'textarea', prefilled: 'Commercial Cleaning, Specialist Services, Facilities Support, Housekeeping Services, Domestic Cleaning, Maintenance & Support, Event & Venue Cleaning' },
+      { id: 'futureServices', label: 'Future Services (to add later)', type: 'textarea', prefilled: 'Security, Lift Maintenance, Full Building/Facilities Management' },
+      { id: 'positioningApproach', label: 'Website Positioning', type: 'radio', options: ['Cleaning only — add other services later', 'Building services — mention cleaning is available now, others coming soon', 'Full facilities — list everything as available'], helpText: 'How should we frame the business on the website at launch?' },
+      { id: 'serviceAreas', label: 'What types of properties do you clean?', type: 'checkbox', options: ['Offices', 'Schools', 'Residential', 'Retail', 'Healthcare', 'Hospitality', 'Industrial', 'Other'], helpText: 'Tick all that apply' },
+      { id: 'serviceAreasOther', label: 'Other property types (if applicable)', type: 'text', placeholder: 'Any other property types not listed above' },
+      { id: 'uniqueSellingPoints', label: 'What sets Servoro apart from competitors?', type: 'textarea', placeholder: 'e.g. eco-friendly products, DBS-checked staff, rapid response, flexible scheduling, etc.' },
+      { id: 'accreditations', label: 'Accreditations / Certifications', type: 'textarea', placeholder: 'e.g. CHAS, SafeContractor, ISO certifications, BICS, etc.' },
+    ]
+  },
+  {
+    id: 'target-audience',
+    title: 'Target Audience',
+    subtitle: 'Who are you trying to reach with the new website?',
+    icon: Users,
+    fields: [
+      { id: 'idealClient', label: 'Ideal Client Profile', type: 'textarea', placeholder: 'Describe your ideal client — building managers, facilities managers, school administrators, landlords, homeowners, etc.' },
+      { id: 'decisionMakers', label: 'Who typically makes the buying decision?', type: 'textarea', placeholder: 'e.g. Facilities managers, office managers, head teachers, property managers, homeowners' },
+      { id: 'clientSize', label: 'Typical Client Size', type: 'checkbox', options: ['Small businesses', 'Medium enterprises', 'Large corporates', 'Public sector / Government', 'Residential homeowners'], helpText: 'Tick all that apply' },
+      { id: 'geographicFocus', label: 'Geographic Focus', type: 'textarea', prefilled: 'Central London', helpText: 'Specific boroughs, postcode areas, or broader London coverage?' },
     ]
   },
   {
     id: 'branding',
-    title: 'Branding & Identity',
-    subtitle: 'Help us understand your visual identity and brand direction',
+    title: 'Branding & Design',
+    subtitle: 'Help us get the look and feel right',
     icon: Palette,
-    infoNote: 'Strong branding builds trust with buyers. Even if you don\'t have formal guidelines, your preferences here will shape the website\'s look and feel.',
     fields: [
-      { id: 'currentTone', label: 'Current Brand Perception (our assessment)', type: 'textarea', prefilled: 'Your brand has strong foundations. The new website is an opportunity to elevate the visual presentation — clean, premium, industrial credibility with strong product clarity.' },
-      { id: 'brandGuidelines', label: 'Do you have formal brand guidelines?', type: 'radio', options: ['Yes', 'No', 'Partially — some elements exist'] },
-      { id: 'guidelinesDetail', label: 'If yes, please describe what\'s available', type: 'textarea', placeholder: 'e.g. colour palette, fonts, logo usage rules, tone of voice document...' },
-      { id: 'logoFiles', label: 'Do you have vector logo files? (SVG, AI, EPS)', type: 'radio', options: ['Yes', 'No', 'Not sure'], helpText: 'Vector files are essential for sharp rendering at any size. If you only have a JPG/PNG, we\'ll need to vectorise your logo.' },
-      { id: 'preferredTone', label: 'How do you want to be perceived?', type: 'select', options: ['Corporate & Professional', 'Technical & Authoritative', 'Approachable & Friendly', 'Premium & Exclusive', 'Industrial & Reliable', 'Other — describe below'] },
-      { id: 'brandColors', label: 'Brand Colours', type: 'text', placeholder: 'Hex codes, Pantone references, or descriptions (e.g. "navy blue and silver")' },
-      { id: 'toneNotes', label: 'Any other branding notes or preferences?', type: 'textarea', placeholder: 'Anything else about how you\'d like the brand to come across...' },
-    ]
-  },
-  {
-    id: 'products-services',
-    title: 'Products & Services',
-    subtitle: 'Detail your full offering so we can showcase it effectively',
-    icon: Package,
-    infoNote: 'The more detail you provide here, the better we can structure your product pages and write compelling copy. Technical accuracy matters for your buyers.',
-    fields: [
-      { id: 'boardTypes', label: 'Types of Board Supplied', type: 'textarea', prefilled: 'Folding box board (GC1 / GC2 confirmed via partnership)\nPaper and board in reels and sheets' },
-      { id: 'conversionServices', label: 'Conversion Services', type: 'textarea', prefilled: 'Cutting reels into sheets\nBespoke sizing\nPaper conversion services' },
-      { id: 'warehousingCapacity', label: 'Warehousing Capacity', type: 'textarea', prefilled: 'Large-scale stockholding (7,500–10,000 tonnes)\nPrimary site: Kent' },
-      { id: 'fullProductList', label: 'Full Product Catalogue', type: 'textarea', placeholder: 'Please list all product types/categories you supply — be as detailed as possible' },
-      { id: 'productUSPs', label: 'Unique Selling Points Per Product', type: 'textarea', placeholder: 'For each product category, what makes your offering stand out?' },
-      { id: 'primingExplanation', label: 'The "Priming" Process — Please Explain', type: 'textarea', placeholder: 'We\'d like to feature this on the website. How does the priming process work? What are the benefits?', helpText: 'This is a key differentiator we want to highlight.' },
-      { id: 'machineryDetails', label: 'Machinery & Equipment', type: 'textarea', placeholder: 'What machinery do you use for conversion? (names, capabilities, capacity)' },
-      { id: 'capacityScale', label: 'Conversion Capacity & Turnaround', type: 'textarea', placeholder: 'Volume capacity, typical turnaround times, minimum/maximum order sizes' },
-      { id: 'boardOneInfo', label: 'Board One — Exclusivity Details', type: 'textarea', placeholder: 'Please provide details about Board One and the exclusivity arrangement' },
-    ]
-  },
-  {
-    id: 'industries-customers',
-    title: 'Industries & Customers',
-    subtitle: 'Who you serve and how — this shapes the entire website messaging',
-    icon: Users,
-    fields: [
-      { id: 'primaryIndustries', label: 'Primary Industries Served', type: 'textarea', prefilled: 'Packaging\nPrinting' },
-      { id: 'foodPackaging', label: 'Food Packaging', type: 'textarea', prefilled: 'Likely served via folding box board (used in cartons, takeaway packaging, etc.)' },
-      { id: 'idealCustomers', label: 'Ideal Customer Types', type: 'textarea', prefilled: 'Packaging manufacturers\nPrinters\nTrade resellers\nIndustrial buyers requiring bulk paper/board' },
-      { id: 'keyClients', label: 'Key Clients or Brands', type: 'textarea', placeholder: 'Names of notable clients we could feature (with permission) as social proof', helpText: 'Even anonymous examples help — e.g. "a major UK fast food chain"' },
-      { id: 'caseStudies', label: 'Case Studies Available?', type: 'textarea', placeholder: 'Do you have any success stories, testimonials, or projects we can feature?' },
-      { id: 'industriesBreakdown', label: 'Detailed Industry Breakdown', type: 'textarea', placeholder: 'Break down the industries you serve with approximate % of business each represents' },
-      { id: 'foodPackagingExamples', label: 'Food Packaging Examples', type: 'textarea', placeholder: 'Specific examples — e.g. KFC-style popcorn chicken boxes, bakery cartons, etc.', helpText: 'Food packaging is a strong proof point. Specific examples make your website more convincing.' },
-    ]
-  },
-  {
-    id: 'certifications-resources',
-    title: 'Certifications & Resources',
-    subtitle: 'Certifications and technical documents build credibility and boost SEO',
-    icon: ShieldCheck,
-    infoNote: 'B2B buyers specifically look for certifications and technical specs. These are also excellent for search engine rankings.',
-    fields: [
-      { id: 'fscCertified', label: 'Are you FSC certified?', type: 'radio', options: ['Yes', 'No', 'In progress'], prefilled: 'Yes' },
-      { id: 'pefcCertified', label: 'Are you PEFC certified?', type: 'radio', options: ['Yes', 'No', 'In progress'], prefilled: 'Yes' },
-      { id: 'otherCertifications', label: 'Other Certifications or Compliance', type: 'textarea', placeholder: 'ISO standards, environmental certifications, food safety, etc.' },
-      { id: 'specSheets', label: 'Do you have product spec sheets or data sheets?', type: 'radio', options: ['Yes — ready to share', 'Yes — need updating', 'No — need creating', 'Not sure'] },
-      { id: 'specSheetsDetail', label: 'Spec Sheet Details', type: 'textarea', placeholder: 'What format are they in? How many products do they cover? Can you share them with us?' },
-      { id: 'technicalDocs', label: 'Other Technical Documentation', type: 'textarea', placeholder: 'Any other downloadable resources (product guides, compliance docs, brochures)?' },
+      { id: 'hasLogo', label: 'Do you have a logo?', type: 'radio', options: ['Yes — ready to use', 'Yes — but needs updating', 'No — need one created'] },
+      { id: 'brandColours', label: 'Preferred Brand Colours', type: 'textarea', placeholder: 'Do you have specific colours in mind? Or happy for us to propose something? e.g. "Blues and whites for clean/professional feel" or "Happy for BSK to choose"', helpText: 'If you don\'t have a preference, we\'ll propose options based on your industry.' },
+      { id: 'fontPreference', label: 'Font / Typography Preference', type: 'textarea', placeholder: 'Any font preferences? Modern, classic, bold? Or happy for us to choose?', helpText: 'If unsure, just say "Happy for BSK to choose" — we\'ll find something that fits.' },
+      { id: 'designDirection', label: 'Design Direction', type: 'radio', options: ['Clean & minimal', 'Bold & corporate', 'Warm & approachable', 'Premium & sophisticated', 'Happy for BSK to decide'] },
+      { id: 'websitesYouLike', label: 'Websites You Like (for inspiration)', type: 'textarea', placeholder: 'Links to any websites whose look and feel you admire — doesn\'t have to be in your industry' },
+      { id: 'websitesToAvoid', label: 'Anything to Avoid?', type: 'textarea', placeholder: 'Any design styles, colours, or approaches you definitely don\'t want?' },
     ]
   },
   {
     id: 'website-content',
     title: 'Website & Content',
-    subtitle: 'Structure, messaging, and the content that will bring it to life',
+    subtitle: 'Pages, features, and content for the new site',
     icon: Globe,
     fields: [
-      { id: 'currentStructure', label: 'Current Website Structure', type: 'textarea', prefilled: 'Home\nAbout\nProducts/services (limited detail)\nContact' },
-      { id: 'recommendedStructure', label: 'Our Recommended Structure (SEO-led)', type: 'textarea', prefilled: '1. Home — value proposition, certifications, services, trust signals\n2. Board & Packaging — core offering, types, food packaging, priming\n3. Conversion — capabilities, machinery, applications\n4. Warehousing & Logistics — storage, distribution, HGV access\n5. Industries — food packaging (hero), retail, other sectors\n6. Technical / Resources — data sheets, spec sheets, downloads\n7. About — family story, history, certifications\n8. Contact — enquiry form, locations, HGV directions' },
-      { id: 'competitors', label: 'Competitors & Inspiration', type: 'textarea', prefilled: 'Colombier Paper → clean, premium, editorial feel\nVarsity Packaging → structured, commercial\nChapelton Board → industrial + technical clarity' },
-      { id: 'structureApproval', label: 'Do you approve the recommended structure?', type: 'radio', options: ['Yes — looks great', 'Yes — with some changes', 'No — I\'d prefer something different'] },
-      { id: 'structureChanges', label: 'Structure Changes / Additions', type: 'textarea', placeholder: 'What would you change, add, or remove from the recommended structure?' },
-      { id: 'keyMessages', label: 'Top 3 Messages for Website Visitors', type: 'textarea', placeholder: 'What are the 3 most important things a visitor should understand about your business?' },
-      { id: 'existingContent', label: 'Existing Content to Repurpose', type: 'textarea', placeholder: 'Brochures, PDFs, old website copy, presentations — anything we can use as a starting point' },
+      { id: 'mustHavePages', label: 'Must-Have Pages', type: 'textarea', prefilled: 'Home, About, Services (with sub-pages), Contact, Blog', helpText: 'We\'ll suggest a full sitemap — but let us know if you have specific pages in mind.' },
+      { id: 'blogTopics', label: 'Blog Topics / Content Ideas', type: 'textarea', prefilled: 'Commercial cleaning, school cleaning, residential cleaning', helpText: 'What topics would you want to write about or have us create content for?' },
+      { id: 'keyFeatures', label: 'Key Website Features', type: 'checkbox', options: ['Quote request form', 'Live chat', 'Booking system', 'Client portal', 'Testimonials section', 'Case studies', 'FAQ section'], helpText: 'Tick any features you\'d like on the website' },
+      { id: 'existingContent', label: 'Do you have existing content to reuse?', type: 'radio', options: ['Yes — text and images from current site', 'Some — but most needs rewriting', 'No — starting from scratch'] },
+      { id: 'toneOfVoice', label: 'Tone of Voice', type: 'radio', options: ['Professional & corporate', 'Friendly & approachable', 'Authoritative & expert', 'Mix of professional and friendly'] },
     ]
   },
   {
-    id: 'marketing-seo',
-    title: 'Marketing & SEO',
-    subtitle: 'Your digital visibility strategy starts here',
-    icon: BarChart3,
-    fields: [
-      { id: 'domain', label: 'Domain Name', type: 'text', prefilled: 'scalderhurst.co.uk' },
-      { id: 'inferredKeywords', label: 'Suggested Target Keywords', type: 'textarea', prefilled: 'Paper merchant UK\nPaper converter UK\nFolding box board supplier\nBespoke paper cutting\nBulk paper supplier' },
-      { id: 'targetLocations', label: 'Target Locations', type: 'textarea', prefilled: 'UK\nIreland\nNorthern Europe\nGlobal export' },
-      { id: 'targetKeywords', label: 'Your Target Keywords', type: 'textarea', placeholder: 'What words or phrases would your ideal customers type into Google to find you?' },
-      { id: 'targetMarketsPriority', label: 'Market Priority Ranking', type: 'textarea', placeholder: 'Rank your target markets in order of priority (e.g. 1. UK, 2. Ireland, 3. Europe...)' },
-      { id: 'currentMarketing', label: 'Current Marketing Activity', type: 'textarea', placeholder: 'Trade shows, print advertising, digital campaigns, referrals, etc.' },
-      { id: 'socialMedia', label: 'Social Media Accounts', type: 'textarea', placeholder: 'Which platforms are you on? Please share links if possible.' },
-    ]
-  },
-  {
-    id: 'media-photography',
-    title: 'Photography & Media',
-    subtitle: 'Great imagery transforms a website — let\'s plan what you need',
-    icon: Camera,
-    infoNote: 'Professional photography of your facility, products, and team can dramatically improve credibility. We can discuss options that work for your budget.',
-    fields: [
-      { id: 'existingPhotos', label: 'Do you have professional photography?', type: 'radio', options: ['Yes — facility, products, and team', 'Some — but needs updating', 'No — nothing suitable'] },
-      { id: 'photosDetail', label: 'Photo Details', type: 'textarea', placeholder: 'What photos do you have? (facility shots, product images, team photos, machinery, warehouse, etc.)' },
-      { id: 'photoPreference', label: 'Photography Preference', type: 'radio', options: ['We\'ll supply our own photos', 'Arrange a professional shoot', 'Mix of both'] },
-    ]
-  },
-  {
-    id: 'timeline-legal',
-    title: 'Timeline, Hosting & Legal',
+    id: 'timeline-project',
+    title: 'Timeline & Project Details',
     subtitle: 'Final details to get the project moving',
     icon: Clock,
     fields: [
-      { id: 'targetLaunch', label: 'Target Launch Date', type: 'text', prefilled: '1st May 2025' },
-      { id: 'currentHosting', label: 'Current Hosting', type: 'text', prefilled: 'GoDaddy (~£500/year)' },
-      { id: 'privacyPolicy', label: 'Do you have a privacy policy?', type: 'radio', options: ['Yes — up to date', 'Yes — needs updating', 'No'] },
-      { id: 'otherLegal', label: 'Other Legal / Compliance Requirements', type: 'textarea', placeholder: 'Anything else we should know — industry regulations, data handling, etc.' },
+      { id: 'targetLaunch', label: 'Target Launch Date', type: 'text', prefilled: 'May 2025' },
+      { id: 'domainStatus', label: 'Domain Registration (servoro.co.uk)', type: 'radio', options: ['I own it — full access', 'I own it — need help accessing', 'Not registered yet', 'Not sure'], helpText: 'Please confirm your domain registration status so we can plan hosting and DNS.' },
+      { id: 'currentHosting', label: 'Current Hosting Provider', type: 'text', placeholder: 'Where is your current site hosted? (e.g. Wix, GoDaddy, etc.)' },
+      { id: 'otherNotes', label: 'Anything Else?', type: 'textarea', placeholder: 'Anything else we should know about the project, your business, or your expectations?' },
       { id: 'contactPreference', label: 'Preferred Contact Method (tick all that apply)', type: 'checkbox', options: ['Email', 'WhatsApp', 'Phone Call', 'Video Call'], helpText: 'How would you like us to stay in touch during the project?' },
     ]
   },
@@ -183,52 +132,42 @@ const SECTIONS: FormSection[] = [
 
 const MEETING_NOTES = [
   {
-    title: '1. Key Positioning',
-    content: `Board & packaging specialists who add value through "priming" raw paper/board. Strong in food packaging (e.g. KFC-style popcorn chicken boxes). Operate globally with emphasis on UK & Ireland.\n\nHighlights: FSC & PEFC certification, family business heritage, warehousing capability, Board One exclusivity.\n\nAction: Confirm role of Artinova / Antinova.`
+    title: '1. Background',
+    content: `Client: Alan Benfield — met via Precision Lifts. Servoro is an independent side project.\n\nCurrent website appears to be a Wix-based template. Needs a professional rebuild to credibly compete for commercial contracts.`
   },
   {
-    title: '2. Competitor Direction',
-    content: `Likes: Colombier Paper (clean, premium, editorial), Varsity Packaging (structured, commercial), Chapelton Board (industrial + technical clarity).\n\nDirection: Clean + premium + industrial credibility + strong product clarity.`
+    title: '2. Positioning',
+    content: `Servoro wants to position as building services — covering cleaning, security, and lift maintenance.\n\nInitially launching with cleaning services only. Full facilities management to follow.\n\nKey question: how to present this on the website — cleaning-only for now, or broader "building services" messaging with cleaning available immediately?`
   },
   {
-    title: '3. Website Structure',
-    content: `Client suggested: Board & Packaging, Conversion, Other Services (Warehousing).\n\nSEO-refined: Home, Board & Packaging, Conversion, Warehousing & Logistics, Industries, Technical/Resources, About, Contact.\n\nRecommend: Reframe "Other Services" → Warehousing & Logistics for SEO.`
+    title: '3. Service Areas',
+    content: `Commercial cleaning, specialist services, facilities support, housekeeping, domestic cleaning, maintenance & support, event & venue cleaning.\n\nTarget properties: offices, schools, residential, commercial.`
   },
   {
-    title: '4. Key Features',
-    content: `Admin login area (analytics dashboard), downloadable spec/data sheets, SEO-ready structure, mobile optimised, fast load speed.\n\nClear HGV directions (written, map, downloadable). Protected admin analytics page.`
+    title: '4. Location',
+    content: `Central London based. Need to clarify specific boroughs served.`
   },
   {
-    title: '5. Branding & Assets',
-    content: `Logo needs vectorising (critical for print, scaling, consistency).\n\nPhotography: Option 1 — client supplies. Option 2 — professional shoot (likely better for quality + consistency).`
+    title: '5. Content',
+    content: `Blog topics: commercial cleaning, school cleaning, residential cleaning.\n\nWebsite should have clear service pages, contact forms, and professional imagery.\n\nAll forms need contact preference options (email, WhatsApp, phone call).`
   },
   {
-    title: '6. SEO Plan',
-    content: `Client to provide: keywords, services, locations, customer types via this discovery form.\n\nStrategy: Focus UK & Ireland initially. Build pages around packaging types, industries, materials. Spec sheets = SEO gold.`
+    title: '6. Branding',
+    content: `Ask about preferred brand colours and font preferences — or whether he's happy for BSK to choose.\n\nCurrent site tagline: "Simply Clean Perfectly Managed" and "Quality You Can Trust".`
   },
   {
-    title: '7. Hosting & Costs',
-    content: `Current: GoDaddy (~£500/year).\nNew: £20/month hosting, £200/month SEO (min 4 months).`
+    title: '7. Domain & Timeline',
+    content: `Domain: servoro.co.uk — confirm registration status and access details.\n\nLaunch target: by May 2025.`
   },
   {
-    title: '8. Timeline',
-    content: `Target launch: 1st May.\nAchievable if discovery form returned quickly and assets supplied early.`
-  },
-  {
-    title: '9. Next Steps',
-    content: `Send confirmation email and this discovery form. Clarify Artinova/Antinova. Confirm logo file format. Photography preference. Begin sitemap approval and wireframes.`
-  },
-  {
-    title: '10. Strategic Notes',
-    content: `Push food packaging more prominently (strong proof points). Lean into certifications, scale, and reliability. Reframe "Other Services" → Warehousing & Logistics.`
+    title: '8. Next Steps',
+    content: `Send discovery form. Clarify positioning approach (cleaning-only vs building services). Confirm domain status. Begin sitemap and wireframes once form is returned.`
   },
 ]
 
 /* ─────────────────────────────────────────────
    PASSWORD GATE
    ───────────────────────────────────────────── */
-
-const ACCESS_PASSWORD = 'BSK2025'
 
 function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
   const [password, setPassword] = useState('')
@@ -237,7 +176,7 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (password === ACCESS_PASSWORD) {
+    if (password === 'BSK2025') {
       onUnlock()
     } else {
       setError(true)
@@ -259,7 +198,7 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
             <Lock className="w-7 h-7 text-brand-gold" />
           </div>
           <h1 className="text-2xl font-semibold text-white mb-2">Client Discovery Form</h1>
-          <p className="text-neutral-400 text-sm">Scalderhurst Ltd — Website Project</p>
+          <p className="text-neutral-400 text-sm">Servoro — Website Project</p>
         </div>
 
         <motion.form
@@ -335,48 +274,6 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
 }
 
 /* ─────────────────────────────────────────────
-   STEP INDICATORS
-   ───────────────────────────────────────────── */
-
-function StepIndicators({ sections, current, visited, onJump }: {
-  sections: FormSection[]
-  current: number
-  visited: Set<number>
-  onJump: (i: number) => void
-}) {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {sections.map((s, i) => {
-        const Icon = s.icon
-        const isCurrent = i === current
-        const isVisited = visited.has(i)
-        return (
-          <button
-            key={s.id}
-            onClick={() => onJump(i)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-              isCurrent
-                ? 'bg-brand-gold/15 text-brand-gold border border-brand-gold/30'
-                : isVisited
-                ? 'bg-neutral-800/50 text-neutral-300 border border-neutral-700 hover:border-neutral-600'
-                : 'bg-neutral-900 text-neutral-500 border border-neutral-800 hover:border-neutral-700'
-            }`}
-          >
-            {isVisited && !isCurrent ? (
-              <Check className="w-3 h-3 text-green-400" />
-            ) : (
-              <Icon className="w-3 h-3" />
-            )}
-            <span className="hidden sm:inline">{s.title}</span>
-            <span className="sm:hidden">{i + 1}</span>
-          </button>
-        )
-      })}
-    </div>
-  )
-}
-
-/* ─────────────────────────────────────────────
    PREFILLED FIELD (editable)
    ───────────────────────────────────────────── */
 
@@ -420,19 +317,19 @@ function PrefilledField({ field, value, onChange }: {
           )}
           <button
             onClick={() => setEditing(false)}
-            className="absolute top-2 right-2 p-1 text-neutral-400 hover:text-white"
+            className="absolute top-3 right-3 text-xs text-brand-gold hover:text-white transition-colors"
           >
-            <Check className="w-4 h-4" />
+            Done
           </button>
         </div>
       ) : (
         <div
+          className="relative px-4 py-3 bg-brand-gold/5 border border-brand-gold/15 rounded-xl cursor-pointer hover:border-brand-gold/30 transition-all"
           onClick={() => setEditing(true)}
-          className="relative px-4 py-3 bg-neutral-900/50 border-l-2 border-brand-gold/40 rounded-r-xl text-sm text-neutral-300 whitespace-pre-line cursor-pointer group-hover:bg-neutral-800/50 transition-colors"
         >
-          {value}
-          <button className="absolute top-2 right-2 p-1 text-neutral-600 group-hover:text-brand-gold transition-colors">
-            <Edit3 className="w-3.5 h-3.5" />
+          <p className="text-sm text-white pr-16 whitespace-pre-wrap">{value}</p>
+          <button className="absolute top-3 right-3 flex items-center gap-1 text-xs text-brand-gold hover:text-white transition-colors">
+            <Edit3 className="w-3 h-3" /> Edit
           </button>
         </div>
       )}
@@ -441,7 +338,7 @@ function PrefilledField({ field, value, onChange }: {
 }
 
 /* ─────────────────────────────────────────────
-   FORM FIELD (empty / to fill)
+   FORM FIELD INPUT
    ───────────────────────────────────────────── */
 
 function FormFieldInput({ field, value, onChange }: {
@@ -580,7 +477,7 @@ function SectionRenderer({ section, values, onChange }: {
 
       <div className="space-y-5">
         {section.fields.map(field => (
-          field.prefilled && field.type !== 'radio' && field.type !== 'select' ? (
+          field.prefilled && field.type !== 'radio' && field.type !== 'select' && field.type !== 'checkbox' ? (
             <PrefilledField
               key={field.id}
               field={field}
@@ -610,7 +507,6 @@ function MeetingNotesPanel({ isOpen, onClose }: { isOpen: boolean; onClose: () =
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Mobile overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -698,7 +594,7 @@ function CompletionScreen({ onBack }: { onBack: () => void }) {
    ───────────────────────────────────────────── */
 
 export default function DiscoveryClient() {
-  const STORAGE_KEY = 'discovery-scalderhurst-submitted'
+  const STORAGE_KEY = 'discovery-servoro-submitted'
 
   const [unlocked, setUnlocked] = useState(false)
   const [currentSection, setCurrentSection] = useState(0)
@@ -710,7 +606,6 @@ export default function DiscoveryClient() {
   const [submitError, setSubmitError] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  // Check if already submitted on mount
   useEffect(() => {
     try {
       const submitted = localStorage.getItem(STORAGE_KEY)
@@ -721,7 +616,6 @@ export default function DiscoveryClient() {
     } catch {}
   }, [])
 
-  // Initialise pre-filled values
   useEffect(() => {
     const initial: Record<string, string> = {}
     SECTIONS.forEach(section => {
@@ -754,7 +648,7 @@ export default function DiscoveryClient() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          clientSlug: 'scalderhurst',
+          clientSlug: 'servoro',
           formData,
           completedAt: new Date().toISOString(),
         }),
@@ -814,7 +708,7 @@ export default function DiscoveryClient() {
             <div className="flex items-center gap-3">
               <img src="/logo.png" alt="Business Sorted Kent" className="h-8 w-auto" />
               <div>
-                <h1 className="text-lg font-semibold text-white">Scalderhurst Ltd</h1>
+                <h1 className="text-lg font-semibold text-white">Servoro</h1>
                 <p className="text-xs text-neutral-500">Discovery Form — Website Project</p>
               </div>
             </div>
@@ -853,7 +747,6 @@ export default function DiscoveryClient() {
               onChange={handleFieldChange}
             />
           </AnimatePresence>
-
 
           {/* Navigation */}
           <div className="flex items-center justify-between mt-8 pt-6 border-t border-neutral-800">
