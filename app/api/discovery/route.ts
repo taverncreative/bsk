@@ -2,10 +2,12 @@ import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { sendFormErrorAlert } from '@/lib/error-alert'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
 
 const sendEmail = async (to: string, subject: string, html: string) => {
   const apiKey = process.env.RESEND_API_KEY
@@ -70,7 +72,7 @@ export async function POST(req: Request) {
     }
 
     // 1. Insert into discovery_submissions table
-    const { data: submission, error: insertError } = await supabase
+    const { data: submission, error: insertError } = await getSupabase()
       .from('discovery_submissions')
       .insert([{
         client_slug: clientSlug,
