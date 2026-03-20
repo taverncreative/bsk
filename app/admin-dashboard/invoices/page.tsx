@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { createClient } from '@/lib/supabaseClient';
 import { FileText, Plus, X, Send, CheckCircle, Clock, AlertCircle, PoundSterling, Trash2, ArrowLeft, Users } from 'lucide-react';
 import Link from 'next/link';
@@ -13,6 +13,14 @@ interface LineItem {
 }
 
 export default function InvoicesPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-[50vh]"><div className="w-8 h-8 rounded-full border-4 border-zinc-800 border-t-brand-gold animate-spin"></div></div>}>
+      <InvoicesPageInner />
+    </Suspense>
+  );
+}
+
+function InvoicesPageInner() {
   const [invoices, setInvoices] = useState<any[]>([]);
   const [clients, setClients] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
