@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Lock, ChevronRight, ChevronLeft, Check, Building2, Palette,
@@ -678,6 +678,7 @@ export default function DiscoveryClient() {
   const [completed, setCompleted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   // Check if already submitted on mount
   useEffect(() => {
@@ -710,7 +711,9 @@ export default function DiscoveryClient() {
   const goToSection = useCallback((i: number) => {
     setCurrentSection(i)
     setVisited(prev => new Set([...prev, i]))
-    window.scrollTo({ top: 0, behavior: 'instant' })
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: 0 })
+    }
   }, [])
 
   const submitForm = useCallback(async () => {
@@ -773,7 +776,7 @@ export default function DiscoveryClient() {
   }
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-black overflow-auto">
+    <div ref={scrollRef} className="fixed inset-0 z-[9999] bg-black overflow-auto">
       {/* Header */}
       <header className="sticky top-0 z-30 bg-black/80 backdrop-blur-md border-b border-neutral-800/50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4">
