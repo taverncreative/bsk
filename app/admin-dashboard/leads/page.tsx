@@ -1,1 +1,5 @@
-export default function LeadsPage() { return <div className="p-8"><h1 className="text-3xl font-bold text-white">Leads</h1></div>; }
+import { redirect } from 'next/navigation';
+
+export default function LeadsPage() {
+  redirect('/admin-dashboard/pipeline');
+}

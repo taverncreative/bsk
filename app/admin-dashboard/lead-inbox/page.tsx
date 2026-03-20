@@ -1,16 +1,28 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
-import { Mail, Globe, Clock, User, MessageSquare, ExternalLink, Calendar, LayoutGrid } from 'lucide-react';
+import { createClient } from '@/lib/supabaseClient';
+import { Mail, Globe, Clock, User, MessageSquare, ExternalLink, LayoutGrid, CheckCircle, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function LeadInboxPage() {
   const [leads, setLeads] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [addingToPipeline, setAddingToPipeline] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  const supabase = createClient();
 
   useEffect(() => {
     fetchLeads();
   }, []);
+
+  useEffect(() => {
+    if (toast) {
+      const t = setTimeout(() => setToast(null), 3000);
+      return () => clearTimeout(t);
+    }
+  }, [toast]);
 
   const fetchLeads = async () => {
     try {
@@ -21,7 +33,6 @@ export default function LeadInboxPage() {
         .order('timestamp', { ascending: false });
 
       if (error) {
-        // If the table doesn't exist yet, we catch it smoothly.
         if (error.code === 'PGRST205') {
           console.warn('Unified leads table not created yet.');
           setLeads([]);
@@ -38,6 +49,49 @@ export default function LeadInboxPage() {
     }
   };
 
+  const addToPipeline = async (lead: any) => {
+    setAddingToPipeline(lead.id);
+    try {
+      // Insert into leads table (pipeline)
+      const { error: insertError } = await supabase
+        .from('leads')
+        .insert([{
+          business_name: lead.name || 'Unknown Business',
+          website_url: lead.website_url || '',
+          location: '',
+          industry: '',
+          source: lead.submission_type || 'Website Form',
+          email: lead.email || '',
+          phone: lead.phone || '',
+          contact_name: lead.name || '',
+          notes: lead.message || '',
+          stage: 'New Lead',
+          unified_lead_id: lead.id,
+        }]);
+
+      if (insertError) {
+        console.error('Error adding to pipeline:', insertError);
+        setToast({ message: 'Failed to add to pipeline', type: 'error' });
+        return;
+      }
+
+      // Log activity
+      await supabase.from('activity_log').insert([{
+        entity_type: 'lead',
+        entity_id: lead.id,
+        action: 'added_to_pipeline',
+        description: `${lead.name || 'Lead'} added to pipeline from inbox`,
+      }]);
+
+      setToast({ message: `${lead.name || 'Lead'} added to pipeline!`, type: 'success' });
+    } catch (err) {
+      console.error(err);
+      setToast({ message: 'Something went wrong', type: 'error' });
+    } finally {
+      setAddingToPipeline(null);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
@@ -48,6 +102,15 @@ export default function LeadInboxPage() {
 
   return (
     <div>
+      {/* Toast */}
+      {toast && (
+        <div className={`fixed top-24 right-6 z-50 px-5 py-3 rounded-lg text-sm font-medium shadow-xl transition-all ${
+          toast.type === 'success' ? 'bg-green-900/90 text-green-200 border border-green-700' : 'bg-red-900/90 text-red-200 border border-red-700'
+        }`}>
+          {toast.message}
+        </div>
+      )}
+
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white tracking-tight mb-2">Lead Inbox</h1>
         <p className="text-zinc-400">View and manage all incoming enquiries from website forms, Elle, and bookings.</p>
@@ -118,7 +181,7 @@ export default function LeadInboxPage() {
                       hour: '2-digit', minute: '2-digit'
                     })}
                   </div>
-                  
+
                   {lead.message && (
                     <div className="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800 text-sm text-zinc-300 whitespace-pre-wrap leading-relaxed">
                       {lead.message}
@@ -129,10 +192,19 @@ export default function LeadInboxPage() {
                     <div className="flex items-center gap-2 text-xs text-zinc-600">
                       <span className="font-semibold text-zinc-500">Source:</span> {lead.page_context}
                     </div>
-                    
+
                     <div className="flex gap-3">
-                      <button className="px-4 py-2 bg-brand-gold text-black text-xs font-bold rounded-lg hover:bg-white transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(214,173,103,0.15)] flex-shrink-0">
-                         <LayoutGrid className="w-3.5 h-3.5" /> Add to Pipeline
+                      <button
+                        onClick={() => addToPipeline(lead)}
+                        disabled={addingToPipeline === lead.id}
+                        className="px-4 py-2 bg-brand-gold text-black text-xs font-bold rounded-lg hover:bg-white transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(214,173,103,0.15)] flex-shrink-0 disabled:opacity-50"
+                      >
+                        {addingToPipeline === lead.id ? (
+                          <div className="w-3.5 h-3.5 rounded-full border-2 border-black border-t-transparent animate-spin" />
+                        ) : (
+                          <LayoutGrid className="w-3.5 h-3.5" />
+                        )}
+                        Add to Pipeline
                       </button>
                       <a href={`mailto:${lead.email}`} className="px-4 py-2 bg-zinc-900 border border-zinc-800 text-white text-xs font-bold rounded-lg hover:border-brand-gold hover:text-brand-gold transition-colors flex items-center gap-2 flex-shrink-0">
                          <Mail className="w-3.5 h-3.5" /> Contact Lead

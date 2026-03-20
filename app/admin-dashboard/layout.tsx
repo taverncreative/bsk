@@ -2,22 +2,21 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, Users, UserPlus, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail, ClipboardList } from 'lucide-react';
+import { LayoutDashboard, Users, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail, ClipboardList } from 'lucide-react';
 import { createClient } from '@/lib/supabaseClient';
 
 const navigation = [
   { name: 'Overview', href: '/admin-dashboard', icon: LayoutDashboard },
-  { name: 'Upcoming Calls', href: '/admin-dashboard/upcoming-calls', icon: FileText },
   { name: 'Lead Inbox', href: '/admin-dashboard/lead-inbox', icon: Mail },
-  { name: 'Leads', href: '/admin-dashboard/leads', icon: UserPlus },
   { name: 'CRM Pipeline', href: '/admin-dashboard/pipeline', icon: KanbanSquare },
   { name: 'Clients', href: '/admin-dashboard/clients', icon: Users },
-  { name: 'Analytics', href: '/admin-dashboard/analytics', icon: PieChart },
-  { name: 'Elle', href: '/admin-dashboard/elle', icon: Bot },
   { name: 'Invoices', href: '/admin-dashboard/invoices', icon: Receipt },
+  { name: 'Upcoming Calls', href: '/admin-dashboard/upcoming-calls', icon: FileText },
+  { name: 'Analytics', href: '/admin-dashboard/analytics', icon: PieChart },
   { name: 'Reports', href: '/admin-dashboard/reports', icon: FileText },
   { name: 'Templates', href: '/admin-dashboard/templates', icon: Layers },
   { name: 'Discovery', href: '/admin-dashboard/discovery', icon: ClipboardList },
+  { name: 'Elle', href: '/admin-dashboard/elle', icon: Bot },
 ];
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
