@@ -12,12 +12,12 @@ function getSupabase() {
 const sendEmail = async (to: string, subject: string, html: string) => {
   const apiKey = process.env.RESEND_API_KEY
   if (!apiKey) {
-    console.warn('RESEND_API_KEY is not set. Logging email to console.')
-    console.log(`[EMAIL DISPATCH: ${to}]\nSubject: ${subject}\nBody: ${html}`)
+    console.error('[DISCOVERY EMAIL] RESEND_API_KEY is not set — email NOT sent. Add it to Vercel environment variables.')
     return
   }
 
   try {
+    console.log(`[DISCOVERY EMAIL] Sending to ${to}...`)
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -32,11 +32,14 @@ const sendEmail = async (to: string, subject: string, html: string) => {
       }),
     })
 
+    const responseText = await res.text()
     if (!res.ok) {
-      console.error('Failed to send email with Resend:', await res.text())
+      console.error(`[DISCOVERY EMAIL] Resend API error (${res.status}):`, responseText)
+    } else {
+      console.log('[DISCOVERY EMAIL] Sent successfully:', responseText)
     }
   } catch (err) {
-    console.error('Resend error:', err)
+    console.error('[DISCOVERY EMAIL] Network error:', err)
   }
 }
 

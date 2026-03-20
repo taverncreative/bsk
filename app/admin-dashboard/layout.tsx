@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, Users, UserPlus, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail } from 'lucide-react';
+import { LayoutDashboard, Users, UserPlus, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail, ClipboardList } from 'lucide-react';
 import { createClient } from '@/lib/supabaseClient';
 
 const navigation = [
@@ -17,6 +17,7 @@ const navigation = [
   { name: 'Invoices', href: '/admin-dashboard/invoices', icon: Receipt },
   { name: 'Reports', href: '/admin-dashboard/reports', icon: FileText },
   { name: 'Templates', href: '/admin-dashboard/templates', icon: Layers },
+  { name: 'Discovery', href: '/admin-dashboard/discovery', icon: ClipboardList },
 ];
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
