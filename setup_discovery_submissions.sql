@@ -25,3 +25,8 @@ create policy "Allow anonymous inserts"
 create policy "Allow admin reads"
   on discovery_submissions for select
   using (auth.role() = 'authenticated');
+
+-- Allow deletes only for authenticated admin users
+create policy "Allow admin deletes"
+  on discovery_submissions for delete
+  using (auth.role() = 'authenticated');

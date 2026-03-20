@@ -53,7 +53,7 @@ const SECTIONS: FormSection[] = [
       { id: 'founded', label: 'Year Founded', type: 'text', prefilled: '1973' },
       { id: 'familyBusiness', label: 'Family Business / History', type: 'textarea', prefilled: 'Yes, multi-generation family business (now third generation). Built from paper trading into large-scale stockholding and conversion operation.' },
       { id: 'businessGoals', label: 'Key Business Goals (next 12 months)', type: 'textarea', placeholder: 'What are the most important business objectives you\'re working towards?' },
-      { id: 'artinovaRole', label: 'Artinova / Antinova — Please Clarify', type: 'textarea', placeholder: 'What is the role of Artinova/Antinova? (e.g. agents, partner brand, product line)', helpText: 'This came up in our meeting — we need to understand this relationship to position it correctly on the website.' },
+      { id: 'artinovaRole', label: 'Artinova / Antinova — Please Clarify', type: 'textarea', placeholder: 'Please confirm the correct name/spelling and explain the significance to your business (e.g. exclusive UK distribution, card stock brand, product line)', helpText: 'This came up in our meeting — we need to understand the correct name, what it is (e.g. a card stock), and your relationship with it (e.g. exclusivity in the UK) to position it correctly on the website.' },
     ]
   },
   {
@@ -63,7 +63,7 @@ const SECTIONS: FormSection[] = [
     icon: Palette,
     infoNote: 'Strong branding builds trust with buyers. Even if you don\'t have formal guidelines, your preferences here will shape the website\'s look and feel.',
     fields: [
-      { id: 'currentTone', label: 'Current Brand Perception (our assessment)', type: 'textarea', prefilled: 'Currently basic / outdated. Recommended direction: Clean + premium + industrial credibility + strong product clarity.' },
+      { id: 'currentTone', label: 'Current Brand Perception (our assessment)', type: 'textarea', prefilled: 'Your brand has strong foundations. The new website is an opportunity to elevate the visual presentation — clean, premium, industrial credibility with strong product clarity.' },
       { id: 'brandGuidelines', label: 'Do you have formal brand guidelines?', type: 'radio', options: ['Yes', 'No', 'Partially — some elements exist'] },
       { id: 'guidelinesDetail', label: 'If yes, please describe what\'s available', type: 'textarea', placeholder: 'e.g. colour palette, fonts, logo usage rules, tone of voice document...' },
       { id: 'logoFiles', label: 'Do you have vector logo files? (SVG, AI, EPS)', type: 'radio', options: ['Yes', 'No', 'Not sure'], helpText: 'Vector files are essential for sharp rendering at any size. If you only have a JPG/PNG, we\'ll need to vectorise your logo.' },
@@ -160,9 +160,6 @@ const SECTIONS: FormSection[] = [
       { id: 'existingPhotos', label: 'Do you have professional photography?', type: 'radio', options: ['Yes — facility, products, and team', 'Some — but needs updating', 'No — nothing suitable'] },
       { id: 'photosDetail', label: 'Photo Details', type: 'textarea', placeholder: 'What photos do you have? (facility shots, product images, team photos, machinery, warehouse, etc.)' },
       { id: 'photoPreference', label: 'Photography Preference', type: 'radio', options: ['We\'ll supply our own photos', 'Arrange a professional shoot', 'Mix of both'] },
-      { id: 'videoContent', label: 'Do you have video content?', type: 'radio', options: ['Yes', 'No'] },
-      { id: 'videoInterest', label: 'Interested in video for the website?', type: 'radio', options: ['Yes — definitely', 'Maybe — tell me more', 'No — not right now'] },
-      { id: 'teamPhotos', label: 'Team photos on the website?', type: 'radio', options: ['Yes — individual and/or group', 'Maybe — need to discuss', 'No — prefer not to'] },
     ]
   },
   {
@@ -173,14 +170,7 @@ const SECTIONS: FormSection[] = [
     fields: [
       { id: 'targetLaunch', label: 'Target Launch Date', type: 'text', prefilled: '1st May 2025' },
       { id: 'currentHosting', label: 'Current Hosting', type: 'text', prefilled: 'GoDaddy (~£500/year)' },
-      { id: 'decisionMaker', label: 'Primary Decision Maker', type: 'text', placeholder: 'Name and role of the person signing off on the website' },
-      { id: 'approvalProcess', label: 'Approval Process', type: 'textarea', placeholder: 'How do decisions get made? Single sign-off, committee, multiple stakeholders?' },
-      { id: 'timelineConfirm', label: 'Can you meet the 1st May launch target?', type: 'radio', options: ['Yes — let\'s do it', 'Tight — but we\'ll try', 'Need more time', 'Prefer earlier'] },
-      { id: 'hostingAccess', label: 'Do you have access to your hosting account?', type: 'radio', options: ['Yes', 'No', 'Not sure'] },
-      { id: 'domainAccess', label: 'Do you have access to your domain registrar?', type: 'radio', options: ['Yes', 'No', 'Not sure'] },
-      { id: 'hostingPreference', label: 'Would you like us to manage hosting?', type: 'radio', options: ['Yes — manage everything', 'No — we\'ll handle it', 'Let\'s discuss'], helpText: 'We offer managed hosting at £20/month — faster, more secure, and we handle all maintenance.' },
       { id: 'privacyPolicy', label: 'Do you have a privacy policy?', type: 'radio', options: ['Yes — up to date', 'Yes — needs updating', 'No'] },
-      { id: 'cookieCompliance', label: 'Cookie compliance in place?', type: 'radio', options: ['Yes', 'No', 'Not sure'] },
       { id: 'otherLegal', label: 'Other Legal / Compliance Requirements', type: 'textarea', placeholder: 'Anything else we should know — industry regulations, data handling, etc.' },
     ]
   },

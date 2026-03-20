@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabaseClient';
-import { ClipboardList, ChevronLeft, Calendar, Building2 } from 'lucide-react';
+import { ClipboardList, ChevronLeft, Calendar, Building2, Trash2 } from 'lucide-react';
 
 interface DiscoverySubmission {
   id: string;
@@ -16,6 +16,7 @@ export default function DiscoveryPage() {
   const [submissions, setSubmissions] = useState<DiscoverySubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<DiscoverySubmission | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   useEffect(() => {
     fetchSubmissions();
@@ -70,6 +71,30 @@ export default function DiscoveryPage() {
       .replace(/\b\w/g, (c) => c.toUpperCase());
   };
 
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this submission? This cannot be undone.')) return;
+    try {
+      setDeleting(id);
+      const supabase = createClient();
+      const { error } = await supabase
+        .from('discovery_submissions')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        console.error('Error deleting submission:', error);
+        alert('Failed to delete. Check console for details.');
+      } else {
+        setSubmissions((prev) => prev.filter((s) => s.id !== id));
+        if (selected?.id === id) setSelected(null);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setDeleting(null);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
@@ -94,11 +119,21 @@ export default function DiscoveryPage() {
           Back to submissions
         </button>
 
-        <div className="flex items-center gap-3 mb-2">
-          <Building2 className="h-6 w-6 text-brand-gold" />
-          <h1 className="text-2xl font-bold text-white">
-            {formatSlug(selected.client_slug)}
-          </h1>
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-3">
+            <Building2 className="h-6 w-6 text-brand-gold" />
+            <h1 className="text-2xl font-bold text-white">
+              {formatSlug(selected.client_slug)}
+            </h1>
+          </div>
+          <button
+            onClick={() => handleDelete(selected.id)}
+            disabled={deleting === selected.id}
+            className="flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50"
+          >
+            <Trash2 className="h-4 w-4" />
+            {deleting === selected.id ? 'Deleting...' : 'Delete'}
+          </button>
         </div>
         <p className="text-zinc-500 text-sm mb-8">
           Submitted {formatDate(selected.completed_at || selected.created_at)}
@@ -177,7 +212,20 @@ export default function DiscoveryPage() {
                       </div>
                     </div>
                   </div>
-                  <ChevronLeft className="h-5 w-5 text-zinc-700 rotate-180 group-hover:text-brand-gold transition-colors" />
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(sub.id);
+                      }}
+                      disabled={deleting === sub.id}
+                      className="p-2 text-zinc-600 hover:text-red-400 hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50"
+                      title="Delete submission"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                    <ChevronLeft className="h-5 w-5 text-zinc-700 rotate-180 group-hover:text-brand-gold transition-colors" />
+                  </div>
                 </div>
               </button>
             );
