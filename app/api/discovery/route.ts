@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
 import { sendFormErrorAlert } from '@/lib/error-alert'
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
 
 const sendEmail = async (to: string, subject: string, html: string) => {
   const apiKey = process.env.RESEND_API_KEY
