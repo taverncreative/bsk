@@ -710,6 +710,7 @@ export default function DiscoveryClient() {
   const goToSection = useCallback((i: number) => {
     setCurrentSection(i)
     setVisited(prev => new Set([...prev, i]))
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [])
 
   const submitForm = useCallback(async () => {
@@ -777,9 +778,12 @@ export default function DiscoveryClient() {
       <header className="sticky top-0 z-30 bg-black/80 backdrop-blur-md border-b border-neutral-800/50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between mb-3">
-            <div>
-              <h1 className="text-lg font-semibold text-white">Scalderhurst Ltd</h1>
-              <p className="text-xs text-neutral-500">Discovery Form — Website Project</p>
+            <div className="flex items-center gap-3">
+              <img src="/logo.png" alt="Business Sorted Kent" className="h-8 w-auto" />
+              <div>
+                <h1 className="text-lg font-semibold text-white">Scalderhurst Ltd</h1>
+                <p className="text-xs text-neutral-500">Discovery Form — Website Project</p>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <button
