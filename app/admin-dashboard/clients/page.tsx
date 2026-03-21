@@ -24,9 +24,10 @@ function ClientsPageInner() {
   const [editForm, setEditForm] = useState<any>({});
   const [saving, setSaving] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
-  const [addForm, setAddForm] = useState({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', project_value: '', monthly_value: '', package_name: '' });
+  const [addForm, setAddForm] = useState({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', monthly_value: '', package_name: '' });
   const [clientInvoices, setClientInvoices] = useState<any[]>([]);
   const [clientActivity, setClientActivity] = useState<any[]>([]);
+  const [clientProjects, setClientProjects] = useState<any[]>([]);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [deleting, setDeleting] = useState(false);
 
@@ -58,13 +59,15 @@ function ClientsPageInner() {
     setEditForm(client);
     setEditing(false);
 
-    // Fetch invoices and activity for this client
-    const [invRes, actRes] = await Promise.all([
+    // Fetch invoices, activity, and projects for this client
+    const [invRes, actRes, projRes] = await Promise.all([
       supabase.from('invoices').select('*').eq('client_id', client.id).order('created_at', { ascending: false }),
       supabase.from('activity_log').select('*').eq('entity_type', 'client').eq('entity_id', client.id).order('created_at', { ascending: false }).limit(20),
+      supabase.from('projects').select('*').eq('client_id', client.id).order('created_at', { ascending: false }),
     ]);
     setClientInvoices(invRes.data || []);
     setClientActivity(actRes.data || []);
+    setClientProjects(projRes.data || []);
   };
 
   const saveClient = async () => {
@@ -78,7 +81,6 @@ function ClientsPageInner() {
       website: editForm.website,
       notes: editForm.notes,
       status: editForm.status,
-      project_value: editForm.project_value ? parseFloat(editForm.project_value) : null,
       monthly_value: editForm.monthly_value ? parseFloat(editForm.monthly_value) : null,
       package_name: editForm.package_name || null,
       updated_at: new Date().toISOString(),
@@ -109,7 +111,6 @@ function ClientsPageInner() {
       address: addForm.address,
       website: addForm.website,
       notes: addForm.notes,
-      project_value: addForm.project_value ? parseFloat(addForm.project_value) : null,
       monthly_value: addForm.monthly_value ? parseFloat(addForm.monthly_value) : null,
       package_name: addForm.package_name || null,
       status: 'active',
@@ -120,7 +121,7 @@ function ClientsPageInner() {
     } else {
       setToast({ message: 'Client added!', type: 'success' });
       setShowAddModal(false);
-      setAddForm({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', project_value: '', monthly_value: '', package_name: '' });
+      setAddForm({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', monthly_value: '', package_name: '' });
       fetchClients();
     }
     setSaving(false);
@@ -252,18 +253,6 @@ function ClientsPageInner() {
                 <div className="flex items-start gap-3">
                   <PoundSterling className="w-4 h-4 text-zinc-500 mt-1 shrink-0" />
                   <div>
-                    <p className="text-xs text-zinc-500">Project Value</p>
-                    {editing ? (
-                      <input type="number" value={editForm.project_value || ''} onChange={e => setEditForm({ ...editForm, project_value: e.target.value })}
-                        className="bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-sm text-white w-full mt-0.5" />
-                    ) : (
-                      <p className="text-sm text-zinc-300">{selectedClient.project_value ? `£${parseFloat(selectedClient.project_value).toLocaleString()}` : '—'}</p>
-                    )}
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <PoundSterling className="w-4 h-4 text-zinc-500 mt-1 shrink-0" />
-                  <div>
                     <p className="text-xs text-zinc-500">Monthly Value</p>
                     {editing ? (
                       <input type="number" value={editForm.monthly_value || ''} onChange={e => setEditForm({ ...editForm, monthly_value: e.target.value })}
@@ -327,6 +316,40 @@ function ClientsPageInner() {
                         }`}>{inv.status}</span>
                       </div>
                     </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Projects for this client */}
+            <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-lg font-semibold text-white">Projects</h2>
+                <Link href="/admin-dashboard/projects" className="text-xs text-brand-gold hover:text-white transition-colors">
+                  View All →
+                </Link>
+              </div>
+              {clientProjects.length === 0 ? (
+                <p className="text-sm text-zinc-500 py-4 text-center">No projects yet.</p>
+              ) : (
+                <div className="space-y-3">
+                  {clientProjects.map(proj => (
+                    <Link key={proj.id} href="/admin-dashboard/projects"
+                      className="flex items-center justify-between bg-zinc-900/50 rounded-lg p-3 hover:bg-zinc-900 transition-colors">
+                      <div>
+                        <p className="text-sm font-medium text-white">{proj.name}</p>
+                        <p className="text-xs text-zinc-500">{proj.start_date ? new Date(proj.start_date).toLocaleDateString('en-GB') : 'No dates set'}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        {proj.value && <span className="text-sm font-semibold text-white">£{parseFloat(proj.value).toLocaleString()}</span>}
+                        <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                          proj.status === 'completed' ? 'bg-green-900/50 text-green-300' :
+                          proj.status === 'in_progress' ? 'bg-blue-900/50 text-blue-300' :
+                          proj.status === 'on_hold' ? 'bg-yellow-900/50 text-yellow-300' :
+                          'bg-zinc-800 text-zinc-400'
+                        }`}>{proj.status?.replace(/_/g, ' ')}</span>
+                      </div>
+                    </Link>
                   ))}
                 </div>
               )}
@@ -464,9 +487,6 @@ function ClientsPageInner() {
                   {client.package_name && <span className="text-zinc-400 font-normal">{client.package_name}</span>}
                 </p>
               )}
-              {!client.monthly_value && client.project_value && (
-                <p className="text-sm font-semibold text-brand-gold mt-2">£{parseFloat(client.project_value).toLocaleString()}</p>
-              )}
               <p className="text-xs text-zinc-600 mt-2">
                 Added {new Date(client.created_at).toLocaleDateString('en-GB')}
               </p>
@@ -521,20 +541,15 @@ function ClientsPageInner() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-zinc-300 mb-1">Project Value (£)</label>
-                  <input type="number" value={addForm.project_value} onChange={e => setAddForm({ ...addForm, project_value: e.target.value })}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="2500" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-zinc-300 mb-1">Monthly Value (£)</label>
+                  <label className="block text-sm font-medium text-zinc-300 mb-1">Monthly Retainer (£)</label>
                   <input type="number" value={addForm.monthly_value} onChange={e => setAddForm({ ...addForm, monthly_value: e.target.value })}
                     className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="200" />
                 </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1">Package Name</label>
-                <input value={addForm.package_name} onChange={e => setAddForm({ ...addForm, package_name: e.target.value })}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="e.g. SEO Growth, Website Build" />
+                <div>
+                  <label className="block text-sm font-medium text-zinc-300 mb-1">Package Name</label>
+                  <input value={addForm.package_name} onChange={e => setAddForm({ ...addForm, package_name: e.target.value })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="e.g. SEO Growth" />
+                </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-zinc-300 mb-1">Notes</label>

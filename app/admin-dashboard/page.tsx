@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Users, PoundSterling, LayoutGrid, TrendingUp, ArrowRight, Activity, Plus, FileText, RefreshCw, AlertCircle, Tag } from 'lucide-react';
+import { Users, PoundSterling, LayoutGrid, TrendingUp, ArrowRight, Activity, Plus, FileText, RefreshCw, AlertCircle, Tag, FolderOpen } from 'lucide-react';
 import { createClient } from '@/lib/supabaseClient';
 import Link from 'next/link';
 
@@ -14,6 +14,7 @@ export default function AdminOverview() {
     arr: 0,
     revenue: 0,
     outstanding: 0,
+    projectRevenue: 0,
   });
   const [activeClients, setActiveClients] = useState<any[]>([]);
   const [recentLeads, setRecentLeads] = useState<any[]>([]);
@@ -26,16 +27,18 @@ export default function AdminOverview() {
 
   const loadDashboard = async () => {
     try {
-      const [leadsRes, clientsRes, invoicesRes, activityRes] = await Promise.all([
+      const [leadsRes, clientsRes, invoicesRes, activityRes, projectsRes] = await Promise.all([
         supabase.from('leads').select('*'),
         supabase.from('clients').select('*'),
         supabase.from('invoices').select('*'),
         supabase.from('activity_log').select('*').order('created_at', { ascending: false }).limit(10),
+        supabase.from('projects').select('*'),
       ]);
 
       const leads = leadsRes.data || [];
       const clients = clientsRes.data || [];
       const invoices = invoicesRes.data || [];
+      const projectsList = projectsRes.data || [];
 
       const now = new Date();
       const thisMonth = leads.filter(l => {
@@ -58,6 +61,10 @@ export default function AdminOverview() {
       const active = clients.filter((c: any) => c.status === 'active');
       const mrr = active.reduce((sum: number, c: any) => sum + (parseFloat(c.monthly_value) || 0), 0);
 
+      const projectRevenue = projectsList
+        .filter((p: any) => p.status === 'completed')
+        .reduce((sum: number, p: any) => sum + (parseFloat(p.value) || 0), 0);
+
       setStats({
         leads: thisMonth.length,
         pipelineValue,
@@ -66,6 +73,7 @@ export default function AdminOverview() {
         arr: mrr * 12,
         revenue,
         outstanding,
+        projectRevenue,
       });
 
       setActiveClients(active.sort((a: any, b: any) => (parseFloat(b.monthly_value) || 0) - (parseFloat(a.monthly_value) || 0)));
@@ -89,11 +97,12 @@ export default function AdminOverview() {
   const kpis = [
     { name: 'Monthly Recurring Revenue', value: `£${stats.mrr.toLocaleString()}`, icon: RefreshCw, href: '/admin-dashboard/clients', color: 'text-brand-gold' },
     { name: 'Annual Recurring Revenue', value: `£${stats.arr.toLocaleString()}`, icon: TrendingUp, href: '/admin-dashboard/clients', color: 'text-brand-gold' },
-    { name: 'Pipeline Value', value: `£${stats.pipelineValue.toLocaleString()}`, icon: LayoutGrid, href: '/admin-dashboard/pipeline', color: 'text-purple-400' },
+    { name: 'Project Revenue', value: `£${stats.projectRevenue.toLocaleString()}`, icon: FolderOpen, href: '/admin-dashboard/projects', color: 'text-purple-400' },
     { name: 'Active Clients', value: stats.clients.toString(), icon: Users, href: '/admin-dashboard/clients', color: 'text-green-400' },
     { name: 'New Leads (Month)', value: stats.leads.toString(), icon: TrendingUp, href: '/admin-dashboard/pipeline', color: 'text-blue-400' },
     { name: 'Outstanding Invoices', value: `£${stats.outstanding.toLocaleString()}`, icon: AlertCircle, href: '/admin-dashboard/invoices', color: 'text-yellow-400' },
     { name: 'Revenue Collected', value: `£${stats.revenue.toLocaleString()}`, icon: PoundSterling, href: '/admin-dashboard/invoices', color: 'text-green-400' },
+    { name: 'Pipeline Value', value: `£${stats.pipelineValue.toLocaleString()}`, icon: LayoutGrid, href: '/admin-dashboard/pipeline', color: 'text-zinc-400' },
   ];
 
   return (

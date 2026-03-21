@@ -2,8 +2,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, Users, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail, ClipboardList, Phone } from 'lucide-react';
+import { LayoutDashboard, Users, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail, ClipboardList, Phone, CheckSquare, FolderOpen } from 'lucide-react';
 import { createClient } from '@/lib/supabaseClient';
+
+const todoNav = { name: 'To-Do', href: '/admin-dashboard/todos', icon: CheckSquare };
 
 const navigationGroups = [
   {
@@ -13,6 +15,7 @@ const navigationGroups = [
       { name: 'Lead Inbox', href: '/admin-dashboard/lead-inbox', icon: Mail },
       { name: 'Pipeline', href: '/admin-dashboard/pipeline', icon: KanbanSquare },
       { name: 'Clients', href: '/admin-dashboard/clients', icon: Users },
+      { name: 'Projects', href: '/admin-dashboard/projects', icon: FolderOpen },
       { name: 'Discovery', href: '/admin-dashboard/discovery', icon: ClipboardList },
     ],
   },
@@ -66,6 +69,19 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
               Business<span className="text-brand-gold">Sorted</span>
             </div>
             <nav className="flex-1 overflow-y-auto">
+              {/* To-Do — pinned at top */}
+              {(() => {
+                const isActive = pathname === todoNav.href;
+                return (
+                  <Link href={todoNav.href} onClick={() => setSidebarOpen(false)}
+                    className={`group flex items-center px-3 py-2.5 text-sm font-semibold rounded-md mb-4 ${
+                      isActive ? 'bg-brand-gold/10 text-brand-gold' : 'text-white hover:bg-zinc-900'
+                    }`}>
+                    <todoNav.icon className={`mr-3 h-5 w-5 flex-shrink-0 ${isActive ? 'text-brand-gold' : 'text-brand-gold/70'}`} />
+                    {todoNav.name}
+                  </Link>
+                );
+              })()}
               {navigationGroups.map((group) => (
                 <div key={group.label} className="mb-4">
                   <p className="px-3 mb-2 text-[10px] font-bold uppercase tracking-widest text-zinc-600">{group.label}</p>
@@ -103,6 +119,19 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
           </div>
           <div className="flex-1 flex flex-col">
             <nav className="flex-1 px-4">
+              {/* To-Do — pinned at top */}
+              {(() => {
+                const isActive = pathname === todoNav.href;
+                return (
+                  <Link href={todoNav.href}
+                    className={`group flex items-center px-3 py-2.5 text-sm font-semibold rounded-md mb-4 transition-colors ${
+                      isActive ? 'bg-brand-gold/10 text-brand-gold' : 'text-white hover:bg-zinc-900'
+                    }`}>
+                    <todoNav.icon className={`mr-3 h-5 w-5 flex-shrink-0 transition-colors ${isActive ? 'text-brand-gold' : 'text-brand-gold/70'}`} />
+                    {todoNav.name}
+                  </Link>
+                );
+              })()}
               {navigationGroups.map((group) => (
                 <div key={group.label} className="mb-4">
                   <p className="px-3 mb-2 text-[10px] font-bold uppercase tracking-widest text-zinc-600">{group.label}</p>
