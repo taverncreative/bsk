@@ -16,7 +16,7 @@ import FAQ from '@/components/sections/FAQ';
 import GrowthSystem from '@/components/sections/GrowthSystem';
 import Services from '@/components/sections/Services';
 import { getLocalServiceMessaging } from '@/lib/content/messaging';
-import { Search, Zap, Palette, LinkIcon, FileText, Laptop } from 'lucide-react';
+import { Search, Zap, Palette, LinkIcon, FileText, Laptop, Bot, MessageSquare, Mail, BrainCircuit } from 'lucide-react';
 
 // External Types
 import type { Industry, Guide, IndustryPainPoint } from '@/types';
@@ -222,6 +222,138 @@ export default function ServiceTownPage({
     { question: `Do you supply clothing or just the branding?`, answer: `We supply the entire package end-to-end. We source high-quality garments from trusted UK suppliers and then manage the professional embroidery or printing process, delivering the finished product directly to you in ${town.name}.` },
     { question: `Can you match materials to my existing logo?`, answer: `Absolutely. Our design team ensures complete consistency, carefully matching your specific brand colours (Pantone/CMYK) and logo architecture so every physical item flawlessly represents your business identity.` }
   ];
+
+  // AI Chatbots Data
+  const isAIChatbots = service.slug === 'ai-chatbots';
+  const aiChatbotTerms = ["AI chatbot", "intelligent assistant", "conversational AI", "automated lead capture", "24/7 customer engagement"];
+  const aiChatbotPainPointsBank = [
+    { title: "Visitors leave without engaging", pain_point: `Your ${town.name} business website gets traffic but most visitors browse and leave without making contact.` },
+    { title: "Enquiries only during office hours", pain_point: `Potential customers searching in the evenings and weekends have no way to get immediate answers.` },
+    { title: "Slow response times", pain_point: `By the time you reply to a form submission, the customer in ${town.name} has already contacted a competitor.` },
+    { title: "No lead qualification", pain_point: `Every enquiry arrives as a generic message with no context about what the customer actually needs.` },
+    { title: "Contact forms feel impersonal", pain_point: `A static form cannot answer questions, guide visitors, or create a connection with potential customers.` }
+  ];
+  const rotatedAIChatbotPainPoints = [aiChatbotPainPointsBank[seed % 5], aiChatbotPainPointsBank[(seed + 1) % 5], aiChatbotPainPointsBank[(seed + 2) % 5]];
+  const aiChatbotFaqsBank = [
+    { question: `How does an AI chatbot help my ${town.name} business?`, answer: `It engages website visitors 24/7, answers their questions about your services, captures their contact details, and can even book appointments — all without you being online.` },
+    { question: `Will the chatbot sound robotic?`, answer: `No. Our chatbots are trained on your specific business and use natural language. Most visitors cannot tell they are speaking to AI.` },
+    { question: `Can it book appointments for my business?`, answer: `Yes. We integrate with calendar systems so visitors can book consultations, demos, or callbacks directly through the conversation.` },
+    { question: `How long does it take to set up?`, answer: `Most AI chatbots for ${town.name} businesses are live within 5-7 working days. We handle the full build, training, and integration.` }
+  ];
+  const aiChatbotFaqs = [aiChatbotFaqsBank[seed % 4], aiChatbotFaqsBank[(seed + 1) % 4], aiChatbotFaqsBank[(seed + 2) % 4]];
+  const usedAIChatbotTerms = [aiChatbotTerms[seed % 5], aiChatbotTerms[(seed + 1) % 5], aiChatbotTerms[(seed + 2) % 5]];
+
+  // AI Content Data
+  const isAIContent = service.slug === 'ai-content';
+  const aiContentTerms = ["AI content creation", "SEO blog posts", "content marketing", "social media content", "brand copywriting"];
+  const aiContentPainPointsBank = [
+    { title: "No time to write content", pain_point: `Running your ${town.name} business leaves no time to produce blog posts, social media, or website copy consistently.` },
+    { title: "Blog sits empty or outdated", pain_point: `Your website has a blog section that signals inactivity to both Google and potential customers in ${town.name}.` },
+    { title: "Competitors publish more", pain_point: `Other businesses in ${town.name} are steadily climbing search rankings by publishing regular content while yours stays still.` },
+    { title: "Social media goes quiet", pain_point: `You post sporadically when you remember but there is no strategy or consistency driving results.` },
+    { title: "Hiring writers is expensive", pain_point: `A full-time content writer costs £25,000+ per year. Freelancers are unpredictable and expensive per piece.` }
+  ];
+  const rotatedAIContentPainPoints = [aiContentPainPointsBank[seed % 5], aiContentPainPointsBank[(seed + 1) % 5], aiContentPainPointsBank[(seed + 2) % 5]];
+  const aiContentFaqsBank = [
+    { question: `What kind of content can AI create for my ${town.name} business?`, answer: `Blog posts, social media content, website copy, email newsletters, and product descriptions — all tailored to your brand voice and local audience.` },
+    { question: `Is AI-generated content good for SEO?`, answer: `When done properly with human oversight, absolutely. We target the keywords your ${town.name} customers actually search for and ensure every piece adds genuine value.` },
+    { question: `Will the content sound like my brand?`, answer: `Yes. We train the AI on your specific tone, terminology, and style preferences before producing any content.` },
+    { question: `How much content can you produce each month?`, answer: `We can deliver 4-8 blog posts per week, daily social media content, and weekly email newsletters — consistently and on schedule.` }
+  ];
+  const aiContentFaqs = [aiContentFaqsBank[seed % 4], aiContentFaqsBank[(seed + 1) % 4], aiContentFaqsBank[(seed + 2) % 4]];
+  const usedAIContentTerms = [aiContentTerms[seed % 5], aiContentTerms[(seed + 1) % 5], aiContentTerms[(seed + 2) % 5]];
+
+  // AI Automation Data
+  const isAIAutomation = service.slug === 'ai-automation';
+  const aiAutomationTerms = ["AI automation", "intelligent workflows", "automated lead response", "AI-powered CRM", "smart business processes"];
+  const aiAutomationPainPointsBank = [
+    { title: "Leads go cold from slow follow-ups", pain_point: `By the time you manually respond to an enquiry, the customer in ${town.name} has already moved on to a competitor.` },
+    { title: "Hours wasted on repetitive admin", pain_point: `Copying data, sending confirmations, updating records — tasks that drain hours from your working week.` },
+    { title: "Customer data is scattered", pain_point: `Information lives across emails, spreadsheets, and WhatsApp — nothing is centralised for your ${town.name} business.` },
+    { title: "No system for qualifying leads", pain_point: `Every enquiry lands in the same inbox with no way to prioritise high-value opportunities.` },
+    { title: "Cannot scale without hiring", pain_point: `Growth means more admin work, and more admin means needing staff you cannot yet afford.` }
+  ];
+  const rotatedAIAutomationPainPoints = [aiAutomationPainPointsBank[seed % 5], aiAutomationPainPointsBank[(seed + 1) % 5], aiAutomationPainPointsBank[(seed + 2) % 5]];
+  const aiAutomationFaqsBank = [
+    { question: `What tasks can AI automation handle for my ${town.name} business?`, answer: `We automate enquiry responses, lead scoring, follow-up sequences, CRM data entry, appointment reminders, review requests, and invoice follow-ups.` },
+    { question: `Do I need special software?`, answer: `No. We integrate with the tools you already use — your email, website, calendar, and any CRM system.` },
+    { question: `How quickly will I see results?`, answer: `Most ${town.name} businesses see immediate time savings from week one. Automated lead follow-ups typically increase response rates by 30-50%.` },
+    { question: `Is AI automation suitable for small businesses?`, answer: `Absolutely. Small businesses often see the highest ROI because automation acts as a virtual administrator, handling background work without needing additional staff.` }
+  ];
+  const aiAutomationFaqs = [aiAutomationFaqsBank[seed % 4], aiAutomationFaqsBank[(seed + 1) % 4], aiAutomationFaqsBank[(seed + 2) % 4]];
+  const usedAIAutomationTerms = [aiAutomationTerms[seed % 5], aiAutomationTerms[(seed + 1) % 5], aiAutomationTerms[(seed + 2) % 5]];
+
+  if (isAIChatbots) {
+    return (
+      <>
+        <LocalServiceHero
+          title={<>AI Chatbots for {town.name} Businesses</>}
+          subtitle={`Most ${town.name} business websites lose visitors because nobody is available to answer questions in real time. Our custom AI chatbots engage every visitor, capture leads, and book appointments — 24 hours a day.`}
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
+        />
+        <ParentLinks service={service} town={town} />
+        <LocalContextSection townName={town.name} townIntro={combinedIntro} />
+        <ProblemSection headlineOverride={`Why ${town.name} Businesses Lose Website Leads`} painPoints={rotatedAIChatbotPainPoints} />
+        <SolutionSection headlineOverride="How An AI Chatbot Captures More Leads" paragraphOverride={`By deploying ${usedAIChatbotTerms[0]} technology with ${usedAIChatbotTerms[1]} capabilities, we help ${town.name} businesses achieve ${usedAIChatbotTerms[2]} that works around the clock.`} townName={town.name} />
+        <ProcessAuthority headlineOverride="How We Build Your AI Chatbot" descriptionOverride="Every chatbot is custom-built for your specific business, services, and customer base." />
+        <Authority />
+        <LocalAuthorityMap headlineOverride="AI Chatbot Services Across Kent" />
+        <CaseStudySection townName={town.name} caseStudies={displayCaseStudies} />
+        <GrowthSystem currentService={service.slug} />
+        <FAQ faqs={aiChatbotFaqs} title="Frequently Asked Questions" />
+        <InternalLinks serviceSlug={service.slug} townSlug={town.slug} latitude={town.latitude} longitude={town.longitude} />
+        <CTA titleOverride="Start Capturing Leads Around The Clock" paragraphOverride={`An AI chatbot works for your ${town.name} business 24/7 — engaging visitors, answering questions, and converting them into real enquiries.`} buttonOverride={selectedCTA} />
+      </>
+    );
+  }
+
+  if (isAIContent) {
+    return (
+      <>
+        <LocalServiceHero
+          title={<>AI Content Creation for {town.name} Businesses</>}
+          subtitle={`Consistent content is one of the most powerful ways to grow your visibility online — but most ${town.name} businesses cannot keep up with the volume required. Our AI content service delivers professional, SEO-optimised content at scale.`}
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
+        />
+        <ParentLinks service={service} town={town} />
+        <LocalContextSection townName={town.name} townIntro={combinedIntro} />
+        <ProblemSection headlineOverride={`Why ${town.name} Businesses Struggle With Content`} painPoints={rotatedAIContentPainPoints} />
+        <SolutionSection headlineOverride="How AI Content Creation Works" paragraphOverride={`By combining ${usedAIContentTerms[0]} with ${usedAIContentTerms[1]} strategies, we help ${town.name} businesses build authority through consistent ${usedAIContentTerms[2]}.`} townName={town.name} />
+        <ProcessAuthority headlineOverride="Our AI Content Process" descriptionOverride="We build a content engine tailored to your business that produces consistent, high-quality output month after month." />
+        <Authority />
+        <LocalAuthorityMap headlineOverride="AI Content Services Across Kent" />
+        <CaseStudySection townName={town.name} caseStudies={displayCaseStudies} />
+        <GrowthSystem currentService={service.slug} />
+        <FAQ faqs={aiContentFaqs} title="Frequently Asked Questions" />
+        <InternalLinks serviceSlug={service.slug} townSlug={town.slug} latitude={town.latitude} longitude={town.longitude} />
+        <CTA titleOverride="Start Publishing Content That Grows Your Business" paragraphOverride={`Our AI content service delivers consistent, professional content every month for ${town.name} businesses — blog posts, social media, email campaigns — all optimised for search.`} buttonOverride={selectedCTA} />
+      </>
+    );
+  }
+
+  if (isAIAutomation) {
+    return (
+      <>
+        <LocalServiceHero
+          title={<>AI Business Automation for {town.name}</>}
+          subtitle={`Most ${town.name} business owners spend hours every week on repetitive admin. AI automation handles lead responses, follow-ups, data entry, and customer communications intelligently — so you can focus on revenue-generating work.`}
+          primaryCTA={{ text: 'Book A Free Consultation', href: '/contact' }}
+        />
+        <ParentLinks service={service} town={town} />
+        <LocalContextSection townName={town.name} townIntro={combinedIntro} />
+        <ProblemSection headlineOverride={`Why Manual Processes Cost ${town.name} Businesses Money`} painPoints={rotatedAIAutomationPainPoints} />
+        <SolutionSection headlineOverride="What AI Automation Does For Your Business" paragraphOverride={`By implementing ${usedAIAutomationTerms[0]} with ${usedAIAutomationTerms[1]}, we help ${town.name} businesses build ${usedAIAutomationTerms[2]} that eliminates manual admin.`} townName={town.name} />
+        <ProcessAuthority headlineOverride="How We Build Your Automation System" descriptionOverride="We map your current processes, identify bottlenecks, and build intelligent automations that eliminate them." />
+        <Authority />
+        <LocalAuthorityMap headlineOverride="AI Automation Services Across Kent" />
+        <CaseStudySection townName={town.name} caseStudies={displayCaseStudies} />
+        <GrowthSystem currentService={service.slug} />
+        <FAQ faqs={aiAutomationFaqs} title="Frequently Asked Questions" />
+        <InternalLinks serviceSlug={service.slug} townSlug={town.slug} latitude={town.latitude} longitude={town.longitude} />
+        <CTA titleOverride="Stop Doing Manually What AI Can Do Automatically" paragraphOverride={`Every hour you spend on repetitive admin is an hour you are not spending on billable work. AI automation helps ${town.name} businesses run efficiently without growing headcount.`} buttonOverride={selectedCTA} />
+      </>
+    );
+  }
 
   if (isSEO) {
     return (

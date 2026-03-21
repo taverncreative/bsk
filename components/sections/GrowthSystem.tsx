@@ -23,6 +23,12 @@ export default function GrowthSystem({ currentService }: GrowthSystemProps) {
     description = "Optimised social media funnels traffic back to your core growth system. It complements your SEO visibility, directs users to your high-converting website, and feeds your lead capture and automation pipelines.";
   } else if (currentService === 'workwear-print') {
     description = "Physical branding bridges your real-world presence with your digital growth system. Professional print and workwear reinforce the trust built by your website, SEO, and automated follow-ups.";
+  } else if (currentService === 'ai-chatbots') {
+    description = "AI chatbots sit at the front of your growth system, engaging visitors the moment they land on your website. They feed qualified leads directly into your automation pipeline and capture opportunities that would otherwise be lost outside office hours.";
+  } else if (currentService === 'ai-content') {
+    description = "AI content fuels every other part of your growth system. Blog posts drive SEO traffic, social content builds brand awareness, and email campaigns nurture leads — all produced consistently at a pace that would be impossible manually.";
+  } else if (currentService === 'ai-automation') {
+    description = "AI automation is the nervous system connecting every part of your digital growth engine. It ensures leads captured by your website, chatbot, and SEO efforts are instantly responded to, qualified, and followed up — without any manual intervention.";
   }
 
   const coreServices = [

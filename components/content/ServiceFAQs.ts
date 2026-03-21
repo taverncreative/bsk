@@ -119,6 +119,75 @@ export const getServiceFAQs = (serviceSlug: string) => {
           answer: "Absolutely. Our design team ensures complete brand consistency, carefully matching your specific brand colours (Pantone/CMYK) and logo architecture so every physical item flawlessly represents your business identity."
         }
       ];
+    case 'ai-chatbots':
+      return [
+        {
+          question: "What is an AI chatbot and how does it help my business?",
+          answer: "An AI chatbot is an intelligent assistant embedded on your website that can hold natural conversations with visitors. It answers questions about your services, captures contact details, qualifies leads, and books appointments — 24 hours a day, 7 days a week, without any human intervention."
+        },
+        {
+          question: "How much does an AI chatbot cost?",
+          answer: "Our AI chatbot packages start from £150/month for a basic lead capture bot, up to £500/month for a fully customised AI assistant with booking integration, CRM synchronisation, and advanced multi-step conversation flows tailored to your business."
+        },
+        {
+          question: "How long does it take to build and launch?",
+          answer: "Most AI chatbots are live within 5 to 7 working days. We handle the full process — conversation design, AI training on your specific business data, website integration, and thorough testing before launch."
+        },
+        {
+          question: "Can it actually book appointments?",
+          answer: "Yes. Our chatbots integrate with calendar systems like Google Calendar and Calendly, allowing visitors to book consultations, demos, or callbacks directly through the conversation — no forms or phone calls needed."
+        },
+        {
+          question: "Will it work on my existing website?",
+          answer: "Absolutely. Our chatbots work on any website platform — WordPress, Shopify, Wix, Squarespace, custom-built sites, or anything else. We provide a simple code snippet that takes minutes to install."
+        }
+      ];
+    case 'ai-content':
+      return [
+        {
+          question: "What kind of content can AI produce for my business?",
+          answer: "AI can generate blog posts, social media captions, website service pages, email newsletters, product descriptions, case study drafts, and SEO-optimised articles — all tailored to your brand voice, industry terminology, and target audience."
+        },
+        {
+          question: "Is AI-generated content good enough for Google?",
+          answer: "When produced properly with human editorial oversight, absolutely. Google cares about quality and helpfulness, not whether a human or AI wrote it. We ensure every piece is original, well-structured, keyword-targeted, and genuinely useful for readers."
+        },
+        {
+          question: "How do you make sure it sounds like my brand?",
+          answer: "Before producing any content, we conduct a brand voice session where we learn your tone, style, terminology preferences, and the way you naturally communicate with customers. The AI is then trained on these specifics so every piece sounds authentically you."
+        },
+        {
+          question: "How much content can you produce each month?",
+          answer: "AI dramatically accelerates production compared to manual writing. We can deliver 4 to 8 blog posts per week, daily social media content across multiple platforms, and weekly email newsletters — consistently and on schedule, month after month."
+        },
+        {
+          question: "What does AI content creation cost?",
+          answer: "Our content packages start from £200/month for 4 blog posts with SEO optimisation, up to £800/month for a comprehensive content strategy including blogs, social media scheduling, email campaigns, and performance reporting."
+        }
+      ];
+    case 'ai-automation':
+      return [
+        {
+          question: "What business tasks can AI automation handle?",
+          answer: "We automate the tasks that drain your time: instant lead response emails, follow-up sequences for unresponsive leads, CRM data logging, appointment reminders, Google review requests after completed jobs, invoice follow-ups, and data synchronisation between your business tools."
+        },
+        {
+          question: "How much does AI automation cost?",
+          answer: "Automation packages start from £300/month for basic email and lead response workflows, up to £1,000/month for comprehensive AI-powered business process automation connecting multiple systems with intelligent decision-making."
+        },
+        {
+          question: "Do I need to change my existing software?",
+          answer: "No. We specialise in connecting the tools you already use. If your email, CRM, calendar, or accounting software has an API (most modern tools do), we can integrate it into your automated workflow without replacing anything."
+        },
+        {
+          question: "How quickly will I see time savings?",
+          answer: "Most clients see immediate impact from week one. Automated lead responses alone can save 5+ hours per week. Within the first month, businesses typically see a 30-50% increase in lead response rates and a significant reduction in manual admin hours."
+        },
+        {
+          question: "Is AI automation suitable for small businesses?",
+          answer: "Small businesses often see the highest return because automation acts as a virtual administrator — handling the repetitive background work that would otherwise require hiring additional staff. It scales instantly during busy periods without increasing overheads."
+        }
+      ];
     default:
       return [
         {

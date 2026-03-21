@@ -21,7 +21,7 @@ import Services from '@/components/sections/Services';
 import CredibilityMetrics from '@/components/sections/CredibilityMetrics';
 import WebsiteReviewCTA from '@/components/sections/WebsiteReviewCTA';
 import Reveal from '@/components/ui/Reveal';
-import { Search, Laptop, FileText, Link as LinkIcon, MapPin, TrendingUp, Palette, Zap, Share2, MousePointerClick } from 'lucide-react';
+import { Search, Laptop, FileText, Link as LinkIcon, MapPin, TrendingUp, Palette, Zap, Share2, MousePointerClick, Bot, PenTool, Cpu, MessageSquare, Calendar, Mail, BarChart3, RefreshCw, BrainCircuit, Globe, Clock } from 'lucide-react';
 
 interface TownRef {
   name: string;
@@ -66,6 +66,9 @@ export default async function ServicePage({
   const isBusinessAutomation = serviceSlug === 'business-automation';
   const isSocialMedia = serviceSlug === 'social-media-setup' || serviceSlug === 'digital-marketing';
   const isWorkwearPrint = serviceSlug === 'workwear-print';
+  const isAIChatbots = serviceSlug === 'ai-chatbots';
+  const isAIContent = serviceSlug === 'ai-content';
+  const isAIAutomation = serviceSlug === 'ai-automation';
 
   if (isSEO) {
     return (
@@ -757,6 +760,328 @@ export default async function ServicePage({
     );
   }
 
+  if (isAIChatbots) {
+    return (
+      <>
+        <ServiceHero
+          title={<>AI Chatbots That Convert<br />Website Visitors Into Leads — 24/7</>}
+          subtitle="Most business websites lose visitors because nobody is there to answer questions at 10pm on a Tuesday. Our custom-built AI chatbots engage every visitor, answer their questions instantly, capture their details, and book appointments — without you lifting a finger."
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
+        />
+
+        <ProblemSection
+          headlineOverride="Why Most Business Websites Lose Leads"
+          painPoints={[
+            { title: "Visitors leave without engaging", pain_point: "Your website gets traffic but most visitors browse and leave without ever making contact." },
+            { title: "Enquiries only come during office hours", pain_point: "Potential customers searching at evenings and weekends have no way to get answers immediately." },
+            { title: "Contact forms feel impersonal", pain_point: "A static form cannot answer questions or guide visitors toward the right service." },
+            { title: "Slow response times cost sales", pain_point: "By the time you reply to an enquiry, the customer has already contacted a competitor." },
+            { title: "No way to qualify leads automatically", pain_point: "Every enquiry arrives as a generic message with no context about what the customer actually needs." }
+          ]}
+        />
+
+        <SolutionSection
+          headlineOverride="What An AI Chatbot Actually Does For Your Business"
+          paragraphOverride="An AI chatbot is not a basic FAQ widget. It is an intelligent assistant trained on your business, your services, and your pricing — capable of holding natural conversations that guide visitors toward booking or enquiring."
+          solutions={[
+            { title: "24/7 Lead Capture", description: "Engages visitors and captures contact details at any time of day or night.", icon: Clock },
+            { title: "Intelligent Conversations", description: "Answers questions about your services, pricing, and availability naturally.", icon: MessageSquare },
+            { title: "Appointment Booking", description: "Integrates with your calendar so visitors can book consultations directly.", icon: Calendar },
+            { title: "Lead Qualification", description: "Asks the right questions to understand what the customer needs before you speak to them.", icon: BarChart3 },
+            { title: "Instant Response", description: "Replies within seconds so visitors never wait or lose interest.", icon: Zap },
+            { title: "Custom Trained", description: "Built specifically for your business — your services, your tone, your processes.", icon: BrainCircuit }
+          ]}
+        />
+
+        <ProcessAuthority
+          headlineOverride="How We Build Your AI Chatbot"
+          descriptionOverride="Every chatbot we build is custom. We learn your business inside out and create an assistant that represents you professionally."
+          stepsOverride={[
+            { num: '01', title: 'Business Deep Dive', description: 'We learn your services, pricing, common questions, and how you want to handle enquiries.' },
+            { num: '02', title: 'Conversation Design', description: 'We map out the flows your chatbot needs — from greeting to booking to capturing details.' },
+            { num: '03', title: 'AI Training', description: 'Your chatbot is trained on your specific business data so it answers accurately.' },
+            { num: '04', title: 'Integration & Testing', description: 'We embed it on your website and test every scenario before going live.' },
+            { num: '05', title: 'Launch & Optimise', description: 'Your chatbot goes live and we continuously improve it based on real conversations.' },
+          ]}
+        />
+
+        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
+          <div className="container mx-auto px-4 max-w-7xl">
+            <Reveal>
+              <div className="text-center md:text-left mb-16 max-w-2xl">
+                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">What Your AI Chatbot Can Do</h2>
+                <p className="text-lg text-neutral-400">Every chatbot is tailored to your business. Here are the most common capabilities our clients use.</p>
+              </div>
+            </Reveal>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Answer Service Questions</h3>
+                 <p className="text-neutral-400">Explain what you offer, how it works, and what customers can expect.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Capture Lead Details</h3>
+                 <p className="text-neutral-400">Collect names, emails, phone numbers and project details through natural conversation.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Book Appointments</h3>
+                 <p className="text-neutral-400">Connect to your calendar and let visitors book consultations or callbacks directly.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Qualify Leads</h3>
+                 <p className="text-neutral-400">Ask qualifying questions so you know exactly what the customer needs before calling them.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Provide Instant Quotes</h3>
+                 <p className="text-neutral-400">Give ballpark pricing based on the information the visitor provides.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Handle Out-of-Hours</h3>
+                 <p className="text-neutral-400">Engage visitors at 10pm, weekends, or bank holidays when you are unavailable.</p>
+               </div>
+            </div>
+          </div>
+        </section>
+
+        <LocalAuthorityMap headlineOverride="AI Chatbot Services For Businesses Across Kent" />
+
+        <WebsiteReviewCTA />
+
+        <Services
+          headlineOverride="AI Chatbots Work Best With These Services"
+          descriptionOverride="Combine your AI chatbot with our other services for maximum lead generation."
+          servicesOverride={[
+            { title: 'Website Design', description: 'A high-converting website gives your chatbot the best foundation to work from.', href: '/web-design', icon: Laptop },
+            { title: 'Lead Capture Systems', description: 'Structured funnels that feed into your chatbot conversations.', href: '/lead-capture', icon: MousePointerClick },
+            { title: 'Business Automation', description: 'Route chatbot leads directly into your CRM and follow-up systems.', href: '/business-automation', icon: Zap }
+          ]}
+        />
+
+        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+        <KentCoverage pageType={serviceSlug} />
+        <GrowthSystem currentService={serviceSlug} />
+        <FAQ faqs={getServiceFAQs(serviceSlug)} title="Frequently Asked Questions about AI Chatbots" />
+
+        <CTA
+          titleOverride="Ready To Capture Leads While You Sleep?"
+          paragraphOverride="An AI chatbot works for your business 24 hours a day, 7 days a week — engaging visitors, answering questions, and converting them into real enquiries. No salaries, no sick days, no missed opportunities."
+          buttonOverride="Get A Free Quote"
+        />
+      </>
+    );
+  }
+
+  if (isAIContent) {
+    return (
+      <>
+        <ServiceHero
+          title={<>AI Content Creation That<br />Ranks, Engages, and Converts</>}
+          subtitle="Consistent content is one of the most powerful ways to grow your online visibility — but most businesses cannot keep up with the volume required. Our AI content service produces professional, SEO-optimised blog posts, social media content, and website copy at a pace that would be impossible manually."
+          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
+        />
+
+        <ProblemSection
+          headlineOverride="Why Most Businesses Struggle With Content"
+          painPoints={[
+            { title: "No time to write regularly", pain_point: "You know content matters but running your business leaves no time to produce it consistently." },
+            { title: "Blog sits empty or outdated", pain_point: "Your website has a blog section with 2 posts from 3 years ago — it signals inactivity to Google and customers." },
+            { title: "Social media goes quiet for weeks", pain_point: "You post sporadically when you remember, but there is no strategy or consistency behind it." },
+            { title: "Competitors are publishing more", pain_point: "Businesses that publish regularly are steadily climbing search rankings while yours stays still." },
+            { title: "Hiring a writer is expensive", pain_point: "A full-time content writer costs £25,000+ per year. Freelancers are unpredictable and expensive per piece." }
+          ]}
+        />
+
+        <SolutionSection
+          headlineOverride="How AI Content Creation Works"
+          paragraphOverride="We combine AI production capabilities with human editorial oversight to deliver content that is accurate, on-brand, and genuinely useful for your audience. Every piece is reviewed before publishing."
+          solutions={[
+            { title: "SEO Blog Posts", description: "Long-form articles targeting the keywords your customers actually search for.", icon: FileText },
+            { title: "Social Media Content", description: "Platform-specific posts, captions, and visuals that maintain a consistent presence.", icon: Share2 },
+            { title: "Website Copy", description: "Service pages, landing pages, and about sections written to convert visitors.", icon: Laptop },
+            { title: "Email Newsletters", description: "Regular email content that keeps your audience engaged and drives repeat visits.", icon: Mail },
+            { title: "Brand Voice Training", description: "We train the AI on your specific tone, terminology, and style preferences.", icon: PenTool },
+            { title: "Editorial Oversight", description: "Every piece is reviewed by our team for accuracy, quality, and brand alignment.", icon: Search }
+          ]}
+        />
+
+        <ProcessAuthority
+          headlineOverride="Our AI Content Process"
+          descriptionOverride="We build a content engine tailored to your business that produces consistent, high-quality output month after month."
+          stepsOverride={[
+            { num: '01', title: 'Content Strategy', description: 'We research your industry, competitors, and target keywords to build a content plan.' },
+            { num: '02', title: 'Brand Voice Setup', description: 'We learn your tone, style, and terminology so every piece sounds authentically you.' },
+            { num: '03', title: 'AI Production', description: 'Content is generated at scale using AI trained on your business context.' },
+            { num: '04', title: 'Human Review', description: 'Every piece is edited and quality-checked before delivery.' },
+            { num: '05', title: 'Publish & Optimise', description: 'Content is published on schedule and we track performance to improve over time.' },
+          ]}
+        />
+
+        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
+          <div className="container mx-auto px-4 max-w-7xl">
+            <Reveal>
+              <div className="text-center md:text-left mb-16 max-w-2xl">
+                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">Content We Produce</h2>
+                <p className="text-lg text-neutral-400">Our AI content service covers every channel your business needs to stay visible and relevant.</p>
+              </div>
+            </Reveal>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Blog Articles</h3>
+                 <p className="text-neutral-400">SEO-driven posts that answer customer questions and rank on Google.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Social Posts</h3>
+                 <p className="text-neutral-400">Platform-native content for Facebook, Instagram, LinkedIn, and more.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Website Pages</h3>
+                 <p className="text-neutral-400">Service pages, landing pages, and conversion-focused copy.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Email Campaigns</h3>
+                 <p className="text-neutral-400">Newsletters and drip sequences that nurture leads into customers.</p>
+               </div>
+            </div>
+          </div>
+        </section>
+
+        <LocalAuthorityMap headlineOverride="AI Content Services For Businesses Across Kent" />
+
+        <WebsiteReviewCTA />
+
+        <Services
+          headlineOverride="Content Works Best With These Services"
+          descriptionOverride="AI content amplifies the impact of your other digital investments."
+          servicesOverride={[
+            { title: 'Local SEO', description: 'Content feeds your SEO strategy with fresh, keyword-targeted pages.', href: '/seo', icon: Search },
+            { title: 'Website Design', description: 'Great content needs a great website to live on.', href: '/web-design', icon: Laptop },
+            { title: 'AI Chatbots', description: 'Your chatbot can reference and share your content with visitors.', href: '/ai-chatbots', icon: Bot }
+          ]}
+        />
+
+        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+        <KentCoverage pageType={serviceSlug} />
+        <GrowthSystem currentService={serviceSlug} />
+        <FAQ faqs={getServiceFAQs(serviceSlug)} title="Frequently Asked Questions about AI Content Creation" />
+
+        <CTA
+          titleOverride="Start Publishing Content That Grows Your Business"
+          paragraphOverride="Stop struggling to find time to write. Our AI content service delivers consistent, professional content every month — blog posts, social media, email campaigns — all tailored to your brand and optimised for search."
+          buttonOverride="Get A Free Quote"
+        />
+      </>
+    );
+  }
+
+  if (isAIAutomation) {
+    return (
+      <>
+        <ServiceHero
+          title={<>AI Automation That Runs<br />Your Business While You Sleep</>}
+          subtitle="Most small business owners spend hours every week on repetitive admin — chasing leads, writing follow-up emails, updating spreadsheets, sorting enquiries. AI automation handles all of this intelligently, so you can focus on the work that actually generates revenue."
+          primaryCTA={{ text: 'Book A Free Consultation', href: '/contact' }}
+        />
+
+        <ProblemSection
+          headlineOverride="Why Manual Processes Are Costing You Money"
+          painPoints={[
+            { title: "Leads go cold because follow-ups are slow", pain_point: "By the time you manually respond to an enquiry, the customer has already moved on to a competitor." },
+            { title: "Hours wasted on repetitive admin", pain_point: "Copying data between systems, sending confirmation emails, updating records — tasks that add up fast." },
+            { title: "No system for qualifying leads", pain_point: "Every enquiry lands in the same inbox with no way to prioritise high-value opportunities." },
+            { title: "Customer data is scattered everywhere", pain_point: "Information lives in emails, spreadsheets, WhatsApp messages, and your head — nothing is centralised." },
+            { title: "You cannot scale without hiring", pain_point: "Growth means more admin, and more admin means needing staff you cannot yet afford." }
+          ]}
+        />
+
+        <SolutionSection
+          headlineOverride="What AI Automation Does For Your Business"
+          paragraphOverride="AI automation connects your website, email, CRM, and other tools into intelligent workflows that handle the repetitive work automatically — faster and more reliably than any human."
+          solutions={[
+            { title: "Instant Lead Response", description: "Every enquiry gets an immediate, personalised response within seconds of submission.", icon: Zap },
+            { title: "Intelligent Lead Scoring", description: "AI analyses each enquiry and prioritises the most valuable opportunities for you.", icon: BarChart3 },
+            { title: "Automated Follow-Ups", description: "Sequences of follow-up emails sent automatically until the customer responds or books.", icon: Mail },
+            { title: "CRM Integration", description: "Leads are automatically logged, categorised, and tracked in your CRM system.", icon: Cpu },
+            { title: "Workflow Triggers", description: "Custom actions fire automatically based on events — new lead, payment received, job completed.", icon: RefreshCw },
+            { title: "Data Synchronisation", description: "Information flows between your systems automatically — no more manual data entry.", icon: Globe }
+          ]}
+        />
+
+        <ProcessAuthority
+          headlineOverride="How We Build Your AI Automation System"
+          descriptionOverride="We map your current processes, identify the bottlenecks, and build intelligent automations that eliminate them."
+          stepsOverride={[
+            { num: '01', title: 'Process Audit', description: 'We map every manual task in your business to find the biggest time drains.' },
+            { num: '02', title: 'Automation Design', description: 'We design intelligent workflows that handle these tasks automatically.' },
+            { num: '03', title: 'System Integration', description: 'We connect your existing tools — email, CRM, calendar, website — into a single system.' },
+            { num: '04', title: 'AI Training', description: 'We train the AI on your specific business rules, response templates, and qualification criteria.' },
+            { num: '05', title: 'Launch & Monitor', description: 'Your automations go live and we monitor performance, making improvements as needed.' },
+          ]}
+        />
+
+        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
+          <div className="container mx-auto px-4 max-w-7xl">
+            <Reveal>
+              <div className="text-center md:text-left mb-16 max-w-2xl">
+                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">Examples Of AI Automation In Action</h2>
+                <p className="text-lg text-neutral-400">Real workflows we build for businesses across Kent — saving hours every week.</p>
+              </div>
+            </Reveal>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Enquiry Auto-Response</h3>
+                 <p className="text-neutral-400">New website enquiry triggers instant personalised email + SMS confirmation within seconds.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Lead Scoring & Routing</h3>
+                 <p className="text-neutral-400">AI analyses each lead and routes high-value opportunities to your phone immediately.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Follow-Up Sequences</h3>
+                 <p className="text-neutral-400">Automated email sequences nurture leads who do not respond to your first contact.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Review Requests</h3>
+                 <p className="text-neutral-400">After completing a job, your customer automatically receives a Google review request.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Appointment Reminders</h3>
+                 <p className="text-neutral-400">Clients receive automated reminders before appointments, reducing no-shows.</p>
+               </div>
+               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                 <h3 className="text-xl font-bold text-white mb-2">Invoice Follow-Ups</h3>
+                 <p className="text-neutral-400">Overdue invoices trigger automatic payment reminders on a schedule you define.</p>
+               </div>
+            </div>
+          </div>
+        </section>
+
+        <LocalAuthorityMap headlineOverride="AI Automation For Businesses Across Kent" />
+
+        <WebsiteReviewCTA />
+
+        <Services
+          headlineOverride="AI Automation Amplifies These Services"
+          descriptionOverride="Automation is the engine that makes your entire digital system run without manual intervention."
+          servicesOverride={[
+            { title: 'AI Chatbots', description: 'Chatbot leads feed directly into your automated follow-up workflows.', href: '/ai-chatbots', icon: Bot },
+            { title: 'Lead Capture Systems', description: 'Captured leads are automatically scored, routed, and followed up.', href: '/lead-capture', icon: MousePointerClick },
+            { title: 'Local SEO', description: 'More visibility means more leads — automation ensures none are wasted.', href: '/seo', icon: Search }
+          ]}
+        />
+
+        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+        <KentCoverage pageType={serviceSlug} />
+        <GrowthSystem currentService={serviceSlug} />
+        <FAQ faqs={getServiceFAQs(serviceSlug)} title="Frequently Asked Questions about AI Automation" />
+
+        <CTA
+          titleOverride="Stop Doing Manually What AI Can Do Automatically"
+          paragraphOverride="Every hour you spend on repetitive admin is an hour you are not spending on billable work. AI automation handles the background operations so your business runs efficiently without growing your headcount."
+          buttonOverride="Book A Free Consultation"
+        />
+      </>
+    );
+  }
+
   return (
     <>
       <ServiceHero
@@ -767,7 +1092,7 @@ export default async function ServicePage({
           href: '/contact',
         }}
       />
-      
+
       <ProblemSection />
       <SolutionSection />
       <ProcessAuthority />
