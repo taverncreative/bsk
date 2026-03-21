@@ -2,21 +2,41 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, Users, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail, ClipboardList } from 'lucide-react';
+import { LayoutDashboard, Users, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail, ClipboardList, Phone } from 'lucide-react';
 import { createClient } from '@/lib/supabaseClient';
 
-const navigation = [
-  { name: 'Overview', href: '/admin-dashboard', icon: LayoutDashboard },
-  { name: 'Lead Inbox', href: '/admin-dashboard/lead-inbox', icon: Mail },
-  { name: 'CRM Pipeline', href: '/admin-dashboard/pipeline', icon: KanbanSquare },
-  { name: 'Clients', href: '/admin-dashboard/clients', icon: Users },
-  { name: 'Invoices', href: '/admin-dashboard/invoices', icon: Receipt },
-  { name: 'Upcoming Calls', href: '/admin-dashboard/upcoming-calls', icon: FileText },
-  { name: 'Analytics', href: '/admin-dashboard/analytics', icon: PieChart },
-  { name: 'Reports', href: '/admin-dashboard/reports', icon: FileText },
-  { name: 'Templates', href: '/admin-dashboard/templates', icon: Layers },
-  { name: 'Discovery', href: '/admin-dashboard/discovery', icon: ClipboardList },
-  { name: 'Elle', href: '/admin-dashboard/elle', icon: Bot },
+const navigationGroups = [
+  {
+    label: 'CRM',
+    items: [
+      { name: 'Overview', href: '/admin-dashboard', icon: LayoutDashboard },
+      { name: 'Lead Inbox', href: '/admin-dashboard/lead-inbox', icon: Mail },
+      { name: 'Pipeline', href: '/admin-dashboard/pipeline', icon: KanbanSquare },
+      { name: 'Clients', href: '/admin-dashboard/clients', icon: Users },
+      { name: 'Discovery', href: '/admin-dashboard/discovery', icon: ClipboardList },
+    ],
+  },
+  {
+    label: 'Finance',
+    items: [
+      { name: 'Invoices', href: '/admin-dashboard/invoices', icon: Receipt },
+    ],
+  },
+  {
+    label: 'Intelligence',
+    items: [
+      { name: 'Analytics', href: '/admin-dashboard/analytics', icon: PieChart },
+      { name: 'Reports', href: '/admin-dashboard/reports', icon: FileText },
+      { name: 'Elle', href: '/admin-dashboard/elle', icon: Bot },
+    ],
+  },
+  {
+    label: 'Manage',
+    items: [
+      { name: 'Upcoming Calls', href: '/admin-dashboard/upcoming-calls', icon: Phone },
+      { name: 'Templates', href: '/admin-dashboard/templates', icon: Layers },
+    ],
+  },
 ];
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
@@ -45,23 +65,28 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
             <div className="text-xl font-bold tracking-tight text-white mb-8">
               Business<span className="text-brand-gold">Sorted</span>
             </div>
-            <nav className="flex-1 space-y-1 overflow-y-auto">
-              {navigation.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setSidebarOpen(false)}
-                    className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md ${
-                      isActive ? 'bg-brand-gold/10 text-brand-gold' : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
-                    }`}
-                  >
-                    <item.icon className={`mr-3 h-5 w-5 flex-shrink-0 ${isActive ? 'text-brand-gold' : 'text-zinc-500 group-hover:text-white'}`} aria-hidden="true" />
-                    {item.name}
-                  </Link>
-                );
-              })}
+            <nav className="flex-1 overflow-y-auto">
+              {navigationGroups.map((group) => (
+                <div key={group.label} className="mb-4">
+                  <p className="px-3 mb-2 text-[10px] font-bold uppercase tracking-widest text-zinc-600">{group.label}</p>
+                  {group.items.map((item) => {
+                    const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/admin-dashboard');
+                    return (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setSidebarOpen(false)}
+                        className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md ${
+                          isActive ? 'bg-brand-gold/10 text-brand-gold' : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
+                        }`}
+                      >
+                        <item.icon className={`mr-3 h-5 w-5 flex-shrink-0 ${isActive ? 'text-brand-gold' : 'text-zinc-500 group-hover:text-white'}`} aria-hidden="true" />
+                        {item.name}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ))}
             </nav>
           </div>
         </div>
@@ -77,22 +102,27 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
             </div>
           </div>
           <div className="flex-1 flex flex-col">
-            <nav className="flex-1 px-4 space-y-1">
-              {navigation.map((item) => {
-                const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/admin-dashboard');
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                      isActive ? 'bg-brand-gold/10 text-brand-gold' : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
-                    }`}
-                  >
-                    <item.icon className={`mr-3 h-5 w-5 flex-shrink-0 transition-colors ${isActive ? 'text-brand-gold' : 'text-zinc-500 group-hover:text-white'}`} aria-hidden="true" />
-                    {item.name}
-                  </Link>
-                );
-              })}
+            <nav className="flex-1 px-4">
+              {navigationGroups.map((group) => (
+                <div key={group.label} className="mb-4">
+                  <p className="px-3 mb-2 text-[10px] font-bold uppercase tracking-widest text-zinc-600">{group.label}</p>
+                  {group.items.map((item) => {
+                    const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/admin-dashboard');
+                    return (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                          isActive ? 'bg-brand-gold/10 text-brand-gold' : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
+                        }`}
+                      >
+                        <item.icon className={`mr-3 h-5 w-5 flex-shrink-0 transition-colors ${isActive ? 'text-brand-gold' : 'text-zinc-500 group-hover:text-white'}`} aria-hidden="true" />
+                        {item.name}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ))}
             </nav>
             <div className="p-4 border-t border-zinc-800">
               <Link href="/client-dashboard?preview=true" className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-zinc-400 hover:bg-zinc-900 hover:text-brand-gold transition-colors mb-2">

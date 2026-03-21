@@ -140,6 +140,7 @@ export default function PipelinePage() {
           website: lead.website_url || '',
           notes: lead.notes || '',
           lead_id: lead.id,
+          discovery_submission_id: lead.discovery_submission_id || null,
           project_value: lead.value || null,
           status: 'active',
         }])

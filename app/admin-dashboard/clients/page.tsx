@@ -24,7 +24,7 @@ function ClientsPageInner() {
   const [editForm, setEditForm] = useState<any>({});
   const [saving, setSaving] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
-  const [addForm, setAddForm] = useState({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', project_value: '', monthly_value: '' });
+  const [addForm, setAddForm] = useState({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', project_value: '', monthly_value: '', package_name: '' });
   const [clientInvoices, setClientInvoices] = useState<any[]>([]);
   const [clientActivity, setClientActivity] = useState<any[]>([]);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
@@ -80,6 +80,7 @@ function ClientsPageInner() {
       status: editForm.status,
       project_value: editForm.project_value ? parseFloat(editForm.project_value) : null,
       monthly_value: editForm.monthly_value ? parseFloat(editForm.monthly_value) : null,
+      package_name: editForm.package_name || null,
       updated_at: new Date().toISOString(),
     }).eq('id', selectedClient.id);
 
@@ -110,6 +111,7 @@ function ClientsPageInner() {
       notes: addForm.notes,
       project_value: addForm.project_value ? parseFloat(addForm.project_value) : null,
       monthly_value: addForm.monthly_value ? parseFloat(addForm.monthly_value) : null,
+      package_name: addForm.package_name || null,
       status: 'active',
     }]);
 
@@ -118,7 +120,7 @@ function ClientsPageInner() {
     } else {
       setToast({ message: 'Client added!', type: 'success' });
       setShowAddModal(false);
-      setAddForm({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', project_value: '', monthly_value: '' });
+      setAddForm({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', project_value: '', monthly_value: '', package_name: '' });
       fetchClients();
     }
     setSaving(false);
@@ -256,6 +258,30 @@ function ClientsPageInner() {
                         className="bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-sm text-white w-full mt-0.5" />
                     ) : (
                       <p className="text-sm text-zinc-300">{selectedClient.project_value ? `£${parseFloat(selectedClient.project_value).toLocaleString()}` : '—'}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <PoundSterling className="w-4 h-4 text-zinc-500 mt-1 shrink-0" />
+                  <div>
+                    <p className="text-xs text-zinc-500">Monthly Value</p>
+                    {editing ? (
+                      <input type="number" value={editForm.monthly_value || ''} onChange={e => setEditForm({ ...editForm, monthly_value: e.target.value })}
+                        className="bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-sm text-white w-full mt-0.5" />
+                    ) : (
+                      <p className="text-sm text-zinc-300">{selectedClient.monthly_value ? `£${parseFloat(selectedClient.monthly_value).toLocaleString()}/mo` : '—'}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Tag className="w-4 h-4 text-zinc-500 mt-1 shrink-0" />
+                  <div>
+                    <p className="text-xs text-zinc-500">Package</p>
+                    {editing ? (
+                      <input value={editForm.package_name || ''} onChange={e => setEditForm({ ...editForm, package_name: e.target.value })}
+                        className="bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-sm text-white w-full mt-0.5" placeholder="e.g. SEO Growth" />
+                    ) : (
+                      <p className="text-sm text-zinc-300">{selectedClient.package_name || '—'}</p>
                     )}
                   </div>
                 </div>
@@ -431,7 +457,14 @@ function ClientsPageInner() {
               </div>
               {client.contact_name && <p className="text-sm text-zinc-400 mb-1">{client.contact_name}</p>}
               {client.email && <p className="text-xs text-zinc-500 mb-1">{client.email}</p>}
-              {client.project_value && (
+              {(client.monthly_value || client.package_name) && (
+                <p className="text-sm font-semibold text-brand-gold mt-2">
+                  {client.monthly_value ? `£${parseFloat(client.monthly_value).toLocaleString()}/mo` : ''}
+                  {client.monthly_value && client.package_name ? ' — ' : ''}
+                  {client.package_name && <span className="text-zinc-400 font-normal">{client.package_name}</span>}
+                </p>
+              )}
+              {!client.monthly_value && client.project_value && (
                 <p className="text-sm font-semibold text-brand-gold mt-2">£{parseFloat(client.project_value).toLocaleString()}</p>
               )}
               <p className="text-xs text-zinc-600 mt-2">
@@ -497,6 +530,11 @@ function ClientsPageInner() {
                   <input type="number" value={addForm.monthly_value} onChange={e => setAddForm({ ...addForm, monthly_value: e.target.value })}
                     className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="200" />
                 </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-zinc-300 mb-1">Package Name</label>
+                <input value={addForm.package_name} onChange={e => setAddForm({ ...addForm, package_name: e.target.value })}
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="e.g. SEO Growth, Website Build" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-zinc-300 mb-1">Notes</label>
