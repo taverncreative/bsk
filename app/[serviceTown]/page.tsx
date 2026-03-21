@@ -39,7 +39,7 @@ export async function generateStaticParams() {
     }
   });
 
-  const CORE_SERVICES = ['web-design', 'seo', 'lead-capture', 'business-automation', 'branding', 'social-media-setup', 'digital-marketing', 'workwear-print'];
+  const CORE_SERVICES = ['web-design', 'seo', 'lead-capture', 'business-automation', 'branding', 'social-media-setup', 'digital-marketing', 'workwear-print', 'ai-chatbots', 'ai-content', 'ai-automation'];
 
   // Generate Service x Town Pages (/web-design-ashford) and Micro Locations (/web-design-near-ashford)
   services.forEach((service) => {
@@ -106,7 +106,7 @@ async function parseServiceOrTown(slug: string) {
     }
   }
 
-  const CORE_SERVICES = ['web-design', 'seo', 'lead-capture', 'business-automation', 'branding', 'social-media-setup', 'digital-marketing', 'workwear-print'];
+  const CORE_SERVICES = ['web-design', 'seo', 'lead-capture', 'business-automation', 'branding', 'social-media-setup', 'digital-marketing', 'workwear-print', 'ai-chatbots', 'ai-content', 'ai-automation'];
 
   if (matchedService && matchedTown) {
     if (!CORE_SERVICES.includes(matchedService.slug)) {

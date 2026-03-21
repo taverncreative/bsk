@@ -25,6 +25,21 @@ const commercialKeywords: CommercialKeyword[] = [
     title: 'Website Design Pricing',
     intent: 'pricing',
   },
+  {
+    slug: 'ai-chatbot-cost',
+    title: 'AI Chatbot Cost',
+    intent: 'pricing',
+  },
+  {
+    slug: 'ai-content-pricing',
+    title: 'AI Content Pricing',
+    intent: 'pricing',
+  },
+  {
+    slug: 'best-ai-agency',
+    title: 'Best AI Agency',
+    intent: 'comparison',
+  },
 ];
 
 export function getCommercialKeywords(): CommercialKeyword[] {

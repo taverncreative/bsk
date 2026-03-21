@@ -25,6 +25,21 @@ export function getServiceHubMessaging(serviceSlug: string): { title: string; su
         title: 'Digital Campaigns That Generate Enquiries',
         subtitle: 'Data-driven marketing campaigns that scale operations and drive inbound leads for Kent businesses.',
       };
+    case 'ai-chatbots':
+      return {
+        title: 'AI Chatbots That Convert Visitors Into Leads — 24/7',
+        subtitle: 'Custom-built AI assistants that engage your website visitors, answer questions, capture leads, and book appointments around the clock.',
+      };
+    case 'ai-content':
+      return {
+        title: 'AI-Powered Content That Ranks and Converts',
+        subtitle: 'Professional blog posts, social media content, and website copy created with AI — consistent, SEO-optimised, and on-brand.',
+      };
+    case 'ai-automation':
+      return {
+        title: 'AI Automation That Runs Your Business While You Sleep',
+        subtitle: 'Intelligent automation for email responses, lead scoring, customer follow-ups, and data processing — powered by AI.',
+      };
     default:
       return {
         title: 'Digital Growth Solutions That Generate Leads',
@@ -59,6 +74,21 @@ export function getLocalServiceMessaging(serviceSlug: string, townName: string):
       return {
         title: `Digital Campaigns That Generate Enquiries in ${townName}`,
         subtitle: `Data-driven marketing campaigns structured to scale your local operations and drive inbound leads in ${townName}.`,
+      };
+    case 'ai-chatbots':
+      return {
+        title: `AI Chatbots for ${townName} Businesses — Capture Leads 24/7`,
+        subtitle: `Custom AI assistants built for ${townName} businesses — engage visitors, answer questions, and book appointments while you focus on running your business.`,
+      };
+    case 'ai-content':
+      return {
+        title: `AI Content Creation for ${townName} Businesses`,
+        subtitle: `SEO-optimised blog posts, social media, and website copy powered by AI — helping ${townName} businesses publish consistent content that ranks.`,
+      };
+    case 'ai-automation':
+      return {
+        title: `AI Business Automation for ${townName} Companies`,
+        subtitle: `Intelligent AI automation for email responses, lead scoring, and workflow management — built for businesses in ${townName}.`,
       };
     default:
       return {
