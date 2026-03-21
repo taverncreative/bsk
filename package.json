@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seo-audit": "npx tsx scripts/seoAudit.ts"
+    "seo-audit": "npx tsx scripts/seoAudit.ts",
+    "submit-to-google": "npx tsx scripts/submitToGoogle.ts",
+    "submit-to-google:dry": "npx tsx scripts/submitToGoogle.ts --dry-run"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.66",
