@@ -330,29 +330,7 @@ export default function AssistantElle() {
     };
   }, [messages, setMessages]);
 
-  // Activation behavior (Auto-popup after 5s)
-  useEffect(() => {
-    if (hasActivated) return;
-
-    // Check if auto-popup already fired in this session
-    if (typeof window !== 'undefined' && sessionStorage.getItem('elle_has_activated')) {
-      return; 
-    }
-
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-      return; // Do not auto-open on mobile
-    }
-
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-      setHasActivated(true);
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('elle_has_activated', 'true');
-      }
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, [hasActivated]);
+  // Elle starts minimized — user clicks to open
 
   const triggerAction = (type: string) => {
     const now = Date.now();
@@ -588,27 +566,30 @@ export default function AssistantElle() {
         </div>
       )}
 
-      {/* Floating Action Button */}
+      {/* Glowing Orb */}
       {!isOpen && (
         <button
           onClick={() => {
             setIsOpen(true);
             setHasActivated(true);
           }}
-          className="w-[60px] h-[60px] bg-neutral-900 border border-brand-gold/50 text-brand-gold rounded-full flex items-center justify-center shadow-lg hover:bg-neutral-800 transition-colors duration-300 relative group"
+          className="w-[50px] h-[50px] rounded-full flex items-center justify-center relative group cursor-pointer animate-[orb-float_3s_ease-in-out_infinite]"
           aria-label="Open assistant"
+          style={{
+            background: 'radial-gradient(circle at 35% 35%, #e8c878, #D6AD67 40%, #b8923f 100%)',
+          }}
         >
-          {/* Subtle Glow Pulse (only pulses if not activated yet) */}
-          {!hasActivated && (
-            <div className="absolute inset-0 rounded-full bg-brand-gold/30 opacity-0 animate-[slow-pulse_10s_ease-out_infinite] pointer-events-none"></div>
-          )}
-          
-          <div className="relative flex items-center justify-center text-brand-gold">
-            <svg className="w-6 h-6 group-hover:hidden transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
-            </svg>
-            <span className="hidden group-hover:block font-extrabold text-xl">E</span>
-          </div>
+          {/* Outer glow ring */}
+          <div className="absolute inset-[-4px] rounded-full animate-[orb-glow_3s_ease-in-out_infinite] pointer-events-none" />
+
+          {/* Hover intensify */}
+          <div className="absolute inset-[-6px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={{ boxShadow: '0 0 25px 8px rgba(214,173,103,0.5)' }} />
+
+          {/* Icon */}
+          <svg className="w-5 h-5 text-black/80 relative z-10 group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+          </svg>
         </button>
       )}
     </div>
