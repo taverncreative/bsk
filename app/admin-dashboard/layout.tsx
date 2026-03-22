@@ -37,7 +37,6 @@ const navigationGroups = [
     label: 'Manage',
     items: [
       { name: 'Upcoming Calls', href: '/admin-dashboard/upcoming-calls', icon: Phone },
-      { name: 'Templates', href: '/admin-dashboard/templates', icon: Layers },
     ],
   },
 ];

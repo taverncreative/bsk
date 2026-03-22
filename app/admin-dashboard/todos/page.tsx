@@ -97,7 +97,8 @@ export default function TodosPage() {
       notes: form.notes || null,
     }]);
     if (error) {
-      setToast({ message: 'Failed to add to-do', type: 'error' });
+      console.error('Todo insert error:', error);
+      setToast({ message: `Failed to add to-do: ${error.message}`, type: 'error' });
     } else {
       setToast({ message: 'To-do added!', type: 'success' });
       setShowAddModal(false);

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabaseClient';
-import { Mail, Globe, Clock, User, MessageSquare, ExternalLink, LayoutGrid, CheckCircle, ArrowRight } from 'lucide-react';
+import { Mail, Globe, Clock, User, MessageSquare, ExternalLink, LayoutGrid, CheckCircle, ArrowRight, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
 export default function LeadInboxPage() {
@@ -89,6 +89,17 @@ export default function LeadInboxPage() {
       setToast({ message: 'Something went wrong', type: 'error' });
     } finally {
       setAddingToPipeline(null);
+    }
+  };
+
+  const deleteLead = async (lead: any) => {
+    if (!confirm(`Delete "${lead.name || 'this lead'}"? This cannot be undone.`)) return;
+    const { error } = await supabase.from('unified_leads').delete().eq('id', lead.id);
+    if (error) {
+      setToast({ message: 'Failed to delete lead', type: 'error' });
+    } else {
+      setLeads(prev => prev.filter(l => l.id !== lead.id));
+      setToast({ message: 'Lead deleted', type: 'success' });
     }
   };
 
@@ -214,6 +225,10 @@ export default function LeadInboxPage() {
                            <ExternalLink className="w-3.5 h-3.5" /> View Source Page
                         </a>
                       )}
+                      <button onClick={() => deleteLead(lead)}
+                        className="px-4 py-2 bg-zinc-900 border border-red-900/50 text-red-400 text-xs font-bold rounded-lg hover:bg-red-900/20 transition-colors flex items-center gap-2 flex-shrink-0">
+                        <Trash2 className="w-3.5 h-3.5" /> Delete
+                      </button>
                     </div>
                   </div>
                 </div>

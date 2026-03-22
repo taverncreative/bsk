@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Plus, MoreHorizontal, Calendar, Globe, MapPin, Building, Activity, X, Users, Mail, Phone, PoundSterling, ArrowRight, CheckCircle } from 'lucide-react';
+import { Plus, MoreHorizontal, Calendar, Globe, MapPin, Building, Activity, X, Users, Mail, Phone, PoundSterling, ArrowRight, CheckCircle, Trash2 } from 'lucide-react';
 import { createClient } from '@/lib/supabaseClient';
 import Link from 'next/link';
 
@@ -175,6 +175,17 @@ export default function PipelinePage() {
     }
   };
 
+  const deletePipelineLead = async (lead: any) => {
+    if (!confirm(`Delete "${lead.business_name}" from pipeline? This cannot be undone.`)) return;
+    const { error } = await supabase.from('leads').delete().eq('id', lead.id);
+    if (error) {
+      setToast({ message: 'Failed to delete lead', type: 'error' });
+    } else {
+      setLeads(prev => prev.filter(l => l.id !== lead.id));
+      setToast({ message: `${lead.business_name} deleted`, type: 'success' });
+    }
+  };
+
   const getStageHeaderColor = (stage: string) => {
     switch (stage) {
       case 'New Lead': return 'bg-zinc-800 text-zinc-300';
@@ -326,6 +337,12 @@ export default function PipelinePage() {
                             <Users className="h-3.5 w-3.5" /> View Client
                           </Link>
                         )}
+                        <button
+                          onClick={() => deletePipelineLead(lead)}
+                          className="w-full mt-2 px-3 py-2 bg-red-900/20 text-red-400 text-xs font-bold rounded-lg hover:bg-red-900/40 transition-colors flex items-center justify-center gap-2"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" /> Delete Lead
+                        </button>
                       </div>
                     )}
                   </div>

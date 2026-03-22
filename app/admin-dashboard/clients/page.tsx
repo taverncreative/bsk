@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { createClient } from '@/lib/supabaseClient';
-import { Users, Mail, Phone, Globe, MapPin, Search, Plus, X, Edit3, Save, ArrowLeft, FileText, ClipboardList, LayoutGrid, Tag, PoundSterling, Clock, Trash2 } from 'lucide-react';
+import { Users, Mail, Phone, Globe, MapPin, Search, Plus, X, Edit3, Save, ArrowLeft, FileText, ClipboardList, LayoutGrid, Tag, PoundSterling, Clock, Trash2, Timer } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
@@ -24,7 +24,7 @@ function ClientsPageInner() {
   const [editForm, setEditForm] = useState<any>({});
   const [saving, setSaving] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
-  const [addForm, setAddForm] = useState({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', monthly_value: '', package_name: '' });
+  const [addForm, setAddForm] = useState({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', monthly_value: '', package_name: '', monthly_hours: '' });
   const [clientInvoices, setClientInvoices] = useState<any[]>([]);
   const [clientActivity, setClientActivity] = useState<any[]>([]);
   const [clientProjects, setClientProjects] = useState<any[]>([]);
@@ -82,6 +82,7 @@ function ClientsPageInner() {
       notes: editForm.notes,
       status: editForm.status,
       monthly_value: editForm.monthly_value ? parseFloat(editForm.monthly_value) : null,
+      monthly_hours: editForm.monthly_hours ? parseInt(editForm.monthly_hours) : null,
       package_name: editForm.package_name || null,
       updated_at: new Date().toISOString(),
     }).eq('id', selectedClient.id);
@@ -89,6 +90,25 @@ function ClientsPageInner() {
     if (error) {
       setToast({ message: 'Failed to save', type: 'error' });
     } else {
+      // Auto-create/update recurring todo if monthly_hours is set
+      const hours = editForm.monthly_hours ? parseInt(editForm.monthly_hours) : 0;
+      if (hours > 0) {
+        const todoTitle = `${editForm.company_name} — ${hours}h monthly retainer`;
+        const { data: existingTodo } = await supabase.from('todos').select('id').eq('client_id', selectedClient.id).eq('is_recurring', true).limit(1);
+        if (existingTodo && existingTodo.length > 0) {
+          await supabase.from('todos').update({ title: todoTitle }).eq('id', existingTodo[0].id);
+        } else {
+          const nextMonth = new Date();
+          nextMonth.setDate(nextMonth.getDate() + 30);
+          await supabase.from('todos').insert([{
+            title: todoTitle,
+            is_recurring: true,
+            recurrence_days: 30,
+            client_id: selectedClient.id,
+            due_date: nextMonth.toISOString(),
+          }]);
+        }
+      }
       setToast({ message: 'Client updated!', type: 'success' });
       setEditing(false);
       fetchClients();
@@ -112,16 +132,30 @@ function ClientsPageInner() {
       website: addForm.website,
       notes: addForm.notes,
       monthly_value: addForm.monthly_value ? parseFloat(addForm.monthly_value) : null,
+      monthly_hours: addForm.monthly_hours ? parseInt(addForm.monthly_hours) : null,
       package_name: addForm.package_name || null,
       status: 'active',
-    }]);
+    }]).select().single();
 
     if (error) {
       setToast({ message: 'Failed to add client', type: 'error' });
     } else {
+      // Auto-create recurring todo if monthly_hours is set
+      const hours = addForm.monthly_hours ? parseInt(addForm.monthly_hours) : 0;
+      if (hours > 0 && data) {
+        const nextMonth = new Date();
+        nextMonth.setDate(nextMonth.getDate() + 30);
+        await supabase.from('todos').insert([{
+          title: `${addForm.company_name} — ${hours}h monthly retainer`,
+          is_recurring: true,
+          recurrence_days: 30,
+          client_id: data.id,
+          due_date: nextMonth.toISOString(),
+        }]);
+      }
       setToast({ message: 'Client added!', type: 'success' });
       setShowAddModal(false);
-      setAddForm({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', monthly_value: '', package_name: '' });
+      setAddForm({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', monthly_value: '', package_name: '', monthly_hours: '', monthly_hours: '' });
       fetchClients();
     }
     setSaving(false);
@@ -271,6 +305,18 @@ function ClientsPageInner() {
                         className="bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-sm text-white w-full mt-0.5" placeholder="e.g. SEO Growth" />
                     ) : (
                       <p className="text-sm text-zinc-300">{selectedClient.package_name || '—'}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Timer className="w-4 h-4 text-zinc-500 mt-1 shrink-0" />
+                  <div>
+                    <p className="text-xs text-zinc-500">Monthly Hours</p>
+                    {editing ? (
+                      <input type="number" value={editForm.monthly_hours || ''} onChange={e => setEditForm({ ...editForm, monthly_hours: e.target.value })}
+                        className="bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-sm text-white w-full mt-0.5" placeholder="e.g. 5" />
+                    ) : (
+                      <p className="text-sm text-zinc-300">{selectedClient.monthly_hours ? `${selectedClient.monthly_hours}h/mo` : '—'}</p>
                     )}
                   </div>
                 </div>
@@ -539,11 +585,16 @@ function ClientsPageInner() {
                 <input value={addForm.address} onChange={e => setAddForm({ ...addForm, address: e.target.value })}
                   className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="Kent, UK" />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-zinc-300 mb-1">Monthly Retainer (£)</label>
                   <input type="number" value={addForm.monthly_value} onChange={e => setAddForm({ ...addForm, monthly_value: e.target.value })}
                     className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="200" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-zinc-300 mb-1">Monthly Hours</label>
+                  <input type="number" value={addForm.monthly_hours} onChange={e => setAddForm({ ...addForm, monthly_hours: e.target.value })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="5" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-zinc-300 mb-1">Package Name</label>

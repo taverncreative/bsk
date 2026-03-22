@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabaseClient';
-import { ClipboardList, ChevronLeft, Calendar, Building2, Trash2, KanbanSquare, Users, CheckCircle, ArrowRight } from 'lucide-react';
+import { ClipboardList, ChevronLeft, Calendar, Building2, Trash2, KanbanSquare, Users, CheckCircle, ArrowRight, Plus, Sparkles, Copy, ExternalLink, Eye, Edit3, X, Save, ChevronDown, ChevronUp, GripVertical } from 'lucide-react';
 import Link from 'next/link';
 
 interface DiscoverySubmission {
@@ -13,20 +13,42 @@ interface DiscoverySubmission {
   created_at: string;
 }
 
-interface LinkedLead {
+interface FormField {
   id: string;
-  business_name: string;
-  discovery_submission_id: string;
+  label: string;
+  type: 'text' | 'textarea' | 'select' | 'radio';
+  prefilled?: string;
+  placeholder?: string;
+  helpText?: string;
+  options?: string[];
 }
 
-interface LinkedClient {
+interface FormSection {
   id: string;
-  company_name: string;
-  discovery_submission_id: string;
+  title: string;
+  subtitle?: string;
+  fields: FormField[];
 }
+
+interface DiscoveryForm {
+  id: string;
+  client_slug: string;
+  client_name: string;
+  password: string;
+  sections: FormSection[];
+  status: string;
+  view_count: number;
+  last_viewed_at: string | null;
+  created_at: string;
+}
+
+interface LinkedLead { id: string; business_name: string; discovery_submission_id: string; }
+interface LinkedClient { id: string; company_name: string; discovery_submission_id: string; }
 
 export default function DiscoveryPage() {
+  const [activeTab, setActiveTab] = useState<'forms' | 'submissions'>('forms');
   const [submissions, setSubmissions] = useState<DiscoverySubmission[]>([]);
+  const [forms, setForms] = useState<DiscoveryForm[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<DiscoverySubmission | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
@@ -34,436 +56,497 @@ export default function DiscoveryPage() {
   const [linkedClients, setLinkedClients] = useState<Record<string, LinkedClient>>({});
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const [copied, setCopied] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchSubmissions();
-  }, []);
+  // Form builder state
+  const [showBuilder, setShowBuilder] = useState(false);
+  const [meetingNotes, setMeetingNotes] = useState('');
+  const [generating, setGenerating] = useState(false);
+  const [editingForm, setEditingForm] = useState<{ clientName: string; clientSlug: string; password: string; sections: FormSection[] } | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
+  const supabase = createClient();
+
+  useEffect(() => { fetchAll(); }, []);
   useEffect(() => {
-    if (toast) {
-      const t = setTimeout(() => setToast(null), 3000);
-      return () => clearTimeout(t);
-    }
+    if (toast) { const t = setTimeout(() => setToast(null), 3000); return () => clearTimeout(t); }
   }, [toast]);
 
-  const fetchSubmissions = async () => {
-    try {
-      setLoading(true);
-      const supabase = createClient();
+  const fetchAll = async () => {
+    setLoading(true);
+    const [subsRes, formsRes, leadsRes, clientsRes] = await Promise.all([
+      supabase.from('discovery_submissions').select('*').order('created_at', { ascending: false }),
+      supabase.from('discovery_forms').select('*').order('created_at', { ascending: false }),
+      supabase.from('leads').select('id, business_name, discovery_submission_id').not('discovery_submission_id', 'is', null),
+      supabase.from('clients').select('id, company_name, discovery_submission_id').not('discovery_submission_id', 'is', null),
+    ]);
+    setSubmissions(subsRes.data || []);
+    setForms(formsRes.data || []);
 
-      const [subsRes, leadsRes, clientsRes] = await Promise.all([
-        supabase.from('discovery_submissions').select('*').order('created_at', { ascending: false }),
-        supabase.from('leads').select('id, business_name, discovery_submission_id').not('discovery_submission_id', 'is', null),
-        supabase.from('clients').select('id, company_name, discovery_submission_id').not('discovery_submission_id', 'is', null),
-      ]);
-
-      if (subsRes.error) {
-        if (subsRes.error.code === 'PGRST205' || subsRes.error.code === '42P01') {
-          setSubmissions([]);
-        } else {
-          console.error('Error fetching discovery submissions:', subsRes.error);
-        }
-      } else {
-        setSubmissions(subsRes.data || []);
-      }
-
-      // Build lookup maps
-      const leadsMap: Record<string, LinkedLead> = {};
-      (leadsRes.data || []).forEach((l: LinkedLead) => {
-        if (l.discovery_submission_id) leadsMap[l.discovery_submission_id] = l;
-      });
-      setLinkedLeads(leadsMap);
-
-      const clientsMap: Record<string, LinkedClient> = {};
-      (clientsRes.data || []).forEach((c: LinkedClient) => {
-        if (c.discovery_submission_id) clientsMap[c.discovery_submission_id] = c;
-      });
-      setLinkedClients(clientsMap);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+    const leadsMap: Record<string, LinkedLead> = {};
+    (leadsRes.data || []).forEach((l: LinkedLead) => { if (l.discovery_submission_id) leadsMap[l.discovery_submission_id] = l; });
+    setLinkedLeads(leadsMap);
+    const clientsMap: Record<string, LinkedClient> = {};
+    (clientsRes.data || []).forEach((c: LinkedClient) => { if (c.discovery_submission_id) clientsMap[c.discovery_submission_id] = c; });
+    setLinkedClients(clientsMap);
+    setLoading(false);
   };
 
-  const formatLabel = (key: string) => {
-    return key
-      .replace(/([A-Z])/g, ' $1')
-      .replace(/^./, (s) => s.toUpperCase())
-      .replace(/_/g, ' ');
-  };
+  const formatLabel = (key: string) => key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase()).replace(/_/g, ' ');
+  const formatDate = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  const formatSlug = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
-
-  const formatSlug = (slug: string) => {
-    return slug
-      .replace(/-/g, ' ')
-      .replace(/\b\w/g, (c) => c.toUpperCase());
-  };
-
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this submission? This cannot be undone.')) return;
-    try {
-      setDeleting(id);
-      const supabase = createClient();
-      const { error } = await supabase
-        .from('discovery_submissions')
-        .delete()
-        .eq('id', id);
-
-      if (error) {
-        console.error('Error deleting submission:', error);
-        setToast({ message: 'Failed to delete submission', type: 'error' });
-      } else {
-        setSubmissions((prev) => prev.filter((s) => s.id !== id));
+  const handleDelete = async (id: string, table: string = 'discovery_submissions') => {
+    if (!confirm('Delete this? This cannot be undone.')) return;
+    setDeleting(id);
+    const { error } = await supabase.from(table).delete().eq('id', id);
+    if (error) {
+      setToast({ message: 'Failed to delete', type: 'error' });
+    } else {
+      if (table === 'discovery_submissions') {
+        setSubmissions(prev => prev.filter(s => s.id !== id));
         if (selected?.id === id) setSelected(null);
-        setToast({ message: 'Submission deleted', type: 'success' });
+      } else {
+        setForms(prev => prev.filter(f => f.id !== id));
       }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setDeleting(null);
+      setToast({ message: 'Deleted', type: 'success' });
     }
+    setDeleting(null);
   };
 
   const addAsLead = async (sub: DiscoverySubmission) => {
     setActionLoading(`lead-${sub.id}`);
-    try {
-      const supabase = createClient();
-      const fd = sub.form_data;
-
-      // Build notes from all form fields
-      const noteLines = Object.entries(fd)
-        .filter(([, v]) => v && v.trim())
-        .map(([k, v]) => `${formatLabel(k)}: ${v}`)
-        .join('\n');
-
-      const { data, error } = await supabase.from('leads').insert([{
-        business_name: formatSlug(sub.client_slug),
-        contact_name: fd.contactName || fd.name || '',
-        email: fd.email || fd.contactEmail || '',
-        phone: fd.phone || fd.contactPhone || '',
-        website_url: fd.website || fd.websiteUrl || fd.currentWebsite || '',
-        notes: `Discovery form submission\n\n${noteLines}`,
-        source: 'Discovery Form',
-        stage: 'New Lead',
-        discovery_submission_id: sub.id,
-      }]).select().single();
-
-      if (error) {
-        setToast({ message: 'Failed to add as lead', type: 'error' });
-        return;
-      }
-
-      if (data) {
-        await supabase.from('activity_log').insert([{
-          entity_type: 'lead',
-          entity_id: data.id,
-          action: 'created_from_discovery',
-          description: `Lead created from ${formatSlug(sub.client_slug)} discovery form`,
-        }]);
-
-        setLinkedLeads(prev => ({ ...prev, [sub.id]: { id: data.id, business_name: data.business_name, discovery_submission_id: sub.id } }));
-        setToast({ message: `${formatSlug(sub.client_slug)} added to pipeline!`, type: 'success' });
-      }
-    } catch (err) {
-      console.error(err);
-      setToast({ message: 'Something went wrong', type: 'error' });
-    } finally {
-      setActionLoading(null);
-    }
+    const fd = sub.form_data;
+    const noteLines = Object.entries(fd).filter(([, v]) => v && v.trim()).map(([k, v]) => `${formatLabel(k)}: ${v}`).join('\n');
+    const { data, error } = await supabase.from('leads').insert([{
+      business_name: formatSlug(sub.client_slug), contact_name: fd.contactName || fd.name || '',
+      email: fd.email || fd.contactEmail || '', phone: fd.phone || fd.contactPhone || '',
+      website_url: fd.website || fd.websiteUrl || fd.currentWebsite || '',
+      notes: `Discovery form submission\n\n${noteLines}`, source: 'Discovery Form', stage: 'New Lead', discovery_submission_id: sub.id,
+    }]).select().single();
+    if (!error && data) {
+      await supabase.from('activity_log').insert([{ entity_type: 'lead', entity_id: data.id, action: 'created_from_discovery', description: `Lead created from ${formatSlug(sub.client_slug)} discovery form` }]);
+      setLinkedLeads(prev => ({ ...prev, [sub.id]: { id: data.id, business_name: data.business_name, discovery_submission_id: sub.id } }));
+      setToast({ message: `${formatSlug(sub.client_slug)} added to pipeline!`, type: 'success' });
+    } else { setToast({ message: 'Failed to add as lead', type: 'error' }); }
+    setActionLoading(null);
   };
 
   const addAsClient = async (sub: DiscoverySubmission) => {
     setActionLoading(`client-${sub.id}`);
+    const fd = sub.form_data;
+    const noteLines = Object.entries(fd).filter(([, v]) => v && v.trim()).map(([k, v]) => `${formatLabel(k)}: ${v}`).join('\n');
+    const { data, error } = await supabase.from('clients').insert([{
+      company_name: formatSlug(sub.client_slug), contact_name: fd.contactName || fd.name || '',
+      email: fd.email || fd.contactEmail || '', phone: fd.phone || fd.contactPhone || '',
+      website: fd.website || fd.websiteUrl || fd.currentWebsite || '',
+      notes: `From discovery form\n\n${noteLines}`, discovery_submission_id: sub.id, status: 'active',
+    }]).select().single();
+    if (!error && data) {
+      await supabase.from('activity_log').insert([{ entity_type: 'client', entity_id: data.id, action: 'created_from_discovery', description: `Client created from ${formatSlug(sub.client_slug)} discovery form` }]);
+      setLinkedClients(prev => ({ ...prev, [sub.id]: { id: data.id, company_name: data.company_name, discovery_submission_id: sub.id } }));
+      setToast({ message: `${formatSlug(sub.client_slug)} added as client!`, type: 'success' });
+    } else { setToast({ message: 'Failed to add as client', type: 'error' }); }
+    setActionLoading(null);
+  };
+
+  // AI Form Builder
+  const generateForm = async () => {
+    if (!meetingNotes.trim()) { setToast({ message: 'Paste some meeting notes first', type: 'error' }); return; }
+    setGenerating(true);
     try {
-      const supabase = createClient();
-      const fd = sub.form_data;
-
-      const noteLines = Object.entries(fd)
-        .filter(([, v]) => v && v.trim())
-        .map(([k, v]) => `${formatLabel(k)}: ${v}`)
-        .join('\n');
-
-      const { data, error } = await supabase.from('clients').insert([{
-        company_name: formatSlug(sub.client_slug),
-        contact_name: fd.contactName || fd.name || '',
-        email: fd.email || fd.contactEmail || '',
-        phone: fd.phone || fd.contactPhone || '',
-        website: fd.website || fd.websiteUrl || fd.currentWebsite || '',
-        notes: `From discovery form\n\n${noteLines}`,
-        discovery_submission_id: sub.id,
-        status: 'active',
-      }]).select().single();
-
-      if (error) {
-        setToast({ message: 'Failed to add as client', type: 'error' });
-        return;
-      }
-
-      if (data) {
-        await supabase.from('activity_log').insert([{
-          entity_type: 'client',
-          entity_id: data.id,
-          action: 'created_from_discovery',
-          description: `Client created from ${formatSlug(sub.client_slug)} discovery form`,
-        }]);
-
-        setLinkedClients(prev => ({ ...prev, [sub.id]: { id: data.id, company_name: data.company_name, discovery_submission_id: sub.id } }));
-        setToast({ message: `${formatSlug(sub.client_slug)} added as client!`, type: 'success' });
-      }
-    } catch (err) {
-      console.error(err);
-      setToast({ message: 'Something went wrong', type: 'error' });
-    } finally {
-      setActionLoading(null);
+      const res = await fetch('/api/discovery/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ notes: meetingNotes }),
+      });
+      if (!res.ok) { const err = await res.json(); throw new Error(err.error); }
+      const data = await res.json();
+      setEditingForm({
+        clientName: data.clientName || '',
+        clientSlug: data.clientSlug || '',
+        password: 'bsk2025',
+        sections: data.sections || [],
+      });
+      setToast({ message: 'Form generated! Review and edit below.', type: 'success' });
+    } catch (err: any) {
+      setToast({ message: err.message || 'Failed to generate form', type: 'error' });
     }
+    setGenerating(false);
   };
 
-  const renderLinkedStatus = (subId: string) => {
-    const lead = linkedLeads[subId];
-    const client = linkedClients[subId];
-
-    if (!lead && !client) return null;
-
-    return (
-      <div className="flex flex-wrap gap-2">
-        {lead && (
-          <Link
-            href="/admin-dashboard/pipeline"
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-900/40 text-blue-300 hover:bg-blue-900/60 transition-colors"
-          >
-            <CheckCircle className="h-3 w-3" />
-            In Pipeline: {lead.business_name}
-          </Link>
-        )}
-        {client && (
-          <Link
-            href={`/admin-dashboard/clients?id=${client.id}`}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-900/40 text-green-300 hover:bg-green-900/60 transition-colors"
-          >
-            <CheckCircle className="h-3 w-3" />
-            Client: {client.company_name}
-          </Link>
-        )}
-      </div>
-    );
+  const publishForm = async () => {
+    if (!editingForm || !editingForm.clientName.trim()) { setToast({ message: 'Client name is required', type: 'error' }); return; }
+    setSaving(true);
+    const slug = editingForm.clientSlug || editingForm.clientName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+    const { data, error } = await supabase.from('discovery_forms').insert([{
+      client_name: editingForm.clientName,
+      client_slug: slug,
+      password: editingForm.password || 'bsk2025',
+      sections: editingForm.sections,
+      status: 'published',
+    }]).select().single();
+    if (error) {
+      setToast({ message: `Failed to publish: ${error.message}`, type: 'error' });
+    } else {
+      setToast({ message: 'Form published!', type: 'success' });
+      setEditingForm(null);
+      setShowBuilder(false);
+      setMeetingNotes('');
+      fetchAll();
+    }
+    setSaving(false);
   };
 
-  const renderActionButtons = (sub: DiscoverySubmission) => {
-    const hasLead = !!linkedLeads[sub.id];
-    const hasClient = !!linkedClients[sub.id];
+  // Form editor helpers
+  const updateSection = (sectionIdx: number, key: string, value: string) => {
+    if (!editingForm) return;
+    const sections = [...editingForm.sections];
+    (sections[sectionIdx] as any)[key] = value;
+    setEditingForm({ ...editingForm, sections });
+  };
 
-    if (hasLead && hasClient) return null;
+  const updateField = (sectionIdx: number, fieldIdx: number, key: string, value: any) => {
+    if (!editingForm) return;
+    const sections = [...editingForm.sections];
+    (sections[sectionIdx].fields[fieldIdx] as any)[key] = value;
+    setEditingForm({ ...editingForm, sections });
+  };
 
-    return (
-      <div className="flex gap-2">
-        {!hasLead && (
-          <button
-            onClick={(e) => { e.stopPropagation(); addAsLead(sub); }}
-            disabled={actionLoading === `lead-${sub.id}`}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-brand-gold text-black hover:bg-yellow-500 transition-colors disabled:opacity-50"
-          >
-            {actionLoading === `lead-${sub.id}` ? (
-              <div className="w-3 h-3 rounded-full border-2 border-black border-t-transparent animate-spin" />
-            ) : (
-              <KanbanSquare className="h-3 w-3" />
-            )}
-            Add as Lead
-          </button>
-        )}
-        {!hasClient && (
-          <button
-            onClick={(e) => { e.stopPropagation(); addAsClient(sub); }}
-            disabled={actionLoading === `client-${sub.id}`}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-900 border border-zinc-700 text-zinc-300 hover:border-green-500 hover:text-green-400 transition-colors disabled:opacity-50"
-          >
-            {actionLoading === `client-${sub.id}` ? (
-              <div className="w-3 h-3 rounded-full border-2 border-zinc-400 border-t-transparent animate-spin" />
-            ) : (
-              <Users className="h-3 w-3" />
-            )}
-            Add as Client
-          </button>
-        )}
-      </div>
-    );
+  const addField = (sectionIdx: number) => {
+    if (!editingForm) return;
+    const sections = [...editingForm.sections];
+    sections[sectionIdx].fields.push({
+      id: `field_${Date.now()}`, label: 'New Field', type: 'text', prefilled: '', placeholder: '', helpText: '',
+    });
+    setEditingForm({ ...editingForm, sections });
+  };
+
+  const removeField = (sectionIdx: number, fieldIdx: number) => {
+    if (!editingForm) return;
+    const sections = [...editingForm.sections];
+    sections[sectionIdx].fields.splice(fieldIdx, 1);
+    setEditingForm({ ...editingForm, sections });
+  };
+
+  const addSection = () => {
+    if (!editingForm) return;
+    setEditingForm({
+      ...editingForm,
+      sections: [...editingForm.sections, { id: `section_${Date.now()}`, title: 'New Section', subtitle: '', fields: [{ id: `field_${Date.now()}`, label: 'New Field', type: 'text', prefilled: '', placeholder: '', helpText: '' }] }],
+    });
+  };
+
+  const removeSection = (idx: number) => {
+    if (!editingForm) return;
+    const sections = [...editingForm.sections];
+    sections.splice(idx, 1);
+    setEditingForm({ ...editingForm, sections });
+  };
+
+  const copyLink = (formId: string) => {
+    const url = `${window.location.origin}/discovery/form/${formId}`;
+    navigator.clipboard.writeText(url);
+    setCopied(formId);
+    setTimeout(() => setCopied(null), 2000);
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="w-8 h-8 rounded-full border-4 border-zinc-800 border-t-brand-gold animate-spin"></div>
-      </div>
-    );
+    return <div className="flex items-center justify-center min-h-[50vh]"><div className="w-8 h-8 rounded-full border-4 border-zinc-800 border-t-brand-gold animate-spin"></div></div>;
   }
 
-  // Detail view
+  // Submission detail view
   if (selected) {
-    const fields = Object.entries(selected.form_data).filter(
-      ([, v]) => v && v.trim()
-    );
-
+    const fields = Object.entries(selected.form_data).filter(([, v]) => v && v.trim());
     return (
       <div>
-        {toast && (
-          <div className={`fixed top-24 right-6 z-50 px-5 py-3 rounded-lg text-sm font-medium shadow-xl ${
-            toast.type === 'success' ? 'bg-green-900/90 text-green-200 border border-green-700' : 'bg-red-900/90 text-red-200 border border-red-700'
-          }`}>{toast.message}</div>
-        )}
-
-        <button
-          onClick={() => setSelected(null)}
-          className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-6"
-        >
-          <ChevronLeft className="h-4 w-4" />
-          Back to submissions
-        </button>
-
+        {toast && <div className={`fixed top-24 right-6 z-50 px-5 py-3 rounded-lg text-sm font-medium shadow-xl ${toast.type === 'success' ? 'bg-green-900/90 text-green-200 border border-green-700' : 'bg-red-900/90 text-red-200 border border-red-700'}`}>{toast.message}</div>}
+        <button onClick={() => setSelected(null)} className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-6"><ChevronLeft className="h-4 w-4" /> Back</button>
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <Building2 className="h-6 w-6 text-brand-gold" />
-            <h1 className="text-2xl font-bold text-white">
-              {formatSlug(selected.client_slug)}
-            </h1>
+            <h1 className="text-2xl font-bold text-white">{formatSlug(selected.client_slug)}</h1>
           </div>
           <div className="flex items-center gap-2">
-            {renderActionButtons(selected)}
-            <button
-              onClick={() => handleDelete(selected.id)}
-              disabled={deleting === selected.id}
-              className="flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50"
-            >
-              <Trash2 className="h-4 w-4" />
-              {deleting === selected.id ? 'Deleting...' : 'Delete'}
-            </button>
+            {!linkedLeads[selected.id] && <button onClick={() => addAsLead(selected)} disabled={actionLoading === `lead-${selected.id}`} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-brand-gold text-black hover:bg-yellow-500 transition-colors disabled:opacity-50"><KanbanSquare className="h-3 w-3" /> Add as Lead</button>}
+            {!linkedClients[selected.id] && <button onClick={() => addAsClient(selected)} disabled={actionLoading === `client-${selected.id}`} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-900 border border-zinc-700 text-zinc-300 hover:border-green-500 hover:text-green-400 transition-colors disabled:opacity-50"><Users className="h-3 w-3" /> Add as Client</button>}
+            <button onClick={() => handleDelete(selected.id)} disabled={deleting === selected.id} className="flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50"><Trash2 className="h-4 w-4" /></button>
           </div>
         </div>
-
-        <div className="flex items-center gap-4 mb-8">
-          <p className="text-zinc-500 text-sm">
-            Submitted {formatDate(selected.completed_at || selected.created_at)}
-          </p>
-          {renderLinkedStatus(selected.id)}
-        </div>
-
+        <p className="text-zinc-500 text-sm mb-8">Submitted {formatDate(selected.completed_at || selected.created_at)}</p>
         <div className="bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden">
           <div className="divide-y divide-zinc-800">
             {fields.map(([key, value]) => (
               <div key={key} className="grid grid-cols-1 md:grid-cols-3 gap-2 p-4">
-                <div className="text-sm font-medium text-zinc-400">
-                  {formatLabel(key)}
-                </div>
-                <div className="md:col-span-2 text-sm text-white whitespace-pre-wrap">
-                  {value}
-                </div>
+                <div className="text-sm font-medium text-zinc-400">{formatLabel(key)}</div>
+                <div className="md:col-span-2 text-sm text-white whitespace-pre-wrap">{value}</div>
               </div>
             ))}
           </div>
         </div>
-
-        {fields.length === 0 && (
-          <div className="text-center py-12 text-zinc-500">
-            No form data recorded for this submission.
-          </div>
-        )}
       </div>
     );
   }
 
-  // List view
   return (
     <div>
-      {toast && (
-        <div className={`fixed top-24 right-6 z-50 px-5 py-3 rounded-lg text-sm font-medium shadow-xl ${
-          toast.type === 'success' ? 'bg-green-900/90 text-green-200 border border-green-700' : 'bg-red-900/90 text-red-200 border border-red-700'
-        }`}>{toast.message}</div>
-      )}
+      {toast && <div className={`fixed top-24 right-6 z-50 px-5 py-3 rounded-lg text-sm font-medium shadow-xl ${toast.type === 'success' ? 'bg-green-900/90 text-green-200 border border-green-700' : 'bg-red-900/90 text-red-200 border border-red-700'}`}>{toast.message}</div>}
 
-      <div className="flex items-center gap-3 mb-2">
-        <ClipboardList className="h-6 w-6 text-brand-gold" />
-        <h1 className="text-2xl font-bold text-white">Discovery Forms</h1>
-      </div>
-      <p className="text-zinc-500 text-sm mb-8">
-        Client discovery form submissions — link them to your pipeline or client list.
-      </p>
-
-      {submissions.length === 0 ? (
-        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-12 text-center">
-          <ClipboardList className="h-12 w-12 text-zinc-700 mx-auto mb-4" />
-          <p className="text-zinc-400 text-lg font-medium">No submissions yet</p>
-          <p className="text-zinc-600 text-sm mt-1">
-            Discovery form submissions will appear here once clients complete them.
-          </p>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-white mb-1">Discovery</h1>
+          <p className="text-zinc-500 text-sm">Create, manage, and track client discovery forms.</p>
         </div>
-      ) : (
-        <div className="grid gap-4">
-          {submissions.map((sub) => {
-            const fieldCount = Object.values(sub.form_data).filter(
-              (v) => v && v.trim()
-            ).length;
-            return (
-              <div
-                key={sub.id}
-                className="w-full text-left bg-zinc-950 border border-zinc-800 rounded-xl p-5 hover:border-brand-gold/40 transition-colors group"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <button
-                    onClick={() => setSelected(sub)}
-                    className="flex items-center gap-3 text-left flex-1 min-w-0"
-                  >
-                    <Building2 className="h-5 w-5 text-zinc-600 group-hover:text-brand-gold transition-colors shrink-0" />
-                    <div className="min-w-0">
-                      <h3 className="text-white font-semibold group-hover:text-brand-gold transition-colors">
-                        {formatSlug(sub.client_slug)}
-                      </h3>
-                      <div className="flex items-center gap-3 mt-1 flex-wrap">
-                        <span className="flex items-center gap-1 text-xs text-zinc-500">
-                          <Calendar className="h-3 w-3" />
-                          {formatDate(sub.completed_at || sub.created_at)}
-                        </span>
-                        <span className="text-xs text-zinc-600">
-                          {fieldCount} field{fieldCount !== 1 ? 's' : ''} completed
-                        </span>
-                      </div>
-                      <div className="mt-2">
-                        {renderLinkedStatus(sub.id)}
-                      </div>
-                    </div>
-                  </button>
+        <button onClick={() => { setShowBuilder(!showBuilder); setEditingForm(null); }}
+          className="flex items-center px-4 py-2 bg-brand-gold text-black rounded-lg font-medium hover:bg-yellow-500 transition-colors text-sm">
+          <Sparkles className="h-4 w-4 mr-2" /> {showBuilder ? 'Close Builder' : 'Create Form'}
+        </button>
+      </div>
 
-                  <div className="flex items-center gap-2 shrink-0">
-                    {renderActionButtons(sub)}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(sub.id);
-                      }}
-                      disabled={deleting === sub.id}
-                      className="p-2 text-zinc-600 hover:text-red-400 hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50"
-                      title="Delete submission"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={() => setSelected(sub)}
-                      className="p-2 text-zinc-600 hover:text-brand-gold transition-colors"
-                    >
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-                  </div>
+      {/* AI Form Builder */}
+      {showBuilder && (
+        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-6 mb-8">
+          {!editingForm ? (
+            <div>
+              <h2 className="text-lg font-semibold text-white mb-3">Generate Discovery Form with AI</h2>
+              <p className="text-sm text-zinc-400 mb-4">Paste your meeting notes, client info, or anything you know about the project. AI will generate a structured discovery form with pre-filled fields.</p>
+              <textarea value={meetingNotes} onChange={e => setMeetingNotes(e.target.value)} rows={8}
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 px-4 text-white text-sm placeholder:text-zinc-600 mb-4"
+                placeholder="E.g. Met with John from Acme Plumbing. They're based in Ashford, been trading 15 years. Current website is outdated, built on WordPress. They want a modern site that generates leads. Main services: boiler installation, central heating, emergency plumbing. Budget around £2-3k for the website..." />
+              <button onClick={generateForm} disabled={generating}
+                className="flex items-center px-5 py-2.5 bg-brand-gold text-black rounded-lg font-medium hover:bg-yellow-500 transition-colors text-sm disabled:opacity-50">
+                <Sparkles className="h-4 w-4 mr-2" /> {generating ? 'Generating...' : 'Generate Form'}
+              </button>
+            </div>
+          ) : (
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-semibold text-white">Edit Discovery Form</h2>
+                <div className="flex gap-2">
+                  <button onClick={() => setEditingForm(null)} className="px-3 py-1.5 text-sm text-zinc-400 hover:text-white transition-colors">Cancel</button>
+                  <button onClick={publishForm} disabled={saving}
+                    className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg font-medium text-sm hover:bg-green-500 transition-colors disabled:opacity-50">
+                    <Save className="h-4 w-4 mr-2" /> {saving ? 'Publishing...' : 'Publish Form'}
+                  </button>
                 </div>
               </div>
-            );
-          })}
+
+              {/* Client details */}
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <div>
+                  <label className="block text-xs text-zinc-500 mb-1">Client Name</label>
+                  <input value={editingForm.clientName} onChange={e => setEditingForm({ ...editingForm, clientName: e.target.value })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" />
+                </div>
+                <div>
+                  <label className="block text-xs text-zinc-500 mb-1">URL Slug</label>
+                  <input value={editingForm.clientSlug} onChange={e => setEditingForm({ ...editingForm, clientSlug: e.target.value })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" />
+                </div>
+                <div>
+                  <label className="block text-xs text-zinc-500 mb-1">Password</label>
+                  <input value={editingForm.password} onChange={e => setEditingForm({ ...editingForm, password: e.target.value })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" />
+                </div>
+              </div>
+
+              {/* Sections editor */}
+              <div className="space-y-4">
+                {editingForm.sections.map((section, si) => (
+                  <div key={section.id} className="border border-zinc-800 rounded-lg overflow-hidden">
+                    <button onClick={() => setExpandedSection(expandedSection === section.id ? null : section.id)}
+                      className="w-full flex items-center justify-between p-4 bg-zinc-900/50 hover:bg-zinc-900 transition-colors text-left">
+                      <div className="flex items-center gap-3">
+                        <GripVertical className="h-4 w-4 text-zinc-600" />
+                        <div>
+                          <h3 className="text-sm font-semibold text-white">{section.title}</h3>
+                          <p className="text-xs text-zinc-500">{section.fields.length} field{section.fields.length !== 1 ? 's' : ''}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button onClick={(e) => { e.stopPropagation(); removeSection(si); }} className="text-zinc-600 hover:text-red-400 transition-colors p-1"><Trash2 className="h-3.5 w-3.5" /></button>
+                        {expandedSection === section.id ? <ChevronUp className="h-4 w-4 text-zinc-500" /> : <ChevronDown className="h-4 w-4 text-zinc-500" />}
+                      </div>
+                    </button>
+
+                    {expandedSection === section.id && (
+                      <div className="p-4 space-y-4">
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-xs text-zinc-500 mb-1">Section Title</label>
+                            <input value={section.title} onChange={e => updateSection(si, 'title', e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-700 rounded-md py-1.5 px-2.5 text-white text-sm" />
+                          </div>
+                          <div>
+                            <label className="block text-xs text-zinc-500 mb-1">Subtitle</label>
+                            <input value={section.subtitle || ''} onChange={e => updateSection(si, 'subtitle', e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-700 rounded-md py-1.5 px-2.5 text-white text-sm" />
+                          </div>
+                        </div>
+
+                        {/* Fields */}
+                        <div className="space-y-3">
+                          {section.fields.map((field, fi) => (
+                            <div key={field.id} className="bg-zinc-900/50 rounded-lg p-3">
+                              <div className="grid grid-cols-12 gap-2 items-start">
+                                <div className="col-span-4">
+                                  <label className="block text-[10px] text-zinc-600 mb-0.5">Label</label>
+                                  <input value={field.label} onChange={e => updateField(si, fi, 'label', e.target.value)}
+                                    className="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs text-white" />
+                                </div>
+                                <div className="col-span-2">
+                                  <label className="block text-[10px] text-zinc-600 mb-0.5">Type</label>
+                                  <select value={field.type} onChange={e => updateField(si, fi, 'type', e.target.value)}
+                                    className="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs text-white">
+                                    <option value="text">Text</option>
+                                    <option value="textarea">Textarea</option>
+                                    <option value="select">Select</option>
+                                    <option value="radio">Radio</option>
+                                  </select>
+                                </div>
+                                <div className="col-span-5">
+                                  <label className="block text-[10px] text-zinc-600 mb-0.5">Pre-filled Value</label>
+                                  <input value={field.prefilled || ''} onChange={e => updateField(si, fi, 'prefilled', e.target.value)}
+                                    className="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs text-white" placeholder="Leave empty if unknown" />
+                                </div>
+                                <div className="col-span-1 flex justify-center pt-4">
+                                  <button onClick={() => removeField(si, fi)} className="text-zinc-600 hover:text-red-400"><X className="h-3.5 w-3.5" /></button>
+                                </div>
+                              </div>
+                              <div className="grid grid-cols-2 gap-2 mt-2">
+                                <div>
+                                  <label className="block text-[10px] text-zinc-600 mb-0.5">Placeholder</label>
+                                  <input value={field.placeholder || ''} onChange={e => updateField(si, fi, 'placeholder', e.target.value)}
+                                    className="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs text-white" />
+                                </div>
+                                <div>
+                                  <label className="block text-[10px] text-zinc-600 mb-0.5">Help Text</label>
+                                  <input value={field.helpText || ''} onChange={e => updateField(si, fi, 'helpText', e.target.value)}
+                                    className="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs text-white" />
+                                </div>
+                              </div>
+                              {(field.type === 'select' || field.type === 'radio') && (
+                                <div className="mt-2">
+                                  <label className="block text-[10px] text-zinc-600 mb-0.5">Options (comma-separated)</label>
+                                  <input value={(field.options || []).join(', ')} onChange={e => updateField(si, fi, 'options', e.target.value.split(',').map((o: string) => o.trim()).filter(Boolean))}
+                                    className="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs text-white" placeholder="Option 1, Option 2, Option 3" />
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                        <button onClick={() => addField(si)} className="text-xs text-brand-gold hover:text-white transition-colors flex items-center gap-1">
+                          <Plus className="h-3 w-3" /> Add Field
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <button onClick={addSection} className="mt-4 text-sm text-brand-gold hover:text-white transition-colors flex items-center gap-1">
+                <Plus className="h-4 w-4" /> Add Section
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Tabs */}
+      <div className="flex gap-2 mb-6">
+        <button onClick={() => setActiveTab('forms')}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === 'forms' ? 'bg-brand-gold/10 text-brand-gold border border-brand-gold/30' : 'bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white'}`}>
+          Sent Forms ({forms.length})
+        </button>
+        <button onClick={() => setActiveTab('submissions')}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === 'submissions' ? 'bg-brand-gold/10 text-brand-gold border border-brand-gold/30' : 'bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white'}`}>
+          Submissions ({submissions.length})
+        </button>
+      </div>
+
+      {/* Sent Forms Tab */}
+      {activeTab === 'forms' && (
+        <div>
+          {forms.length === 0 ? (
+            <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-12 text-center">
+              <ClipboardList className="h-12 w-12 text-zinc-700 mx-auto mb-4" />
+              <p className="text-zinc-400 text-lg font-medium">No forms created yet</p>
+              <p className="text-zinc-600 text-sm mt-1">Use the AI builder above to create your first discovery form.</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {forms.map(form => (
+                <div key={form.id} className="bg-zinc-950 border border-zinc-800 rounded-xl p-5 flex items-center justify-between gap-4">
+                  <div className="min-w-0">
+                    <h3 className="text-white font-semibold">{form.client_name}</h3>
+                    <div className="flex items-center gap-4 mt-1 flex-wrap">
+                      <span className={`px-2 py-0.5 rounded text-xs font-medium ${form.status === 'published' ? 'bg-green-900/50 text-green-300' : 'bg-zinc-800 text-zinc-400'}`}>{form.status}</span>
+                      <span className="flex items-center gap-1 text-xs text-zinc-500"><Eye className="h-3 w-3" /> {form.view_count} view{form.view_count !== 1 ? 's' : ''}</span>
+                      {form.last_viewed_at && <span className="text-xs text-zinc-600">Last opened: {formatDate(form.last_viewed_at)}</span>}
+                      <span className="text-xs text-zinc-600">Created: {formatDate(form.created_at)}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button onClick={() => copyLink(form.id)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${copied === form.id ? 'bg-green-900/50 text-green-300' : 'bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white'}`}>
+                      {copied === form.id ? <><CheckCircle className="h-3 w-3" /> Copied!</> : <><Copy className="h-3 w-3" /> Copy Link</>}
+                    </button>
+                    <a href={`/discovery/form/${form.id}`} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white transition-colors">
+                      <ExternalLink className="h-3 w-3" /> Open
+                    </a>
+                    <button onClick={() => handleDelete(form.id, 'discovery_forms')} disabled={deleting === form.id}
+                      className="p-2 text-zinc-600 hover:text-red-400 transition-colors"><Trash2 className="h-4 w-4" /></button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Submissions Tab */}
+      {activeTab === 'submissions' && (
+        <div>
+          {submissions.length === 0 ? (
+            <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-12 text-center">
+              <ClipboardList className="h-12 w-12 text-zinc-700 mx-auto mb-4" />
+              <p className="text-zinc-400 text-lg font-medium">No submissions yet</p>
+              <p className="text-zinc-600 text-sm mt-1">Submissions will appear here once clients complete their forms.</p>
+            </div>
+          ) : (
+            <div className="grid gap-4">
+              {submissions.map(sub => {
+                const fieldCount = Object.values(sub.form_data).filter(v => v && v.trim()).length;
+                return (
+                  <div key={sub.id} className="bg-zinc-950 border border-zinc-800 rounded-xl p-5 hover:border-brand-gold/40 transition-colors">
+                    <div className="flex items-start justify-between gap-4">
+                      <button onClick={() => setSelected(sub)} className="flex items-center gap-3 text-left flex-1 min-w-0">
+                        <Building2 className="h-5 w-5 text-zinc-600 shrink-0" />
+                        <div className="min-w-0">
+                          <h3 className="text-white font-semibold">{formatSlug(sub.client_slug)}</h3>
+                          <div className="flex items-center gap-3 mt-1 flex-wrap">
+                            <span className="flex items-center gap-1 text-xs text-zinc-500"><Calendar className="h-3 w-3" />{formatDate(sub.completed_at || sub.created_at)}</span>
+                            <span className="text-xs text-zinc-600">{fieldCount} fields</span>
+                          </div>
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {linkedLeads[sub.id] && <Link href="/admin-dashboard/pipeline" className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-900/40 text-blue-300"><CheckCircle className="h-3 w-3" /> In Pipeline</Link>}
+                            {linkedClients[sub.id] && <Link href={`/admin-dashboard/clients?id=${linkedClients[sub.id].id}`} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-900/40 text-green-300"><CheckCircle className="h-3 w-3" /> Client</Link>}
+                          </div>
+                        </div>
+                      </button>
+                      <div className="flex items-center gap-2 shrink-0">
+                        {!linkedLeads[sub.id] && <button onClick={() => addAsLead(sub)} disabled={actionLoading === `lead-${sub.id}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-brand-gold text-black hover:bg-yellow-500 transition-colors disabled:opacity-50"><KanbanSquare className="h-3 w-3" /> Lead</button>}
+                        {!linkedClients[sub.id] && <button onClick={() => addAsClient(sub)} disabled={actionLoading === `client-${sub.id}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-green-400 transition-colors disabled:opacity-50"><Users className="h-3 w-3" /> Client</button>}
+                        <button onClick={() => handleDelete(sub.id)} disabled={deleting === sub.id} className="p-2 text-zinc-600 hover:text-red-400 transition-colors"><Trash2 className="h-4 w-4" /></button>
+                        <button onClick={() => setSelected(sub)} className="p-2 text-zinc-600 hover:text-brand-gold transition-colors"><ArrowRight className="h-4 w-4" /></button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
     </div>
