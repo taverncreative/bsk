@@ -123,7 +123,7 @@ function ClientsPageInner() {
       return;
     }
     setSaving(true);
-    const { error } = await supabase.from('clients').insert([{
+    const { data, error } = await supabase.from('clients').insert([{
       company_name: addForm.company_name,
       contact_name: addForm.contact_name,
       email: addForm.email,
@@ -155,7 +155,7 @@ function ClientsPageInner() {
       }
       setToast({ message: 'Client added!', type: 'success' });
       setShowAddModal(false);
-      setAddForm({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', monthly_value: '', package_name: '', monthly_hours: '', monthly_hours: '' });
+      setAddForm({ company_name: '', contact_name: '', email: '', phone: '', address: '', website: '', notes: '', monthly_value: '', package_name: '', monthly_hours: '' });
       fetchClients();
     }
     setSaving(false);
