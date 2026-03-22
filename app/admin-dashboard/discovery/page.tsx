@@ -245,10 +245,14 @@ export default function DiscoveryPage() {
     setEditingForm({ ...editingForm, sections });
   };
 
-  const copyLink = (formId: string) => {
-    const url = `${window.location.origin}/discovery/form/${formId}`;
+  const getFormUrl = (form: DiscoveryForm) => {
+    return (form as any).form_url || `/discovery/form/${form.id}`;
+  };
+
+  const copyLink = (form: DiscoveryForm) => {
+    const url = `${window.location.origin}${getFormUrl(form)}`;
     navigator.clipboard.writeText(url);
-    setCopied(formId);
+    setCopied(form.id);
     setTimeout(() => setCopied(null), 2000);
   };
 
@@ -487,11 +491,11 @@ export default function DiscoveryPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
-                    <button onClick={() => copyLink(form.id)}
+                    <button onClick={() => copyLink(form)}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${copied === form.id ? 'bg-green-900/50 text-green-300' : 'bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white'}`}>
                       {copied === form.id ? <><CheckCircle className="h-3 w-3" /> Copied!</> : <><Copy className="h-3 w-3" /> Copy Link</>}
                     </button>
-                    <a href={`/discovery/form/${form.id}`} target="_blank" rel="noopener noreferrer"
+                    <a href={getFormUrl(form)} target="_blank" rel="noopener noreferrer"
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white transition-colors">
                       <ExternalLink className="h-3 w-3" /> Open
                     </a>
