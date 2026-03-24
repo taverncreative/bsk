@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { trackLead } from '@/lib/analytics/lead';
+import { notifyAdmin } from '@/lib/web3forms-client';
 
 export default function WebsiteReviewTool() {
   const [url, setUrl] = useState('');
@@ -28,6 +29,9 @@ export default function WebsiteReviewTool() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url, email })
       });
+
+      // Notify admin via Web3Forms (client-side)
+      notifyAdmin('Website Review Request', { Email: email, Website: url });
       
       // Generate simulated but highly credible output
       setAnalysis({

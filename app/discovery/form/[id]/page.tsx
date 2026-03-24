@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { Lock, ChevronRight, ChevronLeft, Check, Send, CheckCircle2 } from 'lucide-react';
+import { notifyAdmin } from '@/lib/web3forms-client';
 
 interface FormField {
   id: string;
@@ -110,6 +111,19 @@ export default function DynamicDiscoveryPage({ params }: { params: Promise<{ id:
           completedAt: new Date().toISOString(),
         }),
       });
+
+      // Notify admin via Web3Forms (client-side)
+      const fieldSummary = Object.entries(formData)
+        .filter(([, v]) => v && v.trim())
+        .slice(0, 10)
+        .map(([k, v]) => `${k}: ${v}`)
+        .join('\n');
+      notifyAdmin(`Discovery Form Submitted: ${formDef.client_name}`, {
+        Client: formDef.client_name,
+        'Fields Completed': String(Object.keys(formData).length),
+        'Sample Fields': fieldSummary,
+      });
+
       setSubmitted(true);
     } catch (err) {
       console.error(err);

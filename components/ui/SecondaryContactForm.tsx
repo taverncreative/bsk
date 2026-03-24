@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Send, User, Mail, Briefcase } from 'lucide-react';
+import { notifyAdmin } from '@/lib/web3forms-client';
 
 export default function SecondaryContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', service_required: '', message: '' });
@@ -21,6 +22,13 @@ export default function SecondaryContactForm() {
       });
 
       if (res.ok) {
+        // Send email notification via Web3Forms (client-side)
+        notifyAdmin(`New Enquiry: ${formData.name}`, {
+          Name: formData.name,
+          Email: formData.email,
+          'Service Required': formData.service_required || 'N/A',
+          Message: formData.message || 'N/A',
+        });
         setStatus('success');
         setFormData({ name: '', email: '', service_required: '', message: '' });
       } else {

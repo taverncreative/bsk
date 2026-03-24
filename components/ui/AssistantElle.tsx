@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useChat, Message } from 'ai/react';
 import { usePathname } from 'next/navigation';
+import { notifyAdmin } from '@/lib/web3forms-client';
 
 const InlineFallbackForm = () => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -28,7 +29,10 @@ const InlineFallbackForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      if (res.ok) setStatus('success');
+      if (res.ok) {
+        notifyAdmin('Elle Fallback Message', { Name: String(data.name), Email: String(data.email), Message: String(data.message) });
+        setStatus('success');
+      }
       else setStatus('error');
     } catch {
       setStatus('error');
@@ -94,7 +98,10 @@ const InlineReviewForm = ({ messages }: { messages: Message[] }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      if (res.ok) setStatus('success');
+      if (res.ok) {
+        notifyAdmin('Website Review Request', { Name: String(data.name), Email: String(data.email), Website: String(data.url) });
+        setStatus('success');
+      }
       else setStatus('error');
     } catch {
       setStatus('error');
@@ -145,7 +152,10 @@ const InlineCallForm = ({ messages }: { messages: Message[] }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      if (res.ok) setStatus('success');
+      if (res.ok) {
+        notifyAdmin('Elle Call Booking', { Name: String(data.name), Email: String(data.email), 'Preferred Time': String(data.preferredTime) });
+        setStatus('success');
+      }
       else setStatus('error');
     } catch {
       setStatus('error');
@@ -196,7 +206,10 @@ const InlineMessageForm = ({ messages }: { messages: Message[] }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      if (res.ok) setStatus('success');
+      if (res.ok) {
+        notifyAdmin('Elle Chat Message', { Name: String(data.name), Email: String(data.email), Message: String(data.message) });
+        setStatus('success');
+      }
       else setStatus('error');
     } catch {
       setStatus('error');

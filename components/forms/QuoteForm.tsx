@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { trackLead } from '@/lib/analytics/lead';
+import { notifyAdmin } from '@/lib/web3forms-client';
 
 export default function QuoteForm() {
   const [formData, setFormData] = useState({
@@ -52,7 +53,17 @@ export default function QuoteForm() {
       if (!res.ok) {
         throw new Error('Failed to submit');
       }
-      
+
+      // Send email notification via Web3Forms (client-side)
+      notifyAdmin(`New Quote Request: ${formData.name}`, {
+        Name: formData.name,
+        Email: formData.email,
+        Phone: formData.phone || 'N/A',
+        Service: formData.service || 'N/A',
+        Message: formData.message || 'N/A',
+        Source: window.location.pathname,
+      });
+
       setSuccess(true);
       setFormData({ name: '', email: '', phone: '', service: '', message: '' });
     } catch (err) {
