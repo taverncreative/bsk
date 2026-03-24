@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
-import ConsultationCalendar from '@/components/ui/ConsultationCalendar';
-import ConsultationReassurance from '@/components/ui/ConsultationReassurance';
 import SecondaryContactForm from '@/components/ui/SecondaryContactForm';
 import { Star, Mail, Phone, MapPin } from 'lucide-react';
 import Reveal from '@/components/ui/Reveal';
 
 export const metadata: Metadata = {
   title: 'Contact Us | Business Sorted Kent',
-  description: 'Book a consultation for web design, SEO, and business automation in Kent. Contact the team at Business Sorted today.',
+  description: 'Get in touch about web design, SEO, and business automation in Kent. Contact the team at Business Sorted today.',
   alternates: {
     canonical: 'https://businesssortedkent.co.uk/contact',
   },
@@ -25,47 +23,30 @@ export default function ContactPage() {
               Let's Talk About Growing Your Business
             </h1>
             <p className="text-lg md:text-xl text-neutral-400 leading-relaxed max-w-3xl mx-auto mb-10">
-              Whether you need a new website, better visibility on Google, or systems that turn visitors into enquiries, we can help. Book a quick consultation or send us a message and we'll point you in the right direction.
+              Whether you need a new website, better visibility on Google, or systems that turn visitors into enquiries, we can help. Send us a message and we'll point you in the right direction.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="#book" className="w-full sm:w-auto px-8 py-4 bg-brand-gold text-black font-extrabold rounded-xl hover:bg-white transition-colors active:scale-95">
-                Book A Consultation
-              </a>
-              <a href="#message" className="w-full sm:w-auto px-8 py-4 bg-neutral-900 border border-neutral-800 text-white font-extrabold rounded-xl hover:border-brand-gold transition-colors active:scale-95">
-                Send A Message
-              </a>
-            </div>
+            <a href="#message" className="inline-block px-8 py-4 bg-brand-gold text-black font-extrabold rounded-xl hover:bg-white transition-colors active:scale-95">
+              Send A Message
+            </a>
           </Reveal>
         </div>
       </section>
 
-      {/* 2. Consultation Booking System */}
-      <section id="book" className="py-20 bg-neutral-950 border-b border-neutral-900">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <Reveal delay={0.1}>
-            <ConsultationCalendar />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 2.5 Reassurance Block */}
-      <ConsultationReassurance />
-
-      {/* Split Section: Secondary Contact Form & Contact Details */}
+      {/* Split Section: Contact Form & Contact Details */}
       <section id="message" className="py-24 bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-            
-            {/* 3. Secondary Contact Options */}
+
+            {/* Contact Form */}
             <div>
               <Reveal>
-                <h2 className="text-3xl font-extrabold text-white mb-4">Prefer to Send a Message?</h2>
+                <h2 className="text-3xl font-extrabold text-white mb-4">Send Us a Message</h2>
                 <p className="text-neutral-400 mb-8">Fill out the quick form below and we'll get back to you directly.</p>
                 <SecondaryContactForm />
               </Reveal>
             </div>
 
-            {/* 4. Trust Elements & Contact Details */}
+            {/* Trust Elements & Contact Details */}
             <div className="flex flex-col gap-10">
               {/* Trust Elements */}
               <Reveal delay={0.1}>
@@ -78,7 +59,7 @@ export default function ContactPage() {
                   </div>
                   <h3 className="text-white font-bold text-lg mb-1">Rated 5 Stars by Local Businesses</h3>
                   <p className="text-neutral-400 text-sm mb-6">Based on verified Google reviews across Kent.</p>
-                  
+
                   <blockquote className="border-l-2 border-brand-gold pl-4 italic text-neutral-300">
                     "Business Sorted transformed our completely outdated site into an actual lead generation tool. Brilliant local service."
                   </blockquote>
