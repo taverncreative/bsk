@@ -9,62 +9,62 @@ const caseStudies = [
   {
     title: 'SafeLee Inspection & Consultancy',
     slug: 'safelee-inspection-consultancy',
-    summary: 'A professional website build and local SEO strategy for a statutory equipment inspection firm, establishing credibility and driving organic enquiries across the North West.',
+    summary: 'A professional website and local SEO foundation for a statutory equipment inspection firm, built to establish credibility and capture organic search traffic across the North West.',
     industry: 'Health & Safety Compliance',
     town: 'Manchester',
     businessName: 'SafeLee Inspection & Consultancy Ltd',
     websiteUrl: 'https://www.safeleeinspectionconsultancy.com',
     services_used: ['Web Design', 'Local SEO'],
-    challenge: 'SafeLee had no professional web presence despite offering critical compliance services — LOLER, PSSR, PUWER, and COSHH LEV inspections. Without a website, they relied entirely on word-of-mouth referrals and were invisible to businesses actively searching for inspection services online. Larger competitors dominated search results, making it nearly impossible for this specialist independent firm to compete for new contracts.',
-    solution: 'We designed and built a clean, authoritative website that clearly communicates SafeLee\'s credentials, service scope, and accreditations. Each inspection service — from lifting equipment to pressure systems — was given its own dedicated page, structured for both user clarity and search engine indexing. We implemented a targeted local SEO strategy covering Manchester, the North West, and UK-wide commercial terms, combined with schema markup to strengthen their presence in local search results.',
-    resultsSummary: 'SafeLee went from zero online visibility to appearing on page one for key inspection terms across the North West, generating a steady stream of qualified compliance enquiries without any paid advertising.',
-    metrics: ['Page 1 for Core Inspection Terms', 'Zero to Consistent Organic Leads', 'Professional Online Authority Established'],
-    outcome: 'Built professional authority from scratch',
+    challenge: 'SafeLee had no professional web presence despite offering critical compliance services — LOLER, PSSR, PUWER, and COSHH LEV inspections. Without a website, they relied entirely on word-of-mouth referrals and were invisible to businesses actively searching for inspection services online. Larger competitors dominated search results, making it difficult for this specialist independent firm to compete for new contracts.',
+    solution: 'We designed and built a clean, authoritative website that clearly communicates SafeLee\'s credentials, service scope, and accreditations. Each inspection service was given its own dedicated page, structured for both user clarity and search engine indexing. We implemented a targeted local SEO strategy covering Manchester, the North West, and UK-wide commercial terms.',
+    resultsSummary: 'A professional, SEO-optimised website built from scratch — giving SafeLee their first ever digital presence with dedicated service pages targeting commercial inspection searches across the North West.',
+    metrics: ['Professional Website Launched', 'Dedicated Service Landing Pages', 'Local SEO Foundation Built'],
+    outcome: 'First professional digital presence established',
     content: `
       <h2>Building Credibility From the Ground Up</h2>
       <p>SafeLee Inspection & Consultancy Ltd provides statutory thorough examinations under LOLER, PSSR, PUWER, and COSHH LEV regulations — services that businesses are legally required to undertake. Despite the critical nature of this work, SafeLee had no website and no digital footprint. Their Managing Director, Lee Charnock, had built a solid reputation through direct relationships, but growth was capped by the limits of personal networking alone.</p>
-      <p>The challenge was twofold: first, establish an online presence that reflects the professionalism and regulatory seriousness of the services offered; second, ensure that businesses searching for inspection services in Manchester and across the North West would find SafeLee before their larger, more established competitors.</p>
+      <p>The challenge was twofold: first, establish an online presence that reflects the professionalism and regulatory seriousness of the services offered; second, structure the site so that businesses searching for inspection services in Manchester and across the North West would be able to find SafeLee organically.</p>
 
-      <h2>A Website That Works as Hard as the Team</h2>
+      <h2>A Website Built Around Specialist Services</h2>
       <p>We built a purpose-driven website around SafeLee's core service areas. Rather than bundling everything into a single page, each inspection discipline — lifting equipment, pressure systems, work equipment, LEV testing, and work-at-height assessments — received its own dedicated landing page with in-depth explanations of what each examination involves, why it matters legally, and how SafeLee delivers it.</p>
       <p>This structure serves two purposes. For potential clients, it immediately demonstrates specialist knowledge and makes it easy to find exactly the service they need. For search engines, it creates a network of highly relevant, keyword-targeted pages that signal topical authority across the inspection compliance niche.</p>
 
-      <h2>Local SEO That Reaches Beyond Manchester</h2>
-      <p>While SafeLee is based in Irlam, their work takes them across Greater Manchester, Liverpool, Preston, Wigan, and beyond. We built the SEO strategy to reflect this geographic reach, targeting commercial search terms like "LOLER inspection Manchester", "pressure systems examination North West", and "thorough examination services UK". Directory citations, Google Business Profile optimisation, and technical on-page work all contributed to rapid indexing and ranking improvements.</p>
+      <h2>Local SEO Structured for Geographic Reach</h2>
+      <p>While SafeLee is based in Irlam, their work takes them across Greater Manchester, Liverpool, Preston, Wigan, and beyond. We built the SEO foundation to reflect this geographic reach, targeting commercial search terms like "LOLER inspection Manchester", "pressure systems examination North West", and "thorough examination services UK". Directory citations, Google Business Profile setup, and technical on-page optimisation were all implemented to accelerate indexing.</p>
 
-      <h2>The Outcome</h2>
-      <p>Within months, SafeLee was appearing on the first page of Google for their primary service terms in Manchester and surrounding areas. The website now serves as their primary lead generation channel, with enquiries coming directly from businesses needing compliance inspections — exactly the type of work SafeLee specialises in. The firm has been able to expand its client base significantly without relying on paid advertising or third-party platforms.</p>
+      <h2>What We Delivered</h2>
+      <p>SafeLee now has a professional, fast-loading website that accurately represents the quality and seriousness of their compliance services. Each service page is structured to rank for relevant inspection terms, and the local SEO groundwork has been laid to build organic visibility over time. The site gives SafeLee a credible digital home that they can point clients to, and a foundation for long-term growth beyond word-of-mouth.</p>
     `,
   },
   {
     title: 'Therapy Hair Body & Nails',
     slug: 'therapy-hair-body-nails',
-    summary: 'A complete website design and SEO package for an established hair and beauty salon, transforming their booking pipeline and local search visibility.',
+    summary: 'A modern website design and SEO setup for an established hair and beauty salon, replacing an outdated Wix site with a mobile-first platform built for bookings.',
     industry: 'Hair & Beauty',
     town: 'Kent',
     businessName: 'Therapy Hair Body & Nails',
     websiteUrl: 'https://www.therapyhairbodynails.co.uk',
     services_used: ['Web Design', 'Local SEO'],
-    challenge: 'Therapy Hair Body & Nails had an outdated Wix website that wasn\'t mobile-optimised and failed to showcase their full range of treatments. The salon was losing potential bookings to competitors with more polished online presences, and their Google visibility for local beauty-related searches was minimal. Walk-in traffic alone wasn\'t enough to fill appointment books consistently.',
-    solution: 'We designed a sleek, modern website that puts their services front and centre — from hair treatments and nail services to body therapies. The site was built mobile-first, reflecting how most salon clients browse and book. We integrated clear calls-to-action on every page, making it effortless to enquire or book directly. A comprehensive local SEO campaign targeted high-intent searches like "hair salon near me", "nail technician [area]", and treatment-specific terms across their service radius.',
-    resultsSummary: 'The salon saw a significant increase in online bookings and enquiries, with Google visibility improving across all core treatment categories. New clients specifically cited finding them through Google search.',
-    metrics: ['Mobile-First Design Deployed', 'Local Search Rankings Achieved', 'Consistent Online Booking Enquiries'],
-    outcome: 'Transformed online booking pipeline',
+    challenge: 'Therapy Hair Body & Nails had an outdated Wix website that wasn\'t mobile-optimised and failed to showcase their full range of treatments. The site loaded slowly, buried key service information, and gave potential clients no clear path to book or enquire. Walk-in traffic alone wasn\'t enough to fill appointment books consistently, and their Google visibility for local beauty searches was minimal.',
+    solution: 'We designed a sleek, modern website that puts their services front and centre — from hair treatments and nail services to body therapies. The site was built mobile-first, reflecting how most salon clients browse and book. We integrated clear calls-to-action on every page, making it effortless to enquire or book directly. A local SEO foundation was set up targeting high-intent searches across their service area.',
+    resultsSummary: 'A complete website rebuild replacing an outdated Wix template — mobile-first, conversion-focused, and structured with dedicated treatment pages to capture local beauty searches.',
+    metrics: ['Mobile-First Website Launched', 'Treatment-Specific Landing Pages', 'Local SEO Foundation Established'],
+    outcome: 'Modern booking-ready website deployed',
     content: `
-      <h2>From Outdated Template to Booking Machine</h2>
+      <h2>Replacing an Outdated Template</h2>
       <p>Therapy Hair Body & Nails is an established salon offering a comprehensive range of treatments — hair styling and colouring, nail services, body treatments, and beauty therapies. Despite a loyal existing client base, their online presence was letting them down. The previous website, built on a basic Wix template, loaded slowly on mobile devices, buried key service information, and gave no clear path for potential clients to book or enquire.</p>
       <p>In the hair and beauty industry, first impressions are everything. A salon's website is often the very first point of contact for a new client, and if it doesn't immediately communicate quality, professionalism, and warmth, that potential booking goes straight to a competitor.</p>
 
-      <h2>Designing for the Way Clients Actually Book</h2>
-      <p>We rebuilt the site from scratch with a mobile-first approach. Over 80% of salon searches happen on smartphones — someone looking for "hair salon near me" while on the go. The new design loads in under two seconds, showcases treatment categories with clean imagery, and places booking enquiry buttons within thumb-reach on every page.</p>
-      <p>Each treatment category was given its own structured page with descriptions, what to expect, and clear pricing guidance. This not only helps potential clients make decisions faster but creates dedicated landing pages that rank individually for specific treatment searches.</p>
+      <h2>Designed for How Clients Actually Book</h2>
+      <p>We rebuilt the site from scratch with a mobile-first approach. Over 80% of salon searches happen on smartphones — someone looking for "hair salon near me" while on the go. The new design is fast, showcases treatment categories with clean imagery, and places booking enquiry buttons within thumb-reach on every page.</p>
+      <p>Each treatment category was given its own structured page with descriptions, what to expect, and clear pricing guidance. This not only helps potential clients make decisions faster but creates dedicated landing pages that can rank individually for specific treatment searches over time.</p>
 
-      <h2>Getting Found Where It Matters</h2>
-      <p>The local SEO strategy focused on the treatments and areas where the salon operates. We optimised their Google Business Profile with accurate categories, service listings, and regular updates. On-site, we built content around the specific searches their ideal clients make — from general terms like "beauty salon near me" to specific queries like "balayage [local area]" or "gel nails [town]".</p>
-      <p>We also addressed their citation consistency across directories and review platforms, ensuring the salon's name, address, and phone number were uniform everywhere Google looks.</p>
+      <h2>SEO Groundwork for Local Discovery</h2>
+      <p>The local SEO setup focused on the treatments and areas where the salon operates. We optimised their Google Business Profile with accurate categories, service listings, and proper setup. On-site, content was structured around the specific searches their ideal clients make — from general terms like "beauty salon near me" to specific queries like "balayage" or "gel nails" combined with their local area.</p>
+      <p>Citation consistency across directories and review platforms was also addressed, ensuring the salon's name, address, and phone number are uniform everywhere Google looks.</p>
 
-      <h2>Bookings That Come to Them</h2>
-      <p>The impact was clear within weeks of launch. The salon began receiving direct enquiries through the website from clients who had found them via Google — many of whom had never heard of the salon before. The combination of a professional design that builds instant trust and search visibility that puts them in front of new audiences has created a reliable pipeline of new bookings that supplements their existing client base.</p>
+      <h2>What We Delivered</h2>
+      <p>Therapy Hair Body & Nails now has a professional, mobile-first website that does their services justice. The site is built to convert — every page has a clear path to enquiry or booking. The SEO foundation has been laid with structured content, optimised profiles, and consistent citations, giving the salon the best possible starting position for growing their online visibility and attracting new clients through search.</p>
     `,
   },
   {
