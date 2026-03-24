@@ -6,9 +6,9 @@ import CaseStudyPage from '@/components/templates/CaseStudyPage';
 export const revalidate = 3600; // Invalidate every hour to catch new case studies
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // 1. Generate Static Metadata for SEO
