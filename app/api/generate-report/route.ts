@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { generateText } from 'ai';
+import { anthropic } from '@ai-sdk/anthropic';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -75,7 +76,7 @@ Return your response as valid JSON with this exact structure:
 Be specific and data-driven based on what you can see in the screenshots. If you cannot read specific numbers, make reasonable observations about trends and patterns. Keep language professional but accessible.`;
 
     const { text } = await generateText({
-      model: anthropic('claude-sonnet-4-20250514'),
+      model: anthropic('claude-sonnet-4-20250514') as any,
       messages: [{
         role: 'user',
         content: [
