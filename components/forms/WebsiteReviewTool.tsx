@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { trackLead } from '@/lib/analytics/lead';
-import { notifyAdmin } from '@/lib/web3forms-client';
 
 export default function WebsiteReviewTool() {
   const [url, setUrl] = useState('');
@@ -24,14 +23,24 @@ export default function WebsiteReviewTool() {
 
     // Send the lead to our backend for team follow-up
     try {
-      await fetch('/api/website-review', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url, email })
-      });
-
-      // Notify admin via Web3Forms (client-side)
-      notifyAdmin('Website Review Request', { Email: email, Website: url });
+      await Promise.all([
+        fetch('/api/website-review', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url, email })
+        }),
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            access_key: '31fb5677-3e73-4a83-abc3-4c668ba876df',
+            subject: `Website Review Request: ${url}`,
+            from_name: 'Business Sorted Kent',
+            Email: email,
+            Website: url,
+          }),
+        }).catch(() => {}),
+      ]);
       
       // Generate simulated but highly credible output
       setAnalysis({

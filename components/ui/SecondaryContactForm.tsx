@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { Send, User, Mail, Briefcase } from 'lucide-react';
-import { notifyAdmin } from '@/lib/web3forms-client';
 
 export default function SecondaryContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', service_required: '', message: '' });
@@ -13,22 +12,29 @@ export default function SecondaryContactForm() {
     setStatus('loading');
     
     try {
-      const res = await fetch('/api/enquiry', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      // Fire both API save and Web3Forms email in parallel
+      const [res] = await Promise.all([
+        fetch('/api/enquiry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        }),
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            access_key: '31fb5677-3e73-4a83-abc3-4c668ba876df',
+            subject: `New Enquiry: ${formData.name}`,
+            from_name: 'Business Sorted Kent',
+            Name: formData.name,
+            Email: formData.email,
+            'Service Required': formData.service_required || 'N/A',
+            Message: formData.message || 'N/A',
+          }),
+        }).catch(() => {}),
+      ]);
 
       if (res.ok) {
-        // Send email notification via Web3Forms (client-side)
-        notifyAdmin(`New Enquiry: ${formData.name}`, {
-          Name: formData.name,
-          Email: formData.email,
-          'Service Required': formData.service_required || 'N/A',
-          Message: formData.message || 'N/A',
-        });
         setStatus('success');
         setFormData({ name: '', email: '', service_required: '', message: '' });
       } else {

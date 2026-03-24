@@ -3,7 +3,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useChat, Message } from 'ai/react';
 import { usePathname } from 'next/navigation';
-import { notifyAdmin } from '@/lib/web3forms-client';
+
+const W3F_KEY = '31fb5677-3e73-4a83-abc3-4c668ba876df';
+const w3fNotify = (subject: string, fields: Record<string, string>) =>
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ access_key: W3F_KEY, subject, from_name: 'Business Sorted Kent', ...fields }),
+  }).catch(() => {});
 
 const InlineFallbackForm = () => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -30,7 +37,7 @@ const InlineFallbackForm = () => {
         body: JSON.stringify(data)
       });
       if (res.ok) {
-        notifyAdmin('Elle Fallback Message', { Name: String(data.name), Email: String(data.email), Message: String(data.message) });
+        w3fNotify('Elle Fallback Message', { Name: String(data.name), Email: String(data.email), Message: String(data.message) });
         setStatus('success');
       }
       else setStatus('error');
@@ -99,7 +106,7 @@ const InlineReviewForm = ({ messages }: { messages: Message[] }) => {
         body: JSON.stringify(data)
       });
       if (res.ok) {
-        notifyAdmin('Website Review Request', { Name: String(data.name), Email: String(data.email), Website: String(data.url) });
+        w3fNotify('Website Review Request', { Name: String(data.name), Email: String(data.email), Website: String(data.url) });
         setStatus('success');
       }
       else setStatus('error');
@@ -153,7 +160,7 @@ const InlineCallForm = ({ messages }: { messages: Message[] }) => {
         body: JSON.stringify(data)
       });
       if (res.ok) {
-        notifyAdmin('Elle Call Booking', { Name: String(data.name), Email: String(data.email), 'Preferred Time': String(data.preferredTime) });
+        w3fNotify('Elle Call Booking', { Name: String(data.name), Email: String(data.email), 'Preferred Time': String(data.preferredTime) });
         setStatus('success');
       }
       else setStatus('error');
@@ -207,7 +214,7 @@ const InlineMessageForm = ({ messages }: { messages: Message[] }) => {
         body: JSON.stringify(data)
       });
       if (res.ok) {
-        notifyAdmin('Elle Chat Message', { Name: String(data.name), Email: String(data.email), Message: String(data.message) });
+        w3fNotify('Elle Chat Message', { Name: String(data.name), Email: String(data.email), Message: String(data.message) });
         setStatus('success');
       }
       else setStatus('error');

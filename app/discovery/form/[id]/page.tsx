@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { Lock, ChevronRight, ChevronLeft, Check, Send, CheckCircle2 } from 'lucide-react';
-import { notifyAdmin } from '@/lib/web3forms-client';
 
 interface FormField {
   id: string;
@@ -102,27 +101,35 @@ export default function DynamicDiscoveryPage({ params }: { params: Promise<{ id:
     if (!formDef) return;
     setSubmitting(true);
     try {
-      await fetch('/api/discovery', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          clientSlug: formDef.client_slug,
-          formData,
-          completedAt: new Date().toISOString(),
-        }),
-      });
-
-      // Notify admin via Web3Forms (client-side)
       const fieldSummary = Object.entries(formData)
         .filter(([, v]) => v && v.trim())
         .slice(0, 10)
         .map(([k, v]) => `${k}: ${v}`)
         .join('\n');
-      notifyAdmin(`Discovery Form Submitted: ${formDef.client_name}`, {
-        Client: formDef.client_name,
-        'Fields Completed': String(Object.keys(formData).length),
-        'Sample Fields': fieldSummary,
-      });
+
+      await Promise.all([
+        fetch('/api/discovery', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            clientSlug: formDef.client_slug,
+            formData,
+            completedAt: new Date().toISOString(),
+          }),
+        }),
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            access_key: '31fb5677-3e73-4a83-abc3-4c668ba876df',
+            subject: `Discovery Form Submitted: ${formDef.client_name}`,
+            from_name: 'Business Sorted Kent',
+            Client: formDef.client_name,
+            'Fields Completed': String(Object.keys(formData).length),
+            'Sample Fields': fieldSummary,
+          }),
+        }).catch(() => {}),
+      ]);
 
       setSubmitted(true);
     } catch (err) {
