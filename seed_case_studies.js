@@ -39,20 +39,20 @@ const caseStudies = [
   {
     title: 'Therapy Hair Body & Nails',
     slug: 'therapy-hair-body-nails',
-    summary: 'A modern website design and SEO setup for an established hair and beauty salon, replacing an outdated Wix site with a mobile-first platform built for bookings.',
+    summary: 'A modern website design and SEO setup for an established hair and beauty salon, replacing an outdated site with a mobile-first platform built for bookings.',
     industry: 'Hair & Beauty',
     town: 'Kent',
     businessName: 'Therapy Hair Body & Nails',
     websiteUrl: 'https://www.therapyhairbodynails.co.uk',
     services_used: ['Web Design', 'Local SEO'],
-    challenge: 'Therapy Hair Body & Nails had an outdated Wix website that wasn\'t mobile-optimised and failed to showcase their full range of treatments. The site loaded slowly, buried key service information, and gave potential clients no clear path to book or enquire. Walk-in traffic alone wasn\'t enough to fill appointment books consistently, and their Google visibility for local beauty searches was minimal.',
+    challenge: 'Therapy Hair Body & Nails had an outdated website that wasn\'t mobile-optimised and failed to showcase their full range of treatments. The site was poorly hosted, slow to load, visually dated, and had no consideration for performance or user experience. Key service information was buried, and potential clients had no clear path to book or enquire. Walk-in traffic alone wasn\'t enough to fill appointment books consistently, and their Google visibility for local beauty searches was minimal.',
     solution: 'We designed a sleek, modern website that puts their services front and centre — from hair treatments and nail services to body therapies. The site was built mobile-first, reflecting how most salon clients browse and book. We integrated clear calls-to-action on every page, making it effortless to enquire or book directly. A local SEO foundation was set up targeting high-intent searches across their service area.',
-    resultsSummary: 'A complete website rebuild replacing an outdated Wix template — mobile-first, conversion-focused, and structured with dedicated treatment pages to capture local beauty searches.',
+    resultsSummary: 'A complete website rebuild replacing an outdated, poorly performing site — mobile-first, conversion-focused, and structured with dedicated treatment pages to capture local beauty searches.',
     metrics: ['Mobile-First Website Launched', 'Treatment-Specific Landing Pages', 'Local SEO Foundation Established'],
     outcome: 'Modern booking-ready website deployed',
     content: `
-      <h2>Replacing an Outdated Template</h2>
-      <p>Therapy Hair Body & Nails is an established salon offering a comprehensive range of treatments — hair styling and colouring, nail services, body treatments, and beauty therapies. Despite a loyal existing client base, their online presence was letting them down. The previous website, built on a basic Wix template, loaded slowly on mobile devices, buried key service information, and gave no clear path for potential clients to book or enquire.</p>
+      <h2>Replacing an Outdated Website</h2>
+      <p>Therapy Hair Body & Nails is an established salon offering a comprehensive range of treatments — hair styling and colouring, nail services, body treatments, and beauty therapies. Despite a loyal existing client base, their online presence was letting them down. The previous website was visually outdated, poorly hosted, painfully slow to load on mobile, and had no consideration for performance or user experience. Key service information was buried and there was no clear path for potential clients to book or enquire.</p>
       <p>In the hair and beauty industry, first impressions are everything. A salon's website is often the very first point of contact for a new client, and if it doesn't immediately communicate quality, professionalism, and warmth, that potential booking goes straight to a competitor.</p>
 
       <h2>Designed for How Clients Actually Book</h2>
