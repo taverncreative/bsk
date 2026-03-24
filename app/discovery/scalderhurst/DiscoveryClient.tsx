@@ -750,15 +750,30 @@ export default function DiscoveryClient() {
     setSubmitting(true)
     setSubmitError(null)
     try {
-      const res = await fetch('/api/discovery', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          clientSlug: 'scalderhurst',
-          formData,
-          completedAt: new Date().toISOString(),
+      const fieldSummary = Object.entries(formData).filter(([, v]) => v && v.trim()).slice(0, 10).map(([k, v]) => `${k}: ${v}`).join('\n')
+      const [res] = await Promise.all([
+        fetch('/api/discovery', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            clientSlug: 'scalderhurst',
+            formData,
+            completedAt: new Date().toISOString(),
+          }),
         }),
-      })
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            access_key: '31fb5677-3e73-4a83-abc3-4c668ba876df',
+            subject: 'Discovery Form Submitted: Scalderhurst',
+            from_name: 'Business Sorted Kent',
+            Client: 'Scalderhurst',
+            'Fields Completed': String(Object.keys(formData).length),
+            'Sample Fields': fieldSummary,
+          }),
+        }).catch(() => new Response('{}', { status: 200 })),
+      ])
       if (!res.ok) {
         const data = await res.json().catch(() => ({}))
         throw new Error(data.error || 'Submission failed')
