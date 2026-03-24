@@ -123,6 +123,9 @@ export default async function CaseStudyRoute({ params }: PageProps) {
         solution={parsedPayload.solution}
         outcome={parsedPayload.resultsSummary}
         results={parsedResults}
+        content={parsedPayload.content}
+        businessName={parsedPayload.businessName}
+        websiteUrl={parsedPayload.websiteUrl}
         service={{
           name: serviceName,
           slug: serviceSlug,

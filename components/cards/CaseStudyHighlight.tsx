@@ -20,13 +20,14 @@ export default function CaseStudyHighlight({ caseStudy }: CaseStudyHighlightProp
     // fallback
   }
 
+  const businessName = parsedPayload.businessName || '';
   const town = parsedPayload.town || '';
   const industry = parsedPayload.industry || '';
   const services_used = parsedPayload.services_used || summary;
   const metrics = parsedPayload.resultsSummary || summary;
 
-  // Format the heading (e.g., "Ashford Plumbing Business" or fallback to title)
-  const heading = town && industry ? `${town} ${industry} Business` : title;
+  // Use real business name if available, otherwise fallback to title
+  const heading = businessName || title;
 
   return (
     <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 transition-all duration-300 hover:border-brand-gold hover:shadow-[0_0_40px_rgba(214,173,103,0.15)] flex flex-col h-full group">

@@ -328,27 +328,38 @@ export default function Navbar() {
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
                   
                   <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-6">Featured Results</h3>
-                  
+
                   <div className="flex flex-col gap-4">
-                    <Link href="/case-studies/gem-services" className="flex items-start gap-5 p-4 -mx-4 rounded-xl hover:bg-neutral-900/50 transition-colors group/cs">
+                    <Link href="/case-studies/safelee-inspection-consultancy" className="flex items-start gap-5 p-4 -mx-4 rounded-xl hover:bg-neutral-900/50 transition-colors group/cs">
                       <div className="shrink-0 w-12 h-12 rounded-xl bg-neutral-950 border border-neutral-800 flex items-center justify-center group-hover/cs:border-brand-gold/50 group-hover/cs:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
                         <TrendingUp className="w-5 h-5 text-brand-gold" />
                       </div>
                       <div>
-                        <h4 className="text-white font-bold mb-1 group-hover/cs:text-brand-gold transition-colors">GEM Services</h4>
-                        <p className="text-sm text-neutral-400 mb-2">Pest Control | Kent</p>
-                        <p className="text-xs font-semibold text-brand-gold bg-brand-gold/10 inline-block px-2.5 py-1 rounded-md">Built strong brand identity</p>
+                        <h4 className="text-white font-bold mb-1 group-hover/cs:text-brand-gold transition-colors">SafeLee Inspection & Consultancy</h4>
+                        <p className="text-sm text-neutral-400 mb-2">Health & Safety | Manchester</p>
+                        <p className="text-xs font-semibold text-brand-gold bg-brand-gold/10 inline-block px-2.5 py-1 rounded-md">Page 1 rankings from zero visibility</p>
                       </div>
                     </Link>
 
-                    <Link href="/case-studies/kent-iphone-repair" className="flex items-start gap-5 p-4 -mx-4 rounded-xl hover:bg-neutral-900/50 transition-colors group/cs">
+                    <Link href="/case-studies/therapy-hair-body-nails" className="flex items-start gap-5 p-4 -mx-4 rounded-xl hover:bg-neutral-900/50 transition-colors group/cs">
                       <div className="shrink-0 w-12 h-12 rounded-xl bg-neutral-950 border border-neutral-800 flex items-center justify-center group-hover/cs:border-brand-gold/50 group-hover/cs:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
                         <Briefcase className="w-5 h-5 text-brand-gold" />
                       </div>
                       <div>
-                        <h4 className="text-white font-bold mb-1 group-hover/cs:text-brand-gold transition-colors">Kent iPhone Repair</h4>
-                        <p className="text-sm text-neutral-400 mb-2">Mobile Phone Repair | Kent</p>
-                        <p className="text-xs font-semibold text-brand-gold bg-brand-gold/10 inline-block px-2.5 py-1 rounded-md">Ranked in Google Map results</p>
+                        <h4 className="text-white font-bold mb-1 group-hover/cs:text-brand-gold transition-colors">Therapy Hair Body & Nails</h4>
+                        <p className="text-sm text-neutral-400 mb-2">Hair & Beauty | Kent</p>
+                        <p className="text-xs font-semibold text-brand-gold bg-brand-gold/10 inline-block px-2.5 py-1 rounded-md">Transformed online booking pipeline</p>
+                      </div>
+                    </Link>
+
+                    <Link href="/case-studies/how-to-automate-my-business" className="flex items-start gap-5 p-4 -mx-4 rounded-xl hover:bg-neutral-900/50 transition-colors group/cs">
+                      <div className="shrink-0 w-12 h-12 rounded-xl bg-neutral-950 border border-neutral-800 flex items-center justify-center group-hover/cs:border-brand-gold/50 group-hover/cs:shadow-[0_0_15px_rgba(214,173,103,0.15)] transition-all">
+                        <TrendingUp className="w-5 h-5 text-brand-gold" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold mb-1 group-hover/cs:text-brand-gold transition-colors">How To Automate My Business</h4>
+                        <p className="text-sm text-neutral-400 mb-2">AI & Automation | Kent</p>
+                        <p className="text-xs font-semibold text-brand-gold bg-brand-gold/10 inline-block px-2.5 py-1 rounded-md">Authority platform from launch</p>
                       </div>
                     </Link>
                   </div>

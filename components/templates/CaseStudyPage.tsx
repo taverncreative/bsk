@@ -16,6 +16,9 @@ interface CaseStudyPageProps {
   solution?: string;
   outcome?: string;
   results: string[];
+  content?: string;
+  businessName?: string;
+  websiteUrl?: string;
 }
 
 export default function CaseStudyPage({
@@ -27,6 +30,9 @@ export default function CaseStudyPage({
   solution,
   outcome,
   results,
+  content,
+  businessName,
+  websiteUrl,
 }: CaseStudyPageProps) {
   const safeTown = town.name || 'Kent';
   const safeIndustry = industry || 'Service Businesses';
@@ -98,8 +104,11 @@ export default function CaseStudyPage({
     <>
       {/* SECTION 1: HERO */}
       <LocalServiceHero
-        title={title}
-        subtitle={`How we helped a ${safeIndustry} business in ${safeTown} generate more enquiries using ${safeService}.`}
+        title={businessName || title}
+        subtitle={businessName
+          ? `How we helped ${businessName} grow with ${safeService.toLowerCase()}.`
+          : `How we helped a ${safeIndustry} business in ${safeTown} generate more enquiries using ${safeService}.`
+        }
         primaryCTA={{
           text: 'Get A Free Quote',
           href: '/contact',
@@ -107,65 +116,86 @@ export default function CaseStudyPage({
       />
 
       <article className="bg-white text-slate-900 pb-24 border-t border-slate-200">
-        
-        {/* CLIENT OVERVIEW */}
-        <section className="py-20 border-b border-slate-100">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">1. Client Overview</h2>
-            <div className="prose prose-lg text-slate-600 max-w-none">
-              <p className="leading-relaxed mb-6">{pOverview}</p>
-              <p className="leading-relaxed">By partnering with Business Sorted Kent, they recognized the necessity of upgrading their digital assets from a basic informational page into a highly robust, secure lead engine capable of scaling their revenue dynamically.</p>
-            </div>
-          </div>
-        </section>
 
-        {/* THE CHALLENGE */}
-        <section className="py-20 bg-slate-50 border-b border-slate-100">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">2. The Challenge</h2>
-            <div className="prose prose-lg text-slate-600 max-w-none">
-              <p className="leading-relaxed font-semibold text-slate-800 mb-6">
-                {summary || `This ${safeIndustry} business operating in ${safeTown} was struggling to stand out against local competitors. Despite having years of operational experience, their lack of a structured ${safeService.toLowerCase()} framework meant they were consistently losing high-value enquiries.`}
-              </p>
-              <p className="leading-relaxed mb-6">{pChallenge1}</p>
-              <p className="leading-relaxed">{pChallenge2}</p>
+        {/* Real content from database - used for actual case studies */}
+        {content ? (
+          <section className="py-20 border-b border-slate-100">
+            <div className="container mx-auto px-4 max-w-4xl">
+              {websiteUrl && (
+                <div className="mb-8 flex items-center gap-3">
+                  <a href={websiteUrl} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-dark transition-colors bg-slate-100 px-4 py-2 rounded-lg">
+                    Visit {businessName || 'Client'} Website →
+                  </a>
+                </div>
+              )}
+              <div className="prose prose-lg text-slate-600 max-w-none prose-headings:text-slate-900 prose-headings:font-extrabold prose-headings:tracking-tight prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-p:leading-relaxed prose-p:mb-6"
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
             </div>
-          </div>
-        </section>
+          </section>
+        ) : (
+          <>
+            {/* CLIENT OVERVIEW - fallback for generic case studies */}
+            <section className="py-20 border-b border-slate-100">
+              <div className="container mx-auto px-4 max-w-4xl">
+                <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">1. Client Overview</h2>
+                <div className="prose prose-lg text-slate-600 max-w-none">
+                  <p className="leading-relaxed mb-6">{pOverview}</p>
+                  <p className="leading-relaxed">By partnering with Business Sorted Kent, they recognized the necessity of upgrading their digital assets from a basic informational page into a highly robust, secure lead engine capable of scaling their revenue dynamically.</p>
+                </div>
+              </div>
+            </section>
 
-        {/* THE SOLUTION */}
-        <section className="py-20 border-b border-slate-100">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">3. The Solution</h2>
-            <div className="prose prose-lg text-slate-600 max-w-none">
-              <p className="leading-relaxed font-semibold text-slate-800 mb-6">
-                {solution || `We engineered a highly targeted, conversion-focused ${safeService.toLowerCase()} strategy. By combining high-performance design architecture with localized visibility signals directly mapped for ${safeTown}, we fundamentally restructured how this ${safeIndustry} business interacted with ready-to-buy prospects online.`}
-              </p>
-              <p className="leading-relaxed mb-6">{pSolution1}</p>
-              <p className="leading-relaxed">{pSolution2}</p>
-            </div>
-          </div>
-        </section>
+            {/* THE CHALLENGE */}
+            <section className="py-20 bg-slate-50 border-b border-slate-100">
+              <div className="container mx-auto px-4 max-w-4xl">
+                <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">2. The Challenge</h2>
+                <div className="prose prose-lg text-slate-600 max-w-none">
+                  <p className="leading-relaxed font-semibold text-slate-800 mb-6">
+                    {summary || `This ${safeIndustry} business operating in ${safeTown} was struggling to stand out against local competitors. Despite having years of operational experience, their lack of a structured ${safeService.toLowerCase()} framework meant they were consistently losing high-value enquiries.`}
+                  </p>
+                  <p className="leading-relaxed mb-6">{pChallenge1}</p>
+                  <p className="leading-relaxed">{pChallenge2}</p>
+                </div>
+              </div>
+            </section>
 
-        {/* KEY IMPROVEMENTS */}
-        <section className="py-20 bg-slate-50 border-b border-slate-100">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">4. Key Improvements</h2>
-            <p className="text-lg text-slate-600 mb-8">
-              To guarantee definitive performance improvements, the following strict architectural upgrades were implemented during the campaign:
-            </p>
-            <ul className="space-y-6">
-              {renderedImprovements.map((imp, idx) => (
-                <li key={idx} className="flex items-start">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand flex items-center justify-center text-white mt-1 mr-4 font-bold shadow-md">
-                    ✓
-                  </div>
-                  <p className="text-lg text-slate-700 leading-relaxed pt-1">{imp}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+            {/* THE SOLUTION */}
+            <section className="py-20 border-b border-slate-100">
+              <div className="container mx-auto px-4 max-w-4xl">
+                <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">3. The Solution</h2>
+                <div className="prose prose-lg text-slate-600 max-w-none">
+                  <p className="leading-relaxed font-semibold text-slate-800 mb-6">
+                    {solution || `We engineered a highly targeted, conversion-focused ${safeService.toLowerCase()} strategy. By combining high-performance design architecture with localized visibility signals directly mapped for ${safeTown}, we fundamentally restructured how this ${safeIndustry} business interacted with ready-to-buy prospects online.`}
+                  </p>
+                  <p className="leading-relaxed mb-6">{pSolution1}</p>
+                  <p className="leading-relaxed">{pSolution2}</p>
+                </div>
+              </div>
+            </section>
+
+            {/* KEY IMPROVEMENTS */}
+            <section className="py-20 bg-slate-50 border-b border-slate-100">
+              <div className="container mx-auto px-4 max-w-4xl">
+                <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">4. Key Improvements</h2>
+                <p className="text-lg text-slate-600 mb-8">
+                  To guarantee definitive performance improvements, the following strict architectural upgrades were implemented during the campaign:
+                </p>
+                <ul className="space-y-6">
+                  {renderedImprovements.map((imp, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand flex items-center justify-center text-white mt-1 mr-4 font-bold shadow-md">
+                        ✓
+                      </div>
+                      <p className="text-lg text-slate-700 leading-relaxed pt-1">{imp}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          </>
+        )}
 
         {/* RESULTS */}
         <section className="py-20 border-b border-slate-100">
@@ -218,16 +248,18 @@ export default function CaseStudyPage({
           </div>
         </section>
 
-        {/* LESSONS LEARNED */}
-        <section className="py-20 bg-slate-50">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">6. Lessons Learned</h2>
-            <div className="prose prose-lg text-slate-600 max-w-none">
-              <p className="leading-relaxed mb-6">{pLessons1}</p>
-              <p className="leading-relaxed">By treating their website not as a digital business card, but as a mathematical engine designed exclusively for growth, this business has secured a permanent, highly defensive competitive moat around their operations.</p>
+        {/* LESSONS LEARNED - only for generic case studies */}
+        {!content && (
+          <section className="py-20 bg-slate-50">
+            <div className="container mx-auto px-4 max-w-4xl">
+              <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">6. Lessons Learned</h2>
+              <div className="prose prose-lg text-slate-600 max-w-none">
+                <p className="leading-relaxed mb-6">{pLessons1}</p>
+                <p className="leading-relaxed">By treating their website not as a digital business card, but as a mathematical engine designed exclusively for growth, this business has secured a permanent, highly defensive competitive moat around their operations.</p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
       </article>
 
