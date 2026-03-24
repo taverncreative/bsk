@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { generateText } from 'ai';
 import { openai } from '@ai-sdk/openai';
 import { createClient } from '@supabase/supabase-js';
-import { sendFormErrorAlert } from '@/lib/error-alert';
+import { sendEmail, sendErrorAlert } from '@/lib/web3forms';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -70,7 +70,7 @@ export async function POST(req: Request) {
     
     if (insertError) {
       console.error("Error inserting lead to Supabase:", insertError);
-      sendFormErrorAlert(
+      sendErrorAlert(
         'Website Review',
         pageUrl || 'Unknown',
         email || 'Unknown',
@@ -87,30 +87,11 @@ export async function POST(req: Request) {
       transcript: JSON.stringify(messages)
     });
 
-    // Send Admin Email
-    const apiKey = process.env.RESEND_API_KEY;
-    if (apiKey) {
-      const adminEmailHTML = `
-        <h2>New Website Review Request</h2>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Website:</strong> ${url}</p>
-        <hr />
-        <h3>AI Initial Diagnostic:</h3>
-        <pre style="white-space: pre-wrap;">${aiSummary}</pre>
-        <hr />
-        <p><a href="https://businesssortedkent.co.uk/admin-dashboard/lead-inbox">View in Admin Dashboard</a></p>
-      `;
-      await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-        body: JSON.stringify({
-          from: 'Business Sorted Kent <hello@businesssortedkent.co.uk>',
-          to: 'hello@businesssortedkent.co.uk',
-          subject: `Website Review Request: ${url}`,
-          html: adminEmailHTML
-        })
-      });
-    }
+    // Send Admin Email via Web3Forms
+    await sendEmail(
+      `Website Review Request: ${url}`,
+      `New Website Review Request\n\nEmail: ${email}\nWebsite: ${url}\n\nAI Diagnostic:\n${aiSummary}\n\nView in Dashboard: https://businesssortedkent.co.uk/admin-dashboard/lead-inbox`
+    );
 
     console.log(`[CRM PIPELINE INGESTION] NEW WEBSITE REVIEW REQUEST:
 Name: ${name || 'Not provided'}
@@ -126,7 +107,7 @@ ${aiSummary}
     return NextResponse.json({ success: true, message: 'Review requested successfully.' });
   } catch (error: any) {
     console.error('Error processing website review request:', error);
-    sendFormErrorAlert(
+    sendErrorAlert(
         'Website Review',
         bodyContext?.pageUrl || 'Unknown',
         bodyContext?.email || 'Unknown',

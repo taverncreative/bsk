@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, Users, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail, ClipboardList, Phone, CheckSquare, FolderOpen } from 'lucide-react';
+import { LayoutDashboard, Users, KanbanSquare, PieChart, Bot, Receipt, FileText, Layers, Menu, X, LogOut, Eye, Mail, ClipboardList, CheckSquare, FolderOpen } from 'lucide-react';
 import { createClient } from '@/lib/supabaseClient';
 
 const todoNav = { name: 'To-Do', href: '/admin-dashboard/todos', icon: CheckSquare };
@@ -31,12 +31,6 @@ const navigationGroups = [
       { name: 'Analytics', href: '/admin-dashboard/analytics', icon: PieChart },
       { name: 'Reports', href: '/admin-dashboard/reports', icon: FileText },
       { name: 'Elle', href: '/admin-dashboard/elle', icon: Bot },
-    ],
-  },
-  {
-    label: 'Manage',
-    items: [
-      { name: 'Upcoming Calls', href: '/admin-dashboard/upcoming-calls', icon: Phone },
     ],
   },
 ];

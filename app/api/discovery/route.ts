@@ -1,46 +1,12 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { sendFormErrorAlert } from '@/lib/error-alert'
+import { sendEmail, sendErrorAlert } from '@/lib/web3forms'
 
 function getSupabase() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   )
-}
-
-const sendEmail = async (to: string, subject: string, html: string) => {
-  const apiKey = process.env.RESEND_API_KEY
-  if (!apiKey) {
-    console.error('[DISCOVERY EMAIL] RESEND_API_KEY is not set — email NOT sent. Add it to Vercel environment variables.')
-    return
-  }
-
-  try {
-    console.log(`[DISCOVERY EMAIL] Sending to ${to}...`)
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        from: 'Business Sorted Kent <hello@businesssortedkent.co.uk>',
-        to,
-        subject,
-        html,
-      }),
-    })
-
-    const responseText = await res.text()
-    if (!res.ok) {
-      console.error(`[DISCOVERY EMAIL] Resend API error (${res.status}):`, responseText)
-    } else {
-      console.log('[DISCOVERY EMAIL] Sent successfully:', responseText)
-    }
-  } catch (err) {
-    console.error('[DISCOVERY EMAIL] Network error:', err)
-  }
 }
 
 function formatFieldsToHTML(data: Record<string, string>, sectionTitle: string): string {
@@ -87,7 +53,7 @@ export async function POST(req: Request) {
 
     if (insertError) {
       console.error('Discovery submission insert error:', insertError)
-      sendFormErrorAlert(
+      sendErrorAlert(
         'Discovery Form',
         `Discovery: ${clientSlug}`,
         clientSlug,
@@ -147,16 +113,23 @@ export async function POST(req: Request) {
       </div>
     `
 
+    // Build plain text summary for Web3Forms
+    const plainTextFields = Object.entries(formData as Record<string, string>)
+      .filter(([, v]) => v && v.trim())
+      .map(([key, value]) => {
+        const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase()).replace(/_/g, ' ')
+        return `${label}: ${value}`
+      }).join('\n')
+
     await sendEmail(
-      'hello@businesssortedkent.co.uk',
       `Discovery Form Submitted: ${clientSlug}`,
-      adminEmailHTML
+      `Discovery Form Submitted\n\nClient: ${clientSlug}\nSubmitted: ${new Date().toLocaleString('en-GB')}\n\n${plainTextFields}\n\nView in Dashboard: https://businesssortedkent.co.uk/admin-dashboard/discovery`
     )
 
     return NextResponse.json({ success: true, submission })
   } catch (error: any) {
     console.error('Error handling discovery submission:', error)
-    sendFormErrorAlert(
+    sendErrorAlert(
       'Discovery Form',
       'Discovery Form Submission',
       'Unknown',
