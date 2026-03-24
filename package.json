@@ -12,6 +12,7 @@
     "submit-to-google:dry": "npx tsx scripts/submitToGoogle.ts --dry-run"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.64",
     "@ai-sdk/openai": "^0.0.66",
     "@ai-sdk/react": "^3.0.118",
     "@supabase/auth-helpers-nextjs": "^0.15.0",
@@ -26,7 +27,8 @@
     "next": "16.1.6",
     "openai": "^4.68.0",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "stripe": "^20.4.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

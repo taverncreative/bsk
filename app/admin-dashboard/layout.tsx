@@ -15,7 +15,7 @@ const navigationGroups = [
       { name: 'Lead Inbox', href: '/admin-dashboard/lead-inbox', icon: Mail },
       { name: 'Pipeline', href: '/admin-dashboard/pipeline', icon: KanbanSquare },
       { name: 'Clients', href: '/admin-dashboard/clients', icon: Users },
-      { name: 'Projects', href: '/admin-dashboard/projects', icon: FolderOpen },
+      { name: 'Production', href: '/admin-dashboard/production', icon: Layers },
       { name: 'Discovery', href: '/admin-dashboard/discovery', icon: ClipboardList },
     ],
   },

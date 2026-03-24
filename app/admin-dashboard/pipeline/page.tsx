@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Plus, MoreHorizontal, Calendar, Globe, MapPin, Building, Activity, X, Users, Mail, Phone, PoundSterling, ArrowRight, CheckCircle, Trash2 } from 'lucide-react';
+import { Plus, MoreHorizontal, Calendar, Globe, MapPin, Building, Activity, X, Users, Mail, Phone, PoundSterling, ArrowRight, CheckCircle, Trash2, Link2 } from 'lucide-react';
 import { createClient } from '@/lib/supabaseClient';
 import Link from 'next/link';
 
@@ -221,13 +221,25 @@ export default function PipelinePage() {
             {pipelineValue > 0 && <span className="ml-3 text-brand-gold font-medium">Pipeline value: £{pipelineValue.toLocaleString()}</span>}
           </p>
         </div>
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="flex flex-shrink-0 items-center px-4 py-2 bg-brand-gold text-black rounded-lg font-medium hover:bg-yellow-500 shadow-brand-glow transition-colors"
-        >
-          <Plus className="h-5 w-5 mr-2" />
-          Add Lead
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(`${window.location.origin}/add-lead`);
+              setToast({ message: 'Lead form link copied!', type: 'success' });
+            }}
+            className="flex flex-shrink-0 items-center px-4 py-2 bg-zinc-900 border border-zinc-700 text-zinc-300 rounded-lg font-medium hover:border-brand-gold hover:text-white transition-colors"
+          >
+            <Link2 className="h-4 w-4 mr-2" />
+            Share Form
+          </button>
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="flex flex-shrink-0 items-center px-4 py-2 bg-brand-gold text-black rounded-lg font-medium hover:bg-yellow-500 shadow-brand-glow transition-colors"
+          >
+            <Plus className="h-5 w-5 mr-2" />
+            Add Lead
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-1 overflow-x-auto overflow-y-hidden gap-x-6 pb-8 snap-x">

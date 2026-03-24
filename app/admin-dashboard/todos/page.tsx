@@ -87,7 +87,7 @@ export default function TodosPage() {
   const addTodo = async () => {
     if (!form.title.trim()) { setToast({ message: 'Title is required', type: 'error' }); return; }
     setSaving(true);
-    const { error } = await supabase.from('todos').insert([{
+    const { data, error } = await supabase.from('todos').insert([{
       title: form.title,
       due_date: form.due_date || null,
       is_recurring: form.is_recurring,
@@ -95,10 +95,10 @@ export default function TodosPage() {
       client_id: form.client_id || null,
       project_id: form.project_id || null,
       notes: form.notes || null,
-    }]);
-    if (error) {
-      console.error('Todo insert error:', error);
-      setToast({ message: `Failed to add to-do: ${error.message}`, type: 'error' });
+    }]).select();
+    if (error || !data || data.length === 0) {
+      console.error('Todo insert failed:', { error, data });
+      setToast({ message: `Failed to add to-do: ${error?.message || 'Permission denied — run the RLS migration'}`, type: 'error' });
     } else {
       setToast({ message: 'To-do added!', type: 'success' });
       setShowAddModal(false);

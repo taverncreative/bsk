@@ -35,6 +35,10 @@ function InvoicesPageInner() {
   const [items, setItems] = useState<LineItem[]>([{ description: '', quantity: 1, rate: 0 }]);
   const [dueDate, setDueDate] = useState('');
   const [notes, setNotes] = useState('');
+  const [vatRate, setVatRate] = useState(0);
+  const [showNewClientModal, setShowNewClientModal] = useState(false);
+  const [newClientForm, setNewClientForm] = useState({ company_name: '', email: '', phone: '' });
+  const [savingClient, setSavingClient] = useState(false);
 
   const supabase = createClient();
   const searchParams = useSearchParams();
@@ -68,7 +72,7 @@ function InvoicesPageInner() {
   };
 
   const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.rate), 0);
-  const vat = subtotal * 0.2;
+  const vat = subtotal * (vatRate / 100);
   const total = subtotal + vat;
 
   const createInvoice = async () => {
@@ -85,14 +89,16 @@ function InvoicesPageInner() {
       items: validItems,
       subtotal,
       vat,
+      vat_rate: vatRate,
       total,
       status: 'draft',
       due_date: dueDate || null,
       notes,
     }]).select('*, clients(company_name)').single();
 
-    if (error) {
-      setToast({ message: 'Failed to create invoice', type: 'error' });
+    if (error || !data) {
+      console.error('Invoice creation error:', error, data);
+      setToast({ message: `Failed to create invoice: ${error?.message || 'Permission denied — check RLS policies'}`, type: 'error' });
     } else {
       // Log activity
       await supabase.from('activity_log').insert([{
@@ -116,6 +122,40 @@ function InvoicesPageInner() {
     setItems([{ description: '', quantity: 1, rate: 0 }]);
     setDueDate('');
     setNotes('');
+    setVatRate(0);
+  };
+
+  const duplicateInvoice = (invoice: any) => {
+    setClientId(invoice.client_id);
+    setItems(invoice.items || [{ description: '', quantity: 1, rate: 0 }]);
+    setNotes(invoice.notes || '');
+    setVatRate(invoice.vat_rate || 0);
+    const due = new Date();
+    due.setDate(due.getDate() + 30);
+    setDueDate(due.toISOString().split('T')[0]);
+    setSelectedInvoice(null);
+    setShowCreate(true);
+  };
+
+  const addNewClient = async () => {
+    if (!newClientForm.company_name.trim()) return;
+    setSavingClient(true);
+    const { data, error } = await supabase.from('clients').insert([{
+      company_name: newClientForm.company_name,
+      email: newClientForm.email || null,
+      phone: newClientForm.phone || null,
+      status: 'active',
+    }]).select().single();
+    if (!error && data) {
+      setClients(prev => [...prev, data].sort((a, b) => a.company_name.localeCompare(b.company_name)));
+      setClientId(data.id);
+      setShowNewClientModal(false);
+      setNewClientForm({ company_name: '', email: '', phone: '' });
+      setToast({ message: `${data.company_name} added!`, type: 'success' });
+    } else {
+      setToast({ message: 'Failed to add client', type: 'error' });
+    }
+    setSavingClient(false);
   };
 
   const sendInvoice = async (invoice: any) => {
@@ -241,6 +281,10 @@ function InvoicesPageInner() {
                 <CheckCircle className="h-4 w-4 mr-2" /> Mark as Paid
               </button>
             )}
+            <button onClick={() => duplicateInvoice(selectedInvoice)}
+              className="flex items-center px-4 py-2 bg-zinc-900 border border-zinc-700 text-zinc-300 rounded-lg font-medium text-sm hover:border-brand-gold hover:text-white transition-colors">
+              <FileText className="h-4 w-4 mr-2" /> Duplicate
+            </button>
             <button onClick={() => deleteInvoice(selectedInvoice)}
               className="flex items-center px-4 py-2 bg-zinc-900 border border-red-900/50 text-red-400 rounded-lg font-medium text-sm hover:bg-red-900/20 transition-colors">
               <Trash2 className="h-4 w-4 mr-2" /> Delete
@@ -316,8 +360,8 @@ function InvoicesPageInner() {
               <span>£{parseFloat(selectedInvoice.subtotal).toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-zinc-400">
-              <span>VAT (20%)</span>
-              <span>£{parseFloat(selectedInvoice.vat).toFixed(2)}</span>
+              <span>VAT ({selectedInvoice.vat_rate || 0}%)</span>
+              <span>£{parseFloat(selectedInvoice.vat || 0).toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-white text-lg font-bold pt-2 border-t border-zinc-700">
               <span>Total</span>
@@ -425,6 +469,31 @@ function InvoicesPageInner() {
         </div>
       ) : null}
 
+      {/* New Client Mini Modal */}
+      {showNewClientModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowNewClientModal(false)} />
+          <div className="relative bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl w-full max-w-sm p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-bold text-white">Add New Client</h3>
+              <button onClick={() => setShowNewClientModal(false)} className="text-zinc-400 hover:text-white"><X className="h-5 w-5" /></button>
+            </div>
+            <div className="space-y-3">
+              <input value={newClientForm.company_name} onChange={e => setNewClientForm({ ...newClientForm, company_name: e.target.value })}
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="Company Name *" />
+              <input value={newClientForm.email} onChange={e => setNewClientForm({ ...newClientForm, email: e.target.value })}
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="Email" />
+              <input value={newClientForm.phone} onChange={e => setNewClientForm({ ...newClientForm, phone: e.target.value })}
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" placeholder="Phone" />
+              <button onClick={addNewClient} disabled={savingClient}
+                className="w-full px-4 py-2 bg-brand-gold text-black rounded-md text-sm font-medium hover:bg-yellow-500 disabled:opacity-50">
+                {savingClient ? 'Adding...' : 'Add Client'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Create Invoice Form */}
       {showCreate && (
         <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-6 max-w-3xl">
@@ -436,12 +505,15 @@ function InvoicesPageInner() {
           </div>
 
           <div className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-zinc-300 mb-1">Client *</label>
-                <select value={clientId} onChange={e => setClientId(e.target.value)}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm">
+                <select value={clientId} onChange={e => {
+                  if (e.target.value === 'new') { setShowNewClientModal(true); }
+                  else { setClientId(e.target.value); }
+                }} className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm">
                   <option value="">Select client...</option>
+                  <option value="new">+ Add New Client</option>
                   {clients.map(c => (
                     <option key={c.id} value={c.id}>{c.company_name}</option>
                   ))}
@@ -451,6 +523,15 @@ function InvoicesPageInner() {
                 <label className="block text-sm font-medium text-zinc-300 mb-1">Due Date</label>
                 <input type="date" value={dueDate} onChange={e => setDueDate(e.target.value)}
                   className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-zinc-300 mb-1">VAT Rate</label>
+                <select value={vatRate} onChange={e => setVatRate(parseFloat(e.target.value))}
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-white text-sm">
+                  <option value={0}>No VAT (0%)</option>
+                  <option value={5}>5%</option>
+                  <option value={20}>20%</option>
+                </select>
               </div>
             </div>
 
@@ -494,7 +575,7 @@ function InvoicesPageInner() {
                 <span>£{subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-zinc-400">
-                <span>VAT (20%)</span>
+                <span>VAT ({vatRate}%)</span>
                 <span>£{vat.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-white text-lg font-bold pt-2 border-t border-zinc-700">

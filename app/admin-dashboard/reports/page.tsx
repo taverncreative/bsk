@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabaseClient';
-import { BarChart3, TrendingUp, Users, PoundSterling, Download, Calendar } from 'lucide-react';
+import { BarChart3, TrendingUp, Users, PoundSterling, Download, Calendar, Sparkles } from 'lucide-react';
+import Link from 'next/link';
 
 type ReportType = 'monthly' | 'pipeline' | 'revenue';
 
@@ -112,6 +113,10 @@ export default function ReportsPage() {
           <h1 className="text-3xl font-bold text-white tracking-tight mb-2">Reports</h1>
           <p className="text-zinc-400">Business intelligence at a glance.</p>
         </div>
+        <Link href="/admin-dashboard/reports/generate"
+          className="flex items-center px-4 py-2 bg-brand-gold text-black rounded-lg font-medium hover:bg-yellow-500 transition-colors text-sm">
+          <Sparkles className="h-4 w-4 mr-2" /> Generate Client Report
+        </Link>
       </div>
 
       {/* Report Type Tabs */}

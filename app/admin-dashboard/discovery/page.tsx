@@ -45,6 +45,158 @@ interface DiscoveryForm {
 interface LinkedLead { id: string; business_name: string; discovery_submission_id: string; }
 interface LinkedClient { id: string; company_name: string; discovery_submission_id: string; }
 
+// Company Profile Component - loads/creates profile from discovery submission
+function CompanyProfile({ submission, supabase, toast }: { submission: DiscoverySubmission; supabase: any; toast: (t: { message: string; type: 'success' | 'error' }) => void }) {
+  const [profile, setProfile] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [editingJobs, setEditingJobs] = useState(false);
+  const [newJob, setNewJob] = useState('');
+  const [newSuggestion, setNewSuggestion] = useState('');
+  const [profileNotes, setProfileNotes] = useState('');
+
+  useEffect(() => { loadProfile(); }, [submission.id]);
+
+  const loadProfile = async () => {
+    setLoading(true);
+    const { data } = await supabase.from('company_profiles').select('*').eq('discovery_submission_id', submission.id).single();
+    if (data) {
+      setProfile(data);
+      setProfileNotes(data.notes || '');
+    }
+    setLoading(false);
+  };
+
+  const createProfile = async () => {
+    const fd = submission.form_data;
+    const name = fd.companyName || fd.businessName || fd.company_name || submission.client_slug.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+    const { data, error } = await supabase.from('company_profiles').insert([{
+      discovery_submission_id: submission.id,
+      business_name: name,
+      form_data: fd,
+      immediate_jobs: [],
+      future_suggestions: [],
+    }]).select().single();
+    if (!error && data) { setProfile(data); toast({ message: 'Company profile created!', type: 'success' }); }
+    else { toast({ message: 'Failed to create profile', type: 'error' }); }
+  };
+
+  const addJob = async () => {
+    if (!newJob.trim() || !profile) return;
+    const jobs = [...(profile.immediate_jobs || []), { title: newJob, added_to_todos: false, added_to_production: false }];
+    await supabase.from('company_profiles').update({ immediate_jobs: jobs, updated_at: new Date().toISOString() }).eq('id', profile.id);
+    setProfile({ ...profile, immediate_jobs: jobs });
+    setNewJob('');
+  };
+
+  const addSuggestion = async () => {
+    if (!newSuggestion.trim() || !profile) return;
+    const suggestions = [...(profile.future_suggestions || []), { title: newSuggestion }];
+    await supabase.from('company_profiles').update({ future_suggestions: suggestions, updated_at: new Date().toISOString() }).eq('id', profile.id);
+    setProfile({ ...profile, future_suggestions: suggestions });
+    setNewSuggestion('');
+  };
+
+  const addJobToTodo = async (job: any, idx: number) => {
+    await supabase.from('todos').insert([{ title: job.title, notes: `From ${profile.business_name} company profile` }]);
+    const jobs = [...profile.immediate_jobs];
+    jobs[idx] = { ...jobs[idx], added_to_todos: true };
+    await supabase.from('company_profiles').update({ immediate_jobs: jobs }).eq('id', profile.id);
+    setProfile({ ...profile, immediate_jobs: jobs });
+    toast({ message: `"${job.title}" added to To-Do`, type: 'success' });
+  };
+
+  const addJobToProduction = async (job: any, idx: number) => {
+    await supabase.from('projects').insert([{ name: job.title, description: `From ${profile.business_name} company profile`, production_stage: 'briefing', client_id: profile.client_id || null }]);
+    const jobs = [...profile.immediate_jobs];
+    jobs[idx] = { ...jobs[idx], added_to_production: true };
+    await supabase.from('company_profiles').update({ immediate_jobs: jobs }).eq('id', profile.id);
+    setProfile({ ...profile, immediate_jobs: jobs });
+    toast({ message: `"${job.title}" added to Production`, type: 'success' });
+  };
+
+  const saveNotes = async () => {
+    if (!profile) return;
+    await supabase.from('company_profiles').update({ notes: profileNotes, updated_at: new Date().toISOString() }).eq('id', profile.id);
+    toast({ message: 'Notes saved', type: 'success' });
+  };
+
+  if (loading) return <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-6 mb-6 animate-pulse h-20" />;
+
+  if (!profile) {
+    return (
+      <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-6 mb-6 text-center">
+        <p className="text-zinc-400 mb-3">No company profile yet for this submission.</p>
+        <button onClick={createProfile} className="px-4 py-2 bg-brand-gold text-black rounded-lg text-sm font-medium hover:bg-yellow-500 transition-colors">
+          Create Company Profile
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4 mb-6">
+      <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-6">
+        <h3 className="text-lg font-bold text-white mb-1">{profile.business_name}</h3>
+        <p className="text-xs text-zinc-500 mb-4">Company Profile — Last updated {new Date(profile.updated_at).toLocaleDateString('en-GB')}</p>
+
+        {/* Immediate Jobs */}
+        <div className="mb-6">
+          <h4 className="text-sm font-semibold text-brand-gold uppercase tracking-wider mb-3">Immediate Jobs</h4>
+          {(profile.immediate_jobs || []).length === 0 && <p className="text-xs text-zinc-600 mb-2">No jobs added yet.</p>}
+          <div className="space-y-2 mb-3">
+            {(profile.immediate_jobs || []).map((job: any, idx: number) => (
+              <div key={idx} className="flex items-center justify-between bg-zinc-900/50 rounded-lg px-3 py-2">
+                <span className="text-sm text-zinc-300">{job.title}</span>
+                <div className="flex gap-2">
+                  {!job.added_to_todos && (
+                    <button onClick={() => addJobToTodo(job, idx)} className="text-xs text-brand-gold hover:text-white transition-colors">+ To-Do</button>
+                  )}
+                  {!job.added_to_production && (
+                    <button onClick={() => addJobToProduction(job, idx)} className="text-xs text-blue-400 hover:text-white transition-colors">+ Production</button>
+                  )}
+                  {job.added_to_todos && <span className="text-xs text-green-600">In To-Do</span>}
+                  {job.added_to_production && <span className="text-xs text-blue-600">In Production</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <input value={newJob} onChange={e => setNewJob(e.target.value)} onKeyDown={e => e.key === 'Enter' && addJob()}
+              className="flex-1 bg-zinc-900 border border-zinc-800 rounded-md py-1.5 px-3 text-sm text-white placeholder:text-zinc-600" placeholder="Add a job..." />
+            <button onClick={addJob} className="px-3 py-1.5 bg-zinc-800 border border-zinc-700 rounded-md text-xs text-zinc-300 hover:text-white transition-colors">Add</button>
+          </div>
+        </div>
+
+        {/* Future Suggestions */}
+        <div className="mb-6">
+          <h4 className="text-sm font-semibold text-purple-400 uppercase tracking-wider mb-3">Future Expansion</h4>
+          {(profile.future_suggestions || []).length === 0 && <p className="text-xs text-zinc-600 mb-2">No suggestions yet.</p>}
+          <div className="space-y-2 mb-3">
+            {(profile.future_suggestions || []).map((s: any, idx: number) => (
+              <div key={idx} className="bg-zinc-900/50 rounded-lg px-3 py-2">
+                <span className="text-sm text-zinc-300">{s.title}</span>
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <input value={newSuggestion} onChange={e => setNewSuggestion(e.target.value)} onKeyDown={e => e.key === 'Enter' && addSuggestion()}
+              className="flex-1 bg-zinc-900 border border-zinc-800 rounded-md py-1.5 px-3 text-sm text-white placeholder:text-zinc-600" placeholder="Add a suggestion..." />
+            <button onClick={addSuggestion} className="px-3 py-1.5 bg-zinc-800 border border-zinc-700 rounded-md text-xs text-zinc-300 hover:text-white transition-colors">Add</button>
+          </div>
+        </div>
+
+        {/* Notes */}
+        <div>
+          <h4 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-2">Profile Notes</h4>
+          <textarea value={profileNotes} onChange={e => setProfileNotes(e.target.value)} rows={3}
+            className="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 px-3 text-sm text-white mb-2" placeholder="Additional notes..." />
+          <button onClick={saveNotes} className="text-xs text-brand-gold hover:text-white transition-colors">Save Notes</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function DiscoveryPage() {
   const [activeTab, setActiveTab] = useState<'forms' | 'submissions'>('forms');
   const [submissions, setSubmissions] = useState<DiscoverySubmission[]>([]);
@@ -279,7 +431,14 @@ export default function DiscoveryPage() {
           </div>
         </div>
         <p className="text-zinc-500 text-sm mb-8">Submitted {formatDate(selected.completed_at || selected.created_at)}</p>
-        <div className="bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden">
+
+        {/* Company Profile Section */}
+        <CompanyProfile submission={selected} supabase={supabase} toast={setToast} />
+
+        <div className="bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden mt-6">
+          <div className="px-4 py-3 border-b border-zinc-800">
+            <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider">Raw Form Data</h3>
+          </div>
           <div className="divide-y divide-zinc-800">
             {fields.map(([key, value]) => (
               <div key={key} className="grid grid-cols-1 md:grid-cols-3 gap-2 p-4">
