@@ -270,36 +270,74 @@ export default function DiscoveryPage() {
   const addAsLead = async (sub: DiscoverySubmission) => {
     setActionLoading(`lead-${sub.id}`);
     const fd = sub.form_data;
+    const name = formatSlug(sub.client_slug);
+    const email = fd.email || fd.contactEmail || '';
     const noteLines = Object.entries(fd).filter(([, v]) => v && v.trim()).map(([k, v]) => `${formatLabel(k)}: ${v}`).join('\n');
-    const { data, error } = await supabase.from('leads').insert([{
-      business_name: formatSlug(sub.client_slug), contact_name: fd.contactName || fd.name || '',
-      email: fd.email || fd.contactEmail || '', phone: fd.phone || fd.contactPhone || '',
-      website_url: fd.website || fd.websiteUrl || fd.currentWebsite || '',
-      notes: `Discovery form submission\n\n${noteLines}`, source: 'Discovery Form', stage: 'New Lead', discovery_submission_id: sub.id,
-    }]).select().single();
-    if (!error && data) {
-      await supabase.from('activity_log').insert([{ entity_type: 'lead', entity_id: data.id, action: 'created_from_discovery', description: `Lead created from ${formatSlug(sub.client_slug)} discovery form` }]);
-      setLinkedLeads(prev => ({ ...prev, [sub.id]: { id: data.id, business_name: data.business_name, discovery_submission_id: sub.id } }));
-      setToast({ message: `${formatSlug(sub.client_slug)} added to pipeline!`, type: 'success' });
-    } else { setToast({ message: 'Failed to add as lead', type: 'error' }); }
+
+    // Check for existing lead with same name or email
+    let query = supabase.from('leads').select('id, business_name, notes').limit(1);
+    if (email) {
+      query = query.or(`business_name.ilike.${name},email.eq.${email}`);
+    } else {
+      query = query.ilike('business_name', name);
+    }
+    const { data: existing } = await query.maybeSingle();
+
+    if (existing) {
+      const updatedNotes = `${existing.notes || ''}\n\n--- Discovery Form Data ---\n${noteLines}`.trim();
+      await supabase.from('leads').update({ discovery_submission_id: sub.id, notes: updatedNotes }).eq('id', existing.id);
+      setLinkedLeads(prev => ({ ...prev, [sub.id]: { id: existing.id, business_name: existing.business_name, discovery_submission_id: sub.id } }));
+      setToast({ message: `Linked to existing lead: ${existing.business_name}`, type: 'success' });
+    } else {
+      const { data, error } = await supabase.from('leads').insert([{
+        business_name: name, contact_name: fd.contactName || fd.name || '',
+        email, phone: fd.phone || fd.contactPhone || '',
+        website_url: fd.website || fd.websiteUrl || fd.currentWebsite || '',
+        notes: `Discovery form submission\n\n${noteLines}`, source: 'Discovery Form', stage: 'New Lead', discovery_submission_id: sub.id,
+      }]).select().single();
+      if (!error && data) {
+        await supabase.from('activity_log').insert([{ entity_type: 'lead', entity_id: data.id, action: 'created_from_discovery', description: `Lead created from ${name} discovery form` }]);
+        setLinkedLeads(prev => ({ ...prev, [sub.id]: { id: data.id, business_name: data.business_name, discovery_submission_id: sub.id } }));
+        setToast({ message: `${name} added to pipeline!`, type: 'success' });
+      } else { setToast({ message: 'Failed to add as lead', type: 'error' }); }
+    }
     setActionLoading(null);
   };
 
   const addAsClient = async (sub: DiscoverySubmission) => {
     setActionLoading(`client-${sub.id}`);
     const fd = sub.form_data;
+    const name = formatSlug(sub.client_slug);
+    const email = fd.email || fd.contactEmail || '';
     const noteLines = Object.entries(fd).filter(([, v]) => v && v.trim()).map(([k, v]) => `${formatLabel(k)}: ${v}`).join('\n');
-    const { data, error } = await supabase.from('clients').insert([{
-      company_name: formatSlug(sub.client_slug), contact_name: fd.contactName || fd.name || '',
-      email: fd.email || fd.contactEmail || '', phone: fd.phone || fd.contactPhone || '',
-      website: fd.website || fd.websiteUrl || fd.currentWebsite || '',
-      notes: `From discovery form\n\n${noteLines}`, discovery_submission_id: sub.id, status: 'active',
-    }]).select().single();
-    if (!error && data) {
-      await supabase.from('activity_log').insert([{ entity_type: 'client', entity_id: data.id, action: 'created_from_discovery', description: `Client created from ${formatSlug(sub.client_slug)} discovery form` }]);
-      setLinkedClients(prev => ({ ...prev, [sub.id]: { id: data.id, company_name: data.company_name, discovery_submission_id: sub.id } }));
-      setToast({ message: `${formatSlug(sub.client_slug)} added as client!`, type: 'success' });
-    } else { setToast({ message: 'Failed to add as client', type: 'error' }); }
+
+    // Check for existing client with same name or email
+    let query = supabase.from('clients').select('id, company_name, notes').limit(1);
+    if (email) {
+      query = query.or(`company_name.ilike.${name},email.eq.${email}`);
+    } else {
+      query = query.ilike('company_name', name);
+    }
+    const { data: existing } = await query.maybeSingle();
+
+    if (existing) {
+      const updatedNotes = `${existing.notes || ''}\n\n--- Discovery Form Data ---\n${noteLines}`.trim();
+      await supabase.from('clients').update({ discovery_submission_id: sub.id, notes: updatedNotes }).eq('id', existing.id);
+      setLinkedClients(prev => ({ ...prev, [sub.id]: { id: existing.id, company_name: existing.company_name, discovery_submission_id: sub.id } }));
+      setToast({ message: `Linked to existing client: ${existing.company_name}`, type: 'success' });
+    } else {
+      const { data, error } = await supabase.from('clients').insert([{
+        company_name: name, contact_name: fd.contactName || fd.name || '',
+        email, phone: fd.phone || fd.contactPhone || '',
+        website: fd.website || fd.websiteUrl || fd.currentWebsite || '',
+        notes: `From discovery form\n\n${noteLines}`, discovery_submission_id: sub.id, status: 'active',
+      }]).select().single();
+      if (!error && data) {
+        await supabase.from('activity_log').insert([{ entity_type: 'client', entity_id: data.id, action: 'created_from_discovery', description: `Client created from ${name} discovery form` }]);
+        setLinkedClients(prev => ({ ...prev, [sub.id]: { id: data.id, company_name: data.company_name, discovery_submission_id: sub.id } }));
+        setToast({ message: `${name} added as client!`, type: 'success' });
+      } else { setToast({ message: 'Failed to add as client', type: 'error' }); }
+    }
     setActionLoading(null);
   };
 

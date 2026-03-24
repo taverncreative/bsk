@@ -57,12 +57,20 @@ export default function TodosPage() {
   }, [toast]);
 
   const loadData = async () => {
-    const [todosRes, clientsRes, projectsRes] = await Promise.all([
-      supabase.from('todos').select('*, clients(company_name), projects(name)').order('due_date', { ascending: true, nullsFirst: false }),
+    // Try with joins first, fall back to plain query if relations don't exist
+    const todosRes = await supabase.from('todos').select('*, clients(company_name), projects(name)').order('due_date', { ascending: true, nullsFirst: false });
+    if (todosRes.error) {
+      console.error('Todos query with joins failed, falling back:', todosRes.error);
+      const fallback = await supabase.from('todos').select('*').order('due_date', { ascending: true, nullsFirst: false });
+      setTodos(fallback.data || []);
+    } else {
+      setTodos(todosRes.data || []);
+    }
+
+    const [clientsRes, projectsRes] = await Promise.all([
       supabase.from('clients').select('id, company_name').eq('status', 'active').order('company_name'),
       supabase.from('projects').select('id, name').order('name'),
     ]);
-    setTodos(todosRes.data || []);
     setClients(clientsRes.data || []);
     setProjects(projectsRes.data || []);
     setLoading(false);

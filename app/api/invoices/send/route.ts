@@ -72,10 +72,10 @@ export async function POST(req: Request) {
             <span>Subtotal</span>
             <span>£${parseFloat(invoice.subtotal).toFixed(2)}</span>
           </div>
-          <div style="display:flex;justify-content:space-between;padding:6px 0;color:#888;font-size:14px;">
-            <span>VAT (20%)</span>
+          ${parseFloat(invoice.vat) > 0 ? `<div style="display:flex;justify-content:space-between;padding:6px 0;color:#888;font-size:14px;">
+            <span>VAT (${invoice.vat_rate || 20}%)</span>
             <span>£${parseFloat(invoice.vat).toFixed(2)}</span>
-          </div>
+          </div>` : ''}
           <div style="display:flex;justify-content:space-between;padding:10px 0;color:#D6AD67;font-size:20px;font-weight:700;border-top:2px solid #D6AD67;margin-top:8px;">
             <span>Total</span>
             <span>£${parseFloat(invoice.total).toFixed(2)}</span>
