@@ -1,7 +1,11 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getIndustryBySlug, getServiceBySlug, getGuideBySlug, getAllIndustries, getAllServices, getAllGuides } from '@/lib/queries';
+import { getIndustryContent } from '@/lib/queries/local-content';
 import LocalServiceHero from '@/components/sections/LocalServiceHero';
+import ProblemSection from '@/components/sections/ProblemSection';
+import SolutionSection from '@/components/sections/SolutionSection';
+import FAQ from '@/components/sections/FAQ';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
@@ -82,10 +86,11 @@ export default async function IndustrySlugPage({ params }: Props) {
     notFound();
   }
 
-  const [service, guide, allGuides] = await Promise.all([
+  const [service, guide, allGuides, industryContent] = await Promise.all([
     getServiceBySlug(slug),
     getGuideBySlug(slug),
-    getAllGuides()
+    getAllGuides(),
+    getIndustryContent(industrySlug, slug),
   ]);
 
   if (!service && !guide) {
@@ -211,11 +216,16 @@ export default async function IndustrySlugPage({ params }: Props) {
   }
 
   // IT IS A SERVICE
+  const hasContent = !!(industryContent?.intro_paragraph);
+  const painPoints = industryContent?.pain_points?.map(p => ({ title: p.title, pain_point: p.description }));
+  const solutions = industryContent?.solutions;
+  const faqs = industryContent?.faqs;
+
   return (
     <>
       <LocalServiceHero
         title={`${service!.name} for ${industry.name}`}
-        subtitle={`Helping ${industry.name.toLowerCase()} businesses generate more enquiries using professional ${service!.name.toLowerCase()}.`}
+        subtitle={hasContent ? industryContent!.intro_paragraph : `Helping ${industry.name.toLowerCase()} businesses generate more enquiries using professional ${service!.name.toLowerCase()}.`}
         primaryCTA={{
           text: 'Get A Free Quote',
           href: '/contact',
@@ -235,93 +245,81 @@ export default async function IndustrySlugPage({ params }: Props) {
           </div>
           <div className="prose prose-lg text-neutral-400 mx-auto text-center md:text-left">
             <p className="mb-6 leading-relaxed">
-              In the competitive {industry.name.toLowerCase()} sector, relying entirely on word-of-mouth or outdated directory listings is no longer enough to maintain consistent growth. Your customers are actively searching online for reliable {industry.name.toLowerCase()} providers, and if your digital presence is weak, those high-value leads are going directly to your competitors.
+              {hasContent ? industryContent!.why_needed : `In the competitive ${industry.name.toLowerCase()} sector, relying entirely on word-of-mouth or outdated directory listings is no longer enough to maintain consistent growth. Your customers are actively searching online for reliable ${industry.name.toLowerCase()} providers, and if your digital presence is weak, those high-value leads are going directly to your competitors.`}
             </p>
-            <p className="leading-relaxed">
-              {industry.pain_point || `Whether you're struggling with inconsistent lead volume or dealing with low-quality tyre-kickers, a professional ${service!.name.toLowerCase()} strategy bridges the gap between your operational excellence and your target audience, allowing you to dominate your market share.`}
-            </p>
+            {hasContent && industryContent!.approach_difference && (
+              <p className="leading-relaxed">
+                {industryContent!.approach_difference}
+              </p>
+            )}
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-black border-t border-neutral-900">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-              How Our {service!.name} Helps {industry.name}
-            </h2>
-          </div>
-          
-          <div className="bg-white border border-slate-200 rounded-xl p-8 md:p-12 shadow-sm">
-            <ul className="space-y-8">
-              <li className="flex items-start">
-                <div className="flex-shrink-0 mt-1">
-                  <div className="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="ml-5">
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">Generate more enquiries</h3>
-                  <p className="text-slate-600 leading-relaxed text-lg">
-                    We engineer {service!.name.toLowerCase()} solutions that act as proactive digital sales engines, aggressively capturing high-intent {industry.name.toLowerCase()} leads specifically when they need your services most.
-                  </p>
-                </div>
-              </li>
+      {/* Pain Points — unique per industry×service from database */}
+      <ProblemSection
+        headlineOverride={`Common ${service!.name} Challenges for ${industry.name}`}
+        painPoints={painPoints}
+        industryName={industry.name}
+      />
 
-              <li className="flex items-start">
-                <div className="flex-shrink-0 mt-1">
-                  <div className="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="ml-5">
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">Build trust online</h3>
-                  <p className="text-slate-600 leading-relaxed text-lg">
-                    First impressions matter. We utilize powerful {service!.name.toLowerCase()} frameworks to instantly establish your {industry.name.toLowerCase()} firm as the premier, trusted authority in your sector.
-                  </p>
-                </div>
-              </li>
-
-              <li className="flex items-start">
-                <div className="flex-shrink-0 mt-1">
-                  <div className="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="ml-5">
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">Rank higher on Google</h3>
-                  <p className="text-slate-600 leading-relaxed text-lg">
-                    Visibility is everything. Our technical execution ensures your business surfaces at the exact moment localized commercial intent occurs in the search engines.
-                  </p>
-                </div>
-              </li>
-            </ul>
+      {/* Solutions — unique per industry×service from database */}
+      {solutions && solutions.length > 0 ? (
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-black tracking-tight">
+                How Our {service!.name} Helps {industry.name}
+              </h2>
+            </div>
+            <div className="bg-white border border-slate-200 rounded-xl p-8 md:p-12 shadow-sm">
+              <ul className="space-y-8">
+                {solutions.map((sol, i) => (
+                  <li key={i} className="flex items-start">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-8 h-8 rounded-full bg-brand-gold/20 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="ml-5">
+                      <h3 className="text-xl font-bold text-slate-900 mb-2">{sol.title}</h3>
+                      <p className="text-slate-600 leading-relaxed text-lg">{sol.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <SolutionSection
+          headlineOverride={`How Our ${service!.name} Helps ${industry.name}`}
+        />
+      )}
 
       <section className="py-24 bg-neutral-950 border-t border-neutral-900">
          <div className="container mx-auto px-4 max-w-4xl">
            <h2 className="text-3xl font-bold text-white mb-6">Our {service!.name} Process for {industry.name}</h2>
            <div className="prose prose-lg text-neutral-400">
              <p>
-               Generic marketing campaigns fail because they don't understand the buying cycle of a {industry.name.toLowerCase()} customer. Someone looking for your services isn't casually browsing—they have a specific commercial intent. Our <Link href={`/${service!.slug}`} className="text-brand-gold font-bold hover:text-white transition-colors">{service!.name} solutions</Link> are built specifically to capture that intent.
+               {hasContent && industryContent!.approach_difference
+                 ? `Our approach for ${industry.name.toLowerCase()} is specifically tailored to how your customers search for and evaluate ${service!.name.toLowerCase()} providers.`
+                 : `Generic marketing campaigns fail because they don't understand the buying cycle of a ${industry.name.toLowerCase()} customer.`}
+               {' '}Our <Link href={`/${service!.slug}`} className="text-brand-gold font-bold hover:text-white transition-colors">{service!.name} solutions</Link> are built specifically to capture high-intent {industry.name.toLowerCase()} enquiries.
              </p>
              <p>
-               Every campaign begins with a structural audit. We mapped out how the top-performing {industry.name.toLowerCase()} businesses secure their leads, and we reverse engineer that architecture for your company. This frequently involves executing hyper-local campaigns targeted across key commercial hubs, such as <Link href="/towns/maidstone" className="text-brand-gold font-bold hover:text-white transition-colors">Maidstone</Link>, <Link href="/towns/ashford" className="text-brand-gold font-bold hover:text-white transition-colors">Ashford</Link>, and <Link href="/towns/canterbury" className="text-brand-gold font-bold hover:text-white transition-colors">Canterbury</Link>.
-             </p>
-             <p>
-               Once the localized traffic begins converting into your platform, we deploy <Link href={`/industries/${industry.slug}/business-automation`} className="text-brand-gold font-bold hover:text-white transition-colors">Automated CRM pipelines</Link> engineered to immediately qualify and respond to those specific {industry.name.toLowerCase()} leads. You don't have to spend hours managing an inbox; you just need to close the deals. Read our <Link href="/guides" className="text-brand-gold font-bold hover:text-white transition-colors">Digital Growth Guides</Link> to learn exactly how these systems scale.
+               We target the specific search terms your potential customers use when looking for {industry.name.toLowerCase()} services across Kent — from <Link href="/towns/maidstone" className="text-brand-gold font-bold hover:text-white transition-colors">Maidstone</Link> to <Link href="/towns/ashford" className="text-brand-gold font-bold hover:text-white transition-colors">Ashford</Link> and <Link href="/towns/canterbury" className="text-brand-gold font-bold hover:text-white transition-colors">Canterbury</Link>.
              </p>
            </div>
          </div>
       </section>
+
+      {/* FAQs — unique per industry×service from database */}
+      {faqs && faqs.length > 0 && (
+        <FAQ faqs={faqs} title={`${service!.name} for ${industry.name} — FAQs`} />
+      )}
 
       <section className="bg-black border-t border-neutral-900 py-24 flex items-center justify-center">
         <div className="container mx-auto px-4 text-center max-w-4xl">
@@ -329,7 +327,7 @@ export default async function IndustrySlugPage({ params }: Props) {
             Ready to Grow Your {industry.name} Business?
           </h2>
           <p className="text-xl md:text-2xl text-neutral-400 mb-12 leading-relaxed">
-            Stop losing local leads to your competitors. Let's get started today.
+            Stop losing local leads to your competitors. Let&apos;s get started today.
           </p>
           <div className="flex justify-center">
             <Button href="/contact" className="text-lg px-10 py-4 shadow-lg shadow-brand-gold/20">
