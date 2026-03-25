@@ -17,6 +17,7 @@ import GrowthSystem from '@/components/sections/GrowthSystem';
 import Services from '@/components/sections/Services';
 import { getLocalServiceMessaging } from '@/lib/content/messaging';
 import { Search, Zap, Palette, LinkIcon, FileText, Laptop, Bot, MessageSquare, Mail, BrainCircuit } from 'lucide-react';
+import type { LocalContent } from '@/lib/queries/local-content';
 
 // External Types
 import type { Industry, Guide, IndustryPainPoint } from '@/types';
@@ -41,6 +42,7 @@ interface ServiceTownPageProps {
   service: ServiceEntity;
   town: TownEntity;
   localIntro?: string;
+  localContent?: LocalContent | null;
   otherServices: BaseEntity[];
   nearbyTowns: BaseEntity[];
   industries: Industry[];
@@ -53,6 +55,7 @@ export default function ServiceTownPage({
   service,
   town,
   localIntro,
+  localContent,
   otherServices,
   nearbyTowns,
   industries,
@@ -68,8 +71,25 @@ export default function ServiceTownPage({
   const messaging = getLocalServiceMessaging(service.slug, town.name);
   const isSEO = service.slug === 'seo';
 
+  // ============================================================
+  // UNIQUE LOCAL CONTENT (from database) — used when available
+  // Falls back to hash-rotated generic content when not seeded
+  // ============================================================
+  const hasLocalContent = !!(localContent?.intro_paragraph);
 
-  // Core Services Constants (Rotated Programmatically)
+  // Derive pain points from local_content or fallback
+  const localPainPoints = localContent?.pain_points?.map(p => ({
+    title: p.title,
+    pain_point: p.description,
+  }));
+
+  // Derive FAQs from local_content or fallback
+  const localFaqs = localContent?.faqs;
+
+  // Derive solutions from local_content or fallback
+  const localSolutions = localContent?.solutions;
+
+  // Core Services Constants (Rotated Programmatically) — FALLBACK only
   const seed = town.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
   const intros = [
@@ -288,21 +308,21 @@ export default function ServiceTownPage({
       <>
         <LocalServiceHero
           title={<>AI Chatbots for {town.name} Businesses</>}
-          subtitle={`Most ${town.name} business websites lose visitors because nobody is available to answer questions in real time. Our custom AI chatbots engage every visitor, capture leads, and book appointments — 24 hours a day.`}
+          subtitle={hasLocalContent ? localContent!.intro_paragraph : `Most ${town.name} business websites lose visitors because nobody is available to answer questions in real time. Our custom AI chatbots engage every visitor, capture leads, and book appointments — 24 hours a day.`}
           primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         <ParentLinks service={service} town={town} />
-        <LocalContextSection townName={town.name} townIntro={combinedIntro} />
-        <ProblemSection headlineOverride={`Why ${town.name} Businesses Lose Website Leads`} painPoints={rotatedAIChatbotPainPoints} />
-        <SolutionSection headlineOverride="How An AI Chatbot Captures More Leads" paragraphOverride={`By deploying ${usedAIChatbotTerms[0]} technology with ${usedAIChatbotTerms[1]} capabilities, we help ${town.name} businesses achieve ${usedAIChatbotTerms[2]} that works around the clock.`} townName={town.name} />
+        <LocalContextSection townName={town.name} townIntro={hasLocalContent ? localContent!.local_context : combinedIntro} />
+        <ProblemSection headlineOverride={`Why ${town.name} Businesses Lose Website Leads`} painPoints={localPainPoints || rotatedAIChatbotPainPoints} />
+        <SolutionSection headlineOverride="How An AI Chatbot Captures More Leads" paragraphOverride={hasLocalContent && localContent!.success_approach ? localContent!.success_approach : `By deploying ${usedAIChatbotTerms[0]} technology with ${usedAIChatbotTerms[1]} capabilities, we help ${town.name} businesses achieve ${usedAIChatbotTerms[2]} that works around the clock.`} townName={town.name} />
         <ProcessAuthority headlineOverride="How We Build Your AI Chatbot" descriptionOverride="Every chatbot is custom-built for your specific business, services, and customer base." />
         <Authority />
         <LocalAuthorityMap headlineOverride="AI Chatbot Services Across Kent" />
         <CaseStudySection townName={town.name} caseStudies={displayCaseStudies} />
         <GrowthSystem currentService={service.slug} />
-        <FAQ faqs={aiChatbotFaqs} title="Frequently Asked Questions" />
+        <FAQ faqs={localFaqs || aiChatbotFaqs} title="Frequently Asked Questions" />
         <InternalLinks serviceSlug={service.slug} townSlug={town.slug} latitude={town.latitude} longitude={town.longitude} />
-        <CTA titleOverride="Start Capturing Leads Around The Clock" paragraphOverride={`An AI chatbot works for your ${town.name} business 24/7 — engaging visitors, answering questions, and converting them into real enquiries.`} buttonOverride={selectedCTA} />
+        <CTA titleOverride="Start Capturing Leads Around The Clock" paragraphOverride={hasLocalContent && localContent!.competition_landscape ? localContent!.competition_landscape : `An AI chatbot works for your ${town.name} business 24/7 — engaging visitors, answering questions, and converting them into real enquiries.`} buttonOverride={selectedCTA} />
       </>
     );
   }
@@ -312,21 +332,21 @@ export default function ServiceTownPage({
       <>
         <LocalServiceHero
           title={<>AI Content Creation for {town.name} Businesses</>}
-          subtitle={`Consistent content is one of the most powerful ways to grow your visibility online — but most ${town.name} businesses cannot keep up with the volume required. Our AI content service delivers professional, SEO-optimised content at scale.`}
+          subtitle={hasLocalContent ? localContent!.intro_paragraph : `Consistent content is one of the most powerful ways to grow your visibility online — but most ${town.name} businesses cannot keep up with the volume required. Our AI content service delivers professional, SEO-optimised content at scale.`}
           primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         <ParentLinks service={service} town={town} />
-        <LocalContextSection townName={town.name} townIntro={combinedIntro} />
-        <ProblemSection headlineOverride={`Why ${town.name} Businesses Struggle With Content`} painPoints={rotatedAIContentPainPoints} />
-        <SolutionSection headlineOverride="How AI Content Creation Works" paragraphOverride={`By combining ${usedAIContentTerms[0]} with ${usedAIContentTerms[1]} strategies, we help ${town.name} businesses build authority through consistent ${usedAIContentTerms[2]}.`} townName={town.name} />
+        <LocalContextSection townName={town.name} townIntro={hasLocalContent ? localContent!.local_context : combinedIntro} />
+        <ProblemSection headlineOverride={`Why ${town.name} Businesses Struggle With Content`} painPoints={localPainPoints || rotatedAIContentPainPoints} />
+        <SolutionSection headlineOverride="How AI Content Creation Works" paragraphOverride={hasLocalContent && localContent!.success_approach ? localContent!.success_approach : `By combining ${usedAIContentTerms[0]} with ${usedAIContentTerms[1]} strategies, we help ${town.name} businesses build authority through consistent ${usedAIContentTerms[2]}.`} townName={town.name} />
         <ProcessAuthority headlineOverride="Our AI Content Process" descriptionOverride="We build a content engine tailored to your business that produces consistent, high-quality output month after month." />
         <Authority />
         <LocalAuthorityMap headlineOverride="AI Content Services Across Kent" />
         <CaseStudySection townName={town.name} caseStudies={displayCaseStudies} />
         <GrowthSystem currentService={service.slug} />
-        <FAQ faqs={aiContentFaqs} title="Frequently Asked Questions" />
+        <FAQ faqs={localFaqs || aiContentFaqs} title="Frequently Asked Questions" />
         <InternalLinks serviceSlug={service.slug} townSlug={town.slug} latitude={town.latitude} longitude={town.longitude} />
-        <CTA titleOverride="Start Publishing Content That Grows Your Business" paragraphOverride={`Our AI content service delivers consistent, professional content every month for ${town.name} businesses — blog posts, social media, email campaigns — all optimised for search.`} buttonOverride={selectedCTA} />
+        <CTA titleOverride="Start Publishing Content That Grows Your Business" paragraphOverride={hasLocalContent && localContent!.competition_landscape ? localContent!.competition_landscape : `Our AI content service delivers consistent, professional content every month for ${town.name} businesses — blog posts, social media, email campaigns — all optimised for search.`} buttonOverride={selectedCTA} />
       </>
     );
   }
@@ -336,21 +356,21 @@ export default function ServiceTownPage({
       <>
         <LocalServiceHero
           title={<>AI Business Automation for {town.name}</>}
-          subtitle={`Most ${town.name} business owners spend hours every week on repetitive admin. AI automation handles lead responses, follow-ups, data entry, and customer communications intelligently — so you can focus on revenue-generating work.`}
+          subtitle={hasLocalContent ? localContent!.intro_paragraph : `Most ${town.name} business owners spend hours every week on repetitive admin. AI automation handles lead responses, follow-ups, data entry, and customer communications intelligently — so you can focus on revenue-generating work.`}
           primaryCTA={{ text: 'Book A Free Consultation', href: '/contact' }}
         />
         <ParentLinks service={service} town={town} />
-        <LocalContextSection townName={town.name} townIntro={combinedIntro} />
-        <ProblemSection headlineOverride={`Why Manual Processes Cost ${town.name} Businesses Money`} painPoints={rotatedAIAutomationPainPoints} />
-        <SolutionSection headlineOverride="What AI Automation Does For Your Business" paragraphOverride={`By implementing ${usedAIAutomationTerms[0]} with ${usedAIAutomationTerms[1]}, we help ${town.name} businesses build ${usedAIAutomationTerms[2]} that eliminates manual admin.`} townName={town.name} />
+        <LocalContextSection townName={town.name} townIntro={hasLocalContent ? localContent!.local_context : combinedIntro} />
+        <ProblemSection headlineOverride={`Why Manual Processes Cost ${town.name} Businesses Money`} painPoints={localPainPoints || rotatedAIAutomationPainPoints} />
+        <SolutionSection headlineOverride="What AI Automation Does For Your Business" paragraphOverride={hasLocalContent && localContent!.success_approach ? localContent!.success_approach : `By implementing ${usedAIAutomationTerms[0]} with ${usedAIAutomationTerms[1]}, we help ${town.name} businesses build ${usedAIAutomationTerms[2]} that eliminates manual admin.`} townName={town.name} />
         <ProcessAuthority headlineOverride="How We Build Your Automation System" descriptionOverride="We map your current processes, identify bottlenecks, and build intelligent automations that eliminate them." />
         <Authority />
         <LocalAuthorityMap headlineOverride="AI Automation Services Across Kent" />
         <CaseStudySection townName={town.name} caseStudies={displayCaseStudies} />
         <GrowthSystem currentService={service.slug} />
-        <FAQ faqs={aiAutomationFaqs} title="Frequently Asked Questions" />
+        <FAQ faqs={localFaqs || aiAutomationFaqs} title="Frequently Asked Questions" />
         <InternalLinks serviceSlug={service.slug} townSlug={town.slug} latitude={town.latitude} longitude={town.longitude} />
-        <CTA titleOverride="Stop Doing Manually What AI Can Do Automatically" paragraphOverride={`Every hour you spend on repetitive admin is an hour you are not spending on billable work. AI automation helps ${town.name} businesses run efficiently without growing headcount.`} buttonOverride={selectedCTA} />
+        <CTA titleOverride="Stop Doing Manually What AI Can Do Automatically" paragraphOverride={hasLocalContent && localContent!.competition_landscape ? localContent!.competition_landscape : `Every hour you spend on repetitive admin is an hour you are not spending on billable work. AI automation helps ${town.name} businesses run efficiently without growing headcount.`} buttonOverride={selectedCTA} />
       </>
     );
   }
@@ -360,58 +380,46 @@ export default function ServiceTownPage({
       <>
         <LocalServiceHero
           title={<>SEO Services in {town.name}</>}
-          subtitle={`If your business is not appearing in local search results, potential customers are finding your competitors instead. We help ${town.name} businesses improve visibility and turn searches into direct enquiries.`}
+          subtitle={hasLocalContent ? localContent!.intro_paragraph : `If your business is not appearing in local search results, potential customers are finding your competitors instead. We help ${town.name} businesses improve visibility and turn searches into direct enquiries.`}
           primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
-        
+
         <ParentLinks service={service} town={town} />
 
-        {/* Introduction */}
-        <LocalContextSection townName={town.name} townIntro={combinedIntro} />
+        <LocalContextSection townName={town.name} townIntro={hasLocalContent ? localContent!.local_context : combinedIntro} />
 
-        {/* SEO Challenges for Businesses in {Location} */}
-        <ProblemSection 
+        <ProblemSection
           headlineOverride={`SEO Challenges for Businesses in ${town.name}`}
-          painPoints={rotatedSeoPainPoints} 
-        />
-        
-        {/* How Local SEO Helps Businesses Grow */}
-        <SolutionSection 
-          headlineOverride="How Local SEO Helps Businesses Grow"
-          paragraphOverride={`By focusing on ${usedSeoTerms[0]} and improving your ${usedSeoTerms[1]}, we help construct a digital presence that dominates ${usedSeoTerms[2]} natively across ${town.name}.`}
-          townName={town.name} 
+          painPoints={localPainPoints || rotatedSeoPainPoints}
         />
 
-        {/* Our SEO Process */}
-        <ProcessAuthority 
+        <SolutionSection
+          headlineOverride="How Local SEO Helps Businesses Grow"
+          paragraphOverride={hasLocalContent && localContent!.success_approach ? localContent!.success_approach : `By focusing on ${usedSeoTerms[0]} and improving your ${usedSeoTerms[1]}, we help construct a digital presence that dominates ${usedSeoTerms[2]} natively across ${town.name}.`}
+          townName={town.name}
+        />
+
+        <ProcessAuthority
           headlineOverride="Our SEO Process"
           descriptionOverride="Our structured local SEO methodology builds sustainable search visibility safely."
         />
 
-        {/* Why Choose Business Sorted Kent */}
         <Authority />
-
-        {/* Areas We Support Across Kent */}
         <LocalAuthorityMap headlineOverride="Areas We Support Across Kent" />
-
         <CaseStudySection townName={town.name} caseStudies={displayCaseStudies} />
-
         <GrowthSystem currentService={service.slug} />
+        <FAQ faqs={localFaqs || seoFaqs} title={`Frequently Asked Questions`} />
 
-        {/* Frequently Asked Questions */}
-        <FAQ faqs={seoFaqs} title={`Frequently Asked Questions`} />
-
-        <InternalLinks 
-          serviceSlug={service.slug} 
-          townSlug={town.slug} 
-          latitude={town.latitude} 
-          longitude={town.longitude} 
+        <InternalLinks
+          serviceSlug={service.slug}
+          townSlug={town.slug}
+          latitude={town.latitude}
+          longitude={town.longitude}
         />
 
-        {/* Call to Action */}
-        <CTA 
-          titleOverride="Start Improving Your Google Visibility" 
-          paragraphOverride={`If your business is not appearing in search results, the right SEO strategy can change that. We help ${town.name} businesses improve visibility and generate more enquiries.`} 
+        <CTA
+          titleOverride="Start Improving Your Google Visibility"
+          paragraphOverride={hasLocalContent && localContent!.competition_landscape ? localContent!.competition_landscape : `If your business is not appearing in search results, the right SEO strategy can change that. We help ${town.name} businesses improve visibility and generate more enquiries.`}
           buttonOverride={selectedCTA}
         />
       </>
@@ -423,58 +431,35 @@ export default function ServiceTownPage({
       <>
         <LocalServiceHero
           title={<>Web Design in {town.name}</>}
-          subtitle={`If your current website feels outdated or is not generating enquiries, a professionally designed site can transform how customers see your business in ${town.name}.`}
+          subtitle={hasLocalContent ? localContent!.intro_paragraph : `If your current website feels outdated or is not generating enquiries, a professionally designed site can transform how customers see your business in ${town.name}.`}
           primaryCTA={{ text: 'Get A Free Website Review', href: '/contact' }}
         />
-        
+
         <ParentLinks service={service} town={town} />
+        <LocalContextSection townName={town.name} townIntro={hasLocalContent ? localContent!.local_context : combinedIntro} />
 
-        {/* Introduction */}
-        <LocalContextSection townName={town.name} townIntro={combinedIntro} />
-
-        {/* Website Challenges for Businesses in {Location} */}
-        <ProblemSection 
+        <ProblemSection
           headlineOverride={`Website Challenges for Businesses in ${town.name}`}
-          painPoints={rotatedWebDesignPainPoints} 
+          painPoints={localPainPoints || rotatedWebDesignPainPoints}
         />
-        
-        {/* What a Professional Website Should Do */}
-        <SolutionSection 
+
+        <SolutionSection
           headlineOverride="What a Professional Website Should Do"
-          paragraphOverride={`A true ${usedWebDesignTerms[0]} does more than look nice. By prioritising a ${usedWebDesignTerms[1]}, we deliver ${usedWebDesignTerms[2]} that directly converts traffic in ${town.name}.`}
-          townName={town.name} 
+          paragraphOverride={hasLocalContent && localContent!.success_approach ? localContent!.success_approach : `A true ${usedWebDesignTerms[0]} does more than look nice. By prioritising a ${usedWebDesignTerms[1]}, we deliver ${usedWebDesignTerms[2]} that directly converts traffic in ${town.name}.`}
+          townName={town.name}
         />
 
-        {/* Our Web Design Process */}
-        <ProcessAuthority 
-          headlineOverride="Our Web Design Process"
-          descriptionOverride="Our structured methodology ensures your website is engineered for speed and search visibility, not just visual appeal."
-        />
-
-        {/* Why Choose Business Sorted Kent */}
+        <ProcessAuthority headlineOverride="Our Web Design Process" descriptionOverride="Our structured methodology ensures your website is engineered for speed and search visibility, not just visual appeal." />
         <Authority />
-
-        {/* Areas We Support Across Kent */}
         <LocalAuthorityMap headlineOverride="Areas We Support Across Kent" />
-
         <CaseStudySection townName={town.name} caseStudies={displayCaseStudies} />
-
         <GrowthSystem currentService={service.slug} />
+        <FAQ faqs={localFaqs || webDesignFaqs} title={`Frequently Asked Questions`} />
+        <InternalLinks serviceSlug={service.slug} townSlug={town.slug} latitude={town.latitude} longitude={town.longitude} />
 
-        {/* Frequently Asked Questions */}
-        <FAQ faqs={webDesignFaqs} title={`Frequently Asked Questions`} />
-
-        <InternalLinks 
-          serviceSlug={service.slug} 
-          townSlug={town.slug} 
-          latitude={town.latitude} 
-          longitude={town.longitude} 
-        />
-
-        {/* Call to Action */}
-        <CTA 
-          titleOverride="Ready For A Website That Works For Your Business?" 
-          paragraphOverride={`If your current website feels outdated or is not generating enquiries, a professionally designed site can transform how customers see your business in ${town.name}.`} 
+        <CTA
+          titleOverride="Ready For A Website That Works For Your Business?"
+          paragraphOverride={hasLocalContent && localContent!.competition_landscape ? localContent!.competition_landscape : `If your current website feels outdated or is not generating enquiries, a professionally designed site can transform how customers see your business in ${town.name}.`}
           buttonOverride={selectedCTA}
         />
       </>
@@ -486,19 +471,18 @@ export default function ServiceTownPage({
       <>
         <LocalServiceHero
           title={<>Logo & Branding Services in {town.name}</>}
-          subtitle={`Whether you need a completely new logo or a full branding system, we can help your business present a clear and professional image across ${town.name}.`}
+          subtitle={hasLocalContent ? localContent!.intro_paragraph : `Whether you need a completely new logo or a full branding system, we can help your business present a clear and professional image across ${town.name}.`}
           primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
         
         <ParentLinks service={service} town={town} />
 
         {/* Introduction */}
-        <LocalContextSection townName={town.name} townIntro={town.intro} />
+        <LocalContextSection townName={town.name} townIntro={hasLocalContent ? localContent!.local_context : town.intro} />
 
-        {/* Branding Challenges for Businesses in {Location} */}
-        <ProblemSection 
+        <ProblemSection
           headlineOverride={`Branding Challenges for Businesses in ${town.name}`}
-          painPoints={rotatedBrandingPainPoints} 
+          painPoints={localPainPoints || rotatedBrandingPainPoints}
         />
         
         {/* Why Professional Branding Matters */}
@@ -525,7 +509,7 @@ export default function ServiceTownPage({
         <GrowthSystem currentService={service.slug} />
 
         {/* Frequently Asked Questions */}
-        <FAQ faqs={brandingFaqs} title={`Frequently Asked Questions`} />
+        <FAQ faqs={localFaqs || brandingFaqs} title={`Frequently Asked Questions`} />
 
         <InternalLinks 
           serviceSlug={service.slug} 
@@ -548,19 +532,16 @@ export default function ServiceTownPage({
       <>
         <LocalServiceHero
           title={<>Lead Capture Systems in {town.name}</>}
-          subtitle={`If your website receives traffic but generates few enquiries, improving lead capture can dramatically increase results for your business in ${town.name}.`}
+          subtitle={hasLocalContent ? localContent!.intro_paragraph : `If your website receives traffic but generates few enquiries, improving lead capture can dramatically increase results for your business in ${town.name}.`}
           primaryCTA={{ text: 'Get A Free Website Review', href: '/contact' }}
         />
-        
+
         <ParentLinks service={service} town={town} />
+        <LocalContextSection townName={town.name} townIntro={hasLocalContent ? localContent!.local_context : combinedIntro} />
 
-        {/* Introduction */}
-        <LocalContextSection townName={town.name} townIntro={combinedIntro} />
-
-        {/* Lead Capture Challenges for Businesses in {Location} */}
-        <ProblemSection 
+        <ProblemSection
           headlineOverride={`Why Websites in ${town.name} Fail to Convert`}
-          painPoints={rotatedLeadCapturePainPoints} 
+          painPoints={localPainPoints || rotatedLeadCapturePainPoints}
         />
         
         {/* Why Lead Capture Matters */}
@@ -587,7 +568,7 @@ export default function ServiceTownPage({
         <GrowthSystem currentService={service.slug} />
 
         {/* Frequently Asked Questions */}
-        <FAQ faqs={leadCaptureFaqs} title={`Frequently Asked Questions`} />
+        <FAQ faqs={localFaqs || leadCaptureFaqs} title={`Frequently Asked Questions`} />
 
         <InternalLinks 
           serviceSlug={service.slug} 
@@ -611,19 +592,16 @@ export default function ServiceTownPage({
       <>
         <LocalServiceHero
           title={<>Business Automation in {town.name}</>}
-          subtitle={`If you spend hours on repetitive admin, we build automation systems for businesses in ${town.name} that arrange enquiries, trigger follow ups, and organize operations automatically.`}
+          subtitle={hasLocalContent ? localContent!.intro_paragraph : `If you spend hours on repetitive admin, we build automation systems for businesses in ${town.name} that arrange enquiries, trigger follow ups, and organize operations automatically.`}
           primaryCTA={{ text: 'Book An Automation Consultation', href: '/contact' }}
         />
-        
+
         <ParentLinks service={service} town={town} />
+        <LocalContextSection townName={town.name} townIntro={hasLocalContent ? localContent!.local_context : town.intro} />
 
-        {/* Introduction */}
-        <LocalContextSection townName={town.name} townIntro={town.intro} />
-
-        {/* Automation Challenges for Businesses in {Location} */}
-        <ProblemSection 
+        <ProblemSection
           headlineOverride={`Why Businesses in ${town.name} Struggle With Manual Processes`}
-          painPoints={rotatedBusinessAutomationPainPoints} 
+          painPoints={localPainPoints || rotatedBusinessAutomationPainPoints}
         />
         
         {/* Why Automation Matters */}
@@ -650,7 +628,7 @@ export default function ServiceTownPage({
         <GrowthSystem currentService={service.slug} />
 
         {/* Frequently Asked Questions */}
-        <FAQ faqs={businessAutomationFaqs} title={`Frequently Asked Questions`} />
+        <FAQ faqs={localFaqs || businessAutomationFaqs} title={`Frequently Asked Questions`} />
 
         <InternalLinks 
           serviceSlug={service.slug} 
@@ -674,19 +652,16 @@ export default function ServiceTownPage({
       <>
         <LocalServiceHero
           title={<>Social Media Setup in {town.name}</>}
-          subtitle={`A well structured social media profile helps potential customers in ${town.name} understand your business quickly and builds trust before they contact you.`}
+          subtitle={hasLocalContent ? localContent!.intro_paragraph : `A well structured social media profile helps potential customers in ${town.name} understand your business quickly and builds trust before they contact you.`}
           primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
-        
+
         <ParentLinks service={service} town={town} />
+        <LocalContextSection townName={town.name} townIntro={hasLocalContent ? localContent!.local_context : town.intro} />
 
-        {/* Introduction */}
-        <LocalContextSection townName={town.name} townIntro={town.intro} />
-
-        {/* Social Media Challenges for Businesses in {Location} */}
-        <ProblemSection 
+        <ProblemSection
           headlineOverride={`Common Social Media Profile Problems`}
-          painPoints={rotatedSocialMediaPainPoints} 
+          painPoints={localPainPoints || rotatedSocialMediaPainPoints}
         />
         
         {/* Why a Professional Profile Matters */}
@@ -713,7 +688,7 @@ export default function ServiceTownPage({
         <GrowthSystem currentService={service.slug} />
 
         {/* Frequently Asked Questions */}
-        <FAQ faqs={socialMediaFaqs} title={`Frequently Asked Questions`} />
+        <FAQ faqs={localFaqs || socialMediaFaqs} title={`Frequently Asked Questions`} />
 
         <InternalLinks 
           serviceSlug={service.slug} 
@@ -737,19 +712,16 @@ export default function ServiceTownPage({
       <>
         <LocalServiceHero
           title={<>Workwear & Print in {town.name}</>}
-          subtitle={`Consistent branding across workwear, vehicles and printed materials helps customers in ${town.name} recognise and trust your business instantly.`}
+          subtitle={hasLocalContent ? localContent!.intro_paragraph : `Consistent branding across workwear, vehicles and printed materials helps customers in ${town.name} recognise and trust your business instantly.`}
           primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
         />
-        
+
         <ParentLinks service={service} town={town} />
+        <LocalContextSection townName={town.name} townIntro={hasLocalContent ? localContent!.local_context : town.intro} />
 
-        {/* Introduction */}
-        <LocalContextSection townName={town.name} townIntro={town.intro} />
-
-        {/* Visibility Problems */}
-        <ProblemSection 
+        <ProblemSection
           headlineOverride={`Why Branded Materials Matter`}
-          painPoints={rotatedWorkwearPainPoints} 
+          painPoints={localPainPoints || rotatedWorkwearPainPoints}
         />
         
         {/* Solution Grid */}
@@ -783,7 +755,7 @@ export default function ServiceTownPage({
         />
 
         {/* Frequently Asked Questions */}
-        <FAQ faqs={workwearFaqs} title={`Frequently Asked Questions`} />
+        <FAQ faqs={localFaqs || workwearFaqs} title={`Frequently Asked Questions`} />
 
         <InternalLinks 
           serviceSlug={service.slug} 

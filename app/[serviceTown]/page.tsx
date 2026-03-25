@@ -12,6 +12,7 @@ import {
   getAllCaseStudies,
   getAllGuides,
 } from '@/lib/queries';
+import { getLocalContent } from '@/lib/queries/local-content';
 import type { Service, Town, Guide } from '@/types';
 import ServicePage from '@/components/templates/ServicePage';
 import ServiceTownPage from '@/components/templates/ServiceTownPage';
@@ -41,13 +42,12 @@ export async function generateStaticParams() {
 
   const CORE_SERVICES = ['web-design', 'seo', 'lead-capture', 'business-automation', 'branding', 'social-media-setup', 'digital-marketing', 'workwear-print', 'ai-chatbots', 'ai-content', 'ai-automation'];
 
-  // Generate Service x Town Pages (/web-design-ashford) and Micro Locations (/web-design-near-ashford)
+  // Generate Service x Town Pages (/web-design-ashford) — "near" pages removed (thin content risk)
   services.forEach((service) => {
     if (service.slug && CORE_SERVICES.includes(service.slug)) {
       towns.forEach((town) => {
         if (town.slug) {
           uniquePaths.add(`${service.slug}-${town.slug}`);
-          uniquePaths.add(`${service.slug}-near-${town.slug}`);
         }
       });
     }
@@ -208,35 +208,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return baseMetadata;
   }
 
+  // "Near" pages removed — return noindex metadata as safety net
   if (route.type === 'microLocation') {
-    const title = `${route.service?.name} Near ${route.town?.name} | Business Sorted Kent`;
-    const description = `Looking for ${route.service?.name?.toLowerCase()} near ${route.town?.name}? We help businesses in and around ${route.town?.name} grow online.`;
-    const url = `https://businesssortedkent.co.uk/${route.service?.slug}-near-${route.town?.slug}`;
-    const imageUrl = `https://businesssortedkent.co.uk/api/og?service=${route.service?.slug}&town=${route.town?.slug}`;
-
     return {
-      title,
-      description,
-      alternates: {
-        canonical: url,
-      },
-      openGraph: {
-        title,
-        description,
-        url,
-        images: [
-          {
-            url: imageUrl,
-            width: 1200,
-            height: 630,
-            alt: title,
-          },
-        ],
-      },
-      robots: {
-        index: true,
-        follow: true,
-      }
+      title: 'Not Found | Business Sorted Kent',
+      robots: { index: false, follow: false },
     };
   }
 
@@ -324,14 +300,16 @@ export default async function ProgrammaticPage({ params }: Props) {
     
     // Concurrently aggressively fetch massive data mappings specifically for this localized render
     const [
-      localIntro, 
-      allServices, 
-      industries, 
-      allCaseStudies, 
+      localIntro,
+      localContent,
+      allServices,
+      industries,
+      allCaseStudies,
       guides,
       painPoints
     ] = await Promise.all([
       getLocalIntro(service.id, town.id),
+      getLocalContent(service.slug, town.slug),
       getAllServices(),
       import('@/lib/queries').then(m => m.getAllIndustries()),
       import('@/lib/queries').then(m => m.getAllCaseStudies()),
@@ -382,10 +360,11 @@ export default async function ProgrammaticPage({ params }: Props) {
 
 
         {/* Modular ServiceTown Template Rendering */}
-        <ServiceTownPage 
+        <ServiceTownPage
           service={service}
           town={town}
           localIntro={localIntro?.content}
+          localContent={localContent}
           otherServices={otherServices.map(s => ({ name: s.name, slug: s.slug }))}
           nearbyTowns={nearbyTowns.map(t => ({ name: t.name, slug: t.slug }))}
           industries={industries}
@@ -397,29 +376,9 @@ export default async function ProgrammaticPage({ params }: Props) {
     );
   }
 
-  // ==========================================
-  // TEMPLATE: MICRO LOCATION (NEAR)
-  // ==========================================
-  if (route.type === 'microLocation' && route.service && route.town) {
-    const { service, town } = route;
-    
-    let nearbyTowns: Town[] = [];
-    if (town.latitude !== null && town.longitude !== null) {
-      // Find even closer towns just for contextual linking
-      nearbyTowns = await getNearbyTowns(town.latitude, town.longitude, 4);
-    }
-
-    return (
-      <>
-
-
-        <MicroLocationPage 
-          service={service as Service} 
-          town={town as Town} 
-          nearbyTowns={nearbyTowns.map(t => ({ name: t.name, slug: t.slug }))} 
-        />
-      </>
-    );
+  // "Near" micro-location pages removed — thin content / spam risk
+  if (route.type === 'microLocation') {
+    notFound();
   }
 
   // Fallback guardrail
