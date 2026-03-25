@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getTownBySlug, getAllTowns, getAllServices, getNearbyTowns, getAllGuides } from '@/lib/queries';
 import type { Town } from '@/types';
 import TownPage from '@/components/templates/TownPage';
+import { supabase } from '@/lib/supabase';
 
 type Props = {
   params: Promise<{
@@ -47,16 +48,23 @@ export default async function TownHubPage({ params }: Props) {
     notFound();
   }
 
+  // Fetch all local_content records for this town to build a rich overview
+  const { data: townContent } = await supabase
+    .from('local_content')
+    .select('service_slug, intro_paragraph, local_context, competition_landscape, success_approach, pain_points, solutions')
+    .eq('town_slug', townSlug);
+
   let nearbyTowns: Town[] = [];
   if (town.latitude !== null && town.longitude !== null) {
     nearbyTowns = await getNearbyTowns(town.latitude, town.longitude, 5);
   }
 
   return (
-    <TownPage 
-      town={{ name: town.name, slug: town.slug }} 
-      services={allServices.map(s => ({ name: s.name, slug: s.slug }))} 
+    <TownPage
+      town={{ name: town.name, slug: town.slug }}
+      services={allServices.map(s => ({ name: s.name, slug: s.slug }))}
       guides={allGuides}
+      townContent={townContent || []}
     />
   );
 }
