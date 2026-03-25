@@ -90,26 +90,39 @@ export default async function IndustryHubPage({ params }: Props) {
             <div>
               <h3 className="text-2xl font-bold text-white mb-4">Industry Overview & Competition</h3>
               <p className="text-neutral-400 leading-relaxed mb-6">
-                The {industry?.name?.toLowerCase() || 'service'} sector in Kent is highly competitive. Many established {industry?.name?.toLowerCase() || 'services'} rely heavily on legacy word-of-mouth or expensive aggregators. However, consumer behavior has fundamentally shifted. When a customer needs a {industry?.name?.substring(0, industry.name.length - 1).toLowerCase() || 'service provider'}, they turn immediately to Google.
+                {(industry as any).overview_text || `The ${industry?.name?.toLowerCase() || 'service'} sector in Kent is evolving rapidly. Businesses that invest in their digital presence are consistently outperforming those relying on traditional methods alone.`}
               </p>
               <h3 className="text-2xl font-bold text-white mb-4">Website Strategy</h3>
               <p className="text-neutral-400 leading-relaxed">
-                Most {industry?.name?.toLowerCase() || 'business'} websites act as static digital business cards. They load slowly and fail to convert traffic into phone calls or form fills. By deploying a high-performance, conversion-focused website, you instantly differentiate your brand from the local competition.
+                {(industry as any).strategy_text || `A high-performance, conversion-focused website designed specifically for ${industry?.name?.toLowerCase() || 'your industry'} can transform how you attract and convert new customers online.`}
               </p>
             </div>
-            
+
             <div className="bg-black border border-neutral-800 rounded-xl p-8 shadow-lg">
               <h3 className="text-2xl font-bold text-white mb-6 border-b border-neutral-800 pb-4">Digital Opportunities</h3>
               <ul className="space-y-6">
                 <li>
                   <strong className="block text-brand-gold text-lg mb-1">SEO Dominance</strong>
-                  <p className="text-neutral-400 text-sm leading-relaxed">Most local {industry?.name?.toLowerCase() || 'businesses'} have zero technical SEO. Securing the top 3 spots in the Google Local Desktop pack guarantees consistent daily enquiries.</p>
+                  <p className="text-neutral-400 text-sm leading-relaxed">{(industry as any).opportunity_seo || `Strategic SEO positioning can put your ${industry?.name?.toLowerCase() || 'business'} in front of customers actively searching for your services across Kent.`}</p>
                 </li>
                 <li>
                   <strong className="block text-brand-gold text-lg mb-1">Automation Systems</strong>
-                  <p className="text-neutral-400 text-sm leading-relaxed">Using automated CRM pipelines to instantly follow up with internet leads while your competitors are still on site or unresponsive.</p>
+                  <p className="text-neutral-400 text-sm leading-relaxed">{(industry as any).opportunity_automation || `Intelligent automation can streamline your operations, from lead follow-up to scheduling, freeing you to focus on delivering great service.`}</p>
                 </li>
               </ul>
+              {(industry as any).industry_stats && Object.keys((industry as any).industry_stats).length > 0 && (
+                <div className="mt-8 pt-6 border-t border-neutral-800">
+                  <h4 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-4">Industry Insights</h4>
+                  <ul className="space-y-3">
+                    {Object.values((industry as any).industry_stats).map((stat: any, i: number) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-brand-gold mt-1 shrink-0">•</span>
+                        <span className="text-sm text-neutral-400">{stat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>
