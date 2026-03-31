@@ -6,6 +6,9 @@ import CTA from '@/components/sections/CTA';
 export const metadata: Metadata = {
   title: 'Digital Growth Strategies for Kent Businesses | Business Sorted',
   description: 'A comprehensive guide to digital growth, local SEO competition, and business opportunities across Kent.',
+  alternates: {
+    canonical: 'https://businesssortedkent.co.uk/kent-business-growth',
+  },
 };
 
 export default async function KentBusinessGrowthPage() {

@@ -1,23 +1,30 @@
 import { MetadataRoute } from 'next';
-import { 
-  getAllServices, 
-  getAllTowns, 
-  getAllIndustries, 
-  getAllGuides, 
-  getAllCaseStudies 
+import {
+  getAllServices,
+  getAllTowns,
+  getAllIndustries,
+  getAllGuides,
+  getAllCaseStudies
 } from '@/lib/queries';
+import { supabase } from '@/lib/supabase';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://businesssortedkent.co.uk';
 
   // Fetch all programmatic data concurrently
-  const [services, towns, industries, guides, caseStudies] = await Promise.all([
+  const [services, towns, industries, guides, caseStudies, localContentRows] = await Promise.all([
     getAllServices(),
     getAllTowns(),
     getAllIndustries(),
     getAllGuides(),
-    getAllCaseStudies()
+    getAllCaseStudies(),
+    supabase.from('local_content').select('service_slug, town_slug').then(r => r.data || [])
   ]);
+
+  // Build a set of service-town combos that have local content (i.e. are indexable)
+  const indexableServiceTowns = new Set(
+    localContentRows.map((r: any) => `${r.service_slug}-${r.town_slug}`)
+  );
 
   // Static / Manually added pages
   const staticRoutes = [
@@ -49,21 +56,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
       });
       
-      // 2. Programmatic Location Pages (Service x Town)
+      // 2. Programmatic Location Pages (Service x Town) — only include pages with local content
       if (CORE_SERVICES.includes(service.slug)) {
         towns.forEach((town: any) => {
-          if (town.slug) {
+          if (town.slug && indexableServiceTowns.has(`${service.slug}-${town.slug}`)) {
             map.push({
               url: `${baseUrl}/${service.slug}-${town.slug}`,
-              lastModified: new Date(), // Combined content, default to now or rebuild time
-              changeFrequency: 'weekly',
-              priority: 0.7,
-            });
-            map.push({
-              url: `${baseUrl}/${service.slug}-near-${town.slug}`,
               lastModified: new Date(),
               changeFrequency: 'weekly',
-              priority: 0.6,
+              priority: 0.7,
             });
           }
         });

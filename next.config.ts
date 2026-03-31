@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // Legacy Pages Migration
+      { source: '/logo-branding', destination: '/branding', permanent: true },
       { source: '/seo-by-industry-kent', destination: '/seo', permanent: true },
       { source: '/plumbers', destination: '/industries/plumbers', permanent: true },
       { source: '/case-studies-business-sorted-kent', destination: '/case-studies', permanent: true },

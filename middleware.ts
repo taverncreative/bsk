@@ -1,7 +1,27 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+const CANONICAL_HOST = 'businesssortedkent.co.uk';
+
 export async function middleware(request: NextRequest) {
+  // ── Domain canonicalisation: www → non-www (301 permanent) ──
+  const host = request.headers.get('host') || '';
+  if (host.startsWith('www.')) {
+    const url = request.nextUrl.clone();
+    url.host = CANONICAL_HOST;
+    url.port = '';
+    return NextResponse.redirect(url, 301);
+  }
+
+  // ── Auth routes: run Supabase session check ──
+  const isAuthRoute = request.nextUrl.pathname.startsWith('/login')
+  const isAdminRoute = request.nextUrl.pathname.startsWith('/admin-dashboard') || request.nextUrl.pathname.startsWith('/api/elle-logs')
+  const isClientRoute = request.nextUrl.pathname.startsWith('/client-dashboard')
+
+  if (!isAuthRoute && !isAdminRoute && !isClientRoute) {
+    return NextResponse.next()
+  }
+
   let supabaseResponse = NextResponse.next({
     request: {
       headers: request.headers,
@@ -30,10 +50,6 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const isAuthRoute = request.nextUrl.pathname.startsWith('/login')
-  const isAdminRoute = request.nextUrl.pathname.startsWith('/admin-dashboard') || request.nextUrl.pathname.startsWith('/api/elle-logs')
-  const isClientRoute = request.nextUrl.pathname.startsWith('/client-dashboard')
-
   // Not authenticated
   if (!user && (isAdminRoute || isClientRoute)) {
     return NextResponse.redirect(new URL('/login', request.url))
@@ -61,9 +77,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/admin-dashboard/:path*',
-    '/client-dashboard/:path*',
-    '/login',
-    '/api/elle-logs',
+    // Domain canonicalisation: match ALL routes
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js)).*)',
   ],
 }

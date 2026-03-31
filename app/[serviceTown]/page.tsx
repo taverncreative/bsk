@@ -162,18 +162,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const imageUrl = `https://businesssortedkent.co.uk/api/og?service=${route.service?.slug}&town=${route.town?.slug}`;
 
     // THIN CONTENT GUARDRAIL: Check for unique localized content
-    const [localIntro, reviews, allCaseStudies] = await Promise.all([
-      route.service?.id && route.town?.id ? getLocalIntro(route.service.id, route.town.id) : Promise.resolve(null),
+    const [localContent, reviews, allCaseStudies] = await Promise.all([
+      route.service?.slug && route.town?.slug ? getLocalContent(route.service.slug, route.town.slug) : Promise.resolve(null),
       route.town?.id ? getReviewsByTown(route.town.id) : Promise.resolve([]),
       getAllCaseStudies()
     ]);
 
     const localCaseStudies = allCaseStudies.filter(c => c.town === route.town?.name);
-    
+
     // If we have literally 0 unique content for this exact map, instruct crawlers not to index it natively
     const hasUniqueContent = !!(
-      localIntro?.content || 
-      reviews.length > 0 || 
+      localContent?.intro_paragraph ||
+      reviews.length > 0 ||
       localCaseStudies.length > 0
     );
 
