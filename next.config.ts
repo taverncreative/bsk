@@ -41,6 +41,25 @@ const nextConfig: NextConfig = {
       { source: '/canterbury', destination: '/towns/canterbury', permanent: true },
       { source: '/west-kent', destination: '/towns', permanent: true },
       { source: '/tunbridge-wells', destination: '/towns/tunbridge-wells', permanent: true },
+
+      // ────────────────────────────────────────────────────────────────
+      // Multi-word town slug normalisation: external crawlers/backlinks
+      // sometimes construct '/towns/<town with space>' from the display
+      // name. Next.js matches sources against the *decoded* request path,
+      // so these use a literal space, not '%20'. All destinations have
+      // been verified against the production sitemap.
+      // ────────────────────────────────────────────────────────────────
+      { source: '/towns/tunbridge wells', destination: '/towns/tunbridge-wells', permanent: true },
+      { source: '/towns/tunbridge wells borough', destination: '/towns/tunbridge-wells-borough', permanent: true },
+      { source: '/towns/herne bay', destination: '/towns/herne-bay', permanent: true },
+      { source: '/towns/tonbridge and malling', destination: '/towns/tonbridge-and-malling', permanent: true },
+      { source: '/towns/ashford borough', destination: '/towns/ashford-borough', permanent: true },
+      { source: '/towns/canterbury district', destination: '/towns/canterbury-district', permanent: true },
+      { source: '/towns/dartford borough', destination: '/towns/dartford-borough', permanent: true },
+      { source: '/towns/dover district', destination: '/towns/dover-district', permanent: true },
+      { source: '/towns/maidstone borough', destination: '/towns/maidstone-borough', permanent: true },
+      { source: '/towns/sevenoaks district', destination: '/towns/sevenoaks-district', permanent: true },
+
       { source: '/estate-agents', destination: '/industries', permanent: true },
       { source: '/maidstone', destination: '/towns/maidstone', permanent: true },
       { source: '/website-design-kent', destination: '/web-design', permanent: true },
