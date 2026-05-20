@@ -9,6 +9,7 @@ import { getLocalServiceMessaging } from '@/lib/content/messaging';
 import type { LocalContent } from '@/lib/queries/local-content';
 import type { Industry, Guide, IndustryPainPoint } from '@/types';
 import type { CaseStudy } from '@/lib/queries/caseStudies';
+import { indefiniteArticle, singular, displayCase } from '@/lib/grammar';
 
 interface BaseEntity {
   name: string;
@@ -258,7 +259,12 @@ export default function ServiceTownPage({
       )}
 
       <CTA
-        titleOverride={`Got a ${service.name.toLowerCase()} project in ${town.name}?`}
+        titleOverride={(() => {
+          const serviceLower = service.name.toLowerCase();
+          const serviceSingular = singular(serviceLower);
+          const serviceDisplay = displayCase(serviceSingular);
+          return `Got ${indefiniteArticle(serviceSingular)} ${serviceDisplay} project in ${town.name}?`;
+        })()}
         paragraphOverride="Tell us what you need and we will come back with a plain answer, usually within a day."
         buttonOverride="Send a message"
       />

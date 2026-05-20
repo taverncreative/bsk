@@ -9,6 +9,7 @@ import CTA from '@/components/sections/CTA';
 import { getAllCaseStudies, getAllGuides } from '@/lib/queries';
 import EducationalGuides from '@/components/sections/EducationalGuides';
 import PageSchema from '@/components/seo/PageSchema';
+import { indefiniteArticle, singular, displayCase } from '@/lib/grammar';
 
 type Props = {
   params: Promise<{
@@ -83,6 +84,8 @@ export default async function IndustryHubPage({ params }: Props) {
   );
 
   const lowerName = industry.name.toLowerCase();
+  const industrySingular = singular(lowerName);
+  const industryDisplay = displayCase(industrySingular);
   const overviewText = (industry as any).overview_text as string | null;
   const strategyText = (industry as any).strategy_text as string | null;
   const opportunitySEO = (industry as any).opportunity_seo as string | null;
@@ -271,7 +274,7 @@ export default async function IndustryHubPage({ params }: Props) {
       )}
 
       <CTA
-        titleOverride={`Got a ${lowerName.replace(/s$/, '')} project in mind?`}
+        titleOverride={`Got ${indefiniteArticle(industrySingular)} ${industryDisplay} project in mind?`}
         paragraphOverride="Tell us what you do and what you need. We will come back with a plain answer, usually within a day."
         buttonOverride="Send a message"
       />
