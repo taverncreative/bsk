@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `Websites, SEO and automations for ${industry.name.toLowerCase()} | Business Sorted Kent`,
+    title: `${industry.name} in Kent | Business Sorted Kent`,
     description: `£280 websites, £45/hour SEO and AI-assisted automations for ${industry.name.toLowerCase()} working in Kent. Plain prices, no rolling contracts.`,
     alternates: {
       canonical: `https://businesssortedkent.co.uk/industries/${industry.slug}`,

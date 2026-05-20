@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const capitalize = (s?: string) => s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
 
   return {
-    title: `${caseStudy.title} | Case Study | Business Sorted Kent`,
+    title: `${caseStudy.title} | Business Sorted Kent`,
     description: `See how we helped a ${caseStudy.industry || 'local'} business in ${capitalize(caseStudy.town || 'Kent')} grow using ${capitalize(caseStudy.services_used || 'our services')}.`,
     alternates: {
       canonical: `https://businesssortedkent.co.uk/case-studies/${caseStudy.slug}`,
