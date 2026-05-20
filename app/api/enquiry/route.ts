@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabaseServer } from '@/lib/supabase-server';
 import { sendEmail, sendErrorAlert } from '@/lib/web3forms';
 
 export async function POST(req: Request) {
@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     bodyContext = body;
     const { name, email, website, service_required, preferred_day, preferred_time, message } = body;
 
-    const { data: enquiry, error: insertError } = await supabase
+    const { data: enquiry, error: insertError } = await supabaseServer
       .from('unified_leads')
       .insert([{
         name,
