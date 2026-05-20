@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabaseServer as supabase } from '@/lib/supabase-server';
 import type { IndustryPainPoint } from '@/types';
 
 export async function getPainPointsByService(serviceId: string): Promise<IndustryPainPoint[]> {

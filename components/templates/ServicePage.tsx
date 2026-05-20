@@ -1,27 +1,12 @@
+import { ReactNode } from 'react';
+import Link from 'next/link';
 import ServiceHero from '@/components/sections/ServiceHero';
-import ProblemSection from '@/components/sections/ProblemSection';
-import SolutionSection from '@/components/sections/SolutionSection';
-import CaseStudySection from '@/components/sections/CaseStudySection';
-import ProcessAuthority from '@/components/sections/ProcessAuthority';
-import LocalRelevanceSection from '@/components/sections/LocalRelevanceSection';
-import InternalLinks from '@/components/seo/InternalLinks';
-import FinalCTA from '@/components/sections/FinalCTA';
-import CTA from '@/components/sections/CTA';
-import { getServiceHubMessaging } from '@/lib/content/messaging';
-
-import { getAllCaseStudies } from '@/lib/queries/caseStudies';
-import FAQ from '@/components/sections/FAQ';
-import { getServiceFAQs } from '@/components/content/ServiceFAQs';
-import GrowthSystem from '@/components/sections/GrowthSystem';
-
-import LocalAuthorityMap from '@/components/sections/LocalAuthorityMap';
-import KentCoverage from '@/components/sections/KentCoverage';
-import EducationalGuides from '@/components/sections/EducationalGuides';
 import Services from '@/components/sections/Services';
-import CredibilityMetrics from '@/components/sections/CredibilityMetrics';
-import WebsiteReviewCTA from '@/components/sections/WebsiteReviewCTA';
-import Reveal from '@/components/ui/Reveal';
-import { Search, Laptop, FileText, Link as LinkIcon, MapPin, TrendingUp, Palette, Zap, Share2, MousePointerClick, Bot, PenTool, Cpu, MessageSquare, Calendar, Mail, BarChart3, RefreshCw, BrainCircuit, Globe, Clock } from 'lucide-react';
+import CaseStudySection from '@/components/sections/CaseStudySection';
+import FAQ from '@/components/sections/FAQ';
+import CTA from '@/components/sections/CTA';
+import { getServiceFAQs } from '@/components/content/ServiceFAQs';
+import { getAllCaseStudies } from '@/lib/queries/caseStudies';
 
 interface TownRef {
   name: string;
@@ -44,1072 +29,787 @@ interface ServicePageProps {
   guides?: any[];
 }
 
+interface ContentItem {
+  title: string;
+  body: string;
+}
+
+interface ProcessStep {
+  num: string;
+  title: string;
+  body: string;
+}
+
+interface ServiceContent {
+  hero: {
+    title: ReactNode;
+    subtitle: string;
+    primaryCTA?: { text: string; href: string };
+    secondaryCTA?: { text: string; href: string };
+  };
+  included: {
+    eyebrow: string;
+    headline: string;
+    intro?: string;
+    items: ContentItem[];
+  };
+  process?: {
+    eyebrow: string;
+    headline: string;
+    intro?: string;
+    steps: ProcessStep[];
+  };
+  examples?: {
+    eyebrow: string;
+    headline: string;
+    intro?: string;
+    items: ContentItem[];
+  };
+  cta: {
+    title: string;
+    paragraph: string;
+    button?: string;
+  };
+}
+
+const serviceContent: Record<string, ServiceContent> = {
+  'web-design': {
+    hero: {
+      title: 'Websites built faster. Priced honestly.',
+      subtitle:
+        '£280 for a classic small business website. E-commerce and anything custom priced on application. Built properly, indexed cleanly, yours in 1 to 2 weeks.',
+      primaryCTA: { text: 'See what yours could look like', href: '/free-preview' },
+      secondaryCTA: { text: 'Get in touch', href: '/contact' },
+    },
+    included: {
+      eyebrow: 'What £280 covers',
+      headline: 'A working small business website, built properly.',
+      intro:
+        'Homepage, services, about, contact, plus a couple of supporting pages. Designed, built, launched, and indexed by Google. Hand-checked Next.js code under the hood, not template assembly.',
+      items: [
+        {
+          title: '01 · Discovery',
+          body: 'We find out what you do, who you serve, what makes you different from the four other firms doing similar work down the road. The site is built on real understanding, not assumptions.',
+        },
+        {
+          title: '02 · Mobile-first design',
+          body: 'Designed for phones first. Most of your visitors arrive on a 5-inch screen, and most agency sites are still designed desktop-first then squashed. We do it the other way around.',
+        },
+        {
+          title: '03 · Real design decisions',
+          body: 'Type, hierarchy, spacing, colour, image treatment. The kind of choices that come from years of graphic design background, not AI defaults. Your site looks like your business, not a template.',
+        },
+        {
+          title: '04 · Performance',
+          body: 'Sub-2-second loads. Lighthouse 95+ for performance, accessibility, best practices and SEO. Images compressed and lazy-loaded. Fonts loaded properly. The little things that decide whether Google ranks you.',
+        },
+        {
+          title: '05 · SEO foundations',
+          body: 'Sitemap submitted, structured data set up, robots.txt configured, meta tags written, headings structured. Local SEO basics baked in so Google can find every page from day one.',
+        },
+        {
+          title: '06 · Google Business profile',
+          body: 'Set up or refreshed alongside the launch. Photos, hours, services, categories and address all configured properly. The map pack is where a lot of local searches actually land.',
+        },
+        {
+          title: '07 · Forms that work',
+          body: 'Contact and quote forms that send to you, send a confirmation to the customer, and don’t silently fail. Spam protected without forcing customers through a 20-second CAPTCHA.',
+        },
+        {
+          title: '08 · Hosting (optional)',
+          body: '£15 a month covers fast UK hosting, SSL, weekly backups, security patches, uptime monitoring. Or bring your own — we’ll deploy to whatever you’re using.',
+        },
+      ],
+    },
+    process: {
+      eyebrow: 'How it works',
+      headline: 'Four steps from first chat to live site.',
+      steps: [
+        {
+          num: '01',
+          title: 'A proper chat',
+          body:
+            'We find out what you do, who your customers are, and what is driving you mad about your current site. About 30 minutes by phone or in person.',
+        },
+        {
+          num: '02',
+          title: 'A free preview',
+          body:
+            'A working version at a temporary URL within 2 to 3 working days. Real content, real design, real working forms. You look at it on your phone and your laptop.',
+        },
+        {
+          num: '03',
+          title: 'You decide',
+          body:
+            'Like it? £280 to finish and launch. Want changes? We do them. Not for you? No charge. No card details taken upfront, no awkward follow-up.',
+        },
+        {
+          num: '04',
+          title: 'Live on your domain',
+          body:
+            'We connect your domain, switch on hosting and analytics, submit your sitemap to Google, and hand over login details so you can edit content yourself if you want.',
+        },
+      ],
+    },
+    examples: {
+      eyebrow: 'Worth saying out loud',
+      headline: 'What we won’t do.',
+      items: [
+        {
+          title: 'We won’t lock you into a contract',
+          body: 'You own the site, the code, the domain, the content. Walk away whenever you want. We’d rather earn the next month than tie you in.',
+        },
+        {
+          title: 'We won’t use templates and call it bespoke',
+          body: 'Every site is built from the ground up in Next.js. No drag-and-drop builders pretending to be agency work. You get real code that loads fast and ranks well.',
+        },
+        {
+          title: 'We won’t pretend AI didn’t change this',
+          body: 'AI tooling is how the work got faster, and that’s why £280 is realistic. The design decisions, editing and final checks are still done by people. We don’t hide it.',
+        },
+      ],
+    },
+    cta: {
+      title: 'Want to see what yours could look like?',
+      paragraph:
+        'Send a quick brief and we will build a preview within 2 to 3 working days. No card details, no follow-up if you pass.',
+      button: 'Get a free preview',
+    },
+  },
+
+  seo: {
+    hero: {
+      title: 'SEO that gets your business found.',
+      subtitle:
+        '£45 an hour. From one hour a month. No retainer, no rolling contract. You see exactly what got done and what moved. SEO for everyday businesses who would rather pay someone to do it than learn it themselves.',
+      primaryCTA: { text: 'Get a free SEO audit', href: '/contact' },
+      secondaryCTA: { text: 'See pricing', href: '#services' },
+    },
+    included: {
+      eyebrow: 'How SEO actually works',
+      headline: 'No secrets. Just work that needs doing.',
+      intro:
+        'SEO isn’t a black art, especially now. With AI tools, the methodology is more public than ever. We’re not here to gatekeep how it works. We’re here to do it because you would rather be running your business. Here’s the work, in plain language.',
+      items: [
+        {
+          title: '01 · Keyword research',
+          body: 'We find the actual phrases your customers type. Not what someone in marketing thinks they should type. Tools like Google Keyword Planner, Ahrefs and SEMrush give us volume and intent data. We then test it against real local search patterns and your existing analytics.',
+        },
+        {
+          title: '02 · Competitor analysis',
+          body: 'We look at who currently ranks for those phrases in your area. What pages they’ve built. What backlinks they’ve earned. Where they’re weak. The aim is to find the gaps you can realistically win — not to copy.',
+        },
+        {
+          title: '03 · Technical SEO',
+          body: 'The boring foundations Google quietly punishes when broken. Site speed, mobile rendering, structured data, internal linking, sitemaps, robots.txt, canonical tags, broken links, duplicate content. Most local sites have a dozen issues here that are quick wins.',
+        },
+        {
+          title: '04 · On-page SEO',
+          body: 'Page titles, meta descriptions, heading structure, image alt text, schema markup, internal anchors. Each page tuned to one main search intent and the phrases that match it.',
+        },
+        {
+          title: '05 · Local SEO',
+          body: 'Google Business Profile set up properly, categorised correctly, photos uploaded, posts scheduled, reviews requested and replied to. NAP consistency (name, address, phone) across local citations. The map pack is its own game.',
+        },
+        {
+          title: '06 · Content',
+          body: 'Service pages, location pages, FAQs, guides. Written to answer the question someone actually typed. Not stuffed with keywords. We use AI to draft and edit by hand to keep it sounding like a person.',
+        },
+        {
+          title: '07 · GEO and AI search',
+          body: 'Generative Engine Optimisation. As more people search via ChatGPT, Perplexity, Google AI Overviews and Bing Chat, the rules are shifting. Structured data, clear answers and authority signals matter even more. We build for both classical Google and the LLM-based search engines that are coming up fast.',
+        },
+        {
+          title: '08 · Backlinks and citations',
+          body: 'Mentions on local directories, partner sites, supplier sites, industry directories. Quality over quantity. We don’t buy links — that gets sites penalised — but we do find the legitimate places your business should be listed.',
+        },
+        {
+          title: '09 · Reporting',
+          body: 'A one-page summary every month. What we did, what ranked, what moved, what we suggest next. No 40-page PDFs full of charts you won’t read.',
+        },
+      ],
+    },
+    process: {
+      eyebrow: 'How working together works',
+      headline: 'Audit, plan, work, report. Repeat.',
+      steps: [
+        {
+          num: '01',
+          title: 'Free SEO audit',
+          body:
+            'You send us your site and the searches that matter to you. We run a proper audit covering technical, on-page, local, content and competitor angles. You get a plain summary of where you currently stand and what is realistic.',
+        },
+        {
+          num: '02',
+          title: 'A plain plan, costed in hours',
+          body:
+            'We pick the highest-impact wins first. Each item costed in hours. You decide what to do and in what order. No "package" you have to take whole.',
+        },
+        {
+          num: '03',
+          title: 'The work',
+          body:
+            'You pick how many hours a month — could be one, could be ten. We log every hour and tell you exactly what got done. Walk away whenever it stops being useful.',
+        },
+        {
+          num: '04',
+          title: 'Monthly report',
+          body:
+            'Every month: a one-pager covering what we worked on, what ranked, what moved up or down, what the data is telling us, what to do next.',
+        },
+      ],
+    },
+    examples: {
+      eyebrow: 'Worth saying out loud',
+      headline: 'What we won’t do.',
+      intro: 'We are honest about a few things.',
+      items: [
+        {
+          title: 'We won’t guarantee a #1 ranking',
+          body: 'Anyone who does is either lying or planning to gamble with your site. Rankings depend on Google’s algorithm, your competition and the work that goes in. We can put you in a much better position than you are now, and we tell you what is realistic.',
+        },
+        {
+          title: 'We won’t lock you into a contract',
+          body: 'SEO is hourly. If you want to stop, stop. If you want to pause for a month, pause. The work compounds when it’s consistent but it isn’t held hostage to a 12-month commitment.',
+        },
+        {
+          title: 'We won’t pretend AI doesn’t matter',
+          body: 'AI has changed how we work and how search itself works. We use the tools, we keep up with how LLM-based search engines surface businesses, and we factor that into the plan. Anyone telling you nothing has changed is not paying attention.',
+        },
+        {
+          title: 'We won’t bury you in jargon',
+          body: 'You don’t need to know what TF-IDF or E-E-A-T mean. We use plain English in every report and every conversation. If you want the technical detail you can ask, but you should never have to.',
+        },
+      ],
+    },
+    cta: {
+      title: 'Want to know where you currently rank?',
+      paragraph:
+        'Send your website and the searches that matter to you. We will come back with a plain audit, free of charge. If it makes sense to start, we will quote the hours. If it doesn’t, we will tell you.',
+      button: 'Get a free SEO audit',
+    },
+  },
+
+  'lead-capture': {
+    hero: {
+      title: 'Stop missing the enquiries you’d otherwise lose.',
+      subtitle:
+        'Forms, instant replies, missed-call recovery and follow-ups so a busy day on the job does not cost you the work. Priced on the brief once we know what you handle now.',
+      primaryCTA: { text: 'Get in touch', href: '/contact' },
+    },
+    included: {
+      eyebrow: 'What we build',
+      headline: 'The bits between someone showing interest and you booking the job.',
+      intro:
+        'Most enquiries get lost in the gap between someone showing interest and you replying. Phones go to voicemail, forms go to a spam folder, emails sit unanswered for an afternoon. This is the system that fills that gap.',
+      items: [
+        {
+          title: '01 · Contact forms that convert',
+          body: 'Short, friendly, on the right page, asking the right questions. Not a 14-field interrogation that scares people off. We design forms around the minimum information needed to qualify the enquiry.',
+        },
+        {
+          title: '02 · Instant autoresponders',
+          body: 'The second someone submits a form they get a useful reply by email. Not "thank you for your enquiry" — something with what happens next, when to expect a call, a useful link, your hours. People stay warm when they feel heard.',
+        },
+        {
+          title: '03 · Missed-call SMS recovery',
+          body: 'Phone rings, you’re on a job, can’t pick up. An automatic text fires within seconds: "Sorry I missed your call, I’ll ring back later today. Or book a slot here." Customers who would have called the next firm in the list stay yours.',
+        },
+        {
+          title: '04 · Lead routing',
+          body: 'New enquiries land in the right inbox, with the right context. If you have a partner who handles the south coast and you handle Ashford, leads go to the right person automatically. CRM tagged, ready to action.',
+        },
+        {
+          title: '05 · Follow-up sequences',
+          body: 'A polite nudge two days after a quote, a check-in a week later, a final message after two weeks. All written in your voice. Most enquiries that go quiet need one of these to come back.',
+        },
+        {
+          title: '06 · Live chat or AI chatbot',
+          body: 'If you get the same five questions every day, a chatbot trained on your services handles them out of hours. Real questions still come straight to you, properly summarised.',
+        },
+        {
+          title: '07 · Tracking and attribution',
+          body: 'You see where leads actually come from. Google search, Facebook, that flyer, word of mouth, the Yellow Pages-style directory you tried last year. The data tells you where to spend more and where to stop.',
+        },
+        {
+          title: '08 · Spam protection',
+          body: 'Honeypots, rate limiting, server-side validation. We block the bots without forcing customers to solve nine puzzles to send you a quote request.',
+        },
+      ],
+    },
+    process: {
+      eyebrow: 'How it works',
+      headline: 'Audit, design, build, watch.',
+      steps: [
+        {
+          num: '01',
+          title: 'Audit what happens now',
+          body:
+            'We walk through every way someone currently tries to contact you. Phone, form, email, social DM, WhatsApp. We find the gaps where leads currently leak.',
+        },
+        {
+          num: '02',
+          title: 'Design the flow',
+          body:
+            'A plain document showing each step from first contact to booked job, end to end. You read it, you sign it off, then we build to it.',
+        },
+        {
+          num: '03',
+          title: 'Build it',
+          body:
+            'Forms, automations, integrations and notifications all set up. Connected to whatever email and CRM you already use. Tested end-to-end with real submissions before going live.',
+        },
+        {
+          num: '04',
+          title: 'Watch and refine',
+          body:
+            'After two weeks we look at real data. What got submitted, what got replied to, where customers dropped off. Anything not working gets fixed.',
+        },
+      ],
+    },
+    cta: {
+      title: 'Tired of replying to enquiries at 9pm?',
+      paragraph:
+        'Send a quick note about how you currently handle leads and what is annoying about it. We will quote a fix.',
+      button: 'Get in touch',
+    },
+  },
+
+  'business-automation': {
+    hero: {
+      title: 'Automations, CRMs and the boring admin, handled.',
+      subtitle:
+        'CRM setup, job tracking, follow-ups, repeat invoicing, AI-assisted workflows. The repeat work that eats your Sundays, off your plate. Priced on the brief once we know what you actually run.',
+      primaryCTA: { text: 'Get in touch', href: '/contact' },
+    },
+    included: {
+      eyebrow: 'What gets handled',
+      headline: 'The repeat work, automated. The exceptions, escalated.',
+      intro:
+        'Every business has a handful of small jobs that have to happen every day, every week or every month. Automation does them in the background. You only get involved when something needs a real decision.',
+      items: [
+        {
+          title: '01 · CRM setup',
+          body: 'One place for customers, jobs, quotes, invoices and history. No more spreadsheets, sticky notes, three notebooks and your wife’s phone. We pick the right CRM for your size — HubSpot, Pipedrive, Notion, Airtable, Servoro — and set it up properly.',
+        },
+        {
+          title: '02 · Lead-to-customer flow',
+          body: 'New enquiry → logged contact → qualified → quoted → won → onboarded. All tracked in one timeline. You see where every potential customer is and what needs doing next.',
+        },
+        {
+          title: '03 · Follow-up sequences',
+          body: 'Quotes that stayed quiet get a polite nudge after two days, a check-in after a week, a final message after two. Customers get a follow-up after the job, a request for repeat work, a seasonal reminder if it fits.',
+        },
+        {
+          title: '04 · Invoicing and chasing',
+          body: 'Invoices generated automatically when a job marks complete. Sent to the customer, reminders fire on the schedule you choose (gentle at first, firmer after 30 days). Payments reconcile back to the CRM.',
+        },
+        {
+          title: '05 · Appointment reminders',
+          body: 'Customers get a confirmation when booked, a reminder the day before, a "we’re on our way" message if you want. No-shows drop sharply when the customer has had three touches.',
+        },
+        {
+          title: '06 · Review requests',
+          body: 'After every job, a polite ask for a Google review fires automatically. Reviews drive both local SEO and customer confidence. Most businesses just forget to ask.',
+        },
+        {
+          title: '07 · AI-assisted workflows',
+          body: 'Drafting quotes from a customer brief, summarising long emails, sorting incoming enquiries by urgency, generating job descriptions for staff. AI as an assistant, not a replacement.',
+        },
+        {
+          title: '08 · Data sync between your tools',
+          body: 'Your booking system, accounting software, email marketing, CRM and website forms all talking to each other. No double-entry. No information stranded on one platform.',
+        },
+      ],
+    },
+    process: {
+      eyebrow: 'How it works',
+      headline: 'Map your business, build the system around it.',
+      steps: [
+        {
+          num: '01',
+          title: 'Audit what eats your time',
+          body:
+            'We sit down with you (and your team if you have one) and find out what actually repeats every week. Where the bottlenecks are. What you procrastinate on. What gets dropped.',
+        },
+        {
+          num: '02',
+          title: 'Design the workflows',
+          body:
+            'A plain document showing each automation: what triggers it, what it does, who gets notified, what the customer sees. You sign it off before we build anything.',
+        },
+        {
+          num: '03',
+          title: 'Build and connect',
+          body:
+            'We connect your existing tools — email, CRM, calendar, accounting, booking, website forms — and build the automations on top. Tested with real data before going live.',
+        },
+        {
+          num: '04',
+          title: 'Watch and refine',
+          body:
+            'After a month we review what is working, what could be better, what is being skipped. We tune the rules and add anything missing.',
+        },
+      ],
+    },
+    examples: {
+      eyebrow: 'Real examples',
+      headline: 'What this actually looks like for a small business.',
+      items: [
+        {
+          title: 'For a service business',
+          body: 'New website form submission → logged in CRM → instant autoresponder → SMS to you on your phone → quote drafted from template → follow-up sequence if quote sits unanswered → review request fires after job marked complete.',
+        },
+        {
+          title: 'For a holiday let',
+          body: 'New booking → confirmation email → welcome pack PDF sent → arrival instructions SMS the day before → check-out reminder → review request the morning after → marketing email three months later.',
+        },
+        {
+          title: 'For a repeat-customer business',
+          body: 'Service date logged → reminder email three months before next service due → booking link → automatic confirmation → calendar updated → invoice generated on completion.',
+        },
+        {
+          title: 'For a B2B services firm',
+          body: 'Enquiry form → company researched via AI → enriched contact in CRM → routed to the right partner → discovery call scheduled → proposal drafted from template → contract sent → onboarding sequence triggers.',
+        },
+      ],
+    },
+    cta: {
+      title: 'What is eating your Sundays?',
+      paragraph:
+        'Tell us the bits of admin you wish you never had to do. We will tell you which ones can be automated and quote it properly.',
+      button: 'Get in touch',
+    },
+  },
+
+  branding: {
+    hero: {
+      title: 'A logo and brand identity that fits.',
+      subtitle:
+        'A proper mark, a usable colour palette, fonts that pair, and the bits you need to apply it. For Kent businesses who want something that looks designed, not generated. Priced on the brief.',
+      primaryCTA: { text: 'Get in touch', href: '/contact' },
+    },
+    included: {
+      eyebrow: 'What you get',
+      headline: 'A brand kit you can actually use.',
+      intro:
+        'Branding without the 60-page guidelines document nobody opens. The essentials, sharp, in formats that work.',
+      items: [
+        { title: 'Logo', body: 'A primary mark plus the variants you need for square avatars, dark backgrounds, embroidery and print.' },
+        { title: 'Colour palette', body: 'Five to seven colours with hex, RGB and CMYK values, and rules for when to use which.' },
+        { title: 'Typography', body: 'A heading font and a body font that pair properly, with web and print licensing.' },
+        { title: 'Application examples', body: 'Sample social posts, an invoice mockup, a business card, so you can see it in use.' },
+        { title: 'File formats', body: 'SVG, PNG, PDF, JPG, AI source files. Everything anyone might ever ask for.' },
+        { title: 'One-page guidelines', body: 'A short brand reference your printer, your sign-writer and your future hires will actually read.' },
+      ],
+    },
+    process: {
+      eyebrow: 'How it works',
+      headline: 'Brief, drafts, refine, ship.',
+      steps: [
+        { num: '01', title: 'A proper brief', body: 'What you do, who you serve, where you want to land between professional and friendly, polished and honest.' },
+        { num: '02', title: 'Three directions', body: 'Three distinct directions, not a single "is this it?". You react, we go from there.' },
+        { num: '03', title: 'Refine', body: 'We refine the chosen direction in detail. Colours, type, layouts in real settings.' },
+        { num: '04', title: 'Hand over', body: 'Full file pack and the one-page guidelines, delivered and ready to use.' },
+      ],
+    },
+    cta: {
+      title: 'Need a logo that does not look like everyone else’s?',
+      paragraph: 'Send a couple of lines about what you do and what you want it to feel like. We will quote it properly.',
+      button: 'Get in touch',
+    },
+  },
+
+  'social-media-setup': {
+    hero: {
+      title: 'Social media set up properly.',
+      subtitle:
+        'Profiles set up the right way the first time, branded consistently, pointed at the work you want to win. Priced on the brief.',
+      primaryCTA: { text: 'Get in touch', href: '/contact' },
+    },
+    included: {
+      eyebrow: 'What we set up',
+      headline: 'Profiles that look like they belong to one business.',
+      intro:
+        'Most social profiles look like they were set up by five different people on five different days. We sort that.',
+      items: [
+        { title: 'Facebook business page', body: 'Properly categorised, services listed, hours, location, call-to-action all set.' },
+        { title: 'Instagram business profile', body: 'Bio, link, category, contact button, story highlights organised.' },
+        { title: 'LinkedIn company page', body: 'If your work is B2B, properly set up with employees, services and call-to-actions.' },
+        { title: 'Google Business profile', body: 'Maps listing, hours, photos, posts, attributes, reviews surfaced.' },
+        { title: 'Branded graphics', body: 'Cover images, profile pictures, story highlight covers, all matching.' },
+        { title: 'Cross-links', body: 'Every profile points at your website and at each other. Nothing orphaned.' },
+      ],
+    },
+    cta: {
+      title: 'Want it all looking like one business?',
+      paragraph: 'Tell us which platforms matter and we will quote the set-up.',
+      button: 'Get in touch',
+    },
+  },
+
+  'digital-marketing': {
+    hero: {
+      title: 'Social media set up properly.',
+      subtitle:
+        'Profiles set up the right way the first time, branded consistently, pointed at the work you want to win. Priced on the brief.',
+      primaryCTA: { text: 'Get in touch', href: '/contact' },
+    },
+    included: {
+      eyebrow: 'What we set up',
+      headline: 'Profiles that look like they belong to one business.',
+      intro:
+        'Most social profiles look like they were set up by five different people on five different days. We sort that.',
+      items: [
+        { title: 'Facebook business page', body: 'Properly categorised, services listed, hours, location, call-to-action all set.' },
+        { title: 'Instagram business profile', body: 'Bio, link, category, contact button, story highlights organised.' },
+        { title: 'LinkedIn company page', body: 'If your work is B2B, properly set up with employees, services and call-to-actions.' },
+        { title: 'Google Business profile', body: 'Maps listing, hours, photos, posts, attributes, reviews surfaced.' },
+        { title: 'Branded graphics', body: 'Cover images, profile pictures, story highlight covers, all matching.' },
+        { title: 'Cross-links', body: 'Every profile points at your website and at each other. Nothing orphaned.' },
+      ],
+    },
+    cta: {
+      title: 'Want it all looking like one business?',
+      paragraph: 'Tell us which platforms matter and we will quote the set-up.',
+      button: 'Get in touch',
+    },
+  },
+
+  'workwear-print': {
+    hero: {
+      title: 'Workwear and print, matched to your brand.',
+      subtitle:
+        'T-shirts, polos, hi-vis, business cards, signage. Sorted at the same time as your website so it all matches. Priced on the brief.',
+      primaryCTA: { text: 'Get in touch', href: '/contact' },
+    },
+    included: {
+      eyebrow: 'What we sort',
+      headline: 'Everything your business looks like in the real world.',
+      intro:
+        'Branded properly, ordered alongside your website so your van, your shirt and your signs all match what is online.',
+      items: [
+        { title: 'Workwear', body: 'Polos, t-shirts, hoodies, hi-vis, embroidered or printed to last.' },
+        { title: 'Business cards', body: 'Thick stock, finished properly, with QR codes if you want them.' },
+        { title: 'Flyers & leaflets', body: 'Local distribution material that does not look like an estate agent leaflet.' },
+        { title: 'Signage', body: 'Shop signs, A-boards, banners. Durable, on-brand, made for outdoor.' },
+        { title: 'Vehicle graphics', body: 'Magnets, vinyl wraps or full liveries. Designed to read at speed.' },
+        { title: 'One supplier', body: 'You ask us, we sort it. No chasing three different printers.' },
+      ],
+    },
+    cta: {
+      title: 'Need it all looking the same?',
+      paragraph: 'Send a list of what you need and we will quote it as a package.',
+      button: 'Get in touch',
+    },
+  },
+
+  'ai-chatbots': {
+    hero: {
+      title: 'A chatbot that answers the same five questions on repeat.',
+      subtitle:
+        'A chatbot that handles the basic enquiries your website gets every day. Books appointments, answers FAQs, hands off to you when it matters. Priced on the brief.',
+      primaryCTA: { text: 'Get in touch', href: '/contact' },
+    },
+    included: {
+      eyebrow: 'What it does',
+      headline: 'The repeat questions, handled.',
+      intro:
+        'Trained on what you actually offer, your pricing, your areas, your hours. Not a generic widget.',
+      items: [
+        { title: 'Answers FAQs', body: '"Do you cover Faversham?", "How much for a small kitchen?", "When can you come?" — answered instantly.' },
+        { title: 'Captures leads', body: 'Name, email, phone, what they need — gathered in conversation, not on a form.' },
+        { title: 'Books appointments', body: 'Connected to your calendar so visitors can book without waiting for a reply.' },
+        { title: 'Hands off properly', body: 'When a real question comes up, it hands over to you with the conversation already summarised.' },
+        { title: 'Trained on your business', body: 'Pricing, services, areas, hours, common scenarios. Not a generic FAQ widget.' },
+        { title: 'Works out of hours', body: 'Answers visitors at 10pm or on a Sunday so a real lead is not lost overnight.' },
+      ],
+    },
+    cta: {
+      title: 'Want fewer "what do you charge?" emails?',
+      paragraph: 'Tell us what your top five questions are and we will quote a chatbot that answers them.',
+      button: 'Get in touch',
+    },
+  },
+
+  'ai-content': {
+    hero: {
+      title: 'AI-assisted content that does not read like AI content.',
+      subtitle:
+        'Blog posts, service pages and landing copy written with AI and edited by people who know what good writing looks like. Priced on the brief.',
+      primaryCTA: { text: 'Get in touch', href: '/contact' },
+    },
+    included: {
+      eyebrow: 'What we write',
+      headline: 'The content that helps you get found, without it reading like content.',
+      intro:
+        'AI handles the first draft, a person handles the final draft. Nothing publishes that we would not happily put our name to.',
+      items: [
+        { title: 'Blog articles', body: 'Long-form pieces targeting what your customers actually search.' },
+        { title: 'Service pages', body: 'Pages that explain what you do, in your voice, for the customer in your area.' },
+        { title: 'Landing copy', body: 'Conversion-focused pages for paid campaigns or specific offers.' },
+        { title: 'Email content', body: 'Newsletters and follow-up sequences that sound like a human wrote them.' },
+        { title: 'Voice training', body: 'We learn your tone, common phrases, and what to avoid. The AI matches.' },
+        { title: 'Human edit', body: 'Every piece reviewed by hand before it goes anywhere near your site.' },
+      ],
+    },
+    cta: {
+      title: 'Need content but not the content treadmill?',
+      paragraph: 'Tell us what topics matter and we will quote a content plan.',
+      button: 'Get in touch',
+    },
+  },
+
+  'ai-automation': {
+    hero: {
+      title: 'AI for the repeating bits of your business.',
+      subtitle:
+        'Email triage, follow-up sequences, document drafting, data sorting. Pick what eats your time and we will show you a way around it. Priced on the brief.',
+      primaryCTA: { text: 'Get in touch', href: '/contact' },
+    },
+    included: {
+      eyebrow: 'What gets handled',
+      headline: 'The mundane work, done while you focus on real work.',
+      intro:
+        'AI is genuinely good at boring repeat tasks. We pick the right ones for your business and connect them up properly.',
+      items: [
+        { title: 'Email triage', body: 'Incoming emails categorised, summarised, and answered for the simple ones.' },
+        { title: 'Lead scoring', body: 'New enquiries scored against your criteria so you know who to ring first.' },
+        { title: 'Follow-up sequences', body: 'Reminders, nudges and check-ins drafted automatically, sent on schedule.' },
+        { title: 'Document drafting', body: 'Quotes, scopes of work, proposals drafted from your inputs in minutes.' },
+        { title: 'Data sync', body: 'Information flowing automatically between your tools, no manual copying.' },
+        { title: 'Custom workflows', body: 'Anything repetitive in your business can probably be automated. Tell us what.' },
+      ],
+    },
+    cta: {
+      title: 'What repetitive thing do you do every week?',
+      paragraph: 'Describe it in a sentence and we will tell you if it can be automated.',
+      button: 'Get in touch',
+    },
+  },
+};
+
+function getServiceContent(slug: string, fallbackName: string): ServiceContent {
+  return (
+    serviceContent[slug] || {
+      hero: {
+        title: fallbackName,
+        subtitle:
+          'Web, SEO and automations for Kent businesses. £280 websites, £45/hour SEO, automations priced on the brief.',
+        primaryCTA: { text: 'Get in touch', href: '/contact' },
+      },
+      included: {
+        eyebrow: 'What you get',
+        headline: 'Done properly.',
+        items: [],
+      },
+      cta: {
+        title: 'Want to talk about it?',
+        paragraph: 'Send a quick note about what you need and we will reply with a plain answer.',
+        button: 'Get in touch',
+      },
+    }
+  );
+}
+
 export default async function ServicePage({
   serviceName,
   serviceSlug,
-  description,
-  towns,
   caseStudies,
-  guides,
 }: ServicePageProps) {
-  const messaging = getServiceHubMessaging(serviceSlug);
-
+  const content = getServiceContent(serviceSlug, serviceName);
   const allCaseStudies = await getAllCaseStudies();
-  const serviceCaseStudies = allCaseStudies.filter(c => 
-     c.services_used?.toLowerCase().includes(serviceName.toLowerCase())
+  const serviceCaseStudies = allCaseStudies.filter((c) =>
+    c.services_used?.toLowerCase().includes(serviceName.toLowerCase())
   );
   const displayStudies = serviceCaseStudies.length > 0 ? serviceCaseStudies : allCaseStudies.slice(0, 3);
-  const isSEO = serviceSlug === 'seo';
-  const isWebDesign = serviceSlug === 'web-design';
-  const isBranding = serviceSlug === 'branding';
-  const isLeadCapture = serviceSlug === 'lead-capture';
-  const isBusinessAutomation = serviceSlug === 'business-automation';
-  const isSocialMedia = serviceSlug === 'social-media-setup' || serviceSlug === 'digital-marketing';
-  const isWorkwearPrint = serviceSlug === 'workwear-print';
-  const isAIChatbots = serviceSlug === 'ai-chatbots';
-  const isAIContent = serviceSlug === 'ai-content';
-  const isAIAutomation = serviceSlug === 'ai-automation';
-
-  if (isSEO) {
-    return (
-      <>
-        <ServiceHero
-          title={<>SEO Services That Help Your Business<br />Get Found On Google</>}
-          subtitle="If your business is not appearing in local search results, potential customers are finding your competitors instead. Our SEO services help businesses across Kent improve visibility, attract the right traffic, and turn searches into enquiries."
-          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
-        />
-        
-        <ProblemSection 
-          headlineOverride="Why Many Businesses Struggle To Rank On Google"
-          painPoints={[
-            { title: "Low search visibility", pain_point: "Even when customers search for your services locally." },
-            { title: "Competitor rankings", pain_point: "Businesses investing in SEO appear ahead of you." },
-            { title: "Poor website optimisation", pain_point: "Many sites lack the technical structure Google expects." },
-            { title: "Weak Google Business profile", pain_point: "Local SEO opportunities are often missed." },
-            { title: "Missing local relevance", pain_point: "Your site doesn't clearly show Google that you operate reliably across your area." }
-          ]}
-        />
-        
-        <SolutionSection 
-          headlineOverride="What Local SEO Actually Involves"
-          paragraphOverride="Effective SEO requires a structured, multi-layered approach to signal trust and relevance to Google. It is highly strategic work."
-          solutions={[
-            { title: "Keyword Research", description: "Identifying the exact terms your customers are searching for locally.", icon: Search },
-            { title: "Technical Optimisation", description: "Ensuring your website is fast, secure, and easily crawled by Google.", icon: Laptop },
-            { title: "Structured Content", description: "Creating valuable, relevant pages that answer user intent comprehensively.", icon: FileText },
-            { title: "Internal Linking", description: "Building a logical site architecture that distributes page authority safely.", icon: LinkIcon },
-            { title: "Google Business Profile", description: "Optimising your local map listings to capture immediate commercial intent.", icon: MapPin },
-            { title: "Ongoing Improvements", description: "Continuously refining strategies based on real performance data and trends.", icon: TrendingUp }
-          ]}
-        />
-        
-        <ProcessAuthority 
-          headlineOverride="Our Local SEO System"
-          descriptionOverride="Our structured methodology is engineered specifically to capture high-intent local searches and turn them into safe, measurable commercial enquiries."
-          stepsOverride={[
-            { num: '01', title: 'Search Opportunity Analysis', description: 'Identify the terms your customers actually search.' },
-            { num: '02', title: 'Website Optimisation', description: 'Ensure your website structure supports search visibility.' },
-            { num: '03', title: 'Content Development', description: 'Create pages targeting services, locations and industries.' },
-            { num: '04', title: 'Google Business Profile Optimisation', description: 'Improve visibility in map results.' },
-            { num: '05', title: 'Continuous Improvement', description: 'Monitor performance and refine over time.' },
-          ]}
-        />
-        
-        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <Reveal>
-              <div className="text-center md:text-left mb-16 max-w-2xl">
-                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">What Results Can You Expect From SEO?</h2>
-                <p className="text-lg text-neutral-400">SEO typically improves search visibility, website traffic, and enquiry volume. We focus on sustainable strategies, where results compound reliably over several months rather than offering fleeting, risky overnight spikes.</p>
-              </div>
-            </Reveal>
-            <CredibilityMetrics />
-          </div>
-        </section>
-
-        <LocalAuthorityMap headlineOverride="SEO Support For Businesses Across Kent" />
-        
-        <WebsiteReviewCTA />
-
-        <Services 
-          headlineOverride="Supporting Services That Improve SEO Results"
-          descriptionOverride="Our fully connected digital growth ecosystem integrates seamlessly to improve your search visibility and overall conversion rates."
-          servicesOverride={[
-            { title: 'Website Design', description: 'Professional, modern websites that build trust and showcase your services.', href: '/web-design', icon: Laptop },
-            { title: 'Lead Capture Systems', description: 'Funnels and integrated systems engineered specifically to generate daily enquiries.', href: '/lead-capture', icon: MousePointerClick },
-            { title: 'Business Automation', description: 'Systems that organise enquiries, follow-ups and processes automatically.', href: '/business-automation', icon: Zap }
-          ]}
-        />
-        
-        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
-        <KentCoverage pageType={serviceSlug} />
-        <GrowthSystem currentService={serviceSlug} />
-        <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions about SEO in Kent`} />
-        
-        <CTA 
-          titleOverride="Start Improving Your Google Visibility" 
-          paragraphOverride="If your business is not appearing in search results, the right SEO strategy can change that. We help businesses across Kent improve visibility and generate more enquiries." 
-          buttonOverride="Get A Free Quote"
-        />
-      </>
-    );
-  }
-
-  if (isWebDesign) {
-    return (
-      <>
-        <ServiceHero
-          title={<>Website Design That Turns<br />Visitors Into Customers</>}
-          subtitle="Your website should be more than an online brochure. It should showcase your business professionally, appear in search results, and convert visitors into real enquiries. We design modern, high-performing websites for businesses across Kent."
-          primaryCTA={{ text: 'Get A Free Website Review', href: '/contact' }}
-        />
-        
-        <ProblemSection 
-          headlineOverride="Why Many Business Websites Fail"
-          painPoints={[
-            { title: "Outdated websites", pain_point: "First impressions matter and an old website can reduce trust." },
-            { title: "Slow loading pages", pain_point: "Your website takes too long to load, costing you valuable enquiries." },
-            { title: "Poor mobile experience", pain_point: "Most visitors now browse on phones." },
-            { title: "Confusing navigation", pain_point: "Visitors cannot easily find what they are looking for." },
-            { title: "Weak enquiry pathways", pain_point: "Visitors cannot easily find how to contact you or explore services." }
-          ]}
-        />
-        
-        <SolutionSection 
-          headlineOverride="What Makes a High Performing Business Website"
-          paragraphOverride="Many websites look impressive on the surface but are poorly built underneath. We construct our websites with high-performance code and technical SEO embedded from day one—meaning your site is engineered to rank, perform, and convert just as beautifully as it looks."
-          solutions={[
-            { title: "Clear Messaging", description: "Instantly communicate what you do and who you serve.", icon: FileText },
-            { title: "Fast Loading Speeds", description: "Keep visitors engaged with pages that load instantly.", icon: Zap },
-            { title: "Mobile Friendly Design", description: "Flawless experience across all devices and screen sizes.", icon: Laptop },
-            { title: "Strong Calls to Action", description: "Guide visitors clearly toward making an enquiry.", icon: MapPin },
-            { title: "Search Engine Friendly", description: "Structured from the ground up to be found on Google.", icon: Search },
-            { title: "Easy Navigation", description: "Logical layouts that help users find information effortlessly.", icon: LinkIcon }
-          ]}
-        />
-        
-        <ProcessAuthority 
-          headlineOverride="Our Web Design Process"
-          descriptionOverride="Our structured methodology ensures your website is engineered for speed and search visibility, not just visual appeal."
-          stepsOverride={[
-            { num: '01', title: 'Understanding Your Business', description: 'Learn about services, customers and goals.' },
-            { num: '02', title: 'Planning the Structure', description: 'Design pages that guide visitors toward enquiry.' },
-            { num: '03', title: 'Design & Build', description: 'Create a modern website aligned with your brand.' },
-            { num: '04', title: 'SEO Foundations', description: 'Ensure the site is structured to support search visibility.' },
-            { num: '05', title: 'Launch', description: 'Your website goes live ready to attract customers.' },
-          ]}
-        />
-
-        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <Reveal>
-              <div className="text-center md:text-left mb-16 max-w-2xl">
-                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">Websites Built For Small Businesses</h2>
-                <p className="text-lg text-neutral-400">We build websites tailored to the specific needs of local businesses and service providers.</p>
-              </div>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Websites for Trades</h3>
-                 <p className="text-neutral-400">Showcase services and generate local enquiries.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Websites for Startups</h3>
-                 <p className="text-neutral-400">Professional online presence from day one.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Service Business Websites</h3>
-                 <p className="text-neutral-400">Clear structure that turns visitors into leads.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Ecommerce Websites</h3>
-                 <p className="text-neutral-400">Online stores designed for smooth purchasing.</p>
-               </div>
-            </div>
-          </div>
-        </section>
-
-        <LocalAuthorityMap headlineOverride="Website Design For Businesses Across Kent" />
-        
-        <WebsiteReviewCTA />
-
-        <Services 
-          headlineOverride="More Than Just Website Design"
-          descriptionOverride="Successful websites also benefit from our fully connected digital growth ecosystem."
-          servicesOverride={[
-            { title: 'Local SEO', description: 'Optimised pages and local SEO that help your business appear in relevant searches.', href: '/seo', icon: Search },
-            { title: 'Lead Capture Systems', description: 'Funnels and integrated systems engineered specifically to generate daily enquiries.', href: '/lead-capture', icon: MousePointerClick },
-            { title: 'Business Automation', description: 'Systems that organise enquiries, follow-ups and processes automatically.', href: '/business-automation', icon: Zap }
-          ]}
-        />
-        
-        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
-        <KentCoverage pageType={serviceSlug} />
-        <GrowthSystem currentService={serviceSlug} />
-        <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions about Web Design`} />
-        
-        <CTA 
-          titleOverride="Ready For A Website That Works For Your Business?" 
-          paragraphOverride="If your current website feels outdated or is not generating enquiries, a professionally designed site can transform how customers see your business." 
-          buttonOverride="Get A Free Website Review"
-        />
-      </>
-    );
-  }
-
-  if (isBranding) {
-    return (
-      <>
-        <ServiceHero
-          title={<>Professional Logo & Branding<br />That Makes Your Business Look Established</>}
-          subtitle="Your brand is often the first impression customers have of your business. A clear, professional identity helps you build trust, stand out from competitors and look established from the very first interaction. We create logos and branding systems for businesses across Kent that work consistently across websites, vehicles, workwear and marketing materials."
-          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
-        />
-        
-        <ProblemSection 
-          headlineOverride="Why Many Small Business Brands Struggle"
-          painPoints={[
-            { title: "Your branding looks inconsistent", pain_point: "Different colours, fonts and styles appear across your website, vehicles and social media." },
-            { title: "Your logo looks outdated", pain_point: "An old or poorly designed logo can make your business appear less professional." },
-            { title: "Your business blends in with competitors", pain_point: "Without clear branding it becomes harder for customers to remember you." },
-            { title: "Your marketing materials lack cohesion", pain_point: "Flyers, workwear and signage may not match visually." },
-            { title: "You struggle to present a professional image", pain_point: "Strong branding helps customers trust your business before they even contact you." }
-          ]}
-        />
-        
-        <SolutionSection 
-          headlineOverride="What Strong Branding Actually Includes"
-          paragraphOverride="Professional branding is more than just a logo. It is a complete visual system."
-          solutions={[
-            { title: "Logo Design", description: "A distinct, professional mark that represents your business.", icon: Palette },
-            { title: "Colour Palette", description: "Carefully selected colours that evoke trust and recognition.", icon: Zap },
-            { title: "Typography", description: "Consistent fonts that make your messaging clear and professional.", icon: FileText },
-            { title: "Brand Guidelines", description: "A rulebook ensuring your brand always looks correct.", icon: LinkIcon },
-            { title: "Visual Identity", description: "A cohesive look across all customer touchpoints.", icon: MapPin },
-            { title: "Real World Application", description: "Prepared for print, digital, vehicles, and workwear.", icon: Search }
-          ]}
-        />
-        
-        <ProcessAuthority 
-          headlineOverride="Our Branding Process"
-          descriptionOverride="Our structured methodology builds brands that look established."
-          stepsOverride={[
-            { num: '01', title: 'Understanding Your Business', description: 'We learn about your services, audience and the image you want to present.' },
-            { num: '02', title: 'Concept Development', description: 'Initial logo concepts and visual directions are created.' },
-            { num: '03', title: 'Refinement', description: 'Designs are refined based on feedback until the final direction is agreed.' },
-            { num: '04', title: 'Brand Kit Creation', description: 'Your colours, fonts and logo variations are organised into a clear brand system.' },
-            { num: '05', title: 'Real World Application', description: 'Your branding is prepared for websites, workwear, signage and marketing materials.' },
-          ]}
-        />
-
-        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <Reveal>
-              <div className="text-center md:text-left mb-16 max-w-2xl">
-                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">Branding That Works Across Every Platform</h2>
-                <p className="text-lg text-neutral-400">We design identities built to perform seamlessly everywhere your customers see you.</p>
-              </div>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Website Branding</h3>
-                 <p className="text-neutral-400">A consistent identity across your website improves professionalism.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Vehicle Graphics</h3>
-                 <p className="text-neutral-400">Clear branding helps your vehicles act as moving advertisements.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Workwear Branding</h3>
-                 <p className="text-neutral-400">Uniform branding builds trust with customers on-site.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Print Materials</h3>
-                 <p className="text-neutral-400">Flyers, business cards and signage all align visually.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Social Media Branding</h3>
-                 <p className="text-neutral-400">Profiles and graphics follow the same visual identity.</p>
-               </div>
-            </div>
-          </div>
-        </section>
-
-        <LocalAuthorityMap headlineOverride="Branding Support For Businesses Across Kent" />
-        
-        <Services 
-          headlineOverride="Supporting Services That Strengthen Your Brand"
-          descriptionOverride="Consistent branding improves the effectiveness of these connected services."
-          servicesOverride={[
-            { title: 'Website Design', description: 'Professional, modern websites that build trust and showcase your services.', href: '/web-design', icon: Laptop },
-            { title: 'Local SEO', description: 'Optimised pages and local SEO that help your business appear in relevant searches.', href: '/seo', icon: Search },
-            { title: 'Business Automation', description: 'Systems that organise enquiries, follow-ups and processes automatically.', href: '/business-automation', icon: Zap },
-            { title: 'Social Media Setup', description: 'Optimised social media profiles structured to attract and convert local clients.', href: '/digital-marketing', icon: Share2 }
-          ]}
-        />
-        
-        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
-        <KentCoverage pageType={serviceSlug} />
-        <GrowthSystem currentService={serviceSlug} />
-        <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions about Branding`} />
-        
-        <CTA 
-          titleOverride="Ready To Give Your Business A Professional Identity?" 
-          paragraphOverride="Whether you need a completely new logo or a full branding system, we can help your business present a clear and professional image." 
-        />
-      </>
-    );
-  }
-
-  if (isLeadCapture) {
-    return (
-      <>
-        <ServiceHero
-          title={<>Lead Capture Systems That Turn<br />Visitors Into Enquiries</>}
-          subtitle="Many websites receive visitors but fail to convert them into enquiries. We build lead capture systems that guide visitors toward action, making it easier for potential customers to contact your business."
-          primaryCTA={{ text: 'Get A Free Website Review', href: '/contact' }}
-        />
-        
-        <ProblemSection 
-          headlineOverride="Why Many Websites Fail To Generate Enquiries"
-          painPoints={[
-            { title: "Unclear calls to action", pain_point: "Visitors are unsure what step to take next." },
-            { title: "Visitors leaving without enquiry", pain_point: "Your website may not clearly guide people toward enquiry." },
-            { title: "Confusing contact forms", pain_point: "Complex or confusing forms discourage enquiries." },
-            { title: "Weak conversion pathways", pain_point: "Visitors struggle to understand your services quickly." },
-            { title: "Lack of enquiry tracking", pain_point: "You have no data showing what actually generates leads." }
-          ]}
-        />
-        
-        <SolutionSection 
-          headlineOverride="What Is A Lead Capture System?"
-          paragraphOverride="A lead capture system combines clear calls to action, structured page layouts, enquiry forms, contact pathways, and automated follow ups to guide your visitors directly toward making an enquiry."
-          solutions={[
-            { title: "Strategic Call To Action Buttons", description: "Placed exactly where visitors make decisions.", icon: LinkIcon },
-            { title: "Enquiry Forms", description: "Structured carefully to reduce friction for the user.", icon: FileText },
-            { title: "Landing Pages", description: "Pages built specifically for high conversion rates.", icon: Laptop },
-            { title: "Quote Request Forms", description: "Clear pathways for pricing or custom job queries.", icon: FileText },
-            { title: "Click To Call Features", description: "Allowing mobile visitors to phone you easily.", icon: Search },
-            { title: "Live Chat Options", description: "For immediate, real-time customer conversations.", icon: Zap }
-          ]}
-        />
-        
-        <ProcessAuthority 
-          headlineOverride="How We Improve Lead Generation"
-          descriptionOverride="Our methodical approach ensures every page on your site works hard to generate enquiries."
-          stepsOverride={[
-            { num: '01', title: 'Visitor Journey Planning', description: 'Design pages that guide visitors toward enquiry.' },
-            { num: '02', title: 'Clear Calls To Action', description: 'Place enquiry prompts in the right locations.' },
-            { num: '03', title: 'Optimised Contact Forms', description: 'Simple forms that encourage visitors to get in touch.' },
-            { num: '04', title: 'Conversion Focused Page Layouts', description: 'Ensure key information appears where visitors expect it.' },
-            { num: '05', title: 'Automation Integration', description: 'Connect enquiries to automated systems and workflows.' },
-          ]}
-        />
-
-        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <Reveal>
-              <div className="text-center md:text-left mb-16 max-w-2xl">
-                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">The Impact Of Good Lead Capture</h2>
-                <p className="text-lg text-neutral-400">By optimising user flow, we dramatically increase the number of visitors who choose to interact with your business.</p>
-              </div>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Higher Conversion Rates</h3>
-                 <p className="text-neutral-400">Turn existing traffic into paying clients immediately.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Better Quality Leads</h3>
-                 <p className="text-neutral-400">Filter out low-intent users through smart form design.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Faster Response Times</h3>
-                 <p className="text-neutral-400">Integration with your CRM means you follow up first.</p>
-               </div>
-            </div>
-          </div>
-        </section>
-
-        <LocalAuthorityMap headlineOverride="Lead Capture Systems For Businesses Across Kent" />
-        
-        <Services 
-          headlineOverride="Connected Growth Services"
-          descriptionOverride="Lead Capture performs best when supported by the rest of our digital growth framework."
-          servicesOverride={[
-            { title: 'Website Design', description: 'Professional, modern websites that build trust and showcase your services.', href: '/web-design', icon: Laptop },
-            { title: 'Local SEO', description: 'Optimised pages and local SEO that help your business appear in relevant searches.', href: '/seo', icon: Search },
-            { title: 'Business Automation', description: 'Systems that organise enquiries, follow-ups and processes automatically.', href: '/business-automation', icon: Zap }
-          ]}
-        />
-        
-        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
-        <KentCoverage pageType={serviceSlug} />
-        <GrowthSystem currentService={serviceSlug} />
-        <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions`} />
-        
-        <CTA 
-          titleOverride="Turn Website Visitors Into Real Enquiries" 
-          paragraphOverride="If your website receives traffic but generates few enquiries, improving lead capture can dramatically increase results." 
-          buttonOverride="Get A Free Website Review"
-        />
-      </>
-    );
-  }
-
-  if (isBusinessAutomation) {
-    return (
-      <>
-        <ServiceHero
-          title={<>Business Automation Systems That Save<br />Time And Organise Enquiries</>}
-          subtitle="As your business grows, managing enquiries, follow ups and processes manually becomes difficult. We build automation systems that organise incoming enquiries, trigger follow ups and streamline day to day operations."
-          primaryCTA={{ text: 'Book An Automation Consultation', href: '/contact' }}
-        />
-        
-        <ProblemSection 
-          headlineOverride="Why Many Businesses Struggle To Manage Enquiries"
-          painPoints={[
-            { title: "Missed enquiries", pain_point: "Manual processes can cause slow responses." },
-            { title: "Manual follow ups", pain_point: "Potential customers are often forgotten without an automated structure." },
-            { title: "Disorganised customer data", pain_point: "Important details are spread across different systems." },
-            { title: "Time consuming admin tasks", pain_point: "Business owners spend hours managing emails and messages." },
-            { title: "Growth becomes harder to manage", pain_point: "Without systems in place, scaling becomes difficult." }
-          ]}
-        />
-        
-        <SolutionSection 
-          headlineOverride="What Is Business Automation?"
-          paragraphOverride="Business automation systems connect your website with your operational software (like CRMs or booking platforms) to handle repetitive administrative work securely in the background."
-          solutions={[
-            { title: "Organising Enquiries", description: "Directing leads to the right team member instantly.", icon: Zap },
-            { title: "Sending automated follow ups", description: "Ensuring potential customers receive immediate responses.", icon: FileText },
-            { title: "Tracking customer information", description: "Logging details securely without manual data entry.", icon: Search },
-            { title: "Connecting website forms to workflows", description: "Triggering operational tasks from a simple form fill.", icon: LinkIcon },
-            { title: "Improving response times", description: "Allowing your business to reply faster than competitors.", icon: Laptop }
-          ]}
-        />
-        
-        <ProcessAuthority 
-          headlineOverride="How We Build Automation Systems"
-          descriptionOverride="Our structured integration process builds reliable scaling capabilities into your business."
-          stepsOverride={[
-            { num: '01', title: 'Process Discovery', description: 'Understand how your enquiries and workflows currently operate.' },
-            { num: '02', title: 'System Planning', description: 'Identify opportunities to automate repetitive tasks.' },
-            { num: '03', title: 'Automation Setup', description: 'Build workflows that handle enquiries, notifications and follow ups.' },
-            { num: '04', title: 'System Integration', description: 'Connect your website, CRM and communication tools.' },
-            { num: '05', title: 'Testing And Optimisation', description: 'Ensure the automation works reliably as your business grows.' },
-          ]}
-        />
-
-        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <Reveal>
-              <div className="text-center md:text-left mb-16 max-w-2xl">
-                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">Examples Of Business Automation</h2>
-                <p className="text-lg text-neutral-400">By handing off manual admin work to secure systems, you and your team can focus fully on doing the actual work.</p>
-              </div>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Enquiry Routing</h3>
-                 <p className="text-neutral-400">Automatically organise incoming enquiries.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Automated Email Responses</h3>
-                 <p className="text-neutral-400">Send instant confirmation messages.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Lead Tracking</h3>
-                 <p className="text-neutral-400">Track enquiries from first contact to completion.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Follow Up Sequences</h3>
-                 <p className="text-neutral-400">Automatically remind customers about quotes or appointments.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Review Requests</h3>
-                 <p className="text-neutral-400">Automatically ask customers for feedback after a job.</p>
-               </div>
-            </div>
-          </div>
-        </section>
-
-        <LocalAuthorityMap headlineOverride="Automation Systems For Businesses Across Kent" />
-        
-        <Services 
-          headlineOverride="Connected Growth Services"
-          descriptionOverride="Automation works best when receiving consistent enquiries from a high-performing digital ecosystem."
-          servicesOverride={[
-            { title: 'Website Design', description: 'Professional, modern websites that build trust and showcase your services.', href: '/web-design', icon: Laptop },
-            { title: 'Local SEO', description: 'Optimised pages and local SEO that help your business appear in relevant searches.', href: '/seo', icon: Search },
-            { title: 'Lead Capture Systems', description: 'Funnels and integrated systems engineered specifically to generate daily enquiries.', href: '/lead-capture', icon: MousePointerClick }
-          ]}
-        />
-        
-        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
-        <KentCoverage pageType={serviceSlug} />
-        <GrowthSystem currentService={serviceSlug} />
-        <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions`} />
-        
-        <CTA 
-          titleOverride="Streamline Your Business With Automation" 
-          paragraphOverride="Automation systems can help your business respond faster, organise enquiries and reduce repetitive admin work." 
-          buttonOverride="Book An Automation Consultation"
-        />
-      </>
-    );
-  }
-
-  if (isSocialMedia) {
-    return (
-      <>
-        <ServiceHero
-          title={<>Professional Social Media Setup<br />Build A Consistent Online Presence</>}
-          subtitle="A well structured social media profile helps potential customers understand your business quickly and builds trust before they contact you. We set up and optimise social media profiles so they align with your branding and support your wider online presence."
-          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
-        />
-        
-        <ProblemSection 
-          headlineOverride="Why Many Business Social Profiles Fail"
-          painPoints={[
-            { title: "Incomplete profiles", pain_point: "Important information is missing or outdated." },
-            { title: "Inconsistent branding", pain_point: "Colours, logos and descriptions vary across platforms." },
-            { title: "Poor first impressions", pain_point: "Profiles may appear unprofessional or inactive." },
-            { title: "Unclear service information", pain_point: "Visitors struggle to understand what your business offers." },
-            { title: "Disconnected online presence", pain_point: "Profiles do not align with the business website." }
-          ]}
-        />
-        
-        <SolutionSection 
-          headlineOverride="What A Professional Social Media Profile Includes"
-          paragraphOverride="A strong social profile clearly communicates your services, builds trust, and makes it easy for visitors to connect directly with your website."
-          solutions={[
-            { title: "Consistent branding", description: "Logos and imagery matching your official identity.", icon: Palette },
-            { title: "Clear business description", description: "Telling visitors exactly what you do simply.", icon: FileText },
-            { title: "Service highlights", description: "Putting your key offerings front and center.", icon: Zap },
-            { title: "Correct contact information", description: "Making it obvious how to get in touch.", icon: LinkIcon },
-            { title: "Link to the website", description: "Driving interested users straight to your domain.", icon: Laptop },
-            { title: "Profile and cover imagery", description: "Sized and cropped perfectly for every platform.", icon: Search }
-          ]}
-        />
-        
-        <ProcessAuthority 
-          headlineOverride="Our Social Media Setup Process"
-          descriptionOverride="Our structured methodology ensures your profiles mirror your high-end brand identity exactly."
-          stepsOverride={[
-            { num: '01', title: 'Platform Review', description: 'Assess your current social profiles.' },
-            { num: '02', title: 'Brand Alignment', description: 'Ensure colours, logos and messaging match your brand.' },
-            { num: '03', title: 'Profile Optimisation', description: 'Update descriptions, services and contact details.' },
-            { num: '04', title: 'Visual Setup', description: 'Create cover images and profile graphics.' },
-            { num: '05', title: 'Website Integration', description: 'Connect profiles clearly to your website.' },
-          ]}
-        />
-
-        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <Reveal>
-              <div className="text-center md:text-left mb-16 max-w-2xl">
-                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">Platforms We Can Help Set Up</h2>
-                <p className="text-lg text-neutral-400">We establish your brand wherever your local customers are spending their time.</p>
-              </div>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Facebook Business Pages</h3>
-                 <p className="text-neutral-400">For community connection and local reach.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Instagram Business Profiles</h3>
-                 <p className="text-neutral-400">For visual portfolios and direct messaging.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">LinkedIn Company Pages</h3>
-                 <p className="text-neutral-400">For B2B networking and professional authority.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Google Business Integration</h3>
-                 <p className="text-neutral-400">Linking your platforms to local map results.</p>
-               </div>
-            </div>
-          </div>
-        </section>
-
-        <LocalAuthorityMap headlineOverride="Social Media Setup For Businesses Across Kent" />
-        
-        <Services 
-          headlineOverride="Part Of Your Wider Online Presence"
-          descriptionOverride="Social Media profiles support this ecosystem by reinforcing brand visibility."
-          servicesOverride={[
-            { title: 'Website Design', description: 'Creates the foundation of your online presence.', href: '/web-design', icon: Laptop },
-            { title: 'Local SEO', description: 'Helps customers discover your business.', href: '/seo', icon: Search },
-            { title: 'Lead Capture Systems', description: 'Turn visitors into enquiries.', href: '/lead-capture', icon: LinkIcon },
-            { title: 'Business Automation', description: 'Organises incoming leads.', href: '/business-automation', icon: Zap }
-          ]}
-        />
-        
-        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
-        <KentCoverage pageType={serviceSlug} />
-        <GrowthSystem currentService={serviceSlug} />
-        <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions`} />
-        
-        <CTA 
-          titleOverride="Create A Professional Social Media Presence" 
-          paragraphOverride="A well structured profile helps customers understand your business and builds trust before they contact you." 
-          buttonOverride="Get A Free Quote"
-        />
-      </>
-    );
-  }
-
-  if (isWorkwearPrint) {
-    return (
-      <>
-        <ServiceHero
-          title={<>Workwear & Print<br />Professional Branding In The Real World</>}
-          subtitle="Consistent branding across workwear, vehicles and printed materials helps customers recognise and trust your business. We provide high quality branded workwear and printed materials designed to match your business identity."
-          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
-        />
-        
-        <ProblemSection 
-          headlineOverride="Why Physical Branding Matters"
-          painPoints={[
-            { title: "Unbranded workwear", pain_point: "Staff may appear less professional on site." },
-            { title: "Inconsistent printed materials", pain_point: "Flyers and signage may not match your brand identity." },
-            { title: "Missed visibility opportunities", pain_point: "Vehicles and clothing can promote your business daily." },
-            { title: "Low brand recognition", pain_point: "Consistent visuals help customers remember your business." }
-          ]}
-        />
-        
-        <SolutionSection 
-          headlineOverride="What Branded Materials Can Include"
-          paragraphOverride="We ensure your physical assets represent your business to the same high standard as your online presence."
-          solutions={[
-            { title: "Branded Workwear", description: "High quality embroidered and printed clothing.", icon: Palette },
-            { title: "Business Cards", description: "Premium networking materials that leave an impression.", icon: FileText },
-            { title: "Flyers & Leaflets", description: "Targeted localized marketing assets.", icon: Zap },
-            { title: "Signage", description: "Clear, durable displays for your premises.", icon: LinkIcon },
-            { title: "Vehicle Graphics", description: "Turn your transport into a moving billboard.", icon: Laptop },
-            { title: "Promotional Materials", description: "Branded products tailored to your audience.", icon: Search }
-          ]}
-        />
-        
-        <ProcessAuthority 
-          headlineOverride="Our Workwear & Print Process"
-          descriptionOverride="Our end-to-end production process ensures perfect brand alignment and high-quality finishes."
-          stepsOverride={[
-            { num: '01', title: 'Brand Review', description: 'Ensure materials align with your branding.' },
-            { num: '02', title: 'Product Selection', description: 'Choose clothing or materials suited to your business.' },
-            { num: '03', title: 'Design Preparation', description: 'Prepare logos and branding for production.' },
-            { num: '04', title: 'Production', description: 'High quality printing or embroidery.' },
-            { num: '05', title: 'Delivery', description: 'Materials delivered ready to use.' },
-          ]}
-        />
-
-        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <Reveal>
-              <div className="text-center md:text-left mb-16 max-w-2xl">
-                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">Products We Provide</h2>
-                <p className="text-lg text-neutral-400">Everything needed to present a cohesive and professional front to your customers.</p>
-              </div>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Branded Workwear</h3>
-                 <p className="text-neutral-400">Polo shirts, hoodies, jackets, and safety gear.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Business Cards</h3>
-                 <p className="text-neutral-400">Premium thickness and specialized finishes.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Flyers & Leaflets</h3>
-                 <p className="text-neutral-400">High-resolution print for campaign distributions.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Signage</h3>
-                 <p className="text-neutral-400">Durable outdoor and indoor physical branding.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Vehicle Graphics</h3>
-                 <p className="text-neutral-400">Professional vinyl wrap and detailing application design.</p>
-               </div>
-            </div>
-          </div>
-        </section>
-
-        <LocalAuthorityMap headlineOverride="Workwear & Print For Businesses Across Kent" />
-        
-        <Services 
-          headlineOverride="Connected To Your Brand Identity"
-          descriptionOverride="Our workwear services bring the digital identity we create locally into the real world."
-          servicesOverride={[
-            { title: 'Logo & Branding', description: 'Defines your core visual identity.', href: '/branding', icon: Palette },
-            { title: 'Workwear & Print', description: 'Applies that identity to real world materials.', href: '/workwear-print', icon: Zap }
-          ]}
-        />
-        
-        <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions`} />
-        
-        <CTA 
-          titleOverride="Promote Your Business With Professional Branding" 
-          paragraphOverride="Branded workwear and printed materials help your business look professional and increase visibility in everyday situations." 
-          buttonOverride="Get A Free Quote"
-        />
-      </>
-    );
-  }
-
-  if (isAIChatbots) {
-    return (
-      <>
-        <ServiceHero
-          title={<>AI Chatbots That Convert<br />Website Visitors Into Leads — 24/7</>}
-          subtitle="Most business websites lose visitors because nobody is there to answer questions at 10pm on a Tuesday. Our custom-built AI chatbots engage every visitor, answer their questions instantly, capture their details, and book appointments — without you lifting a finger."
-          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
-        />
-
-        <ProblemSection
-          headlineOverride="Why Most Business Websites Lose Leads"
-          painPoints={[
-            { title: "Visitors leave without engaging", pain_point: "Your website gets traffic but most visitors browse and leave without ever making contact." },
-            { title: "Enquiries only come during office hours", pain_point: "Potential customers searching at evenings and weekends have no way to get answers immediately." },
-            { title: "Contact forms feel impersonal", pain_point: "A static form cannot answer questions or guide visitors toward the right service." },
-            { title: "Slow response times cost sales", pain_point: "By the time you reply to an enquiry, the customer has already contacted a competitor." },
-            { title: "No way to qualify leads automatically", pain_point: "Every enquiry arrives as a generic message with no context about what the customer actually needs." }
-          ]}
-        />
-
-        <SolutionSection
-          headlineOverride="What An AI Chatbot Actually Does For Your Business"
-          paragraphOverride="An AI chatbot is not a basic FAQ widget. It is an intelligent assistant trained on your business, your services, and your pricing — capable of holding natural conversations that guide visitors toward booking or enquiring."
-          solutions={[
-            { title: "24/7 Lead Capture", description: "Engages visitors and captures contact details at any time of day or night.", icon: Clock },
-            { title: "Intelligent Conversations", description: "Answers questions about your services, pricing, and availability naturally.", icon: MessageSquare },
-            { title: "Appointment Booking", description: "Integrates with your calendar so visitors can book consultations directly.", icon: Calendar },
-            { title: "Lead Qualification", description: "Asks the right questions to understand what the customer needs before you speak to them.", icon: BarChart3 },
-            { title: "Instant Response", description: "Replies within seconds so visitors never wait or lose interest.", icon: Zap },
-            { title: "Custom Trained", description: "Built specifically for your business — your services, your tone, your processes.", icon: BrainCircuit }
-          ]}
-        />
-
-        <ProcessAuthority
-          headlineOverride="How We Build Your AI Chatbot"
-          descriptionOverride="Every chatbot we build is custom. We learn your business inside out and create an assistant that represents you professionally."
-          stepsOverride={[
-            { num: '01', title: 'Business Deep Dive', description: 'We learn your services, pricing, common questions, and how you want to handle enquiries.' },
-            { num: '02', title: 'Conversation Design', description: 'We map out the flows your chatbot needs — from greeting to booking to capturing details.' },
-            { num: '03', title: 'AI Training', description: 'Your chatbot is trained on your specific business data so it answers accurately.' },
-            { num: '04', title: 'Integration & Testing', description: 'We embed it on your website and test every scenario before going live.' },
-            { num: '05', title: 'Launch & Optimise', description: 'Your chatbot goes live and we continuously improve it based on real conversations.' },
-          ]}
-        />
-
-        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <Reveal>
-              <div className="text-center md:text-left mb-16 max-w-2xl">
-                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">What Your AI Chatbot Can Do</h2>
-                <p className="text-lg text-neutral-400">Every chatbot is tailored to your business. Here are the most common capabilities our clients use.</p>
-              </div>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Answer Service Questions</h3>
-                 <p className="text-neutral-400">Explain what you offer, how it works, and what customers can expect.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Capture Lead Details</h3>
-                 <p className="text-neutral-400">Collect names, emails, phone numbers and project details through natural conversation.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Book Appointments</h3>
-                 <p className="text-neutral-400">Connect to your calendar and let visitors book consultations or callbacks directly.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Qualify Leads</h3>
-                 <p className="text-neutral-400">Ask qualifying questions so you know exactly what the customer needs before calling them.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Provide Instant Quotes</h3>
-                 <p className="text-neutral-400">Give ballpark pricing based on the information the visitor provides.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Handle Out-of-Hours</h3>
-                 <p className="text-neutral-400">Engage visitors at 10pm, weekends, or bank holidays when you are unavailable.</p>
-               </div>
-            </div>
-          </div>
-        </section>
-
-        <LocalAuthorityMap headlineOverride="AI Chatbot Services For Businesses Across Kent" />
-
-        <WebsiteReviewCTA />
-
-        <Services
-          headlineOverride="AI Chatbots Work Best With These Services"
-          descriptionOverride="Combine your AI chatbot with our other services for maximum lead generation."
-          servicesOverride={[
-            { title: 'Website Design', description: 'A high-converting website gives your chatbot the best foundation to work from.', href: '/web-design', icon: Laptop },
-            { title: 'Lead Capture Systems', description: 'Structured funnels that feed into your chatbot conversations.', href: '/lead-capture', icon: MousePointerClick },
-            { title: 'Business Automation', description: 'Route chatbot leads directly into your CRM and follow-up systems.', href: '/business-automation', icon: Zap }
-          ]}
-        />
-
-        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
-        <KentCoverage pageType={serviceSlug} />
-        <GrowthSystem currentService={serviceSlug} />
-        <FAQ faqs={getServiceFAQs(serviceSlug)} title="Frequently Asked Questions about AI Chatbots" />
-
-        <CTA
-          titleOverride="Ready To Capture Leads While You Sleep?"
-          paragraphOverride="An AI chatbot works for your business 24 hours a day, 7 days a week — engaging visitors, answering questions, and converting them into real enquiries. No salaries, no sick days, no missed opportunities."
-          buttonOverride="Get A Free Quote"
-        />
-      </>
-    );
-  }
-
-  if (isAIContent) {
-    return (
-      <>
-        <ServiceHero
-          title={<>AI Content Creation That<br />Ranks, Engages, and Converts</>}
-          subtitle="Consistent content is one of the most powerful ways to grow your online visibility — but most businesses cannot keep up with the volume required. Our AI content service produces professional, SEO-optimised blog posts, social media content, and website copy at a pace that would be impossible manually."
-          primaryCTA={{ text: 'Get A Free Quote', href: '/contact' }}
-        />
-
-        <ProblemSection
-          headlineOverride="Why Most Businesses Struggle With Content"
-          painPoints={[
-            { title: "No time to write regularly", pain_point: "You know content matters but running your business leaves no time to produce it consistently." },
-            { title: "Blog sits empty or outdated", pain_point: "Your website has a blog section with 2 posts from 3 years ago — it signals inactivity to Google and customers." },
-            { title: "Social media goes quiet for weeks", pain_point: "You post sporadically when you remember, but there is no strategy or consistency behind it." },
-            { title: "Competitors are publishing more", pain_point: "Businesses that publish regularly are steadily climbing search rankings while yours stays still." },
-            { title: "Hiring a writer is expensive", pain_point: "A full-time content writer costs £25,000+ per year. Freelancers are unpredictable and expensive per piece." }
-          ]}
-        />
-
-        <SolutionSection
-          headlineOverride="How AI Content Creation Works"
-          paragraphOverride="We combine AI production capabilities with human editorial oversight to deliver content that is accurate, on-brand, and genuinely useful for your audience. Every piece is reviewed before publishing."
-          solutions={[
-            { title: "SEO Blog Posts", description: "Long-form articles targeting the keywords your customers actually search for.", icon: FileText },
-            { title: "Social Media Content", description: "Platform-specific posts, captions, and visuals that maintain a consistent presence.", icon: Share2 },
-            { title: "Website Copy", description: "Service pages, landing pages, and about sections written to convert visitors.", icon: Laptop },
-            { title: "Email Newsletters", description: "Regular email content that keeps your audience engaged and drives repeat visits.", icon: Mail },
-            { title: "Brand Voice Training", description: "We train the AI on your specific tone, terminology, and style preferences.", icon: PenTool },
-            { title: "Editorial Oversight", description: "Every piece is reviewed by our team for accuracy, quality, and brand alignment.", icon: Search }
-          ]}
-        />
-
-        <ProcessAuthority
-          headlineOverride="Our AI Content Process"
-          descriptionOverride="We build a content engine tailored to your business that produces consistent, high-quality output month after month."
-          stepsOverride={[
-            { num: '01', title: 'Content Strategy', description: 'We research your industry, competitors, and target keywords to build a content plan.' },
-            { num: '02', title: 'Brand Voice Setup', description: 'We learn your tone, style, and terminology so every piece sounds authentically you.' },
-            { num: '03', title: 'AI Production', description: 'Content is generated at scale using AI trained on your business context.' },
-            { num: '04', title: 'Human Review', description: 'Every piece is edited and quality-checked before delivery.' },
-            { num: '05', title: 'Publish & Optimise', description: 'Content is published on schedule and we track performance to improve over time.' },
-          ]}
-        />
-
-        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <Reveal>
-              <div className="text-center md:text-left mb-16 max-w-2xl">
-                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">Content We Produce</h2>
-                <p className="text-lg text-neutral-400">Our AI content service covers every channel your business needs to stay visible and relevant.</p>
-              </div>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Blog Articles</h3>
-                 <p className="text-neutral-400">SEO-driven posts that answer customer questions and rank on Google.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Social Posts</h3>
-                 <p className="text-neutral-400">Platform-native content for Facebook, Instagram, LinkedIn, and more.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Website Pages</h3>
-                 <p className="text-neutral-400">Service pages, landing pages, and conversion-focused copy.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Email Campaigns</h3>
-                 <p className="text-neutral-400">Newsletters and drip sequences that nurture leads into customers.</p>
-               </div>
-            </div>
-          </div>
-        </section>
-
-        <LocalAuthorityMap headlineOverride="AI Content Services For Businesses Across Kent" />
-
-        <WebsiteReviewCTA />
-
-        <Services
-          headlineOverride="Content Works Best With These Services"
-          descriptionOverride="AI content amplifies the impact of your other digital investments."
-          servicesOverride={[
-            { title: 'Local SEO', description: 'Content feeds your SEO strategy with fresh, keyword-targeted pages.', href: '/seo', icon: Search },
-            { title: 'Website Design', description: 'Great content needs a great website to live on.', href: '/web-design', icon: Laptop },
-            { title: 'AI Chatbots', description: 'Your chatbot can reference and share your content with visitors.', href: '/ai-chatbots', icon: Bot }
-          ]}
-        />
-
-        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
-        <KentCoverage pageType={serviceSlug} />
-        <GrowthSystem currentService={serviceSlug} />
-        <FAQ faqs={getServiceFAQs(serviceSlug)} title="Frequently Asked Questions about AI Content Creation" />
-
-        <CTA
-          titleOverride="Start Publishing Content That Grows Your Business"
-          paragraphOverride="Stop struggling to find time to write. Our AI content service delivers consistent, professional content every month — blog posts, social media, email campaigns — all tailored to your brand and optimised for search."
-          buttonOverride="Get A Free Quote"
-        />
-      </>
-    );
-  }
-
-  if (isAIAutomation) {
-    return (
-      <>
-        <ServiceHero
-          title={<>AI Automation That Runs<br />Your Business While You Sleep</>}
-          subtitle="Most small business owners spend hours every week on repetitive admin — chasing leads, writing follow-up emails, updating spreadsheets, sorting enquiries. AI automation handles all of this intelligently, so you can focus on the work that actually generates revenue."
-          primaryCTA={{ text: 'Book A Free Consultation', href: '/contact' }}
-        />
-
-        <ProblemSection
-          headlineOverride="Why Manual Processes Are Costing You Money"
-          painPoints={[
-            { title: "Leads go cold because follow-ups are slow", pain_point: "By the time you manually respond to an enquiry, the customer has already moved on to a competitor." },
-            { title: "Hours wasted on repetitive admin", pain_point: "Copying data between systems, sending confirmation emails, updating records — tasks that add up fast." },
-            { title: "No system for qualifying leads", pain_point: "Every enquiry lands in the same inbox with no way to prioritise high-value opportunities." },
-            { title: "Customer data is scattered everywhere", pain_point: "Information lives in emails, spreadsheets, WhatsApp messages, and your head — nothing is centralised." },
-            { title: "You cannot scale without hiring", pain_point: "Growth means more admin, and more admin means needing staff you cannot yet afford." }
-          ]}
-        />
-
-        <SolutionSection
-          headlineOverride="What AI Automation Does For Your Business"
-          paragraphOverride="AI automation connects your website, email, CRM, and other tools into intelligent workflows that handle the repetitive work automatically — faster and more reliably than any human."
-          solutions={[
-            { title: "Instant Lead Response", description: "Every enquiry gets an immediate, personalised response within seconds of submission.", icon: Zap },
-            { title: "Intelligent Lead Scoring", description: "AI analyses each enquiry and prioritises the most valuable opportunities for you.", icon: BarChart3 },
-            { title: "Automated Follow-Ups", description: "Sequences of follow-up emails sent automatically until the customer responds or books.", icon: Mail },
-            { title: "CRM Integration", description: "Leads are automatically logged, categorised, and tracked in your CRM system.", icon: Cpu },
-            { title: "Workflow Triggers", description: "Custom actions fire automatically based on events — new lead, payment received, job completed.", icon: RefreshCw },
-            { title: "Data Synchronisation", description: "Information flows between your systems automatically — no more manual data entry.", icon: Globe }
-          ]}
-        />
-
-        <ProcessAuthority
-          headlineOverride="How We Build Your AI Automation System"
-          descriptionOverride="We map your current processes, identify the bottlenecks, and build intelligent automations that eliminate them."
-          stepsOverride={[
-            { num: '01', title: 'Process Audit', description: 'We map every manual task in your business to find the biggest time drains.' },
-            { num: '02', title: 'Automation Design', description: 'We design intelligent workflows that handle these tasks automatically.' },
-            { num: '03', title: 'System Integration', description: 'We connect your existing tools — email, CRM, calendar, website — into a single system.' },
-            { num: '04', title: 'AI Training', description: 'We train the AI on your specific business rules, response templates, and qualification criteria.' },
-            { num: '05', title: 'Launch & Monitor', description: 'Your automations go live and we monitor performance, making improvements as needed.' },
-          ]}
-        />
-
-        <section className="py-28 bg-neutral-950 border-t border-neutral-900">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <Reveal>
-              <div className="text-center md:text-left mb-16 max-w-2xl">
-                <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">Examples Of AI Automation In Action</h2>
-                <p className="text-lg text-neutral-400">Real workflows we build for businesses across Kent — saving hours every week.</p>
-              </div>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Enquiry Auto-Response</h3>
-                 <p className="text-neutral-400">New website enquiry triggers instant personalised email + SMS confirmation within seconds.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Lead Scoring & Routing</h3>
-                 <p className="text-neutral-400">AI analyses each lead and routes high-value opportunities to your phone immediately.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Follow-Up Sequences</h3>
-                 <p className="text-neutral-400">Automated email sequences nurture leads who do not respond to your first contact.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Review Requests</h3>
-                 <p className="text-neutral-400">After completing a job, your customer automatically receives a Google review request.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Appointment Reminders</h3>
-                 <p className="text-neutral-400">Clients receive automated reminders before appointments, reducing no-shows.</p>
-               </div>
-               <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                 <h3 className="text-xl font-bold text-white mb-2">Invoice Follow-Ups</h3>
-                 <p className="text-neutral-400">Overdue invoices trigger automatic payment reminders on a schedule you define.</p>
-               </div>
-            </div>
-          </div>
-        </section>
-
-        <LocalAuthorityMap headlineOverride="AI Automation For Businesses Across Kent" />
-
-        <WebsiteReviewCTA />
-
-        <Services
-          headlineOverride="AI Automation Amplifies These Services"
-          descriptionOverride="Automation is the engine that makes your entire digital system run without manual intervention."
-          servicesOverride={[
-            { title: 'AI Chatbots', description: 'Chatbot leads feed directly into your automated follow-up workflows.', href: '/ai-chatbots', icon: Bot },
-            { title: 'Lead Capture Systems', description: 'Captured leads are automatically scored, routed, and followed up.', href: '/lead-capture', icon: MousePointerClick },
-            { title: 'Local SEO', description: 'More visibility means more leads — automation ensures none are wasted.', href: '/seo', icon: Search }
-          ]}
-        />
-
-        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
-        <KentCoverage pageType={serviceSlug} />
-        <GrowthSystem currentService={serviceSlug} />
-        <FAQ faqs={getServiceFAQs(serviceSlug)} title="Frequently Asked Questions about AI Automation" />
-
-        <CTA
-          titleOverride="Stop Doing Manually What AI Can Do Automatically"
-          paragraphOverride="Every hour you spend on repetitive admin is an hour you are not spending on billable work. AI automation handles the background operations so your business runs efficiently without growing your headcount."
-          buttonOverride="Book A Free Consultation"
-        />
-      </>
-    );
-  }
 
   return (
     <>
       <ServiceHero
-        title={messaging.title}
-        subtitle={messaging.subtitle}
-        primaryCTA={{
-          text: 'Get A Free Quote',
-          href: '/contact',
-        }}
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
+        primaryCTA={content.hero.primaryCTA || { text: 'Get in touch', href: '/contact' }}
+        secondaryCTA={content.hero.secondaryCTA}
       />
 
-      <ProblemSection />
-      <SolutionSection />
-      <ProcessAuthority />
-      <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
-      <LocalRelevanceSection town="Kent" />
-      <InternalLinks 
-        serviceSlug={serviceSlug} 
-      />
-      <KentCoverage pageType={serviceSlug} />
-        <GrowthSystem currentService={serviceSlug} />
-      <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Frequently Asked Questions about ${serviceName}`} />
-      
-      {guides && guides.length > 0 && (
-        <EducationalGuides guides={guides} headlineOverride={`Guides About ${serviceName}`} />
+      <section className="py-24 md:py-32 bg-paper border-t border-paper-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="mb-16 md:mb-20 max-w-2xl">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
+              {content.included.eyebrow}
+            </p>
+            <h2 className="font-display text-ink mb-4">{content.included.headline}</h2>
+            {content.included.intro && (
+              <p className="text-ink-muted leading-relaxed">{content.included.intro}</p>
+            )}
+          </div>
+
+          {content.included.items.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-paper-border">
+              {content.included.items.map((item) => (
+                <div key={item.title} className="bg-paper p-8 md:p-10">
+                  <h3 className="font-display text-xl md:text-2xl text-ink mb-3 leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-ink-muted leading-relaxed">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {content.process && (
+        <section className="py-24 md:py-32 bg-paper-raised border-t border-paper-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div className="mb-16 md:mb-20 max-w-2xl">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
+                {content.process.eyebrow}
+              </p>
+              <h2 className="font-display text-ink mb-4">{content.process.headline}</h2>
+              {content.process.intro && (
+                <p className="text-ink-muted leading-relaxed">{content.process.intro}</p>
+              )}
+            </div>
+            <ol className="divide-y divide-paper-border border-y border-paper-border">
+              {content.process.steps.map((step) => (
+                <li
+                  key={step.num}
+                  className="grid grid-cols-[auto_1fr] md:grid-cols-[120px_1fr] gap-6 md:gap-10 py-8 md:py-10"
+                >
+                  <div className="font-display text-3xl md:text-5xl text-ink-faint leading-none">
+                    {step.num}
+                  </div>
+                  <div className="max-w-2xl">
+                    <h3 className="font-display text-2xl md:text-3xl text-ink mb-3 leading-tight">
+                      {step.title}
+                    </h3>
+                    <p className="text-ink-muted leading-relaxed">{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
       )}
 
-      <FinalCTA />
+      {displayStudies && displayStudies.length > 0 && (
+        <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+      )}
+
+      <Services
+        headlineOverride="Other things we do"
+        descriptionOverride="The rest of the toolkit, in case you need it."
+      />
+
+      <FAQ faqs={getServiceFAQs(serviceSlug)} title={`Questions about ${serviceName.toLowerCase()}`} />
+
+      <CTA
+        titleOverride={content.cta.title}
+        paragraphOverride={content.cta.paragraph}
+        buttonOverride={content.cta.button}
+      />
     </>
   );
 }

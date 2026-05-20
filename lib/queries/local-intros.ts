@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabaseServer as supabase } from '@/lib/supabase-server';
 import type { LocalIntro } from '@/types';
 
 export async function getLocalIntro(serviceId: string, townId: string): Promise<LocalIntro | null> {

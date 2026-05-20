@@ -48,14 +48,14 @@ export default function WhoWeHelp() {
 
   return (
     <>
-      <section className="bg-black border-y border-neutral-900 py-24">
-        <div className="container mx-auto px-4 max-w-7xl">
+      <section className="bg-paper border-y border-paper-border py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-6">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-ink tracking-tight mb-6">
               Helping Local Businesses Across Kent Grow Online
             </h2>
-            <p className="text-lg md:text-xl text-neutral-400 leading-relaxed font-medium">
+            <p className="text-lg md:text-xl text-ink-muted leading-relaxed font-medium">
               Business Sorted Kent works with tradespeople, service providers and small businesses across Kent to improve their online presence, attract more enquiries and streamline operations.
             </p>
           </div>
@@ -65,18 +65,18 @@ export default function WhoWeHelp() {
               <Link 
                 key={ind.slug}
                 href={`/industries/${ind.slug}`}
-                className="group flex flex-col bg-neutral-900 border border-neutral-800 rounded-2xl p-8 hover:border-brand-gold/50 hover:bg-neutral-900/90 transition-all duration-300 relative h-full"
+                className="group flex flex-col bg-paper-raised border border-paper-border rounded-2xl p-8 hover:border-brand-gold/50 hover:bg-paper-raised/90 transition-all duration-300 relative h-full"
               >
                 <div className="flex justify-between items-start mb-6">
-                  <h3 className="text-xl font-bold text-white group-hover:text-brand-gold transition-colors leading-tight">
+                  <h3 className="text-xl font-bold text-ink group-hover:text-brand-gold transition-colors leading-tight">
                     {ind.name}
                   </h3>
-                  <div className="p-2 bg-black rounded-lg text-neutral-500 group-hover:text-brand-gold group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">
+                  <div className="p-2 bg-paper rounded-lg text-ink-muted group-hover:text-brand-gold group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
                 
-                <p className="text-neutral-400 font-medium leading-relaxed group-hover:text-neutral-300 transition-colors">
+                <p className="text-ink-muted font-medium leading-relaxed group-hover:text-ink transition-colors">
                   {ind.description}
                 </p>
               </Link>

@@ -1,14 +1,12 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://businesssortedkent.co.uk';
-
   return {
     rules: {
       userAgent: '*',
       allow: '/',
       disallow: ['/admin-dashboard', '/client-dashboard', '/login'],
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: 'https://businesssortedkent.co.uk/sitemap.xml',
   };
 }

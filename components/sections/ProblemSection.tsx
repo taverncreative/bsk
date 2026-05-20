@@ -41,14 +41,14 @@ export default function ProblemSection({ headlineOverride, descriptionOverride, 
 
   return (
     <section className="py-28 bg-neutral-50">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <Reveal>
             <div>
               <h2 className="text-4xl font-bold text-black tracking-tight mb-6">
                 {headline}
               </h2>
-              <p className="text-lg text-neutral-600 leading-relaxed mb-8">
+              <p className="text-lg text-ink-faint leading-relaxed mb-8">
                 {paragraph}
               </p>
             </div>

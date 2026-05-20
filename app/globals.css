@@ -2,67 +2,37 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  
-  /* Hard overrides for default builder theme leaks natively */
-  --primary: #D6AD67;
-  --heading: #ffffff;
-  --accent: #D6AD67;
-  --text-muted: #888888;
+  --background: #f1f0ec;
+  --foreground: #0d1b2a;
+
+  --paper: #f1f0ec;
+  --paper-raised: #e9e6dd;
+  --paper-border: rgba(13, 27, 42, 0.10);
+  --ink: #0d1b2a;
+  --ink-muted: #4a5868;
+  --ink-faint: #7b8593;
+
+  --brand-gold: #b8893d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-brand-gold: #D6AD67;
-  --color-brand-black: #000000;
-  
-  /* Map logical variables for tailwind compatibility if needed */
-  --color-primary: var(--primary);
-  --color-heading: var(--heading);
-  --color-accent: var(--accent);
+
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-paper-border: var(--paper-border);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-brand-gold: var(--brand-gold);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
 }
 
-@layer utilities {
-  .shadow-brand-glow {
-    box-shadow: 0 0 60px rgba(214,173,103,0.15);
-  }
-  .shadow-brand-cta {
-    box-shadow: 0 8px 40px rgba(214,173,103,0.35);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes shimmer-vertical {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
-  }
-}
-
-@keyframes snakeTravel {
-  0% {
-    stroke-dasharray: 15, 100;
-    stroke-dashoffset: 15;
-  }
-  100% {
-    stroke-dasharray: 15, 100;
-    stroke-dashoffset: -100;
-  }
-}
-
-/* Mobile Layout Rules Override */
 @layer base {
   html, body {
     overflow-x: hidden;
@@ -71,36 +41,47 @@
     -webkit-text-size-adjust: 100%;
   }
 
-  /* Image Responsive rules */
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+  }
+
   img, video, iframe, canvas, svg {
     max-width: 100%;
     height: auto;
     object-fit: cover;
   }
-  
-  /* Typography Scaling for Mobile */
+
+  h1, h2 {
+    font-family: var(--font-display), -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
+    font-feature-settings: "ss01";
+  }
+
   h1 {
-    font-size: clamp(32px, 5vw, 48px);
-    line-height: 1.2;
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 1.02;
+    font-weight: 600;
   }
   h2 {
-    font-size: clamp(24px, 4vw, 36px);
-    line-height: 1.3;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.1;
+    font-weight: 600;
   }
   h3 {
     font-size: clamp(20px, 3vw, 24px);
-    line-height: 1.4;
+    line-height: 1.3;
+    font-weight: 600;
   }
   p, li, .body-text {
     font-size: clamp(16px, 2vw, 18px);
     line-height: 1.6;
   }
 
-  /* Form Usability */
   input, select, textarea {
     width: 100%;
     min-height: 48px;
-    font-size: 16px !important; /* Prevents iOS zoom */
+    font-size: 16px !important;
   }
 
   label {
@@ -109,59 +90,15 @@
   }
 }
 
-/* Base button and layout stack spacing for mobile */
 @layer utilities {
+  .font-display { font-family: var(--font-display), -apple-system, sans-serif; }
+  .font-mono { font-family: var(--font-mono), ui-monospace, monospace; }
   .section-padding { padding-top: clamp(48px, 8vw, 96px); padding-bottom: clamp(48px, 8vw, 96px); }
-  .content-spacing { gap: clamp(24px, 4vw, 48px); }
-  .block-spacing { margin-bottom: clamp(24px, 4vw, 32px); }
-  button[type="submit"], a.btn { min-height: 48px; flex-shrink: 0; }
 }
 
-@media (max-width: 768px) {
-  /* Disable heavy continuous animations */
-  .animate-\[shimmer_1\.5s_infinite\],
-  .animate-pulse,
-  .animate-ping,
-  .animate-bounce {
-    animation: none !important;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
   }
-  
-  /* Disable hover scalings on mobile since they stick after touch */
-  .hover\:scale-105:hover,
-  .hover\:scale-110:hover,
-  .group:hover .group-hover\:scale-105,
-  .group:hover .group-hover\:scale-110,
-  .hover\:-translate-y-1:hover,
-  .group:hover .group-hover\:-translate-y-1 {
-    transform: none !important;
-  }
-  
-  /* Stack buttons dynamically */
-  .flex-row.gap-4 {
-    flex-direction: column;
-    gap: 16px;
-  }
-}
-
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  overflow-x: hidden;
-}
-
-@keyframes slow-pulse {
-  0% { transform: scale(1); opacity: 0; box-shadow: 0 0 0 0 rgba(214,173,103, 0.4); }
-  5% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 15px 5px rgba(214,173,103, 0.4); }
-  15% { transform: scale(1.15); opacity: 0; box-shadow: 0 0 25px 10px rgba(214,173,103, 0); }
-  100% { transform: scale(1); opacity: 0; box-shadow: 0 0 0 0 rgba(214,173,103, 0); }
-}
-
-@keyframes orb-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-@keyframes orb-glow {
-  0%, 100% { box-shadow: 0 0 8px 2px rgba(214,173,103, 0.2); }
-  50% { box-shadow: 0 0 18px 6px rgba(214,173,103, 0.35); }
 }

@@ -9,7 +9,7 @@ interface ParentLinksProps {
 export default function ParentLinks({ service, town }: ParentLinksProps) {
   return (
     <div className="bg-neutral-900 border-b border-neutral-800 py-3 relative z-20">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center text-sm md:text-base gap-x-6 gap-y-2 text-neutral-400 font-medium justify-center md:justify-start">
           <Link 
             href={`/${service.slug}`} 

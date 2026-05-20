@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const guide = await getGuideBySlug(guideSlug);
 
   if (!town || !guide) {
-    return { title: 'Not Found | Business Sorted' };
+    return { title: 'Not Found | Business Sorted Kent' };
   }
 
   return {
-    title: `${guide.title} for businesses in ${town.name} | Business Sorted`,
+    title: `${guide.title} for businesses in ${town.name} | Business Sorted Kent`,
     description: `Local expansion of our guide about ${guide.title.toLowerCase()} contextualized specifically for the businesses operating in and around ${town.name}.`,
     alternates: {
       canonical: `https://businesssortedkent.co.uk/${town.slug}/${guide.slug}`,
@@ -59,20 +59,20 @@ export default async function TownGuidePage({ params }: Props) {
     .slice(0, 3);
 
   return (
-    <main className="bg-black pt-40 pb-24">
-      <div className="container mx-auto px-4 max-w-4xl">
+    <main className="bg-paper pt-40 pb-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
         <div className="mb-8">
-          <Link href={`/guides/${guide.slug}`} className="inline-flex items-center text-neutral-400 hover:text-brand-gold transition-colors font-medium">
+          <Link href={`/guides/${guide.slug}`} className="inline-flex items-center text-ink-muted hover:text-brand-gold transition-colors font-medium">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to original guide
           </Link>
         </div>
         
-        <header className="mb-16 border-b border-neutral-800 pb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-8">
+        <header className="mb-16 border-b border-paper-border pb-12">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-ink tracking-tight leading-tight mb-8">
             {guide.title} <span className="text-brand-gold whitespace-nowrap">in {town.name}</span>
           </h1>
-          <div className="prose prose-lg text-neutral-400">
+          <div className="prose prose-lg text-ink-muted">
             <p className="text-xl">
               This guide provides specific, actionable context on <strong>{guide.title.toLowerCase()}</strong> for businesses operating in and serving the <strong>{town.name}</strong> area. Ranking locally is heavily dependent on the surrounding geography and regional competition within Kent.
             </p>
@@ -84,26 +84,27 @@ export default async function TownGuidePage({ params }: Props) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           <div className="lg:col-span-8">
-            <article className="prose prose-lg prose-invert max-w-none 
-                prose-headings:font-bold prose-headings:text-white 
-                prose-a:text-brand-gold hover:prose-a:text-yellow-400 prose-a:font-semibold
-                prose-p:text-neutral-300 prose-p:leading-relaxed
-                prose-li:text-neutral-300
-                prose-strong:text-brand-gold
+            <article className="prose prose-lg max-w-none
+                prose-headings:font-display prose-headings:font-semibold prose-headings:text-ink prose-headings:tracking-tight
+                prose-a:text-ink prose-a:font-medium prose-a:no-underline prose-a:border-b-2 prose-a:border-brand-gold/40 hover:prose-a:border-brand-gold hover:prose-a:text-brand-gold prose-a:transition-colors
+                prose-p:text-ink prose-p:leading-relaxed
+                prose-li:text-ink prose-li:marker:text-ink-faint
+                prose-strong:text-ink prose-strong:font-semibold
+                prose-blockquote:text-ink-muted prose-blockquote:border-brand-gold
                 mb-16">
                 <div dangerouslySetInnerHTML={{ __html: guide.content }} />
             </article>
             
-            <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 md:p-12 text-center mt-12">
-              <h2 className="text-3xl font-bold text-white mb-6">Want to apply this to your {town.name} business?</h2>
-              <p className="text-neutral-400 text-lg mb-8 max-w-2xl mx-auto">
+            <div className="bg-paper-raised border border-paper-border rounded-2xl p-8 md:p-12 text-center mt-12">
+              <h2 className="text-3xl font-bold text-ink mb-6">Want to apply this to your {town.name} business?</h2>
+              <p className="text-ink-muted text-lg mb-8 max-w-2xl mx-auto">
                 Stop guessing and start growing locally. We help trades and services effectively dominate the immediate {town.name} market share so you don't travel further than you need to.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button href="/contact" className="w-full sm:w-auto px-8 py-4 text-lg">
                   Book A Call
                 </Button>
-                <Link href="/free-website-review" className="w-full sm:w-auto px-8 py-4 text-lg font-bold text-white border border-neutral-700 rounded-full hover:border-brand-gold hover:text-brand-gold transition-colors">
+                <Link href="/free-website-review" className="w-full sm:w-auto px-8 py-4 text-lg font-bold text-ink border border-paper-border rounded-full hover:border-brand-gold hover:text-brand-gold transition-colors">
                   Request Website Review
                 </Link>
               </div>
@@ -112,11 +113,11 @@ export default async function TownGuidePage({ params }: Props) {
 
           <aside className="lg:col-span-4 relative">
             <div className="sticky top-24 space-y-8">
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-8">
-                <h3 className="text-xl font-bold text-white mb-6">Our Services</h3>
+              <div className="bg-paper-raised border border-paper-border rounded-xl p-8">
+                <h3 className="text-xl font-bold text-ink mb-6">Our Services</h3>
                 <ul className="space-y-4">
                   <li>
-                    <Link href="/web-design" className="text-neutral-400 hover:text-brand-gold transition-colors font-medium flex justify-between items-center group">
+                    <Link href="/web-design" className="text-ink-muted hover:text-brand-gold transition-colors font-medium flex justify-between items-center group">
                       Web Design Waitlist
                       <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -124,7 +125,7 @@ export default async function TownGuidePage({ params }: Props) {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/seo" className="text-neutral-400 hover:text-brand-gold transition-colors font-medium flex justify-between items-center group">
+                    <Link href="/seo" className="text-ink-muted hover:text-brand-gold transition-colors font-medium flex justify-between items-center group">
                       Local SEO Rankings
                       <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -132,7 +133,7 @@ export default async function TownGuidePage({ params }: Props) {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/business-automation" className="text-neutral-400 hover:text-brand-gold transition-colors font-medium flex justify-between items-center group">
+                    <Link href="/business-automation" className="text-ink-muted hover:text-brand-gold transition-colors font-medium flex justify-between items-center group">
                       Full Business Automation
                       <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -143,15 +144,15 @@ export default async function TownGuidePage({ params }: Props) {
               </div>
 
               {relatedGuides.length > 0 && (
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-8">
-                  <h3 className="text-xl font-bold text-white mb-6">Related Guides</h3>
+                <div className="bg-paper-raised border border-paper-border rounded-xl p-8">
+                  <h3 className="text-xl font-bold text-ink mb-6">Related Guides</h3>
                   <div className="space-y-6">
                     {relatedGuides.slice(0, 2).map((rg) => (
                       <Link key={rg.id} href={`/guides/${rg.slug}`} className="group block">
-                        <h4 className="text-white font-medium group-hover:text-brand-gold transition-colors leading-tight mb-2">
+                        <h4 className="text-ink font-medium group-hover:text-brand-gold transition-colors leading-tight mb-2">
                           {rg.title}
                         </h4>
-                        <span className="text-xs text-neutral-500 underline font-semibold group-hover:text-brand-gold">
+                        <span className="text-xs text-ink-muted underline font-semibold group-hover:text-brand-gold">
                           Read Now
                         </span>
                       </Link>

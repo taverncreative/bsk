@@ -16,15 +16,15 @@ export default function DesktopInlineCTA({
 }: DesktopInlineCTAProps) {
   return (
     <div className="hidden md:block py-16 w-full bg-white">
-      <div className="container mx-auto px-4 max-w-5xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         <Reveal>
-          <div className="bg-neutral-950 border border-neutral-800 rounded-3xl p-10 lg:p-14 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+          <div className="bg-paper border border-paper-border rounded-3xl p-10 lg:p-14 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-gold/10 to-transparent mix-blend-screen pointer-events-none" />
             <div className="flex-1 text-left relative z-10">
-              <h3 className="text-3xl font-extrabold text-white tracking-tight mb-4">
+              <h3 className="text-3xl font-extrabold text-ink tracking-tight mb-4">
                 {title}
               </h3>
-              <p className="text-lg text-neutral-400 max-w-xl">
+              <p className="text-lg text-ink-muted max-w-xl">
                 {description}
               </p>
             </div>

@@ -21,14 +21,14 @@ export default function ConsultationReassurance() {
   ];
 
   return (
-    <section className="py-20 bg-neutral-900 border-b border-neutral-800">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section className="py-20 bg-paper-raised border-b border-paper-border">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <Reveal>
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-ink tracking-tight mb-4">
               What Happens After You Book
             </h2>
-            <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+            <p className="text-lg text-ink-muted max-w-2xl mx-auto">
               Our consultations are designed to be practical and helpful. You'll leave the call with a clearer understanding of how your website and online presence could perform better.
             </p>
           </div>
@@ -37,14 +37,14 @@ export default function ConsultationReassurance() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
             <Reveal key={index} delay={index * 0.1}>
-              <div className="bg-black border border-neutral-800 rounded-2xl p-8 h-full flex flex-col hover:border-brand-gold/30 transition-colors group">
-                <div className="w-14 h-14 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center mb-6 group-hover:bg-brand-gold/10 transition-colors">
+              <div className="bg-paper border border-paper-border rounded-2xl p-8 h-full flex flex-col hover:border-brand-gold/30 transition-colors group">
+                <div className="w-14 h-14 rounded-full bg-paper-raised border border-paper-border flex items-center justify-center mb-6 group-hover:bg-brand-gold/10 transition-colors">
                   {step.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
+                <h3 className="text-xl font-bold text-ink mb-3 tracking-tight">
                   {step.title}
                 </h3>
-                <p className="text-neutral-400 leading-relaxed text-sm lg:text-base">
+                <p className="text-ink-muted leading-relaxed text-sm lg:text-base">
                   {step.description}
                 </p>
               </div>

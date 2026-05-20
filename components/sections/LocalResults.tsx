@@ -15,15 +15,15 @@ export default async function LocalResults() {
   const displayStudies = [...allStudies].sort(() => 0.5 - Math.random()).slice(0, 3);
 
   return (
-    <section className="py-28 bg-black border-t border-neutral-800">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section className="py-28 bg-paper border-t border-paper-border">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <Reveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div className="max-w-2xl">
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-ink tracking-tight mb-4">
                 Real Results for Kent Businesses
               </h2>
-              <p className="text-lg text-neutral-400 leading-relaxed">
+              <p className="text-lg text-ink-muted leading-relaxed">
                 Discover how we've helped local companies generate more enquiries and scale operations online.
               </p>
             </div>

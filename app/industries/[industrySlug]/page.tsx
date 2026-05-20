@@ -1,17 +1,14 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { getIndustryBySlug, getAllServices, getAllIndustries } from '@/lib/queries';
 import LocalServiceHero from '@/components/sections/LocalServiceHero';
-import ServiceCard from '@/components/cards/ServiceCard';
-import ProblemSection from '@/components/sections/ProblemSection';
 import CaseStudySection from '@/components/sections/CaseStudySection';
-import InternalLinks from '@/components/seo/InternalLinks';
 import CTA from '@/components/sections/CTA';
-
-// Need additional queries for the hub page extensions
-import { getPainPointsByIndustry, getAllCaseStudies, getAllGuides } from '@/lib/queries';
+import { getAllCaseStudies, getAllGuides } from '@/lib/queries';
 import EducationalGuides from '@/components/sections/EducationalGuides';
-import KentCoverage from '@/components/sections/KentCoverage';
+import PageSchema from '@/components/seo/PageSchema';
 
 type Props = {
   params: Promise<{
@@ -21,9 +18,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const industries = await getAllIndustries();
-  return industries.map((i) => ({
-    industrySlug: i.slug,
-  }));
+  return industries.map((i) => ({ industrySlug: i.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -31,17 +26,44 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const industry = await getIndustryBySlug(industrySlug);
 
   if (!industry) {
-    return { title: 'Not Found | Business Sorted' };
+    return { title: 'Not Found | Business Sorted Kent' };
   }
 
   return {
-    title: `Digital Growth Services for ${industry.name} | Business Sorted`,
-    description: `Professional web design, SEO, and automation services tailored specifically to help ${industry.name.toLowerCase()} businesses generate more leads online.`,
+    title: `Websites, SEO and automations for ${industry.name.toLowerCase()} | Business Sorted Kent`,
+    description: `£280 websites, £45/hour SEO and AI-assisted automations for ${industry.name.toLowerCase()} working in Kent. Plain prices, no rolling contracts.`,
     alternates: {
       canonical: `https://businesssortedkent.co.uk/industries/${industry.slug}`,
     },
   };
 }
+
+const SERVICE_TILES = [
+  {
+    name: 'Websites',
+    slug: 'web-design',
+    price: '£280',
+    line: 'A small business website that loads fast, ranks well and books work.',
+  },
+  {
+    name: 'SEO',
+    slug: 'seo',
+    price: '£45/hr',
+    line: 'Real ranking work, billed by the hour. From one hour a month.',
+  },
+  {
+    name: 'Lead capture',
+    slug: 'lead-capture',
+    price: 'POA',
+    line: 'Forms, instant replies, missed-call recovery.',
+  },
+  {
+    name: 'Automations',
+    slug: 'business-automation',
+    price: 'POA',
+    line: 'CRM, follow-ups, invoicing, the repeat admin.',
+  },
+];
 
 export default async function IndustryHubPage({ params }: Props) {
   const { industrySlug } = await params;
@@ -51,130 +73,208 @@ export default async function IndustryHubPage({ params }: Props) {
     notFound();
   }
 
-  const [allServices, painPoints, allCaseStudies, allGuides] = await Promise.all([
-     getAllServices(),
-     industry.id ? getPainPointsByIndustry(industry.id) : Promise.resolve([]),
-     getAllCaseStudies(),
-     getAllGuides()
+  const [allCaseStudies, allGuides] = await Promise.all([
+    getAllCaseStudies(),
+    getAllGuides(),
   ]);
 
-  const industryCaseStudies = allCaseStudies.filter(c => 
-     c.industry && c.industry.toLowerCase() === industry.name.toLowerCase()
+  const industryCaseStudies = allCaseStudies.filter(
+    (c) => c.industry && c.industry.toLowerCase() === industry.name.toLowerCase()
   );
+
+  const lowerName = industry.name.toLowerCase();
+  const overviewText = (industry as any).overview_text as string | null;
+  const strategyText = (industry as any).strategy_text as string | null;
+  const opportunitySEO = (industry as any).opportunity_seo as string | null;
+  const opportunityAutomation = (industry as any).opportunity_automation as string | null;
+  const industryStats = (industry as any).industry_stats as Record<string, string> | null;
 
   return (
     <>
-      {/* SECTION 1: HERO */}
-      <LocalServiceHero
-        title={`Digital Growth Services for ${industry.name}`}
-        subtitle={`Helping ${industry.name.toLowerCase()} businesses generate more leads online.`}
-        primaryCTA={{
-          text: 'Get A Free Quote',
-          href: '/contact',
-        }}
+      <PageSchema
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Industries', url: '/industries' },
+          { name: industry.name, url: `/industries/${industry.slug}` },
+        ]}
+        extra={[
+          {
+            '@type': 'Service',
+            name: `Web design, SEO and automations for ${lowerName}`,
+            description:
+              industry.description ||
+              `Websites, SEO and automations built for ${lowerName} working in Kent and the wider UK.`,
+            provider: {
+              '@type': 'Organization',
+              '@id': 'https://businesssortedkent.co.uk/#organization',
+              name: 'Business Sorted Kent',
+            },
+            audience: {
+              '@type': 'BusinessAudience',
+              name: industry.name,
+            },
+            areaServed: [
+              { '@type': 'AdministrativeArea', name: 'Kent' },
+              { '@type': 'AdministrativeArea', name: 'Greater London' },
+            ],
+          },
+        ]}
       />
 
-      {/* SECTION 1.5: INDUSTRY KNOWLEDGE GRAPH / OVERVIEW */}
-      <section className="py-24 bg-neutral-900 border-t border-neutral-800">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-              The {industry.name} Digital Landscape
-            </h2>
-            <p className="mt-4 text-lg text-neutral-400">
-              A complete breakdown of the online competition and digital opportunities available for {industry.name.toLowerCase()} operating across Kent.
-            </p>
-          </div>
+      <LocalServiceHero
+        title={`Websites and SEO for ${lowerName}.`}
+        subtitle={`Get found by the right people. Win the work you actually want. Spend less time on admin and more time on the job. That’s what we do for ${lowerName} across Kent and beyond.`}
+        primaryCTA={{ text: 'See what yours could look like', href: '/free-preview' }}
+        secondaryCTA={{ text: 'Get in touch', href: '/contact' }}
+      />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-4">Industry Overview & Competition</h3>
-              <p className="text-neutral-400 leading-relaxed mb-6">
-                {(industry as any).overview_text || `The ${industry?.name?.toLowerCase() || 'service'} sector in Kent is evolving rapidly. Businesses that invest in their digital presence are consistently outperforming those relying on traditional methods alone.`}
+      {/* Industry overview (rich content from DB) */}
+      {overviewText && (
+        <section className="py-24 md:py-32 bg-paper border-t border-paper-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+            <div className="mb-12 max-w-2xl">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
+                The lay of the land
               </p>
-              <h3 className="text-2xl font-bold text-white mb-4">Website Strategy</h3>
-              <p className="text-neutral-400 leading-relaxed">
-                {(industry as any).strategy_text || `A high-performance, conversion-focused website designed specifically for ${industry?.name?.toLowerCase() || 'your industry'} can transform how you attract and convert new customers online.`}
-              </p>
+              <h2 className="font-display text-ink">
+                What we see in the {lowerName} market.
+              </h2>
             </div>
+            <div className="text-lg text-ink-muted leading-relaxed space-y-5 max-w-3xl">
+              <p>{overviewText}</p>
+            </div>
+            {industryStats && Object.keys(industryStats).length > 0 && (
+              <div className="mt-12 pt-12 border-t border-paper-border">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-6">
+                  Worth knowing
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-paper-border">
+                  {Object.values(industryStats).map((stat, i) => (
+                    <div key={i} className="bg-paper p-6">
+                      <p className="text-ink-muted leading-relaxed text-sm">{stat}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
-            <div className="bg-black border border-neutral-800 rounded-xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-white mb-6 border-b border-neutral-800 pb-4">Digital Opportunities</h3>
-              <ul className="space-y-6">
-                <li>
-                  <strong className="block text-brand-gold text-lg mb-1">SEO Dominance</strong>
-                  <p className="text-neutral-400 text-sm leading-relaxed">{(industry as any).opportunity_seo || `Strategic SEO positioning can put your ${industry?.name?.toLowerCase() || 'business'} in front of customers actively searching for your services across Kent.`}</p>
-                </li>
-                <li>
-                  <strong className="block text-brand-gold text-lg mb-1">Automation Systems</strong>
-                  <p className="text-neutral-400 text-sm leading-relaxed">{(industry as any).opportunity_automation || `Intelligent automation can streamline your operations, from lead follow-up to scheduling, freeing you to focus on delivering great service.`}</p>
-                </li>
-              </ul>
-              {(industry as any).industry_stats && Object.keys((industry as any).industry_stats).length > 0 && (
-                <div className="mt-8 pt-6 border-t border-neutral-800">
-                  <h4 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-4">Industry Insights</h4>
-                  <ul className="space-y-3">
-                    {Object.values((industry as any).industry_stats).map((stat: any, i: number) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-brand-gold mt-1 shrink-0">•</span>
-                        <span className="text-sm text-neutral-400">{stat}</span>
-                      </li>
-                    ))}
-                  </ul>
+      {/* Strategy — what a good site for this industry actually does */}
+      {strategyText && (
+        <section className="py-24 md:py-32 bg-paper-raised border-y border-paper-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+            <div className="mb-12 max-w-2xl">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
+                What a good site for {lowerName} actually does
+              </p>
+              <h2 className="font-display text-ink">The strategy, in plain English.</h2>
+            </div>
+            <div className="text-lg text-ink-muted leading-relaxed space-y-5 max-w-3xl">
+              <p>{strategyText}</p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* SEO + Automation opportunities */}
+      {(opportunitySEO || opportunityAutomation) && (
+        <section className="py-24 md:py-32 bg-paper border-t border-paper-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div className="mb-16 max-w-2xl">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
+                Where the wins are
+              </p>
+              <h2 className="font-display text-ink">SEO and automation, for {lowerName}.</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-paper-border">
+              {opportunitySEO && (
+                <div className="bg-paper p-8 md:p-10">
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-faint mb-4">
+                    Getting found
+                  </p>
+                  <h3 className="font-display text-2xl md:text-3xl text-ink mb-4 leading-tight">
+                    Local SEO that matches how your customers actually search.
+                  </h3>
+                  <p className="text-ink-muted leading-relaxed">{opportunitySEO}</p>
+                </div>
+              )}
+              {opportunityAutomation && (
+                <div className="bg-paper p-8 md:p-10">
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-faint mb-4">
+                    Less admin
+                  </p>
+                  <h3 className="font-display text-2xl md:text-3xl text-ink mb-4 leading-tight">
+                    Automating the bits that eat your Sundays.
+                  </h3>
+                  <p className="text-ink-muted leading-relaxed">{opportunityAutomation}</p>
                 </div>
               )}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* SECTION 2: INDUSTRY SERVICES */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Services for {industry?.name || 'Your Industry'}
+      {/* Service tiles tailored for the industry */}
+      <section className="py-24 md:py-32 bg-paper-raised border-y border-paper-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="mb-16 md:mb-20 max-w-2xl">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
+              What we offer
+            </p>
+            <h2 className="font-display text-ink mb-4">
+              Plain prices for {lowerName}.
             </h2>
-            <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-              Our core operational packages, customized natively for the {industry?.name?.toLowerCase() || 'service'} sector.
+            <p className="text-ink-muted leading-relaxed">
+              Same prices, same checks, regardless of industry. The work just gets tuned to what
+              your customers actually search for and how they decide.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allServices.map((service) => (
-              <ServiceCard
-                key={service.slug}
-                title={`${service.name} for ${industry.name}`}
-                description={`Tailored ${service.name.toLowerCase()} solutions to help your ${industry.name.toLowerCase()} business scale and dominate the local market.`}
-                href={`/industries/${industry.slug}/${service.slug}`}
-              />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-paper-border">
+            {SERVICE_TILES.map((s) => (
+              <Link
+                key={s.slug}
+                href={`/industries/${industry.slug}/${s.slug}`}
+                className="group block bg-paper-raised p-8 md:p-10 h-full transition-colors hover:bg-paper"
+              >
+                <div className="flex items-baseline justify-between gap-4 mb-4">
+                  <h3 className="font-display text-2xl md:text-3xl text-ink leading-tight">
+                    {s.name} for {lowerName}
+                  </h3>
+                  <span className="font-mono text-lg md:text-xl text-brand-gold tracking-tight whitespace-nowrap">
+                    {s.price}
+                  </span>
+                </div>
+                <p className="text-ink-muted leading-relaxed mb-8">{s.line}</p>
+                <span className="inline-flex items-center text-sm text-ink-muted group-hover:text-brand-gold transition-colors">
+                  More on this
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 3: INDUSTRY PROBLEMS */}
-      <ProblemSection industryName={industry.name} painPoints={painPoints} />
-
-      {/* SECTION 4: CASE STUDIES */}
-      <CaseStudySection serviceName={industry.name} caseStudies={industryCaseStudies} />
-
-      {/* SECTION 5: INTERNAL LINKS (Fallback linking structure) */}
-      <div className="bg-slate-50 py-12">
-        <InternalLinks
-           serviceSlug="web-design" 
-           townSlug="" 
-        />
-      </div>
-
-      <KentCoverage pageType={industry.slug} />
-
-      {allGuides && allGuides.length > 0 && (
-         <EducationalGuides guides={allGuides} headlineOverride={`Growth Guides for ${industry.name}`} />
+      {/* Case studies if any */}
+      {industryCaseStudies.length > 0 && (
+        <CaseStudySection serviceName={industry.name} caseStudies={industryCaseStudies} />
       )}
 
-      {/* SECTION 3: CTA */}
-      <CTA />
+      {/* Guides */}
+      {allGuides && allGuides.length > 0 && (
+        <EducationalGuides
+          guides={allGuides}
+          headlineOverride={`Guides for ${lowerName}`}
+        />
+      )}
+
+      <CTA
+        titleOverride={`Got a ${lowerName.replace(/s$/, '')} project in mind?`}
+        paragraphOverride="Tell us what you do and what you need. We will come back with a plain answer, usually within a day."
+        buttonOverride="Send a message"
+      />
     </>
   );
 }

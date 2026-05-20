@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabaseServer as supabase } from '@/lib/supabase-server';
 import type { Service } from '@/types';
 
 export async function getServiceBySlug(slug: string): Promise<Service | null> {

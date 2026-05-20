@@ -16,12 +16,12 @@ interface HeroProps {
 export default function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
   return (
     <section className="py-[100px] bg-section-light">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
           {/* Left Side: Copy & Calls to Action */}
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-ink tracking-tight leading-tight">
               {title}
             </h1>
             <p className="text-lg md:text-xl text-slate-600 mt-6 leading-relaxed">
@@ -36,7 +36,7 @@ export default function Hero({ title, subtitle, primaryCTA, secondaryCTA }: Hero
               {secondaryCTA && (
                 <Link
                   href={secondaryCTA.href}
-                  className="inline-flex items-center justify-center border-2 border-slate-900 text-slate-900 font-semibold rounded-lg px-6 py-3 hover:bg-slate-900 hover:text-white transition-colors"
+                  className="inline-flex items-center justify-center border-2 border-ink/30 text-ink font-semibold rounded-lg px-6 py-3 hover:bg-ink hover:text-ink transition-colors"
                 >
                   {secondaryCTA.text}
                 </Link>

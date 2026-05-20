@@ -1,10 +1,4 @@
 import Link from 'next/link';
-import Button from '@/components/ui/Button';
-import MagneticButton from '@/components/ui/MagneticButton';
-import GridBackground from '@/components/ui/GridBackground';
-import Reveal from '@/components/ui/Reveal';
-import GrowthEngine from '@/components/visuals/GrowthEngine';
-import CredibilityMetrics from '@/components/sections/CredibilityMetrics';
 import { ReactNode } from 'react';
 
 interface CTA {
@@ -13,81 +7,67 @@ interface CTA {
 }
 
 interface HomepageHeroProps {
-  title: ReactNode;
-  subtitle: string;
-  primaryCTA: CTA;
+  title?: ReactNode;
+  deck?: ReactNode;
+  subtitle?: ReactNode;
+  primaryCTA?: CTA;
   secondaryCTA?: CTA;
+  eyebrow?: string;
 }
 
-export default function HomepageHero({ title, subtitle, primaryCTA, secondaryCTA }: HomepageHeroProps) {
+export default function HomepageHero({
+  title,
+  deck,
+  subtitle,
+  primaryCTA = { text: 'See what yours could look like', href: '#free-preview' },
+  secondaryCTA = { text: 'See pricing', href: '#services' },
+  eyebrow = 'Web · SEO · Automations · Kent',
+}: HomepageHeroProps) {
   return (
-    <section className="relative overflow-hidden pt-40 pb-24 bg-gradient-to-b from-black to-neutral-900 border-b border-neutral-800">
-      
-      <GridBackground />
+    <section className="relative bg-paper border-b border-paper-border pt-36 md:pt-44 pb-20 md:pb-28">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-10">
+          {eyebrow}
+        </p>
 
-      <div className="container relative z-10 mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
-          
-          {/* Left Side: Copy & Calls to Action */}
-          <div className="max-w-3xl">
-            <Reveal>
-              <h1 
-                className="font-extrabold tracking-tight text-white mb-6 lg:mb-8"
-                style={{ fontSize: 'clamp(48px, 6vw, 80px)', lineHeight: 1.05 }}
-              >
-                {title}
-              </h1>
+        <h1 className="font-display text-ink mb-6 max-w-4xl">
+          {title || 'Websites, SEO and automations for Kent businesses.'}
+        </h1>
 
-              {/* Trust Strip */}
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8">
-                <div className="bg-[#111] border border-white/5 py-2 px-4 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-gold mr-2.5"></span>
-                  <span className="text-[13px] sm:text-[14px] text-neutral-300 font-medium">Kent Businesses</span>
-                </div>
-                
-                <div className="bg-[#111] border border-white/5 py-2 px-4 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-gold mr-2.5"></span>
-                  <span className="text-[13px] sm:text-[14px] text-neutral-300 font-medium">Local Service Specialists</span>
-                </div>
+        <p className="font-display text-2xl md:text-4xl text-ink/80 leading-tight max-w-3xl mb-8">
+          {deck || (
+            <>
+              Websites used to cost{' '}
+              <span className="font-mono text-[0.78em] align-middle line-through decoration-2 text-ink-faint">£3,000</span>
+              . Yours costs{' '}
+              <span className="font-mono text-brand-gold">£280</span>.
+            </>
+          )}
+        </p>
 
-                <div className="bg-[#111] border border-white/5 py-2 px-4 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-gold mr-2.5"></span>
-                  <span className="text-[13px] sm:text-[14px] text-neutral-300 font-medium">Proven Lead Systems</span>
-                </div>
-              </div>
+        <p className="text-lg md:text-xl text-ink-muted leading-relaxed max-w-2xl mb-10">
+          {subtitle || (
+            <>
+              AI changed how websites get built, so we changed how much we charge for it. The checks for speed, security and SEO are the same as on a £3,000 site.
+            </>
+          )}
+        </p>
 
-              <p className="text-lg text-neutral-400 leading-relaxed max-w-xl">
-                {subtitle}
-              </p>
-              
-              <div className="mt-10 flex flex-wrap items-center gap-4">
-                <MagneticButton href={primaryCTA.href}>
-                  {primaryCTA.text}
-                </MagneticButton>
-                
-                {secondaryCTA && (
-                  <Button variant="secondary" href={secondaryCTA.href}>
-                    {secondaryCTA.text}
-                  </Button>
-                )}
-              </div>
-
-              <p className="text-sm md:text-base text-neutral-500 font-medium mt-8 border-t border-neutral-800 pt-6 max-w-lg">
-                Supporting businesses across Ashford, Canterbury, Maidstone, Folkestone, Thanet and Medway.
-              </p>
-            </Reveal>
-          </div>
-
-          {/* Right Side: Growth Engine Diagram */}
-          <div className="relative w-full mt-10 lg:mt-0 flex items-center justify-center lg:justify-end">
-            <GrowthEngine />
-          </div>
-
-        </div>
-
-        {/* Below Hero Grid: Stats */}
-        <div className="mt-16 lg:mt-20 w-full">
-          <CredibilityMetrics />
+        <div className="flex flex-wrap items-center gap-3">
+          <Link
+            href={primaryCTA.href}
+            className="inline-flex items-center bg-ink text-paper font-medium px-6 py-3 rounded-md hover:bg-brand-gold hover:text-ink transition-colors"
+          >
+            {primaryCTA.text}
+          </Link>
+          {secondaryCTA && (
+            <Link
+              href={secondaryCTA.href}
+              className="inline-flex items-center bg-transparent border border-ink/30 text-ink font-medium px-6 py-3 rounded-md hover:border-ink hover:bg-ink hover:text-paper transition-colors"
+            >
+              {secondaryCTA.text}
+            </Link>
+          )}
         </div>
       </div>
     </section>

@@ -30,7 +30,7 @@ export default function InternalLinks({
 
   return (
     <section className="py-28 bg-slate-50 border-t border-slate-200">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <div className="space-y-16">
           
           {/* 1. Related Services */}

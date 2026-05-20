@@ -13,14 +13,14 @@ export default function ProofBand() {
   ];
 
   return (
-    <section className="bg-neutral-950 border-b border-neutral-900 py-20 relative overflow-hidden">
+    <section className="bg-paper border-b border-paper-border py-20 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-gold/20 to-transparent"></div>
       
-      <div className="container mx-auto px-4 max-w-7xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-stretch">
           
           {/* ELEMENT 1: Google Rating Summary */}
-          <div className="flex flex-col justify-center border border-neutral-800 bg-neutral-900 p-8 rounded-2xl relative overflow-hidden group">
+          <div className="flex flex-col justify-center border border-paper-border bg-paper-raised p-8 rounded-2xl relative overflow-hidden group">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-brand-gold/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             
             <div className="flex gap-1 mb-6">
@@ -29,15 +29,15 @@ export default function ProofBand() {
               ))}
             </div>
             
-            <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight mb-4">
+            <h3 className="text-2xl md:text-3xl font-extrabold text-ink tracking-tight leading-tight mb-4">
               Rated 5 Stars by Local Businesses
             </h3>
             
-            <p className="text-neutral-400 font-medium leading-relaxed mb-6">
+            <p className="text-ink-muted font-medium leading-relaxed mb-6">
               Based on verified Google reviews from clients across Kent.
             </p>
             
-            <div className="mt-auto flex items-center gap-2 px-4 py-2 bg-black/50 rounded-full w-fit border border-neutral-800">
+            <div className="mt-auto flex items-center gap-2 px-4 py-2 bg-paper/50 rounded-full w-fit border border-paper-border">
               <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                 <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.16v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -53,7 +53,7 @@ export default function ProofBand() {
             {featuredReviews.map((review, idx) => (
               <div 
                 key={idx} 
-                className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 flex flex-col hover:border-brand-gold/30 transition-colors relative"
+                className="bg-paper-raised border border-paper-border rounded-2xl p-6 flex flex-col hover:border-brand-gold/30 transition-colors relative"
               >
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex gap-1">
@@ -62,11 +62,11 @@ export default function ProofBand() {
                     ))}
                   </div>
                 </div>
-                <blockquote className="text-neutral-300 font-medium italic text-base leading-relaxed mb-6">
+                <blockquote className="text-ink font-medium italic text-base leading-relaxed mb-6">
                   "{review.text}"
                 </blockquote>
-                <div className="mt-auto border-t border-neutral-800 pt-4 flex items-center justify-between">
-                  <span className="font-bold text-white text-sm">{review.name}</span>
+                <div className="mt-auto border-t border-paper-border pt-4 flex items-center justify-between">
+                  <span className="font-bold text-ink text-sm">{review.name}</span>
                   <CheckCircle className="w-4 h-4 text-green-500 opacity-80" />
                 </div>
               </div>
@@ -75,28 +75,28 @@ export default function ProofBand() {
 
           {/* ELEMENT 3: Credibility Statistics */}
           <div className="grid grid-rows-3 gap-4 h-full">
-             <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 flex items-center justify-between hover:border-brand-gold/30 transition-colors">
+             <div className="bg-paper-raised border border-paper-border rounded-2xl p-6 flex items-center justify-between hover:border-brand-gold/30 transition-colors">
                <div>
-                 <p className="text-3xl font-extrabold tracking-tight text-white mb-1"><span className="text-brand-gold">50+</span></p>
-                 <p className="text-sm font-semibold text-neutral-400">Local Businesses Supported</p>
+                 <p className="text-3xl font-extrabold tracking-tight text-ink mb-1"><span className="text-brand-gold">50+</span></p>
+                 <p className="text-sm font-semibold text-ink-muted">Local Businesses Supported</p>
                </div>
-               <Briefcase className="w-8 h-8 text-neutral-700" />
+               <Briefcase className="w-8 h-8 text-ink-faint" />
              </div>
              
-             <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 flex items-center justify-between hover:border-brand-gold/30 transition-colors">
+             <div className="bg-paper-raised border border-paper-border rounded-2xl p-6 flex items-center justify-between hover:border-brand-gold/30 transition-colors">
                <div>
-                 <p className="text-3xl font-extrabold tracking-tight text-white mb-1"><span className="text-brand-gold">5★ Rated</span></p>
-                 <p className="text-sm font-semibold text-neutral-400">On Google Reviews</p>
+                 <p className="text-3xl font-extrabold tracking-tight text-ink mb-1"><span className="text-brand-gold">5★ Rated</span></p>
+                 <p className="text-sm font-semibold text-ink-muted">On Google Reviews</p>
                </div>
-               <Star className="w-8 h-8 text-neutral-700" />
+               <Star className="w-8 h-8 text-ink-faint" />
              </div>
              
-             <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 flex items-center justify-between hover:border-brand-gold/30 transition-colors">
+             <div className="bg-paper-raised border border-paper-border rounded-2xl p-6 flex items-center justify-between hover:border-brand-gold/30 transition-colors">
                <div>
-                 <p className="text-3xl font-extrabold tracking-tight text-white mb-1"><span className="text-brand-gold">Kent Based</span></p>
-                 <p className="text-sm font-semibold text-neutral-400">Serving Businesses Across The County</p>
+                 <p className="text-3xl font-extrabold tracking-tight text-ink mb-1"><span className="text-brand-gold">Kent Based</span></p>
+                 <p className="text-sm font-semibold text-ink-muted">Serving Businesses Across The County</p>
                </div>
-               <MapPin className="w-8 h-8 text-neutral-700" />
+               <MapPin className="w-8 h-8 text-ink-faint" />
              </div>
           </div>
 
@@ -104,7 +104,7 @@ export default function ProofBand() {
 
         {/* Subtle CTA at the bottom */}
         <div className="mt-12 text-center">
-           <p className="text-sm font-semibold text-neutral-500 uppercase tracking-widest">
+           <p className="text-sm font-semibold text-ink-muted uppercase tracking-widest">
              See why businesses across Kent trust Business Sorted Kent
            </p>
         </div>

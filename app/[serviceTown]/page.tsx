@@ -267,14 +267,38 @@ export default async function ProgrammaticPage({ params }: Props) {
                  "@context": "https://schema.org",
                  "@type": "Service",
                  "name": service.name,
+                 "description": service.description || `${service.name} for businesses across Kent and beyond.`,
                  "provider": {
-                   "@type": "LocalBusiness",
+                   "@type": "Organization",
+                   "@id": "https://businesssortedkent.co.uk/#organization",
                    "name": "Business Sorted Kent"
                  },
-                 "areaServed": {
-                   "@type": "State",
-                   "name": "Kent"
-                 }
+                 "areaServed": [
+                   { "@type": "AdministrativeArea", "name": "Kent" },
+                   { "@type": "AdministrativeArea", "name": "Greater London" },
+                   { "@type": "Country", "name": "United Kingdom" }
+                 ],
+                 ...(service.slug === 'web-design' && {
+                   "offers": {
+                     "@type": "Offer",
+                     "price": "280",
+                     "priceCurrency": "GBP",
+                     "availability": "https://schema.org/InStock",
+                     "category": "Website Design"
+                   }
+                 }),
+                 ...(service.slug === 'seo' && {
+                   "offers": {
+                     "@type": "Offer",
+                     "priceSpecification": {
+                       "@type": "UnitPriceSpecification",
+                       "price": "45",
+                       "priceCurrency": "GBP",
+                       "unitText": "HOUR"
+                     },
+                     "category": "Search Engine Optimisation"
+                   }
+                 })
                }
              ])
           }}

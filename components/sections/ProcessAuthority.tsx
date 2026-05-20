@@ -1,5 +1,4 @@
 import Reveal from '@/components/ui/Reveal';
-import Button from '@/components/ui/Button';
 
 export interface ProcessStep {
   num: string;
@@ -13,90 +12,70 @@ interface ProcessAuthorityProps {
   stepsOverride?: ProcessStep[];
 }
 
-const defaultSteps = [
+const defaultSteps: ProcessStep[] = [
   {
     num: '01',
-    title: 'Discovery',
-    description: 'We learn about your business, services and goals.',
+    title: 'A proper chat',
+    description: 'We sit down and find out what you actually do, who you do it for, and what you’re sick of.',
   },
   {
     num: '02',
-    title: 'Strategy',
-    description: 'We plan the best structure for visibility, enquiries and growth.',
+    title: 'A plan you can read',
+    description: 'No 30-page deck. A short, plain summary of what we’ll build and what it’ll do for you.',
   },
   {
     num: '03',
-    title: 'Build',
-    description: 'Your website and systems are designed and developed.',
+    title: 'We build it',
+    description: 'Your website, your Google presence, your forms and your follow-ups. Live in 2–4 weeks.',
   },
   {
     num: '04',
-    title: 'Launch',
-    description: 'Your site goes live with strong technical and SEO foundations.',
-  },
-  {
-    num: '05',
-    title: 'Growth',
-    description: 'We refine and optimise to improve performance over time.',
+    title: 'We keep it sharp',
+    description: 'Once it’s live, we keep it running, watch what works, and fix what doesn’t.',
   },
 ];
 
-export default function ProcessAuthority({ headlineOverride, descriptionOverride, stepsOverride }: ProcessAuthorityProps = {}) {
+export default function ProcessAuthority({
+  headlineOverride,
+  descriptionOverride,
+  stepsOverride,
+}: ProcessAuthorityProps = {}) {
   const steps = stepsOverride && stepsOverride.length > 0 ? stepsOverride : defaultSteps;
 
   return (
-    <section className="py-28 bg-black border-t border-neutral-800">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section className="py-24 md:py-32 bg-paper border-t border-paper-border">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <Reveal>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-6">
-              {headlineOverride || 'How We Help Your Business Grow'}
-            </h2>
-            <p className="text-lg text-neutral-400 leading-relaxed">
-              {descriptionOverride || 'Our structured process turns websites into lead generation systems that attract, convert and scale enquiries.'}
+          <div className="mb-14 md:mb-20 max-w-2xl">
+            <p className="font-sans text-xs uppercase tracking-[0.2em] text-ink-muted mb-4">
+              How we work
             </p>
+            <h2 className="font-display text-ink mb-4">
+              {headlineOverride || 'Four steps. No drama.'}
+            </h2>
+            {descriptionOverride && (
+              <p className="text-ink-muted leading-relaxed">{descriptionOverride}</p>
+            )}
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8 mb-16 relative">
-          
-          {/* Subtle connecting line behind cards (Desktop only) */}
-          <div className="hidden lg:block absolute top-[60px] left-0 right-0 h-[2px] bg-neutral-800 -z-10 mx-10" />
-
+        <ol className="divide-y divide-paper-border border-y border-paper-border">
           {steps.map((step, index) => (
-            <Reveal key={step.num} delay={index * 0.1}>
-              <div 
-                 className="bg-[#111111] border border-[rgba(255,255,255,0.06)] hover:border-[rgba(201,162,89,0.5)] rounded-[18px] p-6 lg:p-8 transition-all duration-400 ease-out hover:-translate-y-1 relative group h-full flex flex-col z-10 before:content-[''] before:absolute before:inset-0 before:-z-10 before:rounded-[18px] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-400 before:shadow-[0_0_30px_rgba(201,162,89,0.3)]"
-                 style={{
-                   boxShadow: '0 10px 40px rgba(0,0,0,0.6)'
-                 }}
-              >
-                <div className="mb-4 lg:mb-6">
-                  <span className="text-brand-gold font-extrabold text-5xl lg:text-6xl opacity-80 group-hover:opacity-100 transition-opacity">
-                    {step.num}
-                  </span>
+            <Reveal key={step.num} delay={index * 0.05}>
+              <li className="grid grid-cols-[auto_1fr] md:grid-cols-[120px_1fr] gap-6 md:gap-10 py-8 md:py-10">
+                <div className="font-display text-3xl md:text-5xl text-ink-faint leading-none">
+                  {step.num}
                 </div>
-                <h3 className="text-xl lg:text-xl font-bold text-white mb-3 lg:mb-4 leading-tight">
-                  {step.title}
-                </h3>
-                <p className="text-neutral-300 lg:text-neutral-400 leading-relaxed text-base lg:text-sm">
-                  {step.description}
-                </p>
-              </div>
+                <div className="max-w-2xl">
+                  <h3 className="font-display text-2xl md:text-3xl text-ink mb-3 leading-tight">
+                    {step.title}
+                  </h3>
+                  <p className="text-ink-muted leading-relaxed">{step.description}</p>
+                </div>
+              </li>
             </Reveal>
           ))}
-        </div>
-
-        <Reveal delay={0.4}>
-          <div className="text-center bg-neutral-900/50 border border-neutral-800 rounded-2xl p-8 max-w-2xl mx-auto">
-            <p className="text-xl font-bold text-white mb-6">
-              Ready to grow your business online?
-            </p>
-            <Button href="/contact">
-              Book a Strategy Call
-            </Button>
-          </div>
-        </Reveal>
+        </ol>
       </div>
     </section>
   );

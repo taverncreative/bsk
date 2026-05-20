@@ -30,15 +30,15 @@ export default function CaseStudyHighlight({ caseStudy }: CaseStudyHighlightProp
   const heading = businessName || title;
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 transition-all duration-300 hover:border-brand-gold hover:shadow-[0_0_40px_rgba(214,173,103,0.15)] flex flex-col h-full group">
-      
+    <article className="bg-paper-raised border border-paper-border rounded-xl p-6 transition-all duration-300 hover:border-brand-gold hover:shadow-[0_0_40px_rgba(214,173,103,0.15)] flex flex-col h-full group">
+
       {/* Meta Info */}
-      <h3 className="text-xl font-bold text-white mb-2">
+      <h3 className="text-xl font-bold text-ink mb-2">
         {heading}
       </h3>
-      
+
       {services_used && (
-        <p className="text-sm text-neutral-400 mb-6 font-medium">
+        <p className="text-sm text-ink-muted mb-6 font-medium">
           {services_used}
         </p>
       )}
@@ -51,15 +51,15 @@ export default function CaseStudyHighlight({ caseStudy }: CaseStudyHighlightProp
       </div>
 
       {/* Call to Action */}
-      <div className="pt-6 border-t border-neutral-800 mt-auto">
-        <Link 
+      <div className="pt-6 border-t border-paper-border mt-auto">
+        <Link
           href={`/case-studies/${slug}`}
-          className="inline-flex items-center text-sm font-semibold text-white group-hover:text-brand-gold transition-colors"
+          className="inline-flex items-center text-sm font-semibold text-ink group-hover:text-brand-gold transition-colors"
         >
           View Case Study
           <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
-    </div>
+    </article>
   );
 }

@@ -52,19 +52,19 @@ export default function LocalAuthorityMapClient({ headlineOverride, towns }: Loc
   };
 
   return (
-    <section className="py-28 bg-neutral-950 border-t border-neutral-900 overflow-hidden">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section className="py-28 bg-paper border-t border-paper-border overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <Reveal>
           <div className="text-center md:text-left mb-16 max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-6">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-ink tracking-tight mb-6">
               {headlineOverride || (
                 <>Based in Ashford<br/>Supporting Businesses Across Kent</>
               )}
             </h2>
-            <p className="text-lg text-neutral-400 leading-relaxed mb-4">
+            <p className="text-lg text-ink-muted leading-relaxed mb-4">
               We work with businesses across Ashford, Canterbury, Maidstone, Folkestone, Thanet and Medway.
             </p>
-            <p className="text-lg text-neutral-400 leading-relaxed">
+            <p className="text-lg text-ink-muted leading-relaxed">
               While our strategic hubs are based in these locations, our digital growth systems and services are engineered to support companies throughout the entirety of Kent, generating consistent local enquiries wherever you're based.
             </p>
           </div>
@@ -74,7 +74,7 @@ export default function LocalAuthorityMapClient({ headlineOverride, towns }: Loc
           
           {/* Left: SVG Map */}
           <Reveal>
-            <div className="relative w-full aspect-video lg:aspect-[4/3] bg-neutral-900/40 rounded-2xl border border-neutral-800 p-4 sm:p-8 flex items-center justify-center shadow-inner overflow-hidden top-0 lg:sticky lg:top-24 map-container animate-in fade-in duration-700">
+            <div className="relative w-full aspect-video lg:aspect-[4/3] bg-paper-raised/40 rounded-2xl border border-paper-border p-4 sm:p-8 flex items-center justify-center shadow-inner overflow-hidden top-0 lg:sticky lg:top-24 map-container animate-in fade-in duration-700">
                 <svg viewBox="0 0 400 300" className="w-full h-full drop-shadow-2xl">
                   {/* Abstract Kent Path */}
                   <path 
@@ -153,19 +153,19 @@ export default function LocalAuthorityMapClient({ headlineOverride, towns }: Loc
               <Reveal key={town.id} delay={index * 0.1}>
                 <div 
                   id={`town-card-${town.id}`}
-                  className={`bg-neutral-900 border rounded-xl p-6 transition-all duration-500 ease-out ${
+                  className={`bg-paper-raised border rounded-xl p-6 transition-all duration-500 ease-out ${
                     activeTown === town.id 
                     ? 'border-brand-gold shadow-[0_0_40px_rgba(214,173,103,0.15)] scale-[1.02]' 
-                    : 'border-neutral-800 hover:border-neutral-700 hover:shadow-lg'
+                    : 'border-paper-border hover:border-paper-border hover:shadow-lg'
                   }`}
                   onMouseEnter={() => setActiveTown(town.id)}
                   onMouseLeave={() => setActiveTown(null)}
                 >
                   <div className="flex items-center gap-3 mb-6">
-                    <div className={`p-2 rounded-lg transition-colors ${activeTown === town.id ? 'bg-brand-gold/10 text-brand-gold' : 'bg-neutral-800 text-neutral-400'}`}>
+                    <div className={`p-2 rounded-lg transition-colors ${activeTown === town.id ? 'bg-brand-gold/10 text-brand-gold' : 'bg-paper-raised text-ink-muted'}`}>
                       <MapPin className="w-5 h-5" />
                     </div>
-                    <h3 className="text-xl font-bold text-white tracking-tight">
+                    <h3 className="text-xl font-bold text-ink tracking-tight">
                       {town.name}
                     </h3>
                   </div>
@@ -173,23 +173,23 @@ export default function LocalAuthorityMapClient({ headlineOverride, towns }: Loc
                   <div className="flex flex-col gap-3">
                     <Link 
                       href={`/web-design-${town.slug}`}
-                      className="group/link flex items-center justify-between p-3 rounded-lg bg-neutral-950/50 border border-neutral-800/50 hover:bg-neutral-800 hover:border-brand-gold/50 transition-all duration-300"
+                      className="group/link flex items-center justify-between p-3 rounded-lg bg-paper/50 border border-paper-border/50 hover:bg-paper-raised hover:border-brand-gold/50 transition-all duration-300"
                     >
-                      <span className="text-sm font-medium text-neutral-300 group-hover/link:text-white transition-colors">Web Design {town.name}</span>
+                      <span className="text-sm font-medium text-ink group-hover/link:text-ink transition-colors">Web Design {town.name}</span>
                       <ChevronRight className="w-4 h-4 text-brand-gold opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
                     </Link>
                     <Link 
                       href={`/seo-${town.slug}`}
-                      className="group/link flex items-center justify-between p-3 rounded-lg bg-neutral-950/50 border border-neutral-800/50 hover:bg-neutral-800 hover:border-brand-gold/50 transition-all duration-300"
+                      className="group/link flex items-center justify-between p-3 rounded-lg bg-paper/50 border border-paper-border/50 hover:bg-paper-raised hover:border-brand-gold/50 transition-all duration-300"
                     >
-                      <span className="text-sm font-medium text-neutral-300 group-hover/link:text-white transition-colors">SEO Services {town.name}</span>
+                      <span className="text-sm font-medium text-ink group-hover/link:text-ink transition-colors">SEO Services {town.name}</span>
                       <ChevronRight className="w-4 h-4 text-brand-gold opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
                     </Link>
                     <Link 
                       href={`/business-automation-${town.slug}`}
-                      className="group/link flex items-center justify-between p-3 rounded-lg bg-neutral-950/50 border border-neutral-800/50 hover:bg-neutral-800 hover:border-brand-gold/50 transition-all duration-300"
+                      className="group/link flex items-center justify-between p-3 rounded-lg bg-paper/50 border border-paper-border/50 hover:bg-paper-raised hover:border-brand-gold/50 transition-all duration-300"
                     >
-                      <span className="text-sm font-medium text-neutral-300 group-hover/link:text-white transition-colors">Automation {town.name}</span>
+                      <span className="text-sm font-medium text-ink group-hover/link:text-ink transition-colors">Automation {town.name}</span>
                       <ChevronRight className="w-4 h-4 text-brand-gold opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
                     </Link>
                   </div>

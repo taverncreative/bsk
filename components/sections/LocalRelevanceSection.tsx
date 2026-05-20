@@ -8,7 +8,7 @@ export default function LocalRelevanceSection({ town = 'Kent' }: LocalRelevanceS
 
   return (
     <section className="py-28 bg-white border-t border-neutral-200">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-black tracking-tight mb-8">
             Helping businesses in <span className="text-brand-gold">{formattedTown}</span> grow online.

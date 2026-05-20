@@ -1,103 +1,104 @@
-import Script from 'next/script';
-
 export default function SiteSchema() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "MarketingAgency",
-    "name": "Business Sorted Kent",
-    "url": "https://www.businesssortedkent.co.uk/",
-    "logo": "https://www.businesssortedkent.co.uk/logo.png",
-    "image": "https://www.businesssortedkent.co.uk/logo.png",
-    "description": "Business Sorted Kent helps tradespeople, sole traders and small businesses across Kent improve their online presence through professional websites, local SEO, lead generation systems and business automation.",
-    "email": "hello@businesssortedkent.co.uk",
-    "telephone": "07522388055",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "184 Sandyhurst Lane",
-      "addressLocality": "Ashford",
-      "addressRegion": "Kent",
-      "postalCode": "TN25 4NX",
-      "addressCountry": "UK"
+  const ORG_ID = 'https://businesssortedkent.co.uk/#organization';
+  const WEBSITE_ID = 'https://businesssortedkent.co.uk/#website';
+
+  const schema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      '@id': ORG_ID,
+      name: 'Business Sorted Kent',
+      url: 'https://businesssortedkent.co.uk/',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://businesssortedkent.co.uk/logo.png',
+      },
+      image: 'https://businesssortedkent.co.uk/logo.png',
+      description:
+        'Founder-led digital agency in Kent. £280 websites, £45/hour SEO, automations priced on the brief. AI tooling made the work faster, and we passed the saving on.',
+      email: 'hello@businesssortedkent.co.uk',
+      address: {
+        '@type': 'PostalAddress',
+        addressRegion: 'Kent',
+        addressCountry: 'UK',
+      },
+      founder: {
+        '@type': 'Person',
+        name: 'John Lally',
+        jobTitle: 'Founder',
+      },
+      sameAs: [
+        'https://www.facebook.com/businesssortedkent',
+        'https://www.instagram.com/businesssortedkent',
+        'https://www.linkedin.com/company/business-sorted-kent',
+      ],
+      areaServed: [
+        { '@type': 'AdministrativeArea', name: 'Kent' },
+        { '@type': 'AdministrativeArea', name: 'Greater London' },
+        { '@type': 'Country', name: 'United Kingdom' },
+      ],
+      review: [
+        {
+          '@type': 'Review',
+          author: { '@type': 'Person', name: 'Sam Stewart' },
+          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+          reviewBody:
+            'This is the best business decision I have made in years. It completely transformed my business within two months.',
+        },
+        {
+          '@type': 'Review',
+          author: { '@type': 'Person', name: 'Ella Pearson' },
+          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+          reviewBody:
+            'They took my idea and turned it into a professional website that perfectly matched my vision.',
+        },
+      ],
+      makesOffer: [
+        {
+          '@type': 'Offer',
+          name: 'Websites',
+          price: '280',
+          priceCurrency: 'GBP',
+          itemOffered: { '@type': 'Service', name: 'Website Design' },
+        },
+        {
+          '@type': 'Offer',
+          name: 'SEO',
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: '45',
+            priceCurrency: 'GBP',
+            unitText: 'HOUR',
+          },
+          itemOffered: { '@type': 'Service', name: 'Local SEO' },
+        },
+        {
+          '@type': 'Offer',
+          name: 'Lead capture',
+          itemOffered: { '@type': 'Service', name: 'Lead Capture Systems' },
+        },
+        {
+          '@type': 'Offer',
+          name: 'Automations',
+          itemOffered: { '@type': 'Service', name: 'Business Automation' },
+        },
+      ],
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "51.1415",
-      "longitude": "0.8751"
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': WEBSITE_ID,
+      url: 'https://businesssortedkent.co.uk/',
+      name: 'Business Sorted Kent',
+      publisher: { '@id': ORG_ID },
+      inLanguage: 'en-GB',
     },
-    "areaServed": [
-      { "@type": "City", "name": "Ashford" },
-      { "@type": "City", "name": "Canterbury" },
-      { "@type": "City", "name": "Maidstone" },
-      { "@type": "City", "name": "Folkestone" },
-      { "@type": "City", "name": "Dover" },
-      { "@type": "City", "name": "Margate" },
-      { "@type": "City", "name": "Ramsgate" },
-      { "@type": "City", "name": "Broadstairs" },
-      { "@type": "City", "name": "Sevenoaks" },
-      { "@type": "City", "name": "Tunbridge Wells" },
-      { "@type": "City", "name": "Tonbridge" },
-      { "@type": "City", "name": "Dartford" },
-      { "@type": "City", "name": "Gravesend" },
-      { "@type": "City", "name": "Sittingbourne" },
-      { "@type": "City", "name": "Faversham" },
-      { "@type": "City", "name": "Whitstable" },
-      { "@type": "City", "name": "Herne Bay" }
-    ],
-    "founder": {
-      "@type": "Person",
-      "name": "John Lally",
-      "jobTitle": "Founder"
-    },
-    "sameAs": [
-      "https://www.facebook.com/businesssortedkent",
-      "https://www.instagram.com/businesssortedkent",
-      "https://www.linkedin.com/company/business-sorted-kent"
-    ],
-    "makesOffer": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Website Design"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Local SEO"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Lead Capture Systems"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Business Automation"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Branding and Logo Design"
-        }
-      }
-    ]
-  };
+  ];
 
   return (
-    <Script
-      id="schema-local-business"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      strategy="afterInteractive"
     />
   );
 }

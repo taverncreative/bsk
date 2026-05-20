@@ -45,7 +45,7 @@ export default function CommercialPage({
 
       {/* SECTION 2: TYPICAL COSTS / EXPECTATIONS */}
       <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
               {isPricing ? 'Typical Costs & Pricing Ranges' : `What to Expect from a Top ${service?.name || 'Local'} Agency`}
@@ -75,7 +75,7 @@ export default function CommercialPage({
 
       {/* SECTION 3: WHAT AFFECTS PRICING / SCOPE */}
       <section className="py-24 section-light border-t border-slate-200">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
               What Affects {isPricing ? 'Pricing' : 'the Scope of Work'}?
@@ -118,7 +118,7 @@ export default function CommercialPage({
 
       {/* SECTION 4: WHY BUSINESSES CHOOSE US */}
       <section className="py-24 bg-white border-t border-slate-200">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
               Why Businesses Choose Us
@@ -162,7 +162,7 @@ export default function CommercialPage({
 
       {/* SECTION 5: AREAS WE COVER */}
       <section className="py-24 section-light border-t border-slate-200">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
               Areas We Cover
@@ -190,7 +190,7 @@ export default function CommercialPage({
 
       {/* SECTION 6: FINAL CTA */}
       <section id="quote" className="section-dark py-24 flex items-center justify-center">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8">
             Ready to Grow Your Business?
           </h2>

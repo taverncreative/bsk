@@ -59,9 +59,9 @@ export default function KentCoverage({ pageType }: KentCoverageProps) {
   const outro = outros[(seed + 1) % outros.length];
 
   return (
-    <section className="py-12 bg-black border-t border-neutral-900">
-      <div className="container mx-auto px-4 max-w-4xl text-center">
-        <p className="text-neutral-400 text-sm md:text-base leading-relaxed tracking-wide font-medium">
+    <section className="py-12 bg-paper border-t border-paper-border">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
+        <p className="text-ink-muted text-sm md:text-base leading-relaxed tracking-wide font-medium">
           {intro} We support businesses in towns such as{' '}
           {selectedTowns.map((town, idx) => {
             const isLast = idx === selectedTowns.length - 1;

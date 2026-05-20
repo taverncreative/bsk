@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabaseServer as supabase } from '@/lib/supabase-server';
 import type { Industry } from '@/types';
 
 export async function getIndustryBySlug(slug: string): Promise<Industry | null> {

@@ -32,14 +32,14 @@ export default function Authority() {
   ];
 
   return (
-    <section className="py-28 bg-neutral-950">
-      <div className="container mx-auto px-4">
+    <section className="py-28 bg-paper">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white tracking-tight">
+            <h2 className="text-4xl font-bold text-ink tracking-tight">
               Why Businesses Choose Business Sorted Kent
             </h2>
-            <p className="mt-4 text-lg text-neutral-400">
+            <p className="mt-4 text-lg text-ink-muted">
               Measurable, transparent digital growth without the agency fluff.
             </p>
           </div>
@@ -49,12 +49,12 @@ export default function Authority() {
           {credentials.map((cred, idx) => (
             <Reveal key={idx} delay={idx * 0.08}>
               <div 
-                className="group flex items-start gap-4 p-8 rounded-xl bg-neutral-900 border border-neutral-800 hover:border-brand-gold hover:shadow-brand-glow transition-all duration-300 h-full"
+                className="group flex items-start gap-4 p-8 rounded-xl bg-paper-raised border border-paper-border hover:border-brand-gold hover:shadow-brand-glow transition-all duration-300 h-full"
               >
-                <IconWrapper icon={cred.icon} glow />
+                <IconWrapper icon={cred.icon} />
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-2">{cred.title}</h3>
-                  <p className="text-neutral-400 leading-relaxed">{cred.description}</p>
+                  <h3 className="text-xl font-bold text-ink mb-2">{cred.title}</h3>
+                  <p className="text-ink-muted leading-relaxed">{cred.description}</p>
                 </div>
               </div>
             </Reveal>

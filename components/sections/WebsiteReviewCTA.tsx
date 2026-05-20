@@ -2,19 +2,19 @@ import Link from 'next/link';
 
 export default function WebsiteReviewCTA() {
   return (
-    <section className="bg-neutral-900 border-y border-neutral-800 py-16">
-      <div className="container mx-auto px-4 max-w-5xl">
-        <div className="bg-black border border-neutral-800 rounded-3xl p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
+    <section className="bg-paper-raised border-y border-paper-border py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        <div className="bg-paper border border-paper-border rounded-3xl p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
           
           {/* Subtle gold glow behind content */}
           <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 bg-brand-gold/10 blur-[100px] rounded-full pointer-events-none" />
 
           <div className="lg:w-2/3 text-center lg:text-left z-10 mb-8 lg:mb-0 lg:pr-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-ink tracking-tight mb-4">
               Is Your Website Losing Leads?
             </h2>
-            <p className="text-lg md:text-xl text-neutral-400 leading-relaxed">
-              Most local websites suffer from hidden performance issues and poor SEO that actively push customers to competitors. Get a <span className="text-white font-bold">Free Technical Website Review</span> to find out exactly what's holding your business back.
+            <p className="text-lg md:text-xl text-ink-muted leading-relaxed">
+              Most local websites suffer from hidden performance issues and poor SEO that actively push customers to competitors. Get a <span className="text-ink font-bold">Free Technical Website Review</span> to find out exactly what's holding your business back.
             </p>
           </div>
           

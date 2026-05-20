@@ -58,14 +58,14 @@ export default function WebsiteReviewTool() {
 
   if (status === 'complete' && analysis) {
     return (
-      <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 lg:p-10 shadow-2xl text-left">
+      <div className="bg-paper-raised border border-paper-border rounded-2xl p-8 lg:p-10 shadow-2xl text-left">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold/20 text-brand-gold mb-6 mb-8">
           <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 className="text-3xl font-extrabold text-white mb-4">Initial Analysis Complete</h2>
-        <p className="text-lg text-neutral-400 mb-8 border-b border-neutral-800 pb-8">
+        <h2 className="text-3xl font-extrabold text-ink mb-4">Initial Analysis Complete</h2>
+        <p className="text-lg text-ink-muted mb-8 border-b border-paper-border pb-8">
           We have securely logged your URL ({url}) and our technical team will conduct a deep-dive manual review shortly. Here are the immediate automated red flags we identified:
         </p>
 
@@ -77,8 +77,8 @@ export default function WebsiteReviewTool() {
               </svg>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white mb-2">Performance Observations</h3>
-              <p className="text-neutral-400 leading-relaxed">{analysis.performance}</p>
+              <h3 className="text-xl font-bold text-ink mb-2">Performance Observations</h3>
+              <p className="text-ink-muted leading-relaxed">{analysis.performance}</p>
             </div>
           </div>
 
@@ -89,8 +89,8 @@ export default function WebsiteReviewTool() {
               </svg>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white mb-2">SEO Architecture</h3>
-              <p className="text-neutral-400 leading-relaxed">{analysis.seo}</p>
+              <h3 className="text-xl font-bold text-ink mb-2">SEO Architecture</h3>
+              <p className="text-ink-muted leading-relaxed">{analysis.seo}</p>
             </div>
           </div>
 
@@ -101,15 +101,15 @@ export default function WebsiteReviewTool() {
               </svg>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white mb-2">Conversion Friction</h3>
-              <p className="text-neutral-400 leading-relaxed">{analysis.conversion}</p>
+              <h3 className="text-xl font-bold text-ink mb-2">Conversion Friction</h3>
+              <p className="text-ink-muted leading-relaxed">{analysis.conversion}</p>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 p-6 bg-black rounded-xl border border-neutral-800">
+        <div className="mt-12 p-6 bg-paper rounded-xl border border-paper-border">
           <p className="text-brand-gold font-bold mb-2">What happens next?</p>
-          <p className="text-neutral-400 text-sm">
+          <p className="text-ink-muted text-sm">
             Our team has received this report at {email}. We will manually inspect your entire digital footprint and send you a comprehensive strategy on how to fix these underlying issues and generate more local enquiries.
           </p>
         </div>
@@ -118,15 +118,15 @@ export default function WebsiteReviewTool() {
   }
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 lg:p-10 shadow-2xl text-left max-w-2xl mx-auto">
-      <h2 className="text-3xl font-extrabold text-white mb-3">Request a Free Website Review</h2>
-      <p className="text-lg text-neutral-400 mb-8">
+    <div className="bg-paper-raised border border-paper-border rounded-2xl p-8 lg:p-10 shadow-2xl text-left max-w-2xl mx-auto">
+      <h2 className="text-3xl font-extrabold text-ink mb-3">Request a Free Website Review</h2>
+      <p className="text-lg text-ink-muted mb-8">
         Enter your website address below. Our system will run an initial diagnostic, and our digital team will follow up with a custom strategy to increase your local conversion rate.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="url" className="block text-sm font-bold text-white mb-2">
+          <label htmlFor="url" className="block text-sm font-bold text-ink mb-2">
             Website URL
           </label>
           <input
@@ -135,13 +135,13 @@ export default function WebsiteReviewTool() {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             required
-            className="w-full px-4 py-4 rounded-xl bg-black border border-neutral-800 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all font-medium text-white placeholder:text-neutral-600"
+            className="w-full px-4 py-4 rounded-xl bg-paper border border-paper-border focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all font-medium text-ink placeholder:text-ink-faint"
             placeholder="https://yourwebsite.co.uk"
           />
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-bold text-white mb-2">
+          <label htmlFor="email" className="block text-sm font-bold text-ink mb-2">
             Email Address
           </label>
           <input
@@ -150,7 +150,7 @@ export default function WebsiteReviewTool() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-4 rounded-xl bg-black border border-neutral-800 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all font-medium text-white placeholder:text-neutral-600"
+            className="w-full px-4 py-4 rounded-xl bg-paper border border-paper-border focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all font-medium text-ink placeholder:text-ink-faint"
             placeholder="you@company.com"
           />
         </div>

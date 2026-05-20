@@ -125,7 +125,8 @@ export default async function CaseStudyRoute({ params }: PageProps) {
         results={parsedResults}
         content={parsedPayload.content}
         businessName={parsedPayload.businessName}
-        websiteUrl={parsedPayload.websiteUrl}
+        websiteUrl={parsedPayload.website || parsedPayload.websiteUrl}
+        websiteNote={parsedPayload.websiteNote}
         service={{
           name: serviceName,
           slug: serviceSlug,

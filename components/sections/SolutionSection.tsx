@@ -40,13 +40,13 @@ export default function SolutionSection({ headlineOverride, paragraphOverride, s
 
   return (
     <section className="py-28 bg-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl font-bold text-black tracking-tight mb-6">
               {headline}
             </h2>
-            <p className="text-lg text-neutral-600 leading-relaxed">
+            <p className="text-lg text-ink-faint leading-relaxed">
               {paragraph}
             </p>
           </div>
@@ -60,7 +60,7 @@ export default function SolutionSection({ headlineOverride, paragraphOverride, s
                 <h3 className="text-2xl font-bold text-black mb-4 group-hover:text-brand-gold transition-colors">
                   {solution.title}
                 </h3>
-                <p className="text-neutral-600 leading-relaxed">
+                <p className="text-ink-faint leading-relaxed">
                   {solution.description}
                 </p>
               </div>
@@ -70,13 +70,13 @@ export default function SolutionSection({ headlineOverride, paragraphOverride, s
 
         <div className="mt-24 hidden md:block">
           <Reveal>
-            <div className="bg-neutral-950 border border-neutral-900 rounded-3xl p-10 lg:p-14 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
+            <div className="bg-paper border border-paper-border rounded-3xl p-10 lg:p-14 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
               <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-gold/10 to-transparent mix-blend-screen pointer-events-none" />
               <div className="flex-1 text-left relative z-10">
-                <h3 className="text-3xl font-extrabold text-white tracking-tight mb-4">
+                <h3 className="text-3xl font-extrabold text-ink tracking-tight mb-4">
                   Ready To Get Started?
                 </h3>
-                <p className="text-lg text-neutral-400 max-w-xl">
+                <p className="text-lg text-ink-muted max-w-xl">
                   Stop losing enquiries to competitors. Let's discuss how a tailored digital approach can turn your business into a reliable lead machine.
                 </p>
               </div>

@@ -25,7 +25,7 @@ export default function IndustryRelevanceSection({
 
   return (
     <section className="py-28 bg-neutral-50 border-t border-neutral-100">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-black tracking-tight mb-4">

@@ -32,7 +32,7 @@ export default async function InternalLinks({
 
   return (
     <section className="py-24 bg-neutral-50 border-t border-neutral-200">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <h2 className="text-4xl font-bold text-black tracking-tight mb-4">
             Explore More Resources

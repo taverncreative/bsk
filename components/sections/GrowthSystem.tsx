@@ -39,15 +39,15 @@ export default function GrowthSystem({ currentService }: GrowthSystemProps) {
   ];
 
   return (
-    <section className="py-24 bg-[#0a0a0a] border-t border-neutral-900 border-b relative overflow-hidden">
+    <section className="py-24 bg-paper-raised border-t border-paper-border border-b relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-gold/5 to-transparent mix-blend-screen pointer-events-none" />
-      <div className="container mx-auto px-4 max-w-5xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10">
         <Reveal>
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-6">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-ink tracking-tight mb-6">
               Part Of The <span className="text-brand-gold">Business Sorted Kent</span> Growth System
             </h2>
-            <p className="text-lg md:text-xl text-neutral-400 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-ink-muted leading-relaxed max-w-3xl mx-auto">
               {description}
             </p>
           </div>
@@ -62,13 +62,13 @@ export default function GrowthSystem({ currentService }: GrowthSystemProps) {
                   <div className={`flex items-center gap-3 px-5 py-3 rounded-xl border transition-all duration-300 ${
                     isActive 
                       ? 'bg-brand-gold/10 border-brand-gold text-brand-gold shadow-[0_0_15px_rgba(214,173,103,0.15)]' 
-                      : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:border-brand-gold/50 hover:text-white'
+                      : 'bg-paper border-paper-border text-ink-muted hover:border-brand-gold/50 hover:text-ink'
                   }`}>
                     <service.icon className="w-5 h-5 shrink-0" />
                     <span className="font-bold text-sm md:text-base">{service.title}</span>
                   </div>
                   {index < coreServices.length - 1 && (
-                    <ArrowRight className="hidden md:block w-5 h-5 text-neutral-700 ml-4 group-hover:text-brand-gold/50 transition-colors" />
+                    <ArrowRight className="hidden md:block w-5 h-5 text-ink-faint ml-4 group-hover:text-brand-gold/50 transition-colors" />
                   )}
                 </Link>
               </Reveal>

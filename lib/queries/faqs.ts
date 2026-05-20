@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabaseServer as supabase } from '@/lib/supabase-server';
 import type { FAQ } from '@/types';
 
 export async function getFAQs(serviceId?: string, townId?: string, industryId?: string): Promise<FAQ[]> {

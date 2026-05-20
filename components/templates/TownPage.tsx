@@ -1,10 +1,9 @@
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import LocalServiceHero from '@/components/sections/LocalServiceHero';
-import Button from '@/components/ui/Button';
-import Contact from '@/components/sections/Contact';
+import CTA from '@/components/sections/CTA';
 import EducationalGuides from '@/components/sections/EducationalGuides';
-import KentCoverage from '@/components/sections/KentCoverage';
-import Reveal from '@/components/ui/Reveal';
+import PageSchema from '@/components/seo/PageSchema';
 
 interface BaseEntity {
   name: string;
@@ -28,258 +27,216 @@ interface TownPageProps {
   townContent?: TownContentRecord[];
 }
 
+const NEARBY_FALLBACK = ['Ashford', 'Maidstone', 'Folkestone', 'Canterbury', 'Tunbridge Wells'];
+
+const SERVICE_PRICES: Record<string, string> = {
+  'web-design': '£280',
+  seo: '£45/hr',
+  'lead-capture': 'POA',
+  'business-automation': 'POA',
+  branding: 'POA',
+  'social-media-setup': 'POA',
+  'digital-marketing': 'POA',
+  'workwear-print': 'POA',
+  'ai-chatbots': 'POA',
+  'ai-content': 'POA',
+  'ai-automation': 'POA',
+};
+
 export default function TownPage({ town, services, guides, townContent = [] }: TownPageProps) {
   const hasContent = townContent.length > 0;
 
-  // Pick different service records for different sections to maximize uniqueness
-  const webDesignContent = townContent.find(c => c.service_slug === 'web-design');
-  const seoContent = townContent.find(c => c.service_slug === 'seo');
-  const automationContent = townContent.find(c => c.service_slug === 'business-automation');
-  const leadCaptureContent = townContent.find(c => c.service_slug === 'lead-capture');
-  const aiContent = townContent.find(c => c.service_slug === 'ai-chatbots');
+  const webDesignContent = townContent.find((c) => c.service_slug === 'web-design');
+  const seoContent = townContent.find((c) => c.service_slug === 'seo');
 
-  // Use real local context from the database, pulling from different service records
-  const heroSubtitle = hasContent && seoContent
-    ? seoContent.intro_paragraph
-    : `Professional web design, SEO and automation services for businesses in ${town.name}, Kent.`;
+  const heroSubtitle =
+    hasContent && seoContent
+      ? seoContent.intro_paragraph
+      : `Web design, SEO and automations for businesses in ${town.name}. £280 websites, £45/hour SEO, automations on the brief.`;
 
-  const landscapeParagraph = hasContent && webDesignContent
-    ? webDesignContent.local_context
-    : `${town.name} has a growing business community with strong demand for professional digital services.`;
+  const localContext =
+    hasContent && webDesignContent
+      ? webDesignContent.local_context
+      : null;
 
-  const approachParagraph = hasContent && webDesignContent
-    ? webDesignContent.success_approach || webDesignContent.intro_paragraph
-    : `We tailor our approach to the specific needs and search patterns of ${town.name} businesses.`;
+  const approachContext =
+    hasContent && webDesignContent
+      ? webDesignContent.success_approach || webDesignContent.intro_paragraph
+      : null;
 
-  const competitionParagraph = hasContent && seoContent
-    ? seoContent.competition_landscape || seoContent.intro_paragraph
-    : `Understanding the local competitive landscape helps us position your business effectively in ${town.name}.`;
-
-  // Collect unique pain points and solutions from different services
-  const featuredChallenges = hasContent
-    ? [
-        ...(seoContent?.pain_points?.slice(0, 1) || []),
-        ...(leadCaptureContent?.pain_points?.slice(0, 1) || []),
-        ...(automationContent?.pain_points?.slice(0, 1) || []),
-      ].slice(0, 3)
-    : [];
-
-  const featuredSolutions = hasContent
-    ? [
-        ...(webDesignContent?.solutions?.slice(0, 1) || []),
-        ...(seoContent?.solutions?.slice(0, 1) || []),
-        ...(aiContent?.solutions?.slice(0, 1) || []),
-      ].slice(0, 3)
-    : [];
+  // Prefer the four core service pillars and dedupe by slug
+  const CORE = ['web-design', 'seo', 'lead-capture', 'business-automation'];
+  const seen = new Set<string>();
+  const orderedServices: BaseEntity[] = [];
+  for (const slug of CORE) {
+    const match = services.find((s) => s.slug === slug);
+    if (match && !seen.has(match.slug)) {
+      orderedServices.push(match);
+      seen.add(match.slug);
+    }
+  }
+  for (const s of services) {
+    if (!seen.has(s.slug)) {
+      orderedServices.push(s);
+      seen.add(s.slug);
+    }
+  }
 
   return (
     <>
-      {/* HERO */}
+      <PageSchema
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Areas we cover', url: '/towns' },
+          { name: town.name, url: `/towns/${town.slug}` },
+        ]}
+        extra={[
+          {
+            '@type': 'Service',
+            name: `Web design, SEO and automations in ${town.name}`,
+            description: `Websites, SEO and automations for businesses based in ${town.name}, Kent.`,
+            provider: {
+              '@type': 'Organization',
+              '@id': 'https://businesssortedkent.co.uk/#organization',
+              name: 'Business Sorted Kent',
+            },
+            areaServed: { '@type': 'City', name: town.name },
+            hasOfferCatalog: {
+              '@type': 'OfferCatalog',
+              name: `Services in ${town.name}`,
+              itemListElement: [
+                {
+                  '@type': 'Offer',
+                  itemOffered: { '@type': 'Service', name: 'Website Design' },
+                  price: '280',
+                  priceCurrency: 'GBP',
+                },
+                {
+                  '@type': 'Offer',
+                  itemOffered: { '@type': 'Service', name: 'Local SEO' },
+                  priceSpecification: {
+                    '@type': 'UnitPriceSpecification',
+                    price: '45',
+                    priceCurrency: 'GBP',
+                    unitText: 'HOUR',
+                  },
+                },
+                {
+                  '@type': 'Offer',
+                  itemOffered: { '@type': 'Service', name: 'Lead Capture' },
+                },
+                {
+                  '@type': 'Offer',
+                  itemOffered: { '@type': 'Service', name: 'Business Automation' },
+                },
+              ],
+            },
+          },
+        ]}
+      />
       <LocalServiceHero
-        title={`Digital Growth Services for ${town.name} Businesses`}
+        title={`Web, SEO and automations for ${town.name} businesses.`}
         subtitle={heroSubtitle}
-        primaryCTA={{
-          text: 'Get A Free Quote',
-          href: '/contact',
-        }}
+        primaryCTA={{ text: 'See what yours could look like', href: '/free-preview' }}
+        secondaryCTA={{ text: 'Get in touch', href: '/contact' }}
       />
 
-      {/* SERVICES GRID */}
-      <section className="py-24 bg-black border-t border-neutral-800">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-              Services Available in {town.name}
-            </h2>
+      {/* Services available in this town */}
+      <section className="py-24 md:py-32 bg-paper border-t border-paper-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="mb-16 md:mb-20 max-w-2xl">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
+              What we do in {town.name}
+            </p>
+            <h2 className="font-display text-ink">Four core services, plus add-ons.</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service) => (
-              <Link
-                key={service.slug}
-                href={`/${service.slug}-${town.slug}`}
-                className="group flex flex-col p-8 bg-neutral-900 border border-neutral-800 rounded-xl hover:border-brand-gold hover:shadow-[0_0_40px_rgba(214,173,103,0.15)] transition-all duration-300"
-              >
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-gold transition-colors">
-                  {service.name} in {town.name}
-                </h3>
-                {/* Pull a unique snippet from the matching local_content record */}
-                {hasContent && (() => {
-                  const match = townContent.find(c => c.service_slug === service.slug);
-                  if (match) {
-                    return (
-                      <p className="text-sm text-neutral-400 mt-2 line-clamp-2">
-                        {match.intro_paragraph.slice(0, 120)}...
-                      </p>
-                    );
-                  }
-                  return null;
-                })()}
-                <div className="mt-auto pt-4 flex items-center text-neutral-400 font-medium group-hover:text-brand-gold transition-colors">
-                  Learn more
-                  <svg
-                    className="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform duration-300"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* BUSINESS LANDSCAPE — unique per town from database */}
-      <section className="py-24 bg-neutral-50 border-t border-neutral-200">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <Reveal>
-              <div>
-                <h2 className="text-3xl font-extrabold text-black mb-6">
-                  The Business Landscape in {town.name}
-                </h2>
-                <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-                  {landscapeParagraph}
-                </p>
-                <p className="text-lg text-neutral-700 leading-relaxed">
-                  {approachParagraph}
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div>
-                <h2 className="text-3xl font-extrabold text-black mb-6">
-                  {hasContent ? `What ${town.name} Businesses Are Up Against` : `Digital Opportunities for ${town.name} SMEs`}
-                </h2>
-                <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-                  {competitionParagraph}
-                </p>
-                {featuredChallenges.length > 0 ? (
-                  <ul className="space-y-4">
-                    {featuredChallenges.map((challenge, i) => (
-                      <li key={i} className="flex items-start">
-                        <span className="w-2 h-2 mt-2 rounded-full bg-brand-gold mr-3 shrink-0"></span>
-                        <p className="text-neutral-700"><strong className="text-black">{challenge.title}:</strong> {challenge.description}</p>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <ul className="space-y-4">
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 mt-2 rounded-full bg-brand-gold mr-3 shrink-0"></span>
-                      <p className="text-neutral-700"><strong className="text-black">Local Search Visibility:</strong> Ensuring your business appears when {town.name} residents search for your services.</p>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 mt-2 rounded-full bg-brand-gold mr-3 shrink-0"></span>
-                      <p className="text-neutral-700"><strong className="text-black">Lead Response Speed:</strong> Responding to enquiries faster than competitors in {town.name}.</p>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 mt-2 rounded-full bg-brand-gold mr-3 shrink-0"></span>
-                      <p className="text-neutral-700"><strong className="text-black">Professional Online Presence:</strong> Representing your business with a website that converts visitors into customers.</p>
-                    </li>
-                  </ul>
-                )}
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* SOLUTIONS — unique per town from database */}
-      {featuredSolutions.length > 0 && (
-        <section className="py-24 bg-white border-t border-neutral-100">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <Reveal>
-              <h2 className="text-3xl font-extrabold text-black mb-12 text-center">
-                How We Help {town.name} Businesses Grow
-              </h2>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {featuredSolutions.map((sol, i) => (
-                <Reveal key={i} delay={i * 0.1}>
-                  <div className="p-6 bg-neutral-50 border border-neutral-200 rounded-xl">
-                    <h3 className="text-lg font-bold text-black mb-3">{sol.title}</h3>
-                    <p className="text-neutral-600 leading-relaxed">{sol.description}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-paper-border">
+            {orderedServices.slice(0, 4).map((service) => {
+              const match = townContent.find((c) => c.service_slug === service.slug);
+              const snippet =
+                match?.intro_paragraph?.slice(0, 140).replace(/\s+\S*$/, '') || null;
+              const price = SERVICE_PRICES[service.slug] || 'POA';
+              return (
+                <Link
+                  key={service.slug}
+                  href={`/${service.slug}-${town.slug}`}
+                  className="group block bg-paper p-8 md:p-10 h-full transition-colors hover:bg-paper-raised"
+                >
+                  <div className="flex items-baseline justify-between gap-4 mb-4">
+                    <h3 className="font-display text-2xl md:text-3xl text-ink leading-tight">
+                      {service.name}
+                    </h3>
+                    <span className="font-mono text-lg md:text-xl text-brand-gold tracking-tight whitespace-nowrap">
+                      {price}
+                    </span>
                   </div>
-                </Reveal>
-              ))}
+                  {snippet && (
+                    <p className="text-ink-muted leading-relaxed mb-8">{snippet}…</p>
+                  )}
+                  <span className="inline-flex items-center text-sm text-ink-muted group-hover:text-brand-gold transition-colors">
+                    {service.name} in {town.name}
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Local context — only render if we have real DB content */}
+      {(localContext || approachContext) && (
+        <section className="py-24 md:py-32 bg-paper-raised border-y border-paper-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+            <div className="mb-12 max-w-2xl">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
+                About {town.name}
+              </p>
+              <h2 className="font-display text-ink">What we know about the area.</h2>
+            </div>
+            <div className="text-lg text-ink-muted leading-relaxed space-y-5 max-w-3xl">
+              {localContext && <p>{localContext}</p>}
+              {approachContext && approachContext !== localContext && <p>{approachContext}</p>}
             </div>
           </div>
         </section>
       )}
 
-      {/* INDUSTRIES */}
-      <section className="py-24 bg-black border-t border-neutral-800">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-              Businesses We Work With in {town.name}
-            </h2>
-            <p className="mt-6 text-lg text-neutral-400 leading-relaxed">
-              We partner with local companies across {town.name}, building bespoke digital systems that drive tangible results.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {['Trades', 'Professional Services', 'Retail', 'Hospitality'].map((industry) => (
-              <div
-                key={industry}
-                className="p-6 bg-neutral-900 border border-neutral-800 rounded-xl text-center shadow-sm"
-              >
-                <span className="font-bold text-white">{industry}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT FORM */}
-      <Contact />
-
-      <KentCoverage pageType={town.slug} />
-
       {guides && guides.length > 0 && (
-        <EducationalGuides guides={guides} headlineOverride={`Growth Guides for ${town.name} Businesses`} />
+        <EducationalGuides
+          guides={guides}
+          headlineOverride={`Guides for ${town.name} businesses`}
+          contextKey={`town-${town.slug}`}
+        />
       )}
 
-      {/* FINAL CTA */}
-      <section className="section-dark py-24 flex items-center justify-center">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8">
-            Ready to Grow Your Business in {town.name}?
-          </h2>
-          <p className="text-xl md:text-2xl text-slate-300 mb-12 leading-relaxed">
-            Stop losing local leads to your competitors. Let&apos;s get started today.
+      {/* Nearby */}
+      <section className="py-20 md:py-24 bg-paper border-t border-paper-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
+            Nearby towns
           </p>
-          <div className="flex justify-center">
-            <Button href="/contact" className="text-lg px-10 py-4 shadow-lg">
-              Get A Free Quote
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* NEARBY AREAS */}
-      <section className="py-20 bg-neutral-950 border-t border-neutral-900">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h3 className="text-2xl font-bold text-white mb-6">Also Serving Businesses Near {town.name}</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {['Ashford', 'Maidstone', 'Folkestone', 'Canterbury', 'Tunbridge Wells'].filter(t => t !== town.name).map(t => (
-              <Link key={t} href={`/towns/${t.toLowerCase().replace(' ', '-')}`} className="text-neutral-400 hover:text-brand-gold transition-colors">
+          <h2 className="font-display text-ink mb-8">Also covering.</h2>
+          <div className="flex flex-wrap gap-3">
+            {NEARBY_FALLBACK.filter((t) => t !== town.name).map((t) => (
+              <Link
+                key={t}
+                href={`/towns/${t.toLowerCase().replace(' ', '-')}`}
+                className="inline-flex items-center text-sm text-ink-muted hover:text-brand-gold transition-colors border border-paper-border rounded-full px-4 py-2 hover:border-brand-gold"
+              >
                 {t}
               </Link>
             ))}
           </div>
-          <div className="mt-8">
-            <Link href="/case-studies" className="text-brand-gold font-bold hover:underline">View our Kent Case Studies</Link>
-            <span className="mx-4 text-neutral-600">|</span>
-            <Link href="/guides" className="text-brand-gold font-bold hover:underline">Read our Digital Growth Guides</Link>
-          </div>
         </div>
       </section>
+
+      <CTA
+        titleOverride={`Got a project in ${town.name}?`}
+        paragraphOverride="Tell us what you do and what you need. We will come back with a plain answer, usually within a day."
+        buttonOverride="Send a message"
+      />
     </>
   );
 }

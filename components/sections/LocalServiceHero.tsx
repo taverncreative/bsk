@@ -1,7 +1,4 @@
-import Link from 'next/link';
 import Button from '@/components/ui/Button';
-import MagneticButton from '@/components/ui/MagneticButton';
-import GridBackground from '@/components/ui/GridBackground';
 import Reveal from '@/components/ui/Reveal';
 import { ReactNode } from 'react';
 
@@ -19,28 +16,15 @@ interface LocalServiceHeroProps {
 
 export default function LocalServiceHero({ title, subtitle, primaryCTA, secondaryCTA }: LocalServiceHeroProps) {
   return (
-    <section className="relative overflow-hidden pt-48 pb-32 bg-gradient-to-b from-black to-neutral-900 border-b border-neutral-800">
-      
-      <GridBackground />
-
-      <div className="container relative z-10 mx-auto px-4 max-w-4xl text-center flex flex-col items-center">
-        
+    <section className="relative bg-paper border-b border-paper-border pt-36 md:pt-44 pb-20 md:pb-28">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
         <Reveal>
-          <h1 
-            className="font-extrabold tracking-tight text-white mb-6"
-            style={{ fontSize: 'clamp(48px, 6vw, 80px)', lineHeight: 1.05 }}
-          >
-            {title}
-          </h1>
-          <p className="text-xl md:text-2xl text-neutral-400 mt-6 leading-relaxed max-w-2xl mx-auto">
+          <h1 className="font-display text-ink mb-6 max-w-3xl">{title}</h1>
+          <p className="text-lg md:text-xl text-ink-muted leading-relaxed max-w-2xl mb-10">
             {subtitle}
           </p>
-          
-          <div className="mt-10 flex flex-wrap justify-center items-center gap-4">
-            <MagneticButton href={primaryCTA.href}>
-              {primaryCTA.text}
-            </MagneticButton>
-            
+          <div className="flex flex-wrap items-center gap-4">
+            <Button href={primaryCTA.href}>{primaryCTA.text}</Button>
             {secondaryCTA && (
               <Button variant="secondary" href={secondaryCTA.href}>
                 {secondaryCTA.text}
@@ -48,7 +32,6 @@ export default function LocalServiceHero({ title, subtitle, primaryCTA, secondar
             )}
           </div>
         </Reveal>
-
       </div>
     </section>
   );

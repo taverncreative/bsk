@@ -48,15 +48,15 @@ export default function SecondaryContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="bg-neutral-900 border border-brand-gold/30 rounded-2xl p-10 text-center">
+      <div className="bg-paper-raised border border-brand-gold/30 rounded-2xl p-10 text-center">
         <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-6">
           <Send className="w-8 h-8 text-black" />
         </div>
-        <h3 className="text-2xl font-bold text-white mb-3">Message Sent Successfully</h3>
-        <p className="text-neutral-300">Thank you for getting in touch. We will review your enquiry and back to you shortly.</p>
+        <h3 className="text-2xl font-bold text-ink mb-3">Message Sent Successfully</h3>
+        <p className="text-ink">Thank you for getting in touch. We will review your enquiry and back to you shortly.</p>
         <button 
           onClick={() => setStatus('')}
-          className="mt-8 text-brand-gold text-sm font-bold hover:text-white transition-colors"
+          className="mt-8 text-brand-gold text-sm font-bold hover:text-ink transition-colors"
         >
           Send Another Message &rarr;
         </button>
@@ -65,7 +65,7 @@ export default function SecondaryContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 lg:p-10 shadow-2xl space-y-5 relative overflow-hidden">
+    <form onSubmit={handleSubmit} className="bg-paper-raised border border-paper-border rounded-3xl p-8 lg:p-10 shadow-2xl space-y-5 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent" />
       
       {status === 'error' && (
@@ -76,36 +76,36 @@ export default function SecondaryContactForm() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div className="relative">
-          <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500 pointer-events-none" />
+          <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-muted pointer-events-none" />
           <input 
             required
             type="text" 
             placeholder="Full Name" 
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none transition-all placeholder:text-neutral-600 focus:ring-1 focus:ring-brand-gold"
+            className="w-full bg-paper border border-paper-border text-ink rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none transition-all placeholder:text-ink-faint focus:ring-1 focus:ring-brand-gold"
           />
         </div>
         <div className="relative">
-          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500 pointer-events-none" />
+          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-muted pointer-events-none" />
           <input 
             required
             type="email" 
             placeholder="Email Address" 
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none transition-all placeholder:text-neutral-600 focus:ring-1 focus:ring-brand-gold"
+            className="w-full bg-paper border border-paper-border text-ink rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none transition-all placeholder:text-ink-faint focus:ring-1 focus:ring-brand-gold"
           />
         </div>
       </div>
 
       <div className="relative">
-        <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500 pointer-events-none" />
+        <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-muted pointer-events-none" />
         <select 
           required
           value={formData.service_required}
           onChange={(e) => setFormData({ ...formData, service_required: e.target.value })}
-          className="w-full bg-neutral-950 border border-neutral-800 text-neutral-300 rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none transition-all focus:ring-1 focus:ring-brand-gold appearance-none"
+          className="w-full bg-paper border border-paper-border text-ink rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none transition-all focus:ring-1 focus:ring-brand-gold appearance-none"
         >
           <option value="" disabled>Select Service Required</option>
           <option value="Website Design">Website Design</option>
@@ -122,7 +122,7 @@ export default function SecondaryContactForm() {
           placeholder="How can we help?" 
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 px-5 min-h-[140px] focus:border-brand-gold outline-none transition-all placeholder:text-neutral-600 focus:ring-1 focus:ring-brand-gold"
+          className="w-full bg-paper border border-paper-border text-ink rounded-xl py-4 px-5 min-h-[140px] focus:border-brand-gold outline-none transition-all placeholder:text-ink-faint focus:ring-1 focus:ring-brand-gold"
         />
       </div>
 

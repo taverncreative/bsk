@@ -84,14 +84,14 @@ export default function ConsultationCalendar() {
 
   if (isSuccess) {
     return (
-      <div className="bg-neutral-900 border border-brand-gold/30 rounded-3xl p-12 text-center shadow-2xl">
+      <div className="bg-paper-raised border border-brand-gold/30 rounded-3xl p-12 text-center shadow-2xl">
         <div className="w-20 h-20 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-6">
           <svg className="w-10 h-10 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-3xl font-extrabold text-white mb-4">Consultation Confirmed</h3>
-        <p className="text-lg text-neutral-300 mb-8 max-w-lg mx-auto">
+        <h3 className="text-3xl font-extrabold text-ink mb-4">Consultation Confirmed</h3>
+        <p className="text-lg text-ink mb-8 max-w-lg mx-auto">
           Thanks, {formData.name}. Your booking for <strong>{selectedDate} at {selectedTime}</strong> is confirmed. Check your email for instructions.
         </p>
       </div>
@@ -113,26 +113,26 @@ export default function ConsultationCalendar() {
           Most businesses we speak to uncover quick wins within the first 15 minutes.
         </p>
       </div>
-      <div className="bg-neutral-900 border border-neutral-800 rounded-3xl shadow-2xl overflow-hidden shadow-black/50">
-        <div className="bg-neutral-950 px-8 py-6 border-b border-neutral-800 flex justify-between items-center">
+      <div className="bg-paper-raised border border-paper-border rounded-3xl shadow-2xl overflow-hidden shadow-black/50">
+        <div className="bg-paper px-8 py-6 border-b border-paper-border flex justify-between items-center">
         <div>
-          <h3 className="text-xl font-bold text-white tracking-tight">Select A Date & Time</h3>
-          <p className="text-sm text-neutral-400 mt-1 flex items-center gap-2">
+          <h3 className="text-xl font-bold text-ink tracking-tight">Select A Date & Time</h3>
+          <p className="text-sm text-ink-muted mt-1 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse" />
             Consultation slots are limited each week.
           </p>
         </div>
-        <div className="hidden sm:flex bg-neutral-900 rounded-lg p-3 items-center gap-3 border border-neutral-800">
+        <div className="hidden sm:flex bg-paper-raised rounded-lg p-3 items-center gap-3 border border-paper-border">
            <Clock className="w-5 h-5 text-brand-gold" />
-           <span className="text-sm font-medium text-white">30 Min Call</span>
+           <span className="text-sm font-medium text-ink">30 Min Call</span>
         </div>
       </div>
 
       {!selectedTime ? (
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Calendar Side */}
-          <div className="p-8 border-b md:border-b-0 md:border-r border-neutral-800">
-            <h4 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-6 flex items-center gap-2">
+          <div className="p-8 border-b md:border-b-0 md:border-r border-paper-border">
+            <h4 className="text-sm font-bold text-ink-muted uppercase tracking-wider mb-6 flex items-center gap-2">
                <CalendarIcon className="w-4 h-4" /> Available Days
             </h4>
             <div className="grid grid-cols-2 gap-3">
@@ -149,22 +149,22 @@ export default function ConsultationCalendar() {
                     className={`flex flex-col items-center justify-center p-4 rounded-xl border transition-all ${
                       isSelected 
                         ? 'bg-brand-gold border-brand-gold text-black shadow-[0_0_15px_rgba(214,173,103,0.3)]' 
-                        : 'bg-neutral-950 border-neutral-800 text-white hover:border-brand-gold/50'
+                        : 'bg-paper border-paper-border text-ink hover:border-brand-gold/50'
                     }`}
                   >
-                    <span className={`text-xs font-bold uppercase ${isSelected ? 'text-black/70' : 'text-neutral-500'}`}>{dayName}</span>
+                    <span className={`text-xs font-bold uppercase ${isSelected ? 'text-black/70' : 'text-ink-muted'}`}>{dayName}</span>
                     <span className={`text-lg font-extrabold mt-1`}>{dayNum}</span>
                   </button>
                 );
               })}
             </div>
             {availableData.length === 0 && (
-               <p className="text-neutral-400 text-sm mt-4">No remaining slots for this month.</p>
+               <p className="text-ink-muted text-sm mt-4">No remaining slots for this month.</p>
             )}
-            <div className="mt-8 pt-6 border-t border-neutral-800">
+            <div className="mt-8 pt-6 border-t border-paper-border">
                <button 
                 onClick={() => setIsFallbackMode(true)}
-                className="text-brand-gold text-sm font-bold hover:text-white transition-colors"
+                className="text-brand-gold text-sm font-bold hover:text-ink transition-colors"
                >
                  Can't see a time that works? Request another time &rarr;
                </button>
@@ -172,8 +172,8 @@ export default function ConsultationCalendar() {
           </div>
 
           {/* Time Slots Side */}
-          <div className="p-8 bg-neutral-950/50">
-            <h4 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-6 flex items-center gap-2">
+          <div className="p-8 bg-paper/50">
+            <h4 className="text-sm font-bold text-ink-muted uppercase tracking-wider mb-6 flex items-center gap-2">
                <Clock className="w-4 h-4" /> Available Times
             </h4>
             {times.length > 0 ? (
@@ -182,7 +182,7 @@ export default function ConsultationCalendar() {
                   <button
                     key={time}
                     onClick={() => setSelectedTime(time)}
-                    className="py-4 rounded-xl font-bold bg-neutral-900 border border-neutral-800 text-white hover:border-brand-gold hover:text-brand-gold transition-colors focus:ring-2 ring-brand-gold/50"
+                    className="py-4 rounded-xl font-bold bg-paper-raised border border-paper-border text-ink hover:border-brand-gold hover:text-brand-gold transition-colors focus:ring-2 ring-brand-gold/50"
                   >
                     {time}
                   </button>
@@ -190,7 +190,7 @@ export default function ConsultationCalendar() {
               </div>
             ) : (
               <div className="text-center py-10">
-                <p className="text-neutral-400">Select a day to view remaining times.</p>
+                <p className="text-ink-muted">Select a day to view remaining times.</p>
               </div>
             )}
           </div>
@@ -198,16 +198,16 @@ export default function ConsultationCalendar() {
       ) : (
         /* Booking Details Form inside Calendar Card */
         <div className="p-8">
-          <div className="flex items-center justify-between mb-8 pb-6 border-b border-neutral-800">
+          <div className="flex items-center justify-between mb-8 pb-6 border-b border-paper-border">
              <div>
-               <h4 className="text-2xl font-bold text-white">Enter Your Details</h4>
-               <p className="text-neutral-400 mt-1">
+               <h4 className="text-2xl font-bold text-ink">Enter Your Details</h4>
+               <p className="text-ink-muted mt-1">
                  Booking for {new Date(selectedDate!).toLocaleDateString('en-GB', { dateStyle: 'long' })} at {selectedTime}
                </p>
              </div>
              <button 
                onClick={() => setSelectedTime(null)}
-               className="text-sm font-bold text-neutral-500 hover:text-white transition-colors border border-neutral-800 py-2 px-4 rounded-lg bg-neutral-950"
+               className="text-sm font-bold text-ink-muted hover:text-ink transition-colors border border-paper-border py-2 px-4 rounded-lg bg-paper"
              >
                Change Slot
              </button>
@@ -223,18 +223,18 @@ export default function ConsultationCalendar() {
             <div className="grid grid-cols-1 gap-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-muted" />
                   <input 
                     required
                     type="text" 
                     placeholder="Full Name" 
                     value={formData.name}
                     onChange={e => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
+                    className="w-full bg-paper border border-paper-border text-ink rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
                   />
                 </div>
                 <div className="relative">
-                  <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                   <input 
@@ -242,43 +242,43 @@ export default function ConsultationCalendar() {
                     placeholder="Phone Number" 
                     value={formData.phone}
                     onChange={e => setFormData({...formData, phone: e.target.value})}
-                    className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
+                    className="w-full bg-paper border border-paper-border text-ink rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
                   />
                 </div>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-muted" />
                   <input 
                     required
                     type="email" 
                     placeholder="Email Address" 
                     value={formData.email}
                     onChange={e => setFormData({...formData, email: e.target.value})}
-                    className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
+                    className="w-full bg-paper border border-paper-border text-ink rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
                   />
                 </div>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500 font-bold">www</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-muted font-bold">www</span>
                   <input 
                     type="url" 
                     placeholder="Website URL (e.g. example.com)" 
                     value={formData.website || ''}
                     onChange={e => setFormData({...formData, website: e.target.value})}
-                    className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
+                    className="w-full bg-paper border border-paper-border text-ink rounded-xl py-4 pl-12 pr-4 focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
                   />
                 </div>
               </div>
             </div>
             
             <div className="relative">
-              <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-neutral-500" />
+              <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-ink-muted" />
               <textarea 
                 placeholder="What would you like to discuss? (Optional)" 
                 value={formData.notes}
                 onChange={e => setFormData({...formData, notes: e.target.value})}
-                className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 pl-12 pr-4 min-h-[120px] focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
+                className="w-full bg-paper border border-paper-border text-ink rounded-xl py-4 pl-12 pr-4 min-h-[120px] focus:border-brand-gold outline-none focus:ring-1 focus:ring-brand-gold transition-all"
               />
             </div>
 
@@ -320,32 +320,32 @@ function FallbackEnquiryForm() {
 
   if (status === 'success') {
     return (
-      <div className="bg-neutral-900 border border-brand-gold/30 rounded-3xl p-12 text-center shadow-2xl">
-        <h3 className="text-3xl font-extrabold text-white mb-4">Request Sent</h3>
-        <p className="text-lg text-neutral-300">We've received your alternative availability request and will be in touch shortly to confirm a slot.</p>
+      <div className="bg-paper-raised border border-brand-gold/30 rounded-3xl p-12 text-center shadow-2xl">
+        <h3 className="text-3xl font-extrabold text-ink mb-4">Request Sent</h3>
+        <p className="text-lg text-ink">We've received your alternative availability request and will be in touch shortly to confirm a slot.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 lg:p-12 shadow-2xl">
+    <div className="bg-paper-raised border border-paper-border rounded-3xl p-8 lg:p-12 shadow-2xl">
       <div className="mb-8">
-        <h3 className="text-2xl font-bold text-white mb-2">Can't see a time that works?</h3>
-        <p className="text-neutral-400 text-lg">Let us know your preferred availability and we'll try to fit you in.</p>
+        <h3 className="text-2xl font-bold text-ink mb-2">Can't see a time that works?</h3>
+        <p className="text-ink-muted text-lg">Let us know your preferred availability and we'll try to fit you in.</p>
       </div>
       
       {status === 'error' && <p className="text-red-400 mb-6 bg-red-900/20 p-4 rounded-lg">Something went wrong. Please try again.</p>}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input required type="text" placeholder="Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 px-5 focus:border-brand-gold outline-none" />
-          <input required type="email" placeholder="Email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 px-5 focus:border-brand-gold outline-none" />
+          <input required type="text" placeholder="Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="bg-paper border border-paper-border text-ink rounded-xl py-4 px-5 focus:border-brand-gold outline-none" />
+          <input required type="email" placeholder="Email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="bg-paper border border-paper-border text-ink rounded-xl py-4 px-5 focus:border-brand-gold outline-none" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" placeholder="Preferred Day (e.g., Next Wednesday)" value={formData.preferred_day} onChange={e => setFormData({...formData, preferred_day: e.target.value})} className="bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 px-5 focus:border-brand-gold outline-none" />
-          <input type="text" placeholder="Preferred Time (e.g., 10:00 AM)" value={formData.preferred_time} onChange={e => setFormData({...formData, preferred_time: e.target.value})} className="bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 px-5 focus:border-brand-gold outline-none" />
+          <input type="text" placeholder="Preferred Day (e.g., Next Wednesday)" value={formData.preferred_day} onChange={e => setFormData({...formData, preferred_day: e.target.value})} className="bg-paper border border-paper-border text-ink rounded-xl py-4 px-5 focus:border-brand-gold outline-none" />
+          <input type="text" placeholder="Preferred Time (e.g., 10:00 AM)" value={formData.preferred_time} onChange={e => setFormData({...formData, preferred_time: e.target.value})} className="bg-paper border border-paper-border text-ink rounded-xl py-4 px-5 focus:border-brand-gold outline-none" />
         </div>
-        <textarea required placeholder="Brief message..." value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="w-full bg-neutral-950 border border-neutral-800 text-white rounded-xl py-4 px-5 min-h-[120px] focus:border-brand-gold outline-none" />
+        <textarea required placeholder="Brief message..." value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="w-full bg-paper border border-paper-border text-ink rounded-xl py-4 px-5 min-h-[120px] focus:border-brand-gold outline-none" />
         <button disabled={status === 'loading'} type="submit" className="w-full bg-brand-gold text-black font-extrabold py-5 rounded-xl text-lg hover:bg-white transition-colors">{status === 'loading' ? 'Sending...' : 'Send Request'}</button>
       </form>
     </div>

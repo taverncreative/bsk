@@ -94,7 +94,7 @@ export default function QuoteForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3.5 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all font-medium text-neutral-800 placeholder:text-neutral-400"
+            className="w-full px-4 py-3.5 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all font-medium text-neutral-800 placeholder:text-ink-muted"
             placeholder="John Doe"
           />
         </div>
@@ -111,7 +111,7 @@ export default function QuoteForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3.5 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all font-medium text-neutral-800 placeholder:text-neutral-400"
+              className="w-full px-4 py-3.5 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all font-medium text-neutral-800 placeholder:text-ink-muted"
               placeholder="john@example.com"
             />
           </div>
@@ -125,7 +125,7 @@ export default function QuoteForm() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-3.5 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all font-medium text-neutral-800 placeholder:text-neutral-400"
+              className="w-full px-4 py-3.5 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all font-medium text-neutral-800 placeholder:text-ink-muted"
               placeholder="07700 900000"
             />
           </div>
@@ -163,7 +163,7 @@ export default function QuoteForm() {
             onChange={handleChange}
             required
             rows={4}
-            className="w-full px-4 py-3.5 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all resize-none font-medium text-neutral-800 placeholder:text-neutral-400"
+            className="w-full px-4 py-3.5 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all resize-none font-medium text-neutral-800 placeholder:text-ink-muted"
             placeholder="Tell us a bit about your project..."
           />
         </div>
@@ -177,7 +177,7 @@ export default function QuoteForm() {
         {success ? (
           <div className="p-6 bg-green-900/20 border border-brand-gold rounded-xl text-center">
             <h3 className="text-xl font-bold text-brand-gold mb-2">Quote Request Sent!</h3>
-            <p className="text-neutral-300">We will review your details and aim to contact you within 24 hours.</p>
+            <p className="text-ink">We will review your details and aim to contact you within 24 hours.</p>
           </div>
         ) : (
           <button

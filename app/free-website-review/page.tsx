@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import WebsiteReviewTool from '@/components/forms/WebsiteReviewTool';
 
 export const metadata: Metadata = {
-  title: 'Free Website Performance & SEO Review | Business Sorted Kent',
-  description: 'Request a free, no-obligation technical review of your existing website. We analyze performance, local SEO visibility, and conversion barriers for businesses in Kent.',
+  title: 'Free website review | Business Sorted Kent',
+  description:
+    'Send us your website. We will tell you what is working, what is not, and what is worth fixing first. Free, no obligation.',
   alternates: {
     canonical: 'https://businesssortedkent.co.uk/free-website-review',
   },
@@ -11,53 +12,63 @@ export const metadata: Metadata = {
 
 export default function FreeWebsiteReviewPage() {
   return (
-    <main className="min-h-screen bg-black pt-32 lg:pt-48 pb-24 text-white">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          
-          <div className="text-left mt-4 lg:mt-10">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-              Is Your Website Losing You Money?
-            </h1>
-            <p className="text-xl md:text-2xl text-neutral-400 mb-8 leading-relaxed">
-              Find out exactly why your website isn't generating local enquiries. Request a free, rapid technical diagnostic of your digital presence today.
-            </p>
-            
-            <ul className="space-y-6">
-              <li className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold mt-1 mr-4 font-bold shadow-md">
-                  1
-                </div>
-                <p className="text-lg text-neutral-300 leading-relaxed font-medium pt-1">Identify critical slow-loading pages costing you Google rankings.</p>
-              </li>
-              <li className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold mt-1 mr-4 font-bold shadow-md">
-                  2
-                </div>
-                <p className="text-lg text-neutral-300 leading-relaxed font-medium pt-1">Discover severe gaps in your localized SEO structure.</p>
-              </li>
-              <li className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold mt-1 mr-4 font-bold shadow-md">
-                  3
-                </div>
-                <p className="text-lg text-neutral-300 leading-relaxed font-medium pt-1">Uncover major conversion barriers stopping users from getting in touch.</p>
-              </li>
-            </ul>
-
-            <div className="mt-12 p-6 bg-neutral-900 border border-neutral-800 rounded-xl">
-              <p className="text-white font-bold mb-2">100% Free & Secure</p>
-              <p className="text-neutral-400 text-sm">
-                No credit card required. Our team safely scans your public website data to generate your personalized report.
-              </p>
-            </div>
-          </div>
-
-          <div className="w-full">
-             <WebsiteReviewTool />
-          </div>
-
+    <main className="min-h-screen bg-paper">
+      <section className="bg-paper border-b border-paper-border pt-36 md:pt-44 pb-16 md:pb-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-8">
+            Free website review
+          </p>
+          <h1 className="font-display text-ink mb-8 max-w-4xl">
+            Send us your site. We will tell you what is worth fixing.
+          </h1>
+          <p className="text-lg md:text-xl text-ink-muted leading-relaxed max-w-3xl">
+            A short, honest review of your existing website. What is loading slowly, what Google is
+            missing, and where visitors are bouncing. Free, no follow-up if you pass.
+          </p>
         </div>
-      </div>
+      </section>
+
+      <section className="py-20 md:py-24 bg-paper">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-faint mb-5">
+                What you’ll get
+              </p>
+              <ul className="space-y-5 text-lg">
+                <li className="flex items-start gap-4 text-ink">
+                  <span className="font-mono text-sm text-ink-faint pt-1">01</span>
+                  <span>Where your site is loading slowly and what to do about it.</span>
+                </li>
+                <li className="flex items-start gap-4 text-ink">
+                  <span className="font-mono text-sm text-ink-faint pt-1">02</span>
+                  <span>What Google is and is not indexing, and why.</span>
+                </li>
+                <li className="flex items-start gap-4 text-ink">
+                  <span className="font-mono text-sm text-ink-faint pt-1">03</span>
+                  <span>The bits of your site where visitors are likely to drop off.</span>
+                </li>
+                <li className="flex items-start gap-4 text-ink">
+                  <span className="font-mono text-sm text-ink-faint pt-1">04</span>
+                  <span>A short list of what would be worth doing next, in priority order.</span>
+                </li>
+              </ul>
+
+              <div className="mt-10 pt-8 border-t border-paper-border max-w-md">
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-faint mb-3">
+                  No card details
+                </p>
+                <p className="text-sm text-ink-muted">
+                  We use your URL to run the review. Nothing else. No mailing list, no follow-up if
+                  you pass.
+                </p>
+              </div>
+            </div>
+
+            <WebsiteReviewTool />
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

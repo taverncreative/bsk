@@ -89,7 +89,7 @@ export default function GuidePage({ title, content }: GuidePageProps) {
 
       {/* SECTION 2: ARTICLE BODY & TOC */}
       <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
           <div className="flex flex-col md:flex-row gap-12">
             
             {/* Main Content Column */}
@@ -113,7 +113,7 @@ export default function GuidePage({ title, content }: GuidePageProps) {
               )}
               
               <div 
-                className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-a:text-brand hover:prose-a:text-black transition-colors prose-img:rounded-xl prose-img:shadow-sm"
+                className="prose prose-lg max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:text-ink prose-headings:tracking-tight prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-a:text-ink prose-a:font-medium prose-a:no-underline prose-a:border-b-2 prose-a:border-brand-gold/40 hover:prose-a:border-brand-gold hover:prose-a:text-brand-gold prose-a:transition-colors prose-p:text-ink prose-li:text-ink prose-strong:text-ink prose-img:rounded-md"
                 dangerouslySetInnerHTML={{ __html: part1 }}
               />
 
@@ -127,7 +127,7 @@ export default function GuidePage({ title, content }: GuidePageProps) {
                     />
                   </div>
                   <div 
-                    className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-a:text-brand hover:prose-a:text-black transition-colors prose-img:rounded-xl prose-img:shadow-sm"
+                    className="prose prose-lg max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:text-ink prose-headings:tracking-tight prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-a:text-ink prose-a:font-medium prose-a:no-underline prose-a:border-b-2 prose-a:border-brand-gold/40 hover:prose-a:border-brand-gold hover:prose-a:text-brand-gold prose-a:transition-colors prose-p:text-ink prose-li:text-ink prose-strong:text-ink prose-img:rounded-md"
                     dangerouslySetInnerHTML={{ __html: part2 }}
                   />
                 </>
@@ -160,7 +160,7 @@ export default function GuidePage({ title, content }: GuidePageProps) {
 
       {/* SECTION 3: RELATED SERVICES */}
       <section className="py-24 section-light border-t border-slate-200">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
               Related Services
@@ -199,7 +199,7 @@ export default function GuidePage({ title, content }: GuidePageProps) {
 
       {/* SECTION 5: FINAL CTA */}
       <section className="section-dark py-24 flex items-center justify-center">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8">
             Ready to Grow Your Business Online?
           </h2>
