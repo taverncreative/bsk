@@ -12,6 +12,18 @@ interface PageProps {
 }
 
 // 1. Generate Static Metadata for SEO
+/**
+ * Truncate description text at the last word boundary before max chars,
+ * appending an ellipsis. Strips trailing punctuation before the ellipsis.
+ */
+function truncateMeta(text: string, max = 160): string {
+  if (text.length <= max) return text;
+  const trimmed = text.slice(0, max - 3);
+  const lastSpace = trimmed.lastIndexOf(' ');
+  const cut = lastSpace > 0 ? trimmed.slice(0, lastSpace) : trimmed;
+  return cut.replace(/[,.;:!?-]+$/, '') + '...';
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const caseStudy = await getCaseStudyBySlug(slug);
@@ -27,7 +39,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${caseStudy.title} | Business Sorted Kent`,
-    description: `See how we helped a ${caseStudy.industry || 'local'} business in ${capitalize(caseStudy.town || 'Kent')} grow using ${capitalize(caseStudy.services_used || 'our services')}.`,
+    description: caseStudy.summary
+      ? truncateMeta(caseStudy.summary)
+      : `See how we helped a ${caseStudy.industry || 'local'} business in ${capitalize(caseStudy.town || 'Kent')} grow using ${capitalize(caseStudy.services_used || 'our services')}.`,
     alternates: {
       canonical: `https://businesssortedkent.co.uk/case-studies/${caseStudy.slug}`,
     },
