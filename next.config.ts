@@ -67,7 +67,7 @@ const nextConfig: NextConfig = {
       { source: '/towns/maidstone%20borough', destination: '/towns/maidstone-borough', permanent: true },
       { source: '/towns/sevenoaks%20district', destination: '/towns/sevenoaks-district', permanent: true },
 
-      { source: '/estate-agents', destination: '/industries', permanent: true },
+      { source: '/estate-agents', destination: '/industries/letting-agents', permanent: true },
       { source: '/maidstone', destination: '/towns/maidstone', permanent: true },
       { source: '/website-design-kent', destination: '/web-design', permanent: true },
       { source: '/solicitors', destination: '/industries/solicitors', permanent: true },
