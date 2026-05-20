@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Bricolage_Grotesque, IBM_Plex_Mono } from 'next/font/google';
+import { Nunito_Sans } from 'next/font/google';
 import './globals.css';
 
 import Navbar from '@/components/layout/Navbar';
@@ -8,24 +8,11 @@ import CookieConsent from '@/components/layout/CookieConsent';
 import SiteSchema from '@/components/seo/SiteSchema';
 import ScrollToTop from '@/components/ui/ScrollToTop';
 
-const inter = Inter({
+const nunitoSans = Nunito_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-nunito-sans',
   display: 'swap',
-});
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-  axes: ['opsz', 'wdth'],
-});
-
-const mono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -45,8 +32,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${bricolage.variable} ${mono.variable}`}>
-      <body className={inter.className}>
+    <html lang="en" className={nunitoSans.variable}>
+      <body className={nunitoSans.className}>
         <ScrollToTop />
         <SiteSchema />
         <header>

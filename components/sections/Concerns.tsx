@@ -34,7 +34,7 @@ export default function Concerns() {
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
             Things worth knowing
           </p>
-          <h2 className="font-display text-ink">The questions we get most.</h2>
+          <h2 className="font-display text-ink">FAQs</h2>
         </div>
 
         <div className="divide-y divide-paper-border border-y border-paper-border">
