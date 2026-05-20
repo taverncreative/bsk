@@ -181,7 +181,40 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 text-xs text-paper/50 font-mono">
+        <div className="border-t border-white/10 pt-8 space-y-4 text-xs text-paper/50 font-mono">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            <li>
+              <Link href="/privacy" className="hover:text-brand-gold transition-colors">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/cookies" className="hover:text-brand-gold transition-colors">
+                Cookie Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms" className="hover:text-brand-gold transition-colors">
+                Terms &amp; Conditions
+              </Link>
+            </li>
+            <li>
+              <Link href="/accessibility" className="hover:text-brand-gold transition-colors">
+                Accessibility
+              </Link>
+            </li>
+          </ul>
+          <p className="text-paper/40 normal-case tracking-normal font-sans leading-relaxed max-w-3xl">
+            Business Sorted Kent is a sole trader registered in England. Business address: 84
+            Abbots Walk, Wye, Ashford, Kent, TN25 5ES. Contact:{' '}
+            <a
+              href="mailto:hello@businesssortedkent.co.uk"
+              className="hover:text-brand-gold transition-colors"
+            >
+              hello@businesssortedkent.co.uk
+            </a>
+            .
+          </p>
           <p>&copy; Business Sorted Kent {new Date().getFullYear()} · Kent, UK</p>
         </div>
       </div>

@@ -4,6 +4,7 @@ import './globals.css';
 
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import CookieConsent from '@/components/layout/CookieConsent';
 import SiteSchema from '@/components/seo/SiteSchema';
 import ScrollToTop from '@/components/ui/ScrollToTop';
 
@@ -53,6 +54,7 @@ export default function RootLayout({
         </header>
         <main>{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
