@@ -34,10 +34,12 @@ export default function WebsiteReviewTool() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             access_key: '31fb5677-3e73-4a83-abc3-4c668ba876df',
-            subject: `Website Review Request: ${url}`,
+            subject: `New Website Review Request from ${email}`,
             from_name: 'Business Sorted Kent',
+            Name: 'Website Review Request',
             Email: email,
             Website: url,
+            Message: `New website review request.\n\nWebsite: ${url}\nEmail: ${email}\n\nPlease run a manual review and follow up with the visitor.`,
           }),
         }).catch(() => {}),
       ]);

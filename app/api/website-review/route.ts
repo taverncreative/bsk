@@ -89,7 +89,7 @@ export async function POST(req: Request) {
 
     // Send Admin Email via Web3Forms
     await sendEmail(
-      `Website Review Request: ${url}`,
+      `New Website Review Request from ${email}`,
       `New Website Review Request\n\nEmail: ${email}\nWebsite: ${url}\n\nAI Diagnostic:\n${aiSummary}\n\nView in Dashboard: https://businesssortedkent.co.uk/admin-dashboard/lead-inbox`
     );
 
