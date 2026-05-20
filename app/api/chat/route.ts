@@ -8,7 +8,13 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const openaiClient = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+let openaiClient: OpenAI | null = null;
+function getOpenAIClient(): OpenAI {
+  if (!openaiClient) {
+    openaiClient = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+  return openaiClient;
+}
 
 const BASE_SYSTEM_PROMPT = `You are Elle, a helpful and knowledgeable digital agency assistant for Business Sorted Kent.
 Your primary role is to act like a knowledgeable assistant who quickly looks at a visitor’s website, identifies potential issues, and explains how Business Sorted Kent solves them.
@@ -51,7 +57,7 @@ async function retrieveRelevantContent(userQuery: string): Promise<string> {
   if (!userQuery || !userQuery.trim()) return '';
 
   try {
-    const embeddingResponse = await openaiClient.embeddings.create({
+    const embeddingResponse = await getOpenAIClient().embeddings.create({
       model: 'text-embedding-3-small',
       input: userQuery.replace(/\n/g, ' '),
     });
