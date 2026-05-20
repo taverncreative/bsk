@@ -45,20 +45,21 @@ const nextConfig: NextConfig = {
       // ────────────────────────────────────────────────────────────────
       // Multi-word town slug normalisation: external crawlers/backlinks
       // sometimes construct '/towns/<town with space>' from the display
-      // name. Next.js matches sources against the *decoded* request path,
-      // so these use a literal space, not '%20'. All destinations have
-      // been verified against the production sitemap.
+      // name. Next.js matches sources against the raw (still-encoded)
+      // request pathname, so these must use '%20' rather than a literal
+      // space. All destinations have been verified against the production
+      // sitemap.
       // ────────────────────────────────────────────────────────────────
-      { source: '/towns/tunbridge wells', destination: '/towns/tunbridge-wells', permanent: true },
-      { source: '/towns/tunbridge wells borough', destination: '/towns/tunbridge-wells-borough', permanent: true },
-      { source: '/towns/herne bay', destination: '/towns/herne-bay', permanent: true },
-      { source: '/towns/tonbridge and malling', destination: '/towns/tonbridge-and-malling', permanent: true },
-      { source: '/towns/ashford borough', destination: '/towns/ashford-borough', permanent: true },
-      { source: '/towns/canterbury district', destination: '/towns/canterbury-district', permanent: true },
-      { source: '/towns/dartford borough', destination: '/towns/dartford-borough', permanent: true },
-      { source: '/towns/dover district', destination: '/towns/dover-district', permanent: true },
-      { source: '/towns/maidstone borough', destination: '/towns/maidstone-borough', permanent: true },
-      { source: '/towns/sevenoaks district', destination: '/towns/sevenoaks-district', permanent: true },
+      { source: '/towns/tunbridge%20wells', destination: '/towns/tunbridge-wells', permanent: true },
+      { source: '/towns/tunbridge%20wells%20borough', destination: '/towns/tunbridge-wells-borough', permanent: true },
+      { source: '/towns/herne%20bay', destination: '/towns/herne-bay', permanent: true },
+      { source: '/towns/tonbridge%20and%20malling', destination: '/towns/tonbridge-and-malling', permanent: true },
+      { source: '/towns/ashford%20borough', destination: '/towns/ashford-borough', permanent: true },
+      { source: '/towns/canterbury%20district', destination: '/towns/canterbury-district', permanent: true },
+      { source: '/towns/dartford%20borough', destination: '/towns/dartford-borough', permanent: true },
+      { source: '/towns/dover%20district', destination: '/towns/dover-district', permanent: true },
+      { source: '/towns/maidstone%20borough', destination: '/towns/maidstone-borough', permanent: true },
+      { source: '/towns/sevenoaks%20district', destination: '/towns/sevenoaks-district', permanent: true },
 
       { source: '/estate-agents', destination: '/industries', permanent: true },
       { source: '/maidstone', destination: '/towns/maidstone', permanent: true },
