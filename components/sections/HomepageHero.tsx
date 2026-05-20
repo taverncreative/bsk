@@ -82,11 +82,12 @@ export default function HomepageHero({
 
           <div className="hidden lg:block">
             <Image
-              src="/hero-portfolio.png"
+              src="/hero-portfolio.webp"
               alt="A selection of websites Business Sorted Kent has built for Kent businesses, including inspection, salon, cleaning, stationery and iPhone repair brands"
               width={1200}
               height={900}
               priority
+              sizes="(min-width: 1024px) 780px, 0px"
               className="w-full h-auto"
             />
           </div>
