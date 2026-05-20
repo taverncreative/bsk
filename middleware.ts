@@ -4,6 +4,21 @@ import { NextResponse, type NextRequest } from 'next/server'
 const CANONICAL_HOST = 'businesssortedkent.co.uk';
 
 export async function middleware(request: NextRequest) {
+  // ── Crawler / infra files: skip canonicalisation (and auth) so these
+  //    serve directly on any host variant (apex or www). robots.txt and
+  //    sitemap.xml are entry points for SEO crawlers, and /.well-known/*
+  //    is the IANA-reserved namespace for security.txt, domain-verification
+  //    files, etc. Redirecting them to apex confuses crawlers that don't
+  //    follow cross-host redirects on infra fetches.
+  const pathname = request.nextUrl.pathname;
+  const isInfraPath =
+    pathname === '/robots.txt' ||
+    pathname === '/sitemap.xml' ||
+    pathname.startsWith('/.well-known/');
+  if (isInfraPath) {
+    return NextResponse.next();
+  }
+
   // ── Domain canonicalisation: www → non-www (301 permanent) ──
   const host = request.headers.get('host') || '';
   if (host.startsWith('www.')) {
