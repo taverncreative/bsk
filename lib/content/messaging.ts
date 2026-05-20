@@ -31,11 +31,16 @@ export function getServiceHubMessaging(serviceSlug: string): { title: string; su
           'A proper mark, a usable colour palette, fonts that pair. For Kent businesses who want something that looks designed, not generated. Priced on the brief.',
       };
     case 'social-media-setup':
-    case 'digital-marketing':
       return {
         title: 'Social media set up properly.',
         subtitle:
           'Profiles set up the right way the first time, branded consistently and pointed at the work you want to win. Priced on the brief.',
+      };
+    case 'digital-marketing':
+      return {
+        title: 'Paid ads, content, email — done properly.',
+        subtitle:
+          'Ongoing Google, Meta and email campaigns aimed at the customers you actually want to win. No jargon, plain monthly reports. Priced on the brief.',
       };
     case 'ai-chatbots':
       return {
@@ -101,10 +106,14 @@ export function getLocalServiceMessaging(
         subtitle: `A logo, palette and typography system that fits how you actually work. Priced on the brief.`,
       };
     case 'social-media-setup':
-    case 'digital-marketing':
       return {
         title: `Social media set up for ${townName} businesses.`,
         subtitle: `Profiles set up properly the first time, pointed at the work you want to win in ${townName}.`,
+      };
+    case 'digital-marketing':
+      return {
+        title: `Digital marketing for ${townName} businesses.`,
+        subtitle: `Google, Meta and email campaigns pointed at the work you want to win in ${townName}. Plain monthly reports. Priced on the brief.`,
       };
     case 'ai-chatbots':
       return {
