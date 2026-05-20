@@ -54,7 +54,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/contact',
     '/services',
     '/kent-business-growth',
-    '/commercial',
     '/free-website-review',
     '/towns',
     '/industries',
