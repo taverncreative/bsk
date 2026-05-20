@@ -45,7 +45,12 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     bodyContext = body;
-    const { name, url, email, pageUrl, timestamp, messages } = body;
+    const { name, url, email, pageUrl, timestamp, messages, hp_website } = body;
+
+    // Honeypot: real users never fill the hidden hp_website field. Silently accept and drop.
+    if (typeof hp_website === 'string' && hp_website.trim().length > 0) {
+      return NextResponse.json({ success: true });
+    }
 
     if (!url || !email) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });

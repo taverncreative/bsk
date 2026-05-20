@@ -7,7 +7,12 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     bodyContext = body;
-    const { name, email, website, service_required, preferred_day, preferred_time, message } = body;
+    const { name, email, website, service_required, preferred_day, preferred_time, message, hp_website } = body;
+
+    // Honeypot: real users never fill the hidden hp_website field. Silently accept and drop.
+    if (typeof hp_website === 'string' && hp_website.trim().length > 0) {
+      return NextResponse.json({ success: true });
+    }
 
     const { data: enquiry, error: insertError } = await supabaseServer
       .from('unified_leads')

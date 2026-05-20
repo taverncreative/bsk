@@ -6,6 +6,7 @@ import { trackLead } from '@/lib/analytics/lead';
 export default function WebsiteReviewTool() {
   const [url, setUrl] = useState('');
   const [email, setEmail] = useState('');
+  const [honeypot, setHoneypot] = useState('');
   const [status, setStatus] = useState<'idle' | 'analyzing' | 'complete' | 'error'>('idle');
   const [analysis, setAnalysis] = useState<any>(null);
 
@@ -14,7 +15,19 @@ export default function WebsiteReviewTool() {
     if (!url || !email) return;
 
     setStatus('analyzing');
-    
+
+    // Honeypot tripped — show the success state but drop the submission.
+    if (honeypot) {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      setAnalysis({
+        performance: 'Initial scan indicates load times may be exceeding the recommended 2.5-second threshold on mobile devices. Heavy image assets or unoptimized scripts could be impacting Core Web Vitals.',
+        seo: 'We detected missing localized schema markup and unoptimized heading hierarchies. This immediately prevents Google from accurately ranking your entity for high-intent regional searches.',
+        conversion: "There is a noticeable absence of 'sticky' contact pathways and native lead capture elements above the fold. Friction here directly lowers your overall enquiry rate.",
+      });
+      setStatus('complete');
+      return;
+    }
+
     // Track lead capture for analytics
     trackLead("website_review_request", { url, email });
 
@@ -27,7 +40,7 @@ export default function WebsiteReviewTool() {
         fetch('/api/website-review', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url, email })
+          body: JSON.stringify({ url, email, hp_website: honeypot })
         }),
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
@@ -40,6 +53,7 @@ export default function WebsiteReviewTool() {
             Email: email,
             Website: url,
             Message: `New website review request.\n\nWebsite: ${url}\nEmail: ${email}\n\nPlease run a manual review and follow up with the visitor.`,
+            botcheck: honeypot,
           }),
         }).catch(() => {}),
       ]);
@@ -127,6 +141,18 @@ export default function WebsiteReviewTool() {
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Honeypot: hidden from humans, bots tend to fill every input. */}
+        <input
+          type="text"
+          name="hp_website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          aria-hidden="true"
+          style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}
+        />
+
         <div>
           <label htmlFor="url" className="block text-sm font-bold text-ink mb-2">
             Website URL

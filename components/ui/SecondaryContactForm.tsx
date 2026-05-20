@@ -5,19 +5,27 @@ import { Send, User, Mail, Briefcase } from 'lucide-react';
 
 export default function SecondaryContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', service_required: '', message: '' });
+  const [honeypot, setHoneypot] = useState('');
   const [status, setStatus] = useState<'' | 'loading' | 'success' | 'error'>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
-    
+
+    // Honeypot tripped — pretend success, drop submission.
+    if (honeypot) {
+      setStatus('success');
+      setFormData({ name: '', email: '', service_required: '', message: '' });
+      return;
+    }
+
     try {
       // Fire both API save and Web3Forms email in parallel
       const [res] = await Promise.all([
         fetch('/api/enquiry', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({ ...formData, hp_website: honeypot }),
         }),
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
@@ -30,6 +38,7 @@ export default function SecondaryContactForm() {
             Email: formData.email,
             'Service Required': formData.service_required || 'N/A',
             Message: formData.message || 'N/A',
+            botcheck: honeypot,
           }),
         }).catch(() => {}),
       ]);
@@ -67,7 +76,19 @@ export default function SecondaryContactForm() {
   return (
     <form onSubmit={handleSubmit} className="bg-paper-raised border border-paper-border rounded-3xl p-8 lg:p-10 shadow-2xl space-y-5 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent" />
-      
+
+      {/* Honeypot: hidden from humans, bots tend to fill every input. */}
+      <input
+        type="text"
+        name="hp_website"
+        tabIndex={-1}
+        autoComplete="off"
+        value={honeypot}
+        onChange={(e) => setHoneypot(e.target.value)}
+        aria-hidden="true"
+        style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}
+      />
+
       {status === 'error' && (
         <div className="p-4 bg-red-900/20 border border-red-900/50 rounded-lg text-red-400 font-medium mb-2">
           Something went wrong. Please try again.
