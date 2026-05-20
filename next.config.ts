@@ -8,6 +8,12 @@ const nextConfig: NextConfig = {
         destination: '/guides',
         permanent: true,
       },
+      // Wix-era /blog/categories/* (plural) — MUST come before /blog/:slug*
+      // wildcard below, or they'd 301 to non-existent /guides/categories/... 404.
+      { source: '/blog/categories/local-seo-help', destination: '/guides', permanent: true },
+      { source: '/blog/categories/small-business-advice', destination: '/guides', permanent: true },
+      { source: '/blog/categories/web-design-tips', destination: '/guides', permanent: true },
+      { source: '/blog-feed.xml', destination: '/sitemap.xml', permanent: true },
       {
         source: '/blog/:slug*',
         destination: '/guides/:slug*',
@@ -64,7 +70,7 @@ const nextConfig: NextConfig = {
       { source: '/estate-agents', destination: '/industries', permanent: true },
       { source: '/maidstone', destination: '/towns/maidstone', permanent: true },
       { source: '/website-design-kent', destination: '/web-design', permanent: true },
-      { source: '/solicitors', destination: '/industries', permanent: true },
+      { source: '/solicitors', destination: '/industries/solicitors', permanent: true },
       { source: '/branding-logo-design-kent', destination: '/branding', permanent: true },
       { source: '/thanet', destination: '/towns/margate', permanent: true },
       { source: '/ai-seo', destination: '/seo', permanent: true },
@@ -80,6 +86,76 @@ const nextConfig: NextConfig = {
       { source: '/social-media', destination: '/digital-marketing', permanent: true },
       { source: '/cleaners', destination: '/industries/cleaning-companies', permanent: true },
       { source: '/print-workwear', destination: '/workwear-print', permanent: true },
+
+      // ────────────────────────────────────────────────────────────────
+      // Wix migration: legacy compound town URLs.
+      // (Wix used "<town>-website-design-seo-branding" as one page per town.)
+      // ────────────────────────────────────────────────────────────────
+      { source: '/ashford-website-design-seo-branding', destination: '/towns/ashford', permanent: true },
+      { source: '/canterbury-website-design-seo-branding', destination: '/towns/canterbury', permanent: true },
+      { source: '/faversham-website-design-seo-branding', destination: '/towns/faversham', permanent: true },
+      { source: '/folkestone-website-design-seo-branding', destination: '/towns/folkestone', permanent: true },
+      { source: '/gravesend-website-design-seo-branding', destination: '/towns/gravesend', permanent: true },
+      { source: '/herne-bay-website-design-seo-branding', destination: '/towns/herne-bay', permanent: true },
+      { source: '/maidstone-website-design-seo-branding', destination: '/towns/maidstone', permanent: true },
+      { source: '/sevenoaks-website-design-seo-branding', destination: '/towns/sevenoaks', permanent: true },
+      { source: '/thanet-website-design-seo-branding', destination: '/towns/margate', permanent: true },
+      { source: '/tunbridge-wells-website-design-seo-branding', destination: '/towns/tunbridge-wells', permanent: true },
+      { source: '/whitstable-website-design-seo-branding', destination: '/towns/whitstable', permanent: true },
+
+      // ────────────────────────────────────────────────────────────────
+      // Wix migration: legacy /seo-for-<industry>-kent URLs.
+      // Some old industry labels are mapped onto current consolidated
+      // industries (carpet-cleaners → cleaning-companies, estate-agents
+      // → letting-agents, gardeners → garden-services).
+      // ────────────────────────────────────────────────────────────────
+      { source: '/seo-for-accountants-kent', destination: '/industries/accountants', permanent: true },
+      { source: '/seo-for-builders-kent', destination: '/industries/builders', permanent: true },
+      { source: '/seo-for-carpet-cleaners-kent', destination: '/industries/cleaning-companies', permanent: true },
+      { source: '/seo-for-electricians-kent', destination: '/industries/electricians', permanent: true },
+      { source: '/seo-for-estate-agents-kent', destination: '/industries/letting-agents', permanent: true },
+      { source: '/seo-for-gardeners-kent', destination: '/industries/garden-services', permanent: true },
+      { source: '/seo-for-hair-beauty-kent', destination: '/industries', permanent: true },
+      { source: '/seo-for-landscapers-kent', destination: '/industries/landscapers', permanent: true },
+      { source: '/seo-for-letting-agents-kent', destination: '/industries/letting-agents', permanent: true },
+      { source: '/seo-for-new-businesses-startups-kent', destination: '/seo', permanent: true },
+      { source: '/seo-for-painters-decorators-kent', destination: '/industries/painters-and-decorators', permanent: true },
+      { source: '/seo-for-plumbers-kent', destination: '/industries/plumbers', permanent: true },
+      { source: '/seo-for-roofers-kent', destination: '/industries/roofers', permanent: true },
+      { source: '/seo-for-solicitors-kent', destination: '/industries/solicitors', permanent: true },
+      { source: '/seo-for-window-cleaners-kent', destination: '/industries/cleaning-companies', permanent: true },
+
+      // ────────────────────────────────────────────────────────────────
+      // Wix migration: legacy /local-seo-<town> URLs.
+      // ────────────────────────────────────────────────────────────────
+      { source: '/local-seo-canterbury', destination: '/seo-canterbury', permanent: true },
+      { source: '/local-seo-folkestone', destination: '/seo-folkestone', permanent: true },
+      { source: '/local-seo-thanet', destination: '/seo-margate', permanent: true },
+      { source: '/local-seo-services-kent', destination: '/seo', permanent: true },
+
+      // ────────────────────────────────────────────────────────────────
+      // Wix migration: legacy service / brand / "-kent" suffix URLs.
+      // ────────────────────────────────────────────────────────────────
+      { source: '/branding-services-kent', destination: '/branding', permanent: true },
+      { source: '/logo-design-in-kent', destination: '/branding', permanent: true },
+      { source: '/business-automation-kent', destination: '/business-automation', permanent: true },
+      { source: '/business-print-materials-kent', destination: '/workwear-print', permanent: true },
+      { source: '/business-support-kent', destination: '/services', permanent: true },
+      { source: '/crm-tools-for-small-businesses-kent', destination: '/business-automation', permanent: true },
+      { source: '/seo-consultancy-kent', destination: '/seo', permanent: true },
+      { source: '/website-design-ashford-kent', destination: '/web-design-ashford', permanent: true },
+      { source: '/website-design-for-trades-kent', destination: '/industries', permanent: true },
+      { source: '/website-lead-generation-automation', destination: '/lead-capture', permanent: true },
+      { source: '/social-media-setup-for-trades', destination: '/social-media-setup', permanent: true },
+
+      // ────────────────────────────────────────────────────────────────
+      // Wix structural / misc legacy URLs.
+      // ────────────────────────────────────────────────────────────────
+      { source: '/home', destination: '/', permanent: true },
+      { source: '/affordable-seo-for-startups-kent', destination: '/seo', permanent: true },
+      { source: '/towns/hythe', destination: '/towns/folkestone', permanent: true },
+      { source: '/privacy-policy', destination: '/privacy', permanent: true },
+      { source: '/terms-of-service', destination: '/terms', permanent: true },
 
       // Legacy/Placeholder Case Study redirects to Hub
       { source: '/case-studies/trades-business-website', destination: '/case-studies', permanent: true },
