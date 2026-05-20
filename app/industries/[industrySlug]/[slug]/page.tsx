@@ -65,11 +65,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const guide = await getGuideBySlug(slug);
   if (guide) {
+    // meta_title overrides <title> for SERPs only. H1, og:title, twitter:title,
+    // Article.headline, breadcrumbs, cards, body copy all continue to use the
+    // editorial title (guide.title). Pattern: guide.meta_title || guide.title.
+    const editorialTitle = `${guide.title} for ${industry.name} | Business Sorted Kent`;
+    const seoTitle = `${guide.meta_title || guide.title} for ${industry.name} | Business Sorted Kent`;
+
     return {
-      title: `${guide.title} for ${industry.name} | Business Sorted Kent`,
+      title: seoTitle,
       description: `Read our comprehensive guide on ${guide.title.toLowerCase()} tailored specifically for the ${industry.name.toLowerCase()} industry.`,
       alternates: {
         canonical: `https://businesssortedkent.co.uk/industries/${industry.slug}/${guide.slug}`,
+      },
+      openGraph: {
+        title: editorialTitle,
       },
     };
   }

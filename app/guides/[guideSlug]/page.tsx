@@ -24,11 +24,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Not Found | Business Sorted Kent' };
   }
 
+  // meta_title overrides <title> for SERPs only. H1, og:title, twitter:title,
+  // Article.headline, breadcrumbs, cards, body copy all continue to use the
+  // editorial title (guide.title). Pattern: guide.meta_title || guide.title.
+  const editorialTitle = `${guide.title} | Business Sorted Kent`;
+  const seoTitle = `${guide.meta_title || guide.title} | Business Sorted Kent`;
+
   return {
-    title: `${guide.title} | Business Sorted Kent`,
+    title: seoTitle,
     description: guide.excerpt || `Read our comprehensive guide on ${guide.title}.`,
     alternates: {
       canonical: `https://businesssortedkent.co.uk/guides/${guide.slug}`,
+    },
+    openGraph: {
+      title: editorialTitle,
     },
   };
 }

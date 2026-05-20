@@ -57,6 +57,7 @@ export interface CaseStudy {
 export interface Guide {
   id: string;
   title: string;
+  meta_title: string | null;
   slug: string;
   excerpt: string | null;
   content: string;
