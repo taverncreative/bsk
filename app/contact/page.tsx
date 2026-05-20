@@ -86,9 +86,22 @@ export default function ContactPage() {
                   hello@businesssortedkent.co.uk
                 </a>
                 <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-faint mb-3 mt-8">
-                  Location
+                  Telephone
                 </p>
-                <p className="text-ink">Based in Kent. Working with businesses across Kent, London and anywhere else useful.</p>
+                <a
+                  href="tel:+447522388055"
+                  className="text-ink-muted text-sm hover:text-brand-gold transition-colors"
+                >
+                  07522 388055
+                </a>
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-faint mb-3 mt-8">
+                  Registered address
+                </p>
+                <address className="not-italic text-ink leading-relaxed">
+                  84 Abbots Walk, Wye<br />
+                  Ashford, Kent<br />
+                  TN25 5ES
+                </address>
               </div>
             </div>
           </div>

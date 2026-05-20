@@ -71,7 +71,15 @@ export default function Footer() {
                   hello@businesssortedkent.co.uk
                 </a>
               </li>
-              <li className="text-paper/50">Kent, UK</li>
+              <li>
+                <a href="tel:+447522388055" className="text-paper hover:text-brand-gold transition-colors">
+                  07522 388055
+                </a>
+              </li>
+              <li className="text-paper/50 leading-relaxed">
+                84 Abbots Walk, Wye<br />
+                Ashford, Kent TN25 5ES
+              </li>
             </ul>
           </div>
         </div>

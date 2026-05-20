@@ -17,10 +17,14 @@ export default function SiteSchema() {
       description:
         'Founder-led digital agency in Kent. £280 websites, £45/hour SEO, automations priced on the brief. AI tooling made the work faster, and we passed the saving on.',
       email: 'hello@businesssortedkent.co.uk',
+      telephone: '+447522388055',
       address: {
         '@type': 'PostalAddress',
+        streetAddress: '84 Abbots Walk, Wye',
+        addressLocality: 'Ashford',
         addressRegion: 'Kent',
-        addressCountry: 'UK',
+        postalCode: 'TN25 5ES',
+        addressCountry: 'GB',
       },
       founder: {
         '@type': 'Person',

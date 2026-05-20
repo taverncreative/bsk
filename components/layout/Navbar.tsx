@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 const servicePillars = [
@@ -122,7 +122,15 @@ export default function Navbar() {
               </Link>
             </div>
 
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-4 shrink-0">
+              <a
+                href="tel:+447522388055"
+                className="hidden md:inline-flex items-center gap-1.5 text-sm text-paper hover:text-brand-gold transition-colors"
+                aria-label="Call 07522 388055"
+              >
+                <Phone className="w-4 h-4" />
+                07522 388055
+              </a>
               <Link
                 href="/contact"
                 className="hidden md:inline-flex items-center bg-brand-gold text-ink font-medium text-sm px-5 py-2.5 rounded-md hover:bg-paper transition-colors"
@@ -193,6 +201,14 @@ export default function Navbar() {
           <Link href="/industries" className="text-base text-paper/60 py-3">
             Industries we serve →
           </Link>
+
+          <a
+            href="tel:+447522388055"
+            className="flex items-center gap-2 text-base text-paper/70 py-3 mt-2"
+          >
+            <Phone className="w-4 h-4" />
+            07522 388055
+          </a>
 
           <div className="mt-8">
             <Link
