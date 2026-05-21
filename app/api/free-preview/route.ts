@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { supabaseServer } from '@/lib/supabase-server';
 
 interface FreePreviewPayload {
   businessName?: string;
@@ -6,6 +7,7 @@ interface FreePreviewPayload {
   currentUrl?: string;
   email?: string;
   specifics?: string;
+  hp_website?: string;
 }
 
 export async function POST(request: Request) {
@@ -21,6 +23,12 @@ export async function POST(request: Request) {
   const email = (payload.email || '').trim();
   const currentUrl = (payload.currentUrl || '').trim();
   const specifics = (payload.specifics || '').trim();
+  const hpWebsite = (payload.hp_website || '').trim();
+
+  // Honeypot: real users never fill the hidden hp_website field. Silently accept and drop.
+  if (hpWebsite.length > 0) {
+    return NextResponse.json({ ok: true });
+  }
 
   if (!businessName || !whatYouDo || !email) {
     return NextResponse.json(
@@ -29,16 +37,41 @@ export async function POST(request: Request) {
     );
   }
 
-  // TODO: wire to Supabase (free_preview_submissions table) and/or Resend email to hello@.
-  // For now: log so the user can see incoming submissions during dev/staging.
-  console.log('[free-preview]', {
-    receivedAt: new Date().toISOString(),
-    businessName,
-    whatYouDo,
-    currentUrl,
-    email,
-    specifics,
-  });
+  // Persist to unified_leads so this submission surfaces in the admin lead inbox
+  // alongside contact-form and website-review submissions. Service-role client
+  // bypasses RLS as established by the earlier /api/enquiry work.
+  const messageBody = [
+    `Business does: ${whatYouDo}`,
+    `Current site: ${currentUrl || 'N/A'}`,
+    `Specifics: ${specifics || 'N/A'}`,
+  ].join('\n');
+
+  const { error: insertError } = await supabaseServer
+    .from('unified_leads')
+    .insert([
+      {
+        name: businessName,
+        email,
+        phone: null,
+        website_url: currentUrl || null,
+        message: messageBody,
+        page_context: 'Free Preview Form',
+        submission_type: 'Free Preview',
+      },
+    ]);
+
+  if (insertError) {
+    console.error('[free-preview] unified_leads insert failed:', insertError);
+    return NextResponse.json(
+      { error: 'Failed to record submission. Please try again.' },
+      { status: 500 }
+    );
+  }
+
+  // Email delivery is handled by the parallel client-side Web3Forms call in
+  // FreePreviewForm — same pattern as SecondaryContactForm and WebsiteReviewTool.
+  // No server-side email call here: Vercel-IP outbound to api.web3forms.com
+  // can hit Cloudflare bot-protection challenges.
 
   return NextResponse.json({ ok: true });
 }

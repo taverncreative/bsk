@@ -8,6 +8,7 @@ export default function FreePreviewForm() {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState('');
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -29,12 +30,38 @@ export default function FreePreviewForm() {
       return;
     }
 
+    // Honeypot tripped — pretend success, drop submission.
+    if (honeypot) {
+      router.push('/free-preview/thanks');
+      return;
+    }
+
     try {
-      const res = await fetch('/api/free-preview', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+      // Fire backend save + Web3Forms email in parallel — same pattern as
+      // SecondaryContactForm and WebsiteReviewTool.
+      const [res] = await Promise.all([
+        fetch('/api/free-preview', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...payload, hp_website: honeypot }),
+        }),
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            access_key: '31fb5677-3e73-4a83-abc3-4c668ba876df',
+            subject: `New Free Preview Request from ${payload.businessName}`,
+            from_name: 'Business Sorted Kent',
+            Name: payload.businessName,
+            Email: payload.email,
+            'Business does': payload.whatYouDo,
+            'Current site': payload.currentUrl || 'N/A',
+            Specifics: payload.specifics || 'N/A',
+            Message: `New Free Preview request.\n\nBusiness: ${payload.businessName}\nWhat they do: ${payload.whatYouDo}\nCurrent site: ${payload.currentUrl || 'N/A'}\nEmail: ${payload.email}\nSpecifics: ${payload.specifics || 'N/A'}\n\nBuild a preview and reply.`,
+            botcheck: honeypot,
+          }),
+        }).catch(() => {}),
+      ]);
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -57,6 +84,18 @@ export default function FreePreviewForm() {
       <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-faint mb-6">
         Tell us about your business
       </p>
+
+      {/* Honeypot: hidden from humans, bots tend to fill every input. */}
+      <input
+        type="text"
+        name="hp_website"
+        tabIndex={-1}
+        autoComplete="off"
+        value={honeypot}
+        onChange={(e) => setHoneypot(e.target.value)}
+        aria-hidden="true"
+        style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}
+      />
 
       <div className="space-y-5">
         <div>
