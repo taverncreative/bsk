@@ -13,7 +13,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Web Design, SEO & Automations | Business Sorted Kent',
   description:
-    '£280 websites, £45/hour SEO, £15/month hosting. AI made it faster, we passed the saving on. SEO experts, graphic designers, mobile-first builds.',
+    '£280 websites, £45/hour SEO, £18/month hosting. AI made it faster, we passed the saving on. SEO experts, graphic designers, mobile-first builds.',
   alternates: {
     canonical: 'https://businesssortedkent.co.uk',
   },

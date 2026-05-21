@@ -21,7 +21,7 @@ const pillars: ServiceItem[] = [
     price: '£280',
     priceNote: 'classic site · e-com/custom: POA',
     description:
-      'A small business website that loads fast, ranks well and works on every phone. Yours in 1–2 weeks. Hosting, SSL, backups and security patches: £15 a month.',
+      'A small business website that loads fast, ranks well and works on every phone. Yours in 1–2 weeks. Hosting, SSL, backups and security patches: £18 a month.',
     href: '/web-design',
   },
   {

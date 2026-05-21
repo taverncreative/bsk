@@ -28,7 +28,7 @@ const ROWS = [
   {
     service_slug: 'web-design',
     intro_paragraph:
-      "Gravesend businesses are operating in a town that has changed shape in the last decade. Ebbsfleet International put us 18 minutes from St Pancras and reshaped the customer base. The High Street regeneration, the new garden city expansion at Ebbsfleet, and the established Sikh community around Khalsa Avenue all mean your customers are increasingly digitally fluent and judging your business by your website before they ever ring. We build websites for Gravesend businesses that work for that audience: fast on a phone during the morning commute, clear about what you do, and built on real Next.js code rather than template assembly. £280 for a classic small business site, hosted for £15 a month. Same checks for speed, security and SEO that a £3,000 build would get, without the £3,000.",
+      "Gravesend businesses are operating in a town that has changed shape in the last decade. Ebbsfleet International put us 18 minutes from St Pancras and reshaped the customer base. The High Street regeneration, the new garden city expansion at Ebbsfleet, and the established Sikh community around Khalsa Avenue all mean your customers are increasingly digitally fluent and judging your business by your website before they ever ring. We build websites for Gravesend businesses that work for that audience: fast on a phone during the morning commute, clear about what you do, and built on real Next.js code rather than template assembly. £280 for a classic small business site, hosted for £18 a month. Same checks for speed, security and SEO that a £3,000 build would get, without the £3,000.",
     local_context: SHARED_LOCAL_CONTEXT,
     competition_landscape: SHARED_COMPETITION_LANDSCAPE,
     success_approach:
@@ -77,7 +77,7 @@ const ROWS = [
       {
         question: 'How does £280 actually work?',
         answer:
-          "£280 covers a classic small business site — homepage, services, about, contact, plus a couple of supporting pages. Designed, built, launched, indexed by Google. Hosting is £15 a month and covers SSL, backups and security. E-commerce or custom builds are priced on application.",
+          "£280 covers a classic small business site — homepage, services, about, contact, plus a couple of supporting pages. Designed, built, launched, indexed by Google. Hosting is £18 a month and covers SSL, backups and security. E-commerce or custom builds are priced on application.",
       },
       {
         question: 'Do you build for the new Ebbsfleet Garden City development?',

@@ -117,7 +117,7 @@ const serviceContent: Record<string, ServiceContent> = {
         },
         {
           title: '08 · Hosting (optional)',
-          body: '£15 a month covers fast UK hosting, SSL, weekly backups, security patches, uptime monitoring. Or bring your own — we’ll deploy to whatever you’re using.',
+          body: '£18 a month covers fast UK hosting, SSL, weekly backups, security patches, uptime monitoring. Or bring your own — we’ll deploy to whatever you’re using.',
         },
       ],
     },
