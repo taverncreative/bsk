@@ -7,32 +7,26 @@ export default function WebsiteReviewTool() {
   const [url, setUrl] = useState('');
   const [email, setEmail] = useState('');
   const [honeypot, setHoneypot] = useState('');
-  const [status, setStatus] = useState<'idle' | 'analyzing' | 'complete' | 'error'>('idle');
-  const [analysis, setAnalysis] = useState<any>(null);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'complete' | 'error'>('idle');
+  const [submittedUrl, setSubmittedUrl] = useState('');
+  const [submittedEmail, setSubmittedEmail] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!url || !email) return;
 
-    setStatus('analyzing');
+    setStatus('sending');
 
     // Honeypot tripped — show the success state but drop the submission.
     if (honeypot) {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setAnalysis({
-        performance: 'Initial scan indicates load times may be exceeding the recommended 2.5-second threshold on mobile devices. Heavy image assets or unoptimized scripts could be impacting Core Web Vitals.',
-        seo: 'We detected missing localized schema markup and unoptimized heading hierarchies. This immediately prevents Google from accurately ranking your entity for high-intent regional searches.',
-        conversion: "There is a noticeable absence of 'sticky' contact pathways and native lead capture elements above the fold. Friction here directly lowers your overall enquiry rate.",
-      });
+      setSubmittedUrl(url);
+      setSubmittedEmail(email);
       setStatus('complete');
       return;
     }
 
     // Track lead capture for analytics
-    trackLead("website_review_request", { url, email });
-
-    // Simulate analysis delay
-    await new Promise((resolve) => setTimeout(resolve, 2500));
+    trackLead('website_review_request', { url, email });
 
     // Send the lead to our backend for team follow-up
     try {
@@ -40,7 +34,7 @@ export default function WebsiteReviewTool() {
         fetch('/api/website-review', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url, email, hp_website: honeypot })
+          body: JSON.stringify({ url, email, hp_website: honeypot }),
         }),
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
@@ -57,14 +51,9 @@ export default function WebsiteReviewTool() {
           }),
         }).catch(() => {}),
       ]);
-      
-      // Generate simulated but highly credible output
-      setAnalysis({
-        performance: "Initial scan indicates load times may be exceeding the recommended 2.5-second threshold on mobile devices. Heavy image assets or unoptimized scripts could be impacting Core Web Vitals.",
-        seo: "We detected missing localized schema markup and unoptimized heading hierarchies. This immediately prevents Google from accurately ranking your entity for high-intent regional searches.",
-        conversion: "There is a noticeable absence of 'sticky' contact pathways and native lead capture elements above the fold. Friction here directly lowers your overall enquiry rate."
-      });
-      
+
+      setSubmittedUrl(url);
+      setSubmittedEmail(email);
       setStatus('complete');
     } catch (error) {
       console.error(error);
@@ -72,72 +61,55 @@ export default function WebsiteReviewTool() {
     }
   };
 
-  if (status === 'complete' && analysis) {
+  if (status === 'complete') {
     return (
       <div className="bg-paper-raised border border-paper-border rounded-2xl p-8 lg:p-10 shadow-2xl text-left">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold/20 text-brand-gold mb-6 mb-8">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold/20 text-brand-gold mb-6">
           <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 className="text-3xl font-extrabold text-ink mb-4">Initial Analysis Complete</h2>
-        <p className="text-lg text-ink-muted mb-8 border-b border-paper-border pb-8">
-          We have securely logged your URL ({url}) and our technical team will conduct a deep-dive manual review shortly. Here are the immediate automated red flags we identified:
+        <h2 className="text-3xl font-extrabold text-ink mb-4">Thanks — we&apos;ve got your site.</h2>
+        <p className="text-lg text-ink-muted mb-6">
+          A human (not a bot) is reviewing{' '}
+          <strong className="text-ink break-all">{submittedUrl}</strong> now. You&apos;ll have
+          specific findings by email at{' '}
+          <strong className="text-ink break-all">{submittedEmail}</strong> within 24 hours.
         </p>
-
-        <div className="space-y-6">
-          <div className="flex gap-4">
-            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center mt-1">
-              <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-ink mb-2">Performance Observations</h3>
-              <p className="text-ink-muted leading-relaxed">{analysis.performance}</p>
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mt-1">
-              <svg className="w-5 h-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-ink mb-2">SEO Architecture</h3>
-              <p className="text-ink-muted leading-relaxed">{analysis.seo}</p>
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-gold/10 flex items-center justify-center mt-1">
-              <svg className="w-5 h-5 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-ink mb-2">Conversion Friction</h3>
-              <p className="text-ink-muted leading-relaxed">{analysis.conversion}</p>
-            </div>
-          </div>
+        <div className="mt-8 p-6 bg-paper rounded-xl border border-paper-border">
+          <p className="font-bold text-ink mb-3">What we look at:</p>
+          <ul className="space-y-2.5 text-ink-muted">
+            <li className="flex gap-3">
+              <span className="text-brand-gold font-mono text-sm pt-0.5">01</span>
+              <span>Page speed and Core Web Vitals — especially on mobile</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-brand-gold font-mono text-sm pt-0.5">02</span>
+              <span>What Google&apos;s actually indexing, and what&apos;s missing</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-brand-gold font-mono text-sm pt-0.5">03</span>
+              <span>Mobile usability and layout shift</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-brand-gold font-mono text-sm pt-0.5">04</span>
+              <span>Conversion paths — where enquiries might be leaking out</span>
+            </li>
+          </ul>
         </div>
-
-        <div className="mt-12 p-6 bg-paper rounded-xl border border-paper-border">
-          <p className="text-brand-gold font-bold mb-2">What happens next?</p>
-          <p className="text-ink-muted text-sm">
-            Our team has received this report at {email}. We will manually inspect your entire digital footprint and send you a comprehensive strategy on how to fix these underlying issues and generate more local enquiries.
-          </p>
-        </div>
+        <p className="mt-6 text-sm text-ink-faint">
+          Free, no obligation, no follow-up if you pass.
+        </p>
       </div>
     );
   }
 
   return (
     <div className="bg-paper-raised border border-paper-border rounded-2xl p-8 lg:p-10 shadow-2xl text-left max-w-2xl mx-auto">
-      <h2 className="text-3xl font-extrabold text-ink mb-3">Request a Free Website Review</h2>
+      <h2 className="text-3xl font-extrabold text-ink mb-3">Request a free website review</h2>
       <p className="text-lg text-ink-muted mb-8">
-        Enter your website address below. Our system will run an initial diagnostic, and our digital team will follow up with a custom strategy to increase your local conversion rate.
+        Drop your URL and email below. We&apos;ll review the site by hand — page speed, mobile,
+        Google indexing, conversion paths — and reply within 24 hours with specific findings.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -170,7 +142,7 @@ export default function WebsiteReviewTool() {
 
         <div>
           <label htmlFor="email" className="block text-sm font-bold text-ink mb-2">
-            Email Address
+            Email address
           </label>
           <input
             type="email"
@@ -185,23 +157,23 @@ export default function WebsiteReviewTool() {
 
         <button
           type="submit"
-          disabled={status === 'analyzing'}
+          disabled={status === 'sending'}
           className="w-full py-4 px-6 bg-brand-gold text-black font-extrabold text-lg rounded-xl hover:bg-white hover:shadow-[0_0_30px_rgba(214,173,103,0.4)] active:scale-[0.98] transition-all shadow-[0_0_15px_rgba(214,173,103,0.2)] disabled:opacity-50 disabled:cursor-not-allowed mt-4 flex items-center justify-center"
         >
-          {status === 'analyzing' ? (
+          {status === 'sending' ? (
             <>
               <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              Analyzing Your Website...
+              Sending…
             </>
           ) : (
-             'Run Full Analysis'
+            'Request review'
           )}
         </button>
       </form>
-      
+
       {status === 'error' && (
         <p className="mt-4 text-red-500 font-semibold text-center">Something went wrong. Please try again.</p>
       )}
