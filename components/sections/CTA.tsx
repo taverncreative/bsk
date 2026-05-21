@@ -4,9 +4,15 @@ interface CTAProps {
   titleOverride?: string;
   paragraphOverride?: string;
   buttonOverride?: string;
+  /**
+   * Override the default /contact destination. Use to deep-link with query
+   * params so the contact form knows what context the visitor arrived from
+   * (e.g. '/contact?service=seo&intent=audit' from the SEO audit CTA).
+   */
+  hrefOverride?: string;
 }
 
-export default function CTA({ titleOverride, paragraphOverride, buttonOverride }: CTAProps) {
+export default function CTA({ titleOverride, paragraphOverride, buttonOverride, hrefOverride }: CTAProps) {
   return (
     <section className="py-24 md:py-32 bg-paper border-t border-paper-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
@@ -21,7 +27,7 @@ export default function CTA({ titleOverride, paragraphOverride, buttonOverride }
             'Tell us what you do and what you need. We’ll come back with a plain answer, usually within a day.'}
         </p>
         <Link
-          href="/contact"
+          href={hrefOverride || '/contact'}
           className="inline-flex items-center bg-ink text-paper font-medium px-6 py-3 rounded-md hover:bg-brand-gold hover:text-ink transition-colors"
         >
           {buttonOverride || 'Send a message'}

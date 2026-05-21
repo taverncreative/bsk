@@ -69,6 +69,12 @@ interface ServiceContent {
     title: string;
     paragraph: string;
     button?: string;
+    /**
+     * Override the bottom CTA's default /contact destination. Use to deep-link
+     * with query params so the contact form knows what context the visitor
+     * came from (e.g. '/contact?service=seo&intent=audit' for SEO).
+     */
+    buttonHref?: string;
   };
 }
 
@@ -182,7 +188,7 @@ const serviceContent: Record<string, ServiceContent> = {
       title: 'SEO that gets your business found.',
       subtitle:
         '£45 an hour. From one hour a month. No retainer, no rolling contract. You see exactly what got done and what moved. SEO for everyday businesses who would rather pay someone to do it than learn it themselves.',
-      primaryCTA: { text: 'Get a free SEO audit', href: '/contact' },
+      primaryCTA: { text: 'Get a free SEO audit', href: '/contact?service=seo&intent=audit' },
       secondaryCTA: { text: 'See pricing', href: '#services' },
     },
     included: {
@@ -287,6 +293,7 @@ const serviceContent: Record<string, ServiceContent> = {
       paragraph:
         'Send your website and the searches that matter to you. We will come back with a plain audit, free of charge. If it makes sense to start, we will quote the hours. If it doesn’t, we will tell you.',
       button: 'Get a free SEO audit',
+      buttonHref: '/contact?service=seo&intent=audit',
     },
   },
 
@@ -809,6 +816,7 @@ export default async function ServicePage({
         titleOverride={content.cta.title}
         paragraphOverride={content.cta.paragraph}
         buttonOverride={content.cta.button}
+        hrefOverride={content.cta.buttonHref}
       />
     </>
   );

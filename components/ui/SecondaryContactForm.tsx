@@ -1,12 +1,49 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Send, User, Mail, Briefcase } from 'lucide-react';
+
+// Service slug (URL query value) → dropdown <option value> in this form.
+// Add new entries here when adding new deep-link CTAs from service pages.
+const SERVICE_SLUG_TO_DROPDOWN: Record<string, string> = {
+  'web-design': 'Website Design',
+  seo: 'SEO & Rankings',
+  'lead-capture': 'Lead Capture',
+  'business-automation': 'Business Automation',
+};
+
+// Intent (URL query value) → message-textarea prefill.
+// Add new entries when adding new deep-link CTAs from service pages.
+const INTENT_TO_MESSAGE: Record<string, string> = {
+  audit: 'Please run a free SEO audit on my site.',
+};
 
 export default function SecondaryContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', service_required: '', message: '' });
   const [honeypot, setHoneypot] = useState('');
   const [status, setStatus] = useState<'' | 'loading' | 'success' | 'error'>('');
+
+  // Read URL params on mount and pre-fill service + message when present.
+  // e.g. arriving from /seo's 'Get a free SEO audit' CTA, the URL is
+  // /contact?service=seo&intent=audit and we pre-select 'SEO & Rankings'
+  // plus pre-fill the message textarea. Visitor can still edit either.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get('service');
+    const intent = params.get('intent');
+    const updates: Partial<typeof formData> = {};
+    if (service && SERVICE_SLUG_TO_DROPDOWN[service]) {
+      updates.service_required = SERVICE_SLUG_TO_DROPDOWN[service];
+    }
+    if (intent && INTENT_TO_MESSAGE[intent]) {
+      updates.message = INTENT_TO_MESSAGE[intent];
+    }
+    if (Object.keys(updates).length > 0) {
+      setFormData((prev) => ({ ...prev, ...updates }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
