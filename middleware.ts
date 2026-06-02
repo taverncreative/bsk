@@ -4,18 +4,30 @@ import { NextResponse, type NextRequest } from 'next/server'
 const CANONICAL_HOST = 'businesssortedkent.co.uk';
 
 export async function middleware(request: NextRequest) {
+  // ── Crawler / infra files: serve directly on any host, no redirect ──
+  // These are crawler infrastructure, not page content, and should resolve
+  // 200 on both apex and www so tools that fetch them without following a
+  // cross-host redirect (some SEO crawlers, agent fetchers) get the file.
+  // This bypass MUST run before the www→apex canonicalisation below, which
+  // is confirmed (via an x-mw-fired probe, 2026-06-02) to fire in middleware
+  // — so the 301 it produces is what was sending these files to apex on www.
+  const pathname = request.nextUrl.pathname;
+  const isInfraPath =
+    pathname === '/robots.txt' ||
+    pathname === '/sitemap.xml' ||
+    pathname === '/llms.txt' ||
+    pathname.startsWith('/.well-known/');
+  if (isInfraPath) {
+    return NextResponse.next();
+  }
+
   // ── Domain canonicalisation: www → non-www (301 permanent) ──
   const host = request.headers.get('host') || '';
   if (host.startsWith('www.')) {
     const url = request.nextUrl.clone();
     url.host = CANONICAL_HOST;
     url.port = '';
-    // PROBE: confirms whether middleware actually fires for www requests
-    // or whether a Vercel platform redirect intercepts upstream. Revert
-    // this block once the diagnostic is captured.
-    const response = NextResponse.redirect(url, 301);
-    response.headers.set('x-mw-fired', '1');
-    return response;
+    return NextResponse.redirect(url, 301);
   }
 
   // ── Auth routes: run Supabase session check ──
