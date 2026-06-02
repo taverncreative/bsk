@@ -10,7 +10,12 @@ export async function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.host = CANONICAL_HOST;
     url.port = '';
-    return NextResponse.redirect(url, 301);
+    // PROBE: confirms whether middleware actually fires for www requests
+    // or whether a Vercel platform redirect intercepts upstream. Revert
+    // this block once the diagnostic is captured.
+    const response = NextResponse.redirect(url, 301);
+    response.headers.set('x-mw-fired', '1');
+    return response;
   }
 
   // ── Auth routes: run Supabase session check ──
