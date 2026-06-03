@@ -137,7 +137,8 @@ export default async function GuidePage({ params }: Props) {
                 "url": "https://businesssortedkent.co.uk/logo.png"
               }
             },
-            "datePublished": guide.published_date || new Date().toISOString()
+            "datePublished": guide.published_date || guide.created_at,
+            "dateModified": guide.updated_at
           })
         }}
       />
