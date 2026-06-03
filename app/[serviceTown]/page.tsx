@@ -348,36 +348,93 @@ export default async function ProgrammaticPage({ params }: Props) {
       nearbyTowns = await getNearbyTowns(town.latitude, town.longitude, 3);
     }
 
+    // Town-specific Service description: prefer the localised intro (truncated
+    // at a sentence boundary, around 200 chars), then the service description,
+    // then a generic fallback. Keeps the Service node description matched to
+    // the page's actual localised content.
+    const truncateAtSentence = (text: string, max = 200): string => {
+      if (text.length <= max) return text;
+      const slice = text.slice(0, max);
+      const lastStop = Math.max(slice.lastIndexOf('. '), slice.lastIndexOf('! '), slice.lastIndexOf('? '));
+      if (lastStop > 80) return slice.slice(0, lastStop + 1).trim();
+      const lastSpace = slice.lastIndexOf(' ');
+      return (lastSpace > 0 ? slice.slice(0, lastSpace) : slice).replace(/[,;:]+$/, '') + '...';
+    };
+    const serviceDescription =
+      (localContent?.intro_paragraph && truncateAtSentence(localContent.intro_paragraph)) ||
+      service.description ||
+      `${service.name} for businesses in ${town.name}, Kent.`;
+
     return (
       <>
         {/* JSON-LD Schema (Rendered outside to avoid template layout shifting) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Home",
-                  "item": "https://businesssortedkent.co.uk"
+             __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://businesssortedkent.co.uk"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": service.name,
+                    "item": `https://businesssortedkent.co.uk/${service.slug}`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": `${service.name} ${town.name}`,
+                    "item": `https://businesssortedkent.co.uk/${service.slug}-${town.slug}`
+                  }
+                ]
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "Service",
+                "name": `${service.name} in ${town.name}`,
+                "serviceType": service.name,
+                "description": serviceDescription,
+                "provider": {
+                  "@type": "Organization",
+                  "@id": "https://businesssortedkent.co.uk/#organization",
+                  "name": "Business Sorted Kent"
                 },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": service.name,
-                  "item": `https://businesssortedkent.co.uk/${service.slug}`
+                "areaServed": {
+                  "@type": "Place",
+                  "name": town.name
                 },
-                {
-                  "@type": "ListItem",
-                  "position": 3,
-                  "name": `${service.name} ${town.name}`,
-                  "item": `https://businesssortedkent.co.uk/${service.slug}-${town.slug}`
-                }
-              ]
-            })
+                "url": `https://businesssortedkent.co.uk/${service.slug}-${town.slug}`,
+                ...(service.slug === 'web-design' && {
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "280",
+                    "priceCurrency": "GBP",
+                    "availability": "https://schema.org/InStock",
+                    "category": "Website Design"
+                  }
+                }),
+                ...(service.slug === 'seo' && {
+                  "offers": {
+                    "@type": "Offer",
+                    "priceSpecification": {
+                      "@type": "UnitPriceSpecification",
+                      "price": "45",
+                      "priceCurrency": "GBP",
+                      "unitText": "HOUR"
+                    },
+                    "category": "Search Engine Optimisation"
+                  }
+                })
+              }
+            ])
           }}
         />
         
