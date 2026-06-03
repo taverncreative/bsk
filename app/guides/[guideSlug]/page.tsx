@@ -126,8 +126,14 @@ export default async function GuidePage({ params }: Props) {
             "headline": guide.title,
             "description": guide.excerpt || guide.title,
             "author": {
-              "@type": "Organization",
-              "name": guide.author || "Business Sorted"
+              "@type": "Person",
+              "name": "John Lally",
+              "jobTitle": "Founder",
+              "worksFor": {
+                "@type": "Organization",
+                "@id": "https://businesssortedkent.co.uk/#organization",
+                "name": "Business Sorted Kent"
+              }
             },
             "publisher": {
               "@type": "Organization",
@@ -161,7 +167,7 @@ export default async function GuidePage({ params }: Props) {
           )}
             <span className="flex items-center">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-gold mr-3"></span>
-              By {guide.author || 'Business Sorted'}
+              By John Lally, founder of Business Sorted Kent
             </span>
           </div>
         </header>
