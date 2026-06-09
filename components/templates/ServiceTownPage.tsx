@@ -135,14 +135,22 @@ export default function ServiceTownPage({
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-paper-border">
-              {includedItems.map((item) => (
-                <div key={item.title} className="bg-paper p-8 md:p-10">
-                  <h3 className="font-display text-xl md:text-2xl text-ink mb-3 leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-ink-muted leading-relaxed">{item.body}</p>
-                </div>
-              ))}
+              {includedItems.map((item, i) => {
+                // When the count is odd, the last card spans both columns so the
+                // 2-col grid has no empty cell showing the grey container background.
+                const spanFull = i === includedItems.length - 1 && includedItems.length % 2 === 1;
+                return (
+                  <div
+                    key={item.title}
+                    className={`bg-paper p-8 md:p-10${spanFull ? ' md:col-span-2' : ''}`}
+                  >
+                    <h3 className="font-display text-xl md:text-2xl text-ink mb-3 leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="text-ink-muted leading-relaxed">{item.body}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
