@@ -156,7 +156,6 @@ const nextConfig: NextConfig = {
       // ────────────────────────────────────────────────────────────────
       { source: '/home', destination: '/', permanent: true },
       { source: '/affordable-seo-for-startups-kent', destination: '/seo', permanent: true },
-      { source: '/towns/hythe', destination: '/towns/folkestone', permanent: true },
       { source: '/privacy-policy', destination: '/privacy', permanent: true },
       { source: '/terms-of-service', destination: '/terms', permanent: true },
 
