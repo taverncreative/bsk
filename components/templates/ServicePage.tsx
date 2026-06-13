@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import ServiceHero from '@/components/sections/ServiceHero';
 import Services from '@/components/sections/Services';
 import CaseStudySection from '@/components/sections/CaseStudySection';
@@ -722,6 +723,7 @@ function getServiceContent(slug: string, fallbackName: string): ServiceContent {
 export default async function ServicePage({
   serviceName,
   serviceSlug,
+  towns,
   caseStudies,
 }: ServicePageProps) {
   const content = getServiceContent(serviceSlug, serviceName);
@@ -803,6 +805,38 @@ export default async function ServicePage({
 
       {displayStudies && displayStudies.length > 0 && (
         <CaseStudySection serviceName={serviceName} caseStudies={displayStudies} />
+      )}
+
+      {/* Local coverage: link the hub down to every service x town page so hub
+          authority flows into the grid (these pages already pick up impressions). */}
+      {towns && towns.length > 0 && (
+        <section className="py-24 md:py-32 bg-paper-raised border-y border-paper-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div className="mb-12 md:mb-16 max-w-2xl">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
+                Local coverage
+              </p>
+              <h2 className="font-display text-ink mb-4">{serviceName} across Kent.</h2>
+              <p className="text-ink-muted leading-relaxed">
+                We work with businesses right across the county. Pick your town below.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              {towns.map((town) => (
+                <Link
+                  key={town.slug}
+                  href={`/${serviceSlug}-${town.slug}`}
+                  className="group flex items-center justify-between gap-2 bg-paper border border-paper-border rounded-lg px-5 py-4 transition-colors hover:border-brand-gold"
+                >
+                  <span className="font-display text-base md:text-lg text-ink leading-snug">
+                    {town.name}
+                  </span>
+                  <ArrowRight className="w-4 h-4 shrink-0 text-ink-faint transition-all group-hover:text-brand-gold group-hover:translate-x-1" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
       )}
 
       <Services
