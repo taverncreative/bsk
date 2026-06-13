@@ -132,6 +132,9 @@ const nextConfig: NextConfig = {
       { source: '/local-seo-folkestone', destination: '/seo-folkestone', permanent: true },
       { source: '/local-seo-thanet', destination: '/seo-margate', permanent: true },
       { source: '/local-seo-services-kent', destination: '/seo', permanent: true },
+      // The site's one deep (non-homepage) backlink points here and it 404s.
+      // Recover it to the SEO hub, matching the /local-seo-services-kent mapping.
+      { source: '/local-seo-kent', destination: '/seo', permanent: true },
 
       // ────────────────────────────────────────────────────────────────
       // Wix migration: legacy service / brand / "-kent" suffix URLs.
