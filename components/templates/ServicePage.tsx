@@ -558,28 +558,28 @@ const serviceContent: Record<string, ServiceContent> = {
 
   'digital-marketing': {
     hero: {
-      title: 'Social media set up properly.',
+      title: 'Paid ads, content, email — done properly.',
       subtitle:
-        'Profiles set up the right way the first time, branded consistently, pointed at the work you want to win. Priced on the brief.',
+        'Ongoing Google, Meta and email campaigns aimed at the customers you actually want to win. No jargon, plain monthly reports. Priced on the brief.',
       primaryCTA: { text: 'Get in touch', href: '/contact' },
     },
     included: {
-      eyebrow: 'What we set up',
-      headline: 'Profiles that look like they belong to one business.',
+      eyebrow: 'What we run',
+      headline: 'Campaigns that bring the right people in.',
       intro:
-        'Most social profiles look like they were set up by five different people on five different days. We sort that.',
+        'Not boosting the odd post and hoping. A proper plan across the channels your customers actually use, measured against real enquiries and reported in plain English every month.',
       items: [
-        { title: 'Facebook business page', body: 'Properly categorised, services listed, hours, location, call-to-action all set.' },
-        { title: 'Instagram business profile', body: 'Bio, link, category, contact button, story highlights organised.' },
-        { title: 'LinkedIn company page', body: 'If your work is B2B, properly set up with employees, services and call-to-actions.' },
-        { title: 'Google Business profile', body: 'Maps listing, hours, photos, posts, attributes, reviews surfaced.' },
-        { title: 'Branded graphics', body: 'Cover images, profile pictures, story highlight covers, all matching.' },
-        { title: 'Cross-links', body: 'Every profile points at your website and at each other. Nothing orphaned.' },
+        { title: 'Google Ads', body: 'Search campaigns built around the terms that signal someone ready to buy. Tight targeting, negative keywords, landing pages that match the ad, so budget is not leaking on the wrong clicks.' },
+        { title: 'Meta ads', body: 'Facebook and Instagram audiences built from your best customers, creative that looks like your business, and retargeting so people who nearly enquired see you again.' },
+        { title: 'Email marketing', body: 'Newsletters and follow-up sequences that keep you in front of past customers and quiet leads. Written in your voice, sent on a schedule.' },
+        { title: 'Content that earns the click', body: 'Offers, service pages and posts aimed at real search intent, so the campaigns have somewhere worth sending people.' },
+        { title: 'Tracking and attribution', body: 'Conversion tracking set up properly so you can see which channel and campaign actually produced the enquiry. The data decides where the next pound goes.' },
+        { title: 'Plain monthly reporting', body: 'One page a month: what we spent, what it produced, what we changed, what is next. Not a 40-page dashboard you will never open.' },
       ],
     },
     cta: {
-      title: 'Want it all looking like one business?',
-      paragraph: 'Tell us which platforms matter and we will quote the set-up.',
+      title: 'Want more of the right enquiries?',
+      paragraph: 'Tell us what you sell and who you want to reach. We will come back with a plain plan and a price.',
       button: 'Get in touch',
     },
   },
