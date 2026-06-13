@@ -166,6 +166,23 @@ const nextConfig: NextConfig = {
       { source: '/case-studies/lead-capture-system-builder', destination: '/case-studies', permanent: true },
       { source: '/case-studies/automated-enquiry-followups', destination: '/case-studies', permanent: true },
       { source: '/case-studies/branding-and-website-launch', destination: '/case-studies', permanent: true },
+
+      // ────────────────────────────────────────────────────────────────
+      // 28-day re-audit (2026-06): 404-tail recovery from the GSC export.
+      // Dead case-study slugs, removed industry hubs, and a legacy
+      // /commercial page. All sources verified 404 and all destinations
+      // verified 200 live before adding. property-services maps to the
+      // property-maintenance industry (closest live match, 200) rather
+      // than the /industries hub.
+      // ────────────────────────────────────────────────────────────────
+      { source: '/case-studies/business-automation-setup', destination: '/case-studies', permanent: true },
+      { source: '/case-studies/lead-capture-optimisation', destination: '/case-studies', permanent: true },
+      { source: '/case-studies/local-service-seo-improvement', destination: '/case-studies', permanent: true },
+      { source: '/case-studies/trades-business-website-redesign', destination: '/case-studies', permanent: true },
+      { source: '/industries/estate-agents', destination: '/industries/letting-agents', permanent: true },
+      { source: '/industries/consultants', destination: '/industries', permanent: true },
+      { source: '/industries/property-services', destination: '/industries/property-maintenance', permanent: true },
+      { source: '/commercial', destination: '/services', permanent: true },
     ];
   },
 };
