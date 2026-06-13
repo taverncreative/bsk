@@ -30,6 +30,29 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
+  // ── Programmatic "-near-" alias redirect: /{service}-near-{town} → /{service}-{town} (301) ──
+  // Crawler / Wix-era "-near-" variants of our service×town slugs (260 of them in
+  // the GSC 404 export, e.g. /web-design-near-ashford) are not real routes — the
+  // grid intentionally never generates "-near-" pages — so they 404. Every one
+  // collapses to a live canonical page at /{service}-{town}, so strip the "-near-"
+  // infix and 301 to it. This sits AFTER the www→apex block so host canonicalisation
+  // stays the outermost gate; the target host is pinned to the apex regardless, so
+  // the redirect is a single clean hop on the canonical host. No DB lookup here (the
+  // matcher runs on every request) — all 260 known targets are live, and a bogus
+  // "-near-" input just degrades to a normal 404, no worse than today. The
+  // x-near-redirect header is an observable probe to confirm this rule actually
+  // fired (never trust an unprobed routing change — early curls can hit the old build).
+  const nearMatch = pathname.match(/^\/([a-z0-9-]+)-near-([a-z0-9-]+)\/?$/);
+  if (nearMatch) {
+    const url = request.nextUrl.clone();
+    url.host = CANONICAL_HOST;
+    url.port = '';
+    url.pathname = `/${nearMatch[1]}-${nearMatch[2]}`;
+    const res = NextResponse.redirect(url, 301);
+    res.headers.set('x-near-redirect', '1');
+    return res;
+  }
+
   // ── Auth routes: run Supabase session check ──
   const isAuthRoute = request.nextUrl.pathname.startsWith('/login')
   const isAdminRoute = request.nextUrl.pathname.startsWith('/admin-dashboard') || request.nextUrl.pathname.startsWith('/api/elle-logs')
