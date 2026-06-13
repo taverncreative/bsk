@@ -39,6 +39,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// All 11 services. The hub links every service x industry combo (not just the
+// 4 core services), so none of the combo pages are left without an inbound
+// internal link. Names/prices/lines are display copy for the tile; the slug
+// must match the service slug so /industries/<industry>/<slug> resolves.
 const SERVICE_TILES = [
   {
     name: 'Websites',
@@ -63,6 +67,48 @@ const SERVICE_TILES = [
     slug: 'business-automation',
     price: 'POA',
     line: 'CRM, follow-ups, invoicing, the repeat admin.',
+  },
+  {
+    name: 'Branding',
+    slug: 'branding',
+    price: 'POA',
+    line: 'A logo, palette and brand kit you can actually use.',
+  },
+  {
+    name: 'Social media',
+    slug: 'social-media-setup',
+    price: 'POA',
+    line: 'Profiles set up properly and branded consistently.',
+  },
+  {
+    name: 'Digital marketing',
+    slug: 'digital-marketing',
+    price: 'POA',
+    line: 'Getting the right people to your business, consistently.',
+  },
+  {
+    name: 'Workwear & print',
+    slug: 'workwear-print',
+    price: 'POA',
+    line: 'Workwear, cards, signage and vehicle graphics, on brand.',
+  },
+  {
+    name: 'AI chatbots',
+    slug: 'ai-chatbots',
+    price: 'POA',
+    line: 'A chatbot that answers the same questions on repeat.',
+  },
+  {
+    name: 'AI content',
+    slug: 'ai-content',
+    price: 'POA',
+    line: 'AI-assisted content that does not read like AI content.',
+  },
+  {
+    name: 'AI automation',
+    slug: 'ai-automation',
+    price: 'POA',
+    line: 'AI for the repeating bits of your business.',
   },
 ];
 
@@ -234,12 +280,12 @@ export default async function IndustryHubPage({ params }: Props) {
               your customers actually search for and how they decide.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-paper-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {SERVICE_TILES.map((s) => (
               <Link
                 key={s.slug}
                 href={`/industries/${industry.slug}/${s.slug}`}
-                className="group block bg-paper-raised p-8 md:p-10 h-full transition-colors hover:bg-paper"
+                className="group flex flex-col bg-paper border border-paper-border rounded-xl p-8 md:p-10 h-full transition-colors hover:border-brand-gold"
               >
                 <div className="flex items-baseline justify-between gap-4 mb-4">
                   <h3 className="font-display text-2xl md:text-3xl text-ink leading-tight">
@@ -250,7 +296,7 @@ export default async function IndustryHubPage({ params }: Props) {
                   </span>
                 </div>
                 <p className="text-ink-muted leading-relaxed mb-8">{s.line}</p>
-                <span className="inline-flex items-center text-sm text-ink-muted group-hover:text-brand-gold transition-colors">
+                <span className="mt-auto inline-flex items-center text-sm text-ink-muted group-hover:text-brand-gold transition-colors">
                   More on this
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                 </span>
