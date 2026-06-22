@@ -113,19 +113,6 @@ export default async function CaseStudyRoute({ params }: PageProps) {
                 "@type": "Organization",
                 "name": "Business Sorted Kent"
               }
-            },
-            {
-              "@context": "https://schema.org",
-              "@type": "Review",
-              "itemReviewed": {
-                "@type": "Organization",
-                "name": "Business Sorted Kent"
-              },
-              "reviewBody": caseStudy.summary,
-              "author": {
-                "@type": "Organization",
-                "name": `${caseStudy.industry} Business in ${townName}`
-              }
             }
           ])
         }}

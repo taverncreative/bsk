@@ -41,22 +41,6 @@ export default function SiteSchema() {
         { '@type': 'AdministrativeArea', name: 'Greater London' },
         { '@type': 'Country', name: 'United Kingdom' },
       ],
-      review: [
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Sam Stewart' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-          reviewBody:
-            'This is the best business decision I have made in years. It completely transformed my business within two months.',
-        },
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Ella Pearson' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-          reviewBody:
-            'They took my idea and turned it into a professional website that perfectly matched my vision.',
-        },
-      ],
       makesOffer: [
         {
           '@type': 'Offer',
