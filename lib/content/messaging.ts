@@ -10,7 +10,7 @@ export function getLocalServiceMessaging(
       };
     case 'seo':
       return {
-        title: `Getting found on Google in ${townName}.`,
+        title: `${townName} SEO: getting found on Google`,
         subtitle: `£45 an hour of real local SEO work, from one hour a month. We focus on the searches ${townName} customers actually type.`,
       };
     case 'lead-capture':
