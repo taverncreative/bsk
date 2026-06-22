@@ -24,11 +24,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Not Found | Business Sorted Kent' };
   }
 
-  // meta_title overrides <title> for SERPs only. H1, og:title, twitter:title,
-  // Article.headline, breadcrumbs, cards, body copy all continue to use the
-  // editorial title (guide.title). Pattern: guide.meta_title || guide.title.
+  // meta_title overrides <title> for SERPs only, with NO brand suffix so titles
+  // stay under the ~60-char SERP truncation limit. og:title keeps the brand.
+  // H1, twitter:title, Article.headline, breadcrumbs, cards, body copy all
+  // continue to use the editorial title (guide.title).
   const editorialTitle = `${guide.title} | Business Sorted Kent`;
-  const seoTitle = `${guide.meta_title || guide.title} | Business Sorted Kent`;
+  const seoTitle = guide.meta_title || guide.title;
 
   return {
     title: seoTitle,
