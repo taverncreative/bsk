@@ -168,6 +168,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/kent-business-growth" className="text-paper/70 hover:text-brand-gold transition-colors">
+                  Directory
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="text-paper/70 hover:text-brand-gold transition-colors">
                   Contact
                 </Link>
