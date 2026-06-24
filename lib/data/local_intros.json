@@ -1,0 +1,202 @@
+[
+  {
+    "id": "c28ce0fe-9914-4cc7-bd01-3935d0433486",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "town_id": "aa111111-1111-1111-1111-111111111111",
+    "content": "Ashford is expanding rapidly, with major commercial developments and housing projects drawing more attention to the town than ever before. For local SMEs, relying solely on foot traffic or word-of-mouth is no longer enough. At Business Sorted Kent, our headquarters are right here in town. We design bespoke, high-performance websites specifically engineered to help Ashford trades, retailers, and professional services stand out from the competition, load instantly on mobile devices, and convert casual local browsers into paying customers.",
+    "created_at": "2026-03-14T00:26:34.757358+00:00",
+    "updated_at": "2026-03-14T00:26:34.757358+00:00"
+  },
+  {
+    "id": "1904775d-cd04-477a-a8bb-508f650841b4",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "town_id": "aa111111-1111-1111-1111-111111111111",
+    "content": "When someone in Ashford needs a local service, they immediately reach for their phone to search Google. If your business isn't appearing in the top three map results or on page one, those valuable enquiries are going straight to your competitors. As a locally-based agency, Business Sorted Kent provides aggressive, targeted SEO campaigns designed specifically for the Ashford market. We fix technical errors, optimise your Google Business Profile, and build the local authority required to make the phone ring consistently.",
+    "created_at": "2026-03-14T00:26:34.757358+00:00",
+    "updated_at": "2026-03-14T00:26:34.757358+00:00"
+  },
+  {
+    "id": "a60ba812-44c6-4a79-be36-610b3ca4e746",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "town_id": "bb222222-2222-2222-2222-222222222222",
+    "content": "Canterbury presents a unique challenge for local businesses: balancing the massive student population, a booming tourist economy, and the needs of established local residents. Your digital storefront must cater to all three. Business Sorted Kent builds fast, responsive websites tailored to Canterbury businesses. Whether you run a popular café near the Cathedral or a reliable plumbing service covering the surrounding villages, our designs are focused entirely on user experience and driving highly-qualified local leads through your door.",
+    "created_at": "2026-03-14T00:26:34.757358+00:00",
+    "updated_at": "2026-03-14T00:26:34.757358+00:00"
+  },
+  {
+    "id": "4b3be4cc-435a-4c9f-a09f-a78ac9ed68f9",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "town_id": "bb222222-2222-2222-2222-222222222222",
+    "content": "The competition for search visibility in Canterbury is notoriously tough, especially given the dense concentration of businesses operating within the city walls. Relying on an outdated website or an unmanaged Google profile guarantees you will remain invisible to high-intent searchers. Our specialized Canterbury SEO strategies are built to cut through the noise. We implement advanced on-page optimisation, build dominant local citations, and create compelling content that forces Google to recognize your business as the premier authority in your sector.",
+    "created_at": "2026-03-14T00:26:34.757358+00:00",
+    "updated_at": "2026-03-14T00:26:34.757358+00:00"
+  },
+  {
+    "id": "9447fb41-a28c-4f88-a775-b34e977a6ef0",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "town_id": "cc333333-3333-3333-3333-333333333333",
+    "content": "Are you looking for expert Web Design services in Maidstone? We understand the unique needs of businesses operating in Maidstone within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:10.080919+00:00",
+    "updated_at": "2026-03-14T07:01:10.080919+00:00"
+  },
+  {
+    "id": "3936a19a-c9d7-4751-b169-980305aaa512",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "town_id": "dd444444-4444-4444-4444-444444444444",
+    "content": "Are you looking for expert Web Design services in Folkestone? We understand the unique needs of businesses operating in Folkestone within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:13.686697+00:00",
+    "updated_at": "2026-03-14T07:01:13.686697+00:00"
+  },
+  {
+    "id": "e1b300c4-8616-4e49-8db3-660ee3b2cef8",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "town_id": "ee555555-5555-5555-5555-555555555555",
+    "content": "Are you looking for expert Web Design services in Tunbridge Wells? We understand the unique needs of businesses operating in Tunbridge Wells within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:19.554866+00:00",
+    "updated_at": "2026-03-14T07:01:19.554866+00:00"
+  },
+  {
+    "id": "53b02947-b12f-4d33-9099-2d0405f42ac8",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "town_id": "cc333333-3333-3333-3333-333333333333",
+    "content": "Are you looking for expert SEO services in Maidstone? We understand the unique needs of businesses operating in Maidstone within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:28.700211+00:00",
+    "updated_at": "2026-03-14T07:01:28.700211+00:00"
+  },
+  {
+    "id": "8517eb1d-a1f0-4064-aa22-1e9878c06ef4",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "town_id": "dd444444-4444-4444-4444-444444444444",
+    "content": "Are you looking for expert SEO services in Folkestone? We understand the unique needs of businesses operating in Folkestone within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:32.144989+00:00",
+    "updated_at": "2026-03-14T07:01:32.144989+00:00"
+  },
+  {
+    "id": "7444910c-c40a-41c8-ba98-6e55267b5264",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "town_id": "ee555555-5555-5555-5555-555555555555",
+    "content": "Are you looking for expert SEO services in Tunbridge Wells? We understand the unique needs of businesses operating in Tunbridge Wells within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:35.40377+00:00",
+    "updated_at": "2026-03-14T07:01:35.40377+00:00"
+  },
+  {
+    "id": "111ddfb7-34ac-401f-8457-fbb036b91c3a",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "town_id": "aa111111-1111-1111-1111-111111111111",
+    "content": "Are you looking for expert Business Automation services in Ashford? We understand the unique needs of businesses operating in Ashford within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:38.331511+00:00",
+    "updated_at": "2026-03-14T07:01:38.331511+00:00"
+  },
+  {
+    "id": "61d65e6c-b9a9-4a64-ac53-223335d53a47",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "town_id": "bb222222-2222-2222-2222-222222222222",
+    "content": "Are you looking for expert Business Automation services in Canterbury? We understand the unique needs of businesses operating in Canterbury within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:41.285321+00:00",
+    "updated_at": "2026-03-14T07:01:41.285321+00:00"
+  },
+  {
+    "id": "25f09f2a-a3b5-4a85-bb64-89086d681ebf",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "town_id": "cc333333-3333-3333-3333-333333333333",
+    "content": "Are you looking for expert Business Automation services in Maidstone? We understand the unique needs of businesses operating in Maidstone within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:44.183804+00:00",
+    "updated_at": "2026-03-14T07:01:44.183804+00:00"
+  },
+  {
+    "id": "f3e4b0b5-8844-4686-b9cb-a1f44e0ada4e",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "town_id": "dd444444-4444-4444-4444-444444444444",
+    "content": "Are you looking for expert Business Automation services in Folkestone? We understand the unique needs of businesses operating in Folkestone within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:47.086811+00:00",
+    "updated_at": "2026-03-14T07:01:47.086811+00:00"
+  },
+  {
+    "id": "d5289819-c8c6-4c8d-bbeb-31accc728c85",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "town_id": "ee555555-5555-5555-5555-555555555555",
+    "content": "Are you looking for expert Business Automation services in Tunbridge Wells? We understand the unique needs of businesses operating in Tunbridge Wells within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:49.968197+00:00",
+    "updated_at": "2026-03-14T07:01:49.968197+00:00"
+  },
+  {
+    "id": "4026e06e-664b-42ff-8c22-7838424b7758",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "town_id": "aa111111-1111-1111-1111-111111111111",
+    "content": "Are you looking for expert Branding services in Ashford? We understand the unique needs of businesses operating in Ashford within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:52.682444+00:00",
+    "updated_at": "2026-03-14T07:01:52.682444+00:00"
+  },
+  {
+    "id": "6d872362-8238-410a-b106-9ac579a32a2f",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "town_id": "bb222222-2222-2222-2222-222222222222",
+    "content": "Are you looking for expert Branding services in Canterbury? We understand the unique needs of businesses operating in Canterbury within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:55.564681+00:00",
+    "updated_at": "2026-03-14T07:01:55.564681+00:00"
+  },
+  {
+    "id": "2421897c-949d-47a4-be87-b88354748706",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "town_id": "cc333333-3333-3333-3333-333333333333",
+    "content": "Are you looking for expert Branding services in Maidstone? We understand the unique needs of businesses operating in Maidstone within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:01:58.713093+00:00",
+    "updated_at": "2026-03-14T07:01:58.713093+00:00"
+  },
+  {
+    "id": "c334801c-881e-4038-981e-53664c26e9ae",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "town_id": "dd444444-4444-4444-4444-444444444444",
+    "content": "Are you looking for expert Branding services in Folkestone? We understand the unique needs of businesses operating in Folkestone within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:02:02.529831+00:00",
+    "updated_at": "2026-03-14T07:02:02.529831+00:00"
+  },
+  {
+    "id": "f96c0801-ff48-47a6-bdaf-6cce5af97f0e",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "town_id": "ee555555-5555-5555-5555-555555555555",
+    "content": "Are you looking for expert Branding services in Tunbridge Wells? We understand the unique needs of businesses operating in Tunbridge Wells within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:02:05.669092+00:00",
+    "updated_at": "2026-03-14T07:02:05.669092+00:00"
+  },
+  {
+    "id": "54843052-b46b-417a-8f41-820e9696b0f4",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "town_id": "aa111111-1111-1111-1111-111111111111",
+    "content": "Are you looking for expert Digital Marketing services in Ashford? We understand the unique needs of businesses operating in Ashford within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:02:08.906689+00:00",
+    "updated_at": "2026-03-14T07:02:08.906689+00:00"
+  },
+  {
+    "id": "3cdd573a-cd11-4d14-9b15-b8b168b3df66",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "town_id": "bb222222-2222-2222-2222-222222222222",
+    "content": "Are you looking for expert Digital Marketing services in Canterbury? We understand the unique needs of businesses operating in Canterbury within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:02:11.914251+00:00",
+    "updated_at": "2026-03-14T07:02:11.914251+00:00"
+  },
+  {
+    "id": "84675437-6950-4d16-9f93-7aab830044aa",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "town_id": "cc333333-3333-3333-3333-333333333333",
+    "content": "Are you looking for expert Digital Marketing services in Maidstone? We understand the unique needs of businesses operating in Maidstone within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:02:15.366487+00:00",
+    "updated_at": "2026-03-14T07:02:15.366487+00:00"
+  },
+  {
+    "id": "9f476d52-e259-4373-9036-838abeb53318",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "town_id": "dd444444-4444-4444-4444-444444444444",
+    "content": "Are you looking for expert Digital Marketing services in Folkestone? We understand the unique needs of businesses operating in Folkestone within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:02:19.16812+00:00",
+    "updated_at": "2026-03-14T07:02:19.16812+00:00"
+  },
+  {
+    "id": "e7a88b33-b46d-4d38-8135-b316622fdc2a",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "town_id": "ee555555-5555-5555-5555-555555555555",
+    "content": "Are you looking for expert Digital Marketing services in Tunbridge Wells? We understand the unique needs of businesses operating in Tunbridge Wells within the Plumbers industry. Our team is dedicated to providing high-quality, tailored solutions to help your business thrive locally and beyond.",
+    "created_at": "2026-03-14T07:02:22.229229+00:00",
+    "updated_at": "2026-03-14T07:02:22.229229+00:00"
+  }
+]

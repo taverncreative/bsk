@@ -1,0 +1,90 @@
+[
+  {
+    "id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "name": "Websites",
+    "slug": "web-design",
+    "description": "£280 for a classic small business website. E-commerce and anything custom priced on application. Built right, indexed cleanly, yours in 1 to 2 weeks.",
+    "created_at": "2026-03-14T00:26:34.757358+00:00",
+    "updated_at": "2026-03-14T00:26:34.757358+00:00"
+  },
+  {
+    "id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "name": "SEO",
+    "slug": "seo",
+    "description": "£45 an hour of real SEO work, from one hour a month, no rolling contract. You see what got done and what it ranked for.",
+    "created_at": "2026-03-14T00:26:34.757358+00:00",
+    "updated_at": "2026-03-14T00:26:34.757358+00:00"
+  },
+  {
+    "id": "ddc9f813-b8c1-42d7-a335-03b6b4cc0adb",
+    "name": "Lead capture",
+    "slug": "lead-capture",
+    "description": "Forms, instant replies and missed-call recovery so a busy day does not cost you the lead. Priced on the brief.",
+    "created_at": "2026-03-14T16:00:33.202736+00:00",
+    "updated_at": "2026-03-14T16:00:33.202736+00:00"
+  },
+  {
+    "id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "name": "Automations",
+    "slug": "business-automation",
+    "description": "CRM setup, follow-ups, job tracking, repeat invoicing. The repeat work that eats your Sundays, handled. Priced on the brief.",
+    "created_at": "2026-03-14T00:26:34.757358+00:00",
+    "updated_at": "2026-03-14T00:26:34.757358+00:00"
+  },
+  {
+    "id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "name": "Branding",
+    "slug": "branding",
+    "description": "A logo, palette, typography system and one-page brand reference. For businesses who want something that looks designed, not generated. Priced on the brief.",
+    "created_at": "2026-03-14T00:26:34.757358+00:00",
+    "updated_at": "2026-03-14T00:26:34.757358+00:00"
+  },
+  {
+    "id": "59c5d08f-eec1-406c-ba31-b26358425220",
+    "name": "Social Media Setup",
+    "slug": "social-media-setup",
+    "description": "Social media profiles set up properly the first time, branded consistently, pointed at the work you want to win. Priced on the brief.",
+    "created_at": "2026-03-14T16:02:52.278051+00:00",
+    "updated_at": "2026-03-14T16:02:52.278051+00:00"
+  },
+  {
+    "id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "name": "Digital Marketing",
+    "slug": "digital-marketing",
+    "description": "Social media profiles set up properly the first time, branded consistently, pointed at the work you want to win. Priced on the brief.",
+    "created_at": "2026-03-14T00:26:34.757358+00:00",
+    "updated_at": "2026-03-14T00:26:34.757358+00:00"
+  },
+  {
+    "id": "ae2d8a60-c856-421f-838d-999c92ca770c",
+    "name": "Workwear & Print",
+    "slug": "workwear-print",
+    "description": "Workwear, business cards, signage and vehicle graphics. Sorted alongside your website so it all matches. Priced on the brief.",
+    "created_at": "2026-03-14T16:14:05.79132+00:00",
+    "updated_at": "2026-03-14T16:14:05.79132+00:00"
+  },
+  {
+    "id": "09a149de-5b00-4eb7-83f2-8a8c0caa2c8b",
+    "name": "AI Chatbots",
+    "slug": "ai-chatbots",
+    "description": "A chatbot trained on your business that handles repeat enquiries, books appointments and hands off when it matters. Priced on the brief.",
+    "created_at": "2026-03-21T23:36:17.080393+00:00",
+    "updated_at": "2026-03-21T23:36:17.080393+00:00"
+  },
+  {
+    "id": "2cd5be83-7673-4d97-a2c4-7b8f3d449576",
+    "name": "AI Content Creation",
+    "slug": "ai-content",
+    "description": "AI-assisted blog posts, service pages and landing copy, edited by hand. Does not read like AI content. Priced on the brief.",
+    "created_at": "2026-03-21T23:36:17.080393+00:00",
+    "updated_at": "2026-03-21T23:36:17.080393+00:00"
+  },
+  {
+    "id": "33383936-edde-4610-99c1-c4e726a4a6fa",
+    "name": "AI Business Automation",
+    "slug": "ai-automation",
+    "description": "Email triage, follow-ups, document drafting, data sorting. The mundane bits handled. Priced on the brief.",
+    "created_at": "2026-03-21T23:36:17.080393+00:00",
+    "updated_at": "2026-03-21T23:36:17.080393+00:00"
+  }
+]

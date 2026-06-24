@@ -1,0 +1,1927 @@
+[
+  {
+    "id": "29cea128-64e0-45b3-9f85-db62d48b8931",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:25.892865+00:00"
+  },
+  {
+    "id": "d8a274c7-8c46-4b2b-b0ad-55a98a7556df",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:26.049371+00:00"
+  },
+  {
+    "id": "e3d52a69-2054-4f32-ad45-b2995a101129",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:26.580204+00:00"
+  },
+  {
+    "id": "e8271174-b7c1-4e71-8d4e-a40a287199ef",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:27.450661+00:00"
+  },
+  {
+    "id": "fcedc188-8fd2-437e-9230-41f1c4d29db2",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:27.642586+00:00"
+  },
+  {
+    "id": "4153767b-4ac0-4552-be93-293bdf0cea9e",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:27.842952+00:00"
+  },
+  {
+    "id": "c0c54411-3ddb-4b49-ab25-9f6629d70e3d",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:28.407779+00:00"
+  },
+  {
+    "id": "b5e5a6c7-ec92-4fa6-98e2-6ef98cf7263b",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:28.52222+00:00"
+  },
+  {
+    "id": "7bf221f7-9791-4e4e-8f76-e47cdd1fd5da",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:28.612374+00:00"
+  },
+  {
+    "id": "ac88d4c5-2cd0-4e5a-9e9f-bf0e4ba4f614",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:28.933805+00:00"
+  },
+  {
+    "id": "0f1d62ca-111e-4208-acf3-9e2d0646786a",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:29.028397+00:00"
+  },
+  {
+    "id": "bef3ea60-3943-4e5b-b251-dfe7df660a58",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:29.115477+00:00"
+  },
+  {
+    "id": "56f60308-3752-4701-9dec-c5d6e7810837",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:29.517264+00:00"
+  },
+  {
+    "id": "e64dab9c-3beb-4bc4-9b58-72b12d49d582",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:29.601443+00:00"
+  },
+  {
+    "id": "64901270-7f15-4da7-a4ee-b743f0c15e39",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:29.700105+00:00"
+  },
+  {
+    "id": "88a967c4-aadc-446d-8116-2a6e803c58dd",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:29.976019+00:00"
+  },
+  {
+    "id": "279d079d-45e0-41da-aad0-ef1278862ba9",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:30.10421+00:00"
+  },
+  {
+    "id": "b7a956a0-5c0d-490b-bbac-4182e25ff13a",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:30.369452+00:00"
+  },
+  {
+    "id": "f277d549-18cd-4106-ba4b-7a0d05ada15f",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:30.552564+00:00"
+  },
+  {
+    "id": "60f205fc-c859-47e2-936d-d35493c549c7",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:30.764081+00:00"
+  },
+  {
+    "id": "2d12613e-3629-48e1-96c7-620f3daa95a7",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:30.887776+00:00"
+  },
+  {
+    "id": "8a8e232d-9211-4230-8356-2f3e54d9c442",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:31.142877+00:00"
+  },
+  {
+    "id": "1a1e7b13-0baf-4b35-b42c-ca949f22c1fd",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:31.26166+00:00"
+  },
+  {
+    "id": "8ef89266-9e2a-4c73-97d9-7c38bb80b34d",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:31.654923+00:00"
+  },
+  {
+    "id": "0743ffa2-56dd-4ec5-bf49-ae924ecd46e9",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:31.776586+00:00"
+  },
+  {
+    "id": "921fc39a-2b4c-47fb-863b-3210dd56a397",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:32.072011+00:00"
+  },
+  {
+    "id": "6bdc16bb-1baa-47c6-bd21-7a1420c6adc3",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:32.197377+00:00"
+  },
+  {
+    "id": "3bc0d488-2e6b-41dd-8024-e9e54ddb6e49",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:32.463621+00:00"
+  },
+  {
+    "id": "603a6a19-23c9-48fd-814e-e8ed233d36f0",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:32.641322+00:00"
+  },
+  {
+    "id": "46170571-a752-449e-85b2-94902b561f5c",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:32.861316+00:00"
+  },
+  {
+    "id": "a1e57ffe-292d-4af2-856f-22ecf3b2ec07",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:32.981075+00:00"
+  },
+  {
+    "id": "16589507-7b4a-4201-a06b-eddf3f5f4292",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:33.235932+00:00"
+  },
+  {
+    "id": "2ecb8113-c815-4ec2-be54-695e01f82f42",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:33.356786+00:00"
+  },
+  {
+    "id": "4839168e-edc6-4006-b239-2e4c910e763d",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:33.788229+00:00"
+  },
+  {
+    "id": "8a02db8a-ebae-4958-8c0f-2b72ff618337",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:33.911365+00:00"
+  },
+  {
+    "id": "592987c0-b2f4-4ec5-9567-0591b91de186",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:34.178669+00:00"
+  },
+  {
+    "id": "f3616edb-9e35-474e-8bc5-a5ddf1366ea0",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:34.313826+00:00"
+  },
+  {
+    "id": "d90760c6-8738-4e29-ab31-ee4684941c11",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:34.651404+00:00"
+  },
+  {
+    "id": "1ab1ce9a-ce85-4af6-8441-1da03d954291",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:34.775081+00:00"
+  },
+  {
+    "id": "d853a74f-f54c-43fd-8c1d-cba5ae4095a9",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:34.989379+00:00"
+  },
+  {
+    "id": "590ba8c0-ad00-4008-94df-41a6af562fbc",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:35.184133+00:00"
+  },
+  {
+    "id": "12ccf1f1-3ec5-407f-86fb-701f20d3cd68",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:35.400072+00:00"
+  },
+  {
+    "id": "d414bbc1-be0d-45bf-83fe-fa5fc0e5a166",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:35.606352+00:00"
+  },
+  {
+    "id": "ce21c6fd-b13d-4a6c-bcf1-8978c559aa28",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:35.878203+00:00"
+  },
+  {
+    "id": "c4169846-9622-4bda-8962-29cd610e1294",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:36.008666+00:00"
+  },
+  {
+    "id": "b7cf4d33-5006-4c3c-9cb3-bd893e845211",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:36.298202+00:00"
+  },
+  {
+    "id": "dd0e4afe-2fe6-4e66-9cbd-8f9d78b11f4b",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:36.424529+00:00"
+  },
+  {
+    "id": "977f3096-8a93-4b36-a24b-d10062a7c717",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:36.751135+00:00"
+  },
+  {
+    "id": "02cc3067-3750-42b5-a650-43a28978caf3",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:36.869442+00:00"
+  },
+  {
+    "id": "303bb760-ea6e-495b-a497-3e11e21155a8",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:37.087893+00:00"
+  },
+  {
+    "id": "759d0187-b499-43e7-934d-f94a01a5bcca",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:37.281355+00:00"
+  },
+  {
+    "id": "44f6174b-2733-4cfb-a470-d08fbe0c1ae5",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:37.492186+00:00"
+  },
+  {
+    "id": "26e522c9-cb6e-43d8-b9e5-733b27eb8785",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:37.706055+00:00"
+  },
+  {
+    "id": "8b2bf555-556d-4526-a009-b58643c348b8",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Web Design specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:37.946887+00:00"
+  },
+  {
+    "id": "a03bf884-4ae1-4fb5-a7f1-f6a16a2b0c83",
+    "service_id": "b1a0e8d0-9a2c-4f1b-8e2a-1c3b5d7e9f1a",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:38.066369+00:00"
+  },
+  {
+    "id": "30d5dc3d-5aa2-4a78-a719-320f3b3ef5b7",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:38.327211+00:00"
+  },
+  {
+    "id": "ba93e1e7-8cbf-4e6b-98c0-b3f6c86385a7",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:38.405894+00:00"
+  },
+  {
+    "id": "926b327a-7aae-4d15-ac87-513adb263b93",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:38.498198+00:00"
+  },
+  {
+    "id": "0ace318e-895f-452f-90a3-6f43b1ac59e1",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:38.857294+00:00"
+  },
+  {
+    "id": "a41d2406-08dc-43ec-8c69-eb8c10e8b8c2",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:38.945163+00:00"
+  },
+  {
+    "id": "133cf796-2513-4758-ad27-824492531a65",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:39.017614+00:00"
+  },
+  {
+    "id": "7e96575d-0bf0-428a-bae9-3942ce253771",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:39.260065+00:00"
+  },
+  {
+    "id": "e82ca84d-5b3d-47ca-a365-c10e665ee322",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:39.414279+00:00"
+  },
+  {
+    "id": "266c6aec-cc5d-4520-84fd-c64db9f89700",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:39.490532+00:00"
+  },
+  {
+    "id": "bb9c7242-a18d-4692-9239-4770b5b05e6e",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:39.778349+00:00"
+  },
+  {
+    "id": "94aff0ca-9e7c-4c4c-9289-be61c3298f47",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:39.942005+00:00"
+  },
+  {
+    "id": "b042e349-a2cd-4ae9-bfef-10aaeeb0dedc",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:40.02045+00:00"
+  },
+  {
+    "id": "271e2648-878b-4d5b-ae9a-2d5ff65fcf4c",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:40.242677+00:00"
+  },
+  {
+    "id": "44557962-a243-46db-9752-16b107e858d1",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:40.325482+00:00"
+  },
+  {
+    "id": "bd20155c-331e-456f-a1cd-966f9fc83d00",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:40.46744+00:00"
+  },
+  {
+    "id": "53d1cf2b-c01f-44da-a916-e07c64d58539",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:40.727833+00:00"
+  },
+  {
+    "id": "150101c7-809d-4bbe-ab89-8156fda9aeda",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:40.944404+00:00"
+  },
+  {
+    "id": "7068d34e-2d7c-4c90-9805-50b3664eb62a",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:41.305417+00:00"
+  },
+  {
+    "id": "e754616f-fbf9-4316-989a-70f096437344",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:41.527829+00:00"
+  },
+  {
+    "id": "3a77ee54-8722-4a93-a6a0-416c13767d7e",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:41.732831+00:00"
+  },
+  {
+    "id": "9ab05d35-0b85-4e00-b1ff-34cd5515d0a2",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:41.898488+00:00"
+  },
+  {
+    "id": "20a2656a-ce45-4648-b361-4f174a679bc9",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:42.24428+00:00"
+  },
+  {
+    "id": "2b38843d-3daf-45d4-8f6b-760d6159e4ff",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:42.361832+00:00"
+  },
+  {
+    "id": "c6421073-6d17-462f-8b04-3c195e69bdb8",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:42.635415+00:00"
+  },
+  {
+    "id": "5393b344-145d-4c6f-baf5-469ec0e1b21d",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:42.763637+00:00"
+  },
+  {
+    "id": "27669647-f8b2-4cc5-bcdb-86283243a19f",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:43.124325+00:00"
+  },
+  {
+    "id": "4f2e3a4b-702f-4ff1-9d7f-abb1dd523119",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:43.237802+00:00"
+  },
+  {
+    "id": "04ba0d7c-5d46-414b-aa19-283a1607448e",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:43.437488+00:00"
+  },
+  {
+    "id": "9c8e4e2c-e455-41e0-82cf-bd25a9c37c61",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:43.607418+00:00"
+  },
+  {
+    "id": "a2d8b042-b583-43ab-a132-00e6516d3237",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:43.803305+00:00"
+  },
+  {
+    "id": "075f27d9-00d3-4260-8f39-98f0162b679c",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:43.994375+00:00"
+  },
+  {
+    "id": "fa9eaa05-658a-44a8-a3b2-e8628098585e",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:44.284637+00:00"
+  },
+  {
+    "id": "a0ab5105-2995-43e8-b8f3-7c881f95c5ff",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:44.408909+00:00"
+  },
+  {
+    "id": "3efd362f-b90e-4af3-b00a-5500e0e4af62",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:44.694625+00:00"
+  },
+  {
+    "id": "b93594fb-dbc4-4aa8-86e6-d6b8427ce1b2",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:44.815061+00:00"
+  },
+  {
+    "id": "93d2da89-e244-4352-a3a4-b683a5b2d852",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:45.225557+00:00"
+  },
+  {
+    "id": "d94d22ab-0146-4fd0-ae94-c9f346eba4f3",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:45.363705+00:00"
+  },
+  {
+    "id": "507af87c-0c7d-4c7f-bae1-487d4a0e5f77",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:45.705236+00:00"
+  },
+  {
+    "id": "43298752-568f-486d-9f82-014182ca3145",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:45.880931+00:00"
+  },
+  {
+    "id": "211eb973-801f-4d85-a044-568dbb530b90",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:46.194805+00:00"
+  },
+  {
+    "id": "231bfe87-a03e-42ed-85b6-36040d7cbed4",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:46.309515+00:00"
+  },
+  {
+    "id": "1fc28fbb-7672-4415-aab6-c8e141592f79",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:46.562225+00:00"
+  },
+  {
+    "id": "714bedad-04bb-403f-b1c7-0d071a64c312",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:46.766126+00:00"
+  },
+  {
+    "id": "5cf4f65b-8fdd-40ee-bcfd-3cc255d8db0b",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:46.964052+00:00"
+  },
+  {
+    "id": "df1a8d72-3517-4611-b7d5-6858ef214939",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:47.144404+00:00"
+  },
+  {
+    "id": "3995d0f3-921b-4bf8-9a6b-49665461548d",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:47.403006+00:00"
+  },
+  {
+    "id": "9095b3b7-0d16-424f-a5c3-0245dd661b0f",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:47.549416+00:00"
+  },
+  {
+    "id": "0e6c048c-f010-4c81-8b14-696deb3cbca4",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:47.811375+00:00"
+  },
+  {
+    "id": "d7bdef74-2e64-4091-ac1e-033f0020813e",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:47.92533+00:00"
+  },
+  {
+    "id": "e4466d7c-478d-4276-9e6b-081ed204f412",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:48.191746+00:00"
+  },
+  {
+    "id": "57778e2c-7123-45b6-a4c2-638b77cd1f2b",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:48.369017+00:00"
+  },
+  {
+    "id": "838e34b4-91af-4e33-aef0-ceb819bfcf7d",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:48.606681+00:00"
+  },
+  {
+    "id": "1449ba1d-017f-485b-a01b-9fd91b32522f",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:48.810745+00:00"
+  },
+  {
+    "id": "4a28a01a-eddf-4fe9-820d-b74caafcbb11",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local SEO specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:49.009818+00:00"
+  },
+  {
+    "id": "89786cbc-4c62-4d00-ab33-c37efeeb5816",
+    "service_id": "c2b1f9e1-0b3d-5a2c-9f3b-2d4c6e8f0a2b",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:49.200999+00:00"
+  },
+  {
+    "id": "b8eb132c-55a9-478e-907a-4e91398cc0e4",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:49.459539+00:00"
+  },
+  {
+    "id": "9613d603-2cc7-452f-8106-38d9cf05ff0e",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:49.541885+00:00"
+  },
+  {
+    "id": "d6648f51-2a16-475a-929a-391a7573a5f5",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:49.619715+00:00"
+  },
+  {
+    "id": "0a085c99-73aa-40b5-b3e1-87325140deff",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:49.90046+00:00"
+  },
+  {
+    "id": "8d61bb41-95bb-4237-a3a5-2461d79bbd20",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:49.97929+00:00"
+  },
+  {
+    "id": "38421808-9932-4a9e-beb9-1aa94ff6836f",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:50.061016+00:00"
+  },
+  {
+    "id": "b24214a1-9e3d-424e-b78e-367429b1d9b4",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:50.425534+00:00"
+  },
+  {
+    "id": "aebb65cf-0764-4a79-bd95-e0518fca42ee",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:50.507855+00:00"
+  },
+  {
+    "id": "d7bab453-ac99-4056-8b2e-373ce5f4c9e5",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:50.585855+00:00"
+  },
+  {
+    "id": "692d1f3c-a3c5-44be-9a28-950c60be99be",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:50.909993+00:00"
+  },
+  {
+    "id": "bd1acd05-c252-4247-a2f5-e56f25f7b097",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:51.010742+00:00"
+  },
+  {
+    "id": "f9fb8497-b41b-4169-85ef-625880a3e05c",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:51.092758+00:00"
+  },
+  {
+    "id": "57821b6c-02ee-4c6d-93a5-ec8920009b2b",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Ashford.",
+    "created_at": "2026-03-14T07:07:51.337565+00:00"
+  },
+  {
+    "id": "706e70ec-7236-4509-8a0e-323a8812c7d4",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:07:51.469487+00:00"
+  },
+  {
+    "id": "1f8ab711-4cf6-4ad1-90bc-6ff0b88e90d2",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:07:51.545332+00:00"
+  },
+  {
+    "id": "30513bd1-4679-4856-b71f-068809a571f0",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:51.738038+00:00"
+  },
+  {
+    "id": "96dbf3d1-87a9-498e-aeb4-ff0310c9ec88",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:51.957903+00:00"
+  },
+  {
+    "id": "0282afff-bf4e-429d-9b2e-1c68866b4d8d",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:52.353699+00:00"
+  },
+  {
+    "id": "165baa6f-5ec7-454b-9bab-b722b8ff2560",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:52.656131+00:00"
+  },
+  {
+    "id": "cd52cb98-e589-49c9-a078-b703019f5f63",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:53.186909+00:00"
+  },
+  {
+    "id": "dc46dc20-501f-4347-bc40-439155d5c034",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:53.403565+00:00"
+  },
+  {
+    "id": "991dd09a-0883-4040-892b-2086e31d660b",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:53.693549+00:00"
+  },
+  {
+    "id": "521a2b6b-9c42-4623-8dad-620d1879a57e",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:53.821451+00:00"
+  },
+  {
+    "id": "647ad374-1cc3-4a04-a1aa-7a2c338aec32",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Canterbury.",
+    "created_at": "2026-03-14T07:07:54.099115+00:00"
+  },
+  {
+    "id": "9b422905-81b5-481f-9bb8-f8e93bb58c82",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:07:54.229841+00:00"
+  },
+  {
+    "id": "e549b142-f934-4771-bd26-82b0b5dc6fea",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:54.590145+00:00"
+  },
+  {
+    "id": "7eba8a83-c0e2-4abc-8183-de95efb08f7b",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:54.712031+00:00"
+  },
+  {
+    "id": "a16c9d74-f221-4dbe-aa44-0e30e04da31a",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:54.912583+00:00"
+  },
+  {
+    "id": "752a8cfc-8041-42be-ac4f-5da61967ebd3",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:55.101779+00:00"
+  },
+  {
+    "id": "52c3ab54-1f9d-49b8-8a29-6deec9147b84",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:55.295306+00:00"
+  },
+  {
+    "id": "2d280f15-3a42-46de-aa6e-dbaf09bc5cda",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:55.498279+00:00"
+  },
+  {
+    "id": "e139a165-d3f9-4932-a0b1-bf12fb0fd33f",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:55.803838+00:00"
+  },
+  {
+    "id": "256df2ca-d231-4a1b-a185-d8b7e4518533",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:55.918011+00:00"
+  },
+  {
+    "id": "4f2639b3-a079-45e7-8a92-8bb5d7f2d353",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Maidstone.",
+    "created_at": "2026-03-14T07:07:56.198102+00:00"
+  },
+  {
+    "id": "c94e8373-55fb-4921-8fae-dfb46d682a68",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:07:56.325438+00:00"
+  },
+  {
+    "id": "6ed0c241-cb5a-4740-b1ee-5c7dc3da72e2",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:56.585772+00:00"
+  },
+  {
+    "id": "f8522ab0-f458-4277-81f9-a2d3062f9ed2",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:56.752955+00:00"
+  },
+  {
+    "id": "96a1a755-9067-46a7-a122-d76db112b796",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:56.951499+00:00"
+  },
+  {
+    "id": "9f83bd77-7408-496f-88e5-a81c10e8bb09",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:57.072702+00:00"
+  },
+  {
+    "id": "769ec132-21af-44cc-a320-c18fcd56bb4d",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:57.415591+00:00"
+  },
+  {
+    "id": "3634b2a2-e3e4-434d-987e-ba456779b01c",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:57.591234+00:00"
+  },
+  {
+    "id": "374bf635-ac6b-4902-a2cb-98ebb0973460",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:57.846608+00:00"
+  },
+  {
+    "id": "5927da38-8775-4621-b935-65f84420dc05",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:57.965751+00:00"
+  },
+  {
+    "id": "a21df0b8-4eb2-45e1-aec4-a8f1feb6fbb4",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Folkestone.",
+    "created_at": "2026-03-14T07:07:58.246172+00:00"
+  },
+  {
+    "id": "4d34987a-bb6b-405a-b663-276c07c2137a",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:07:58.367361+00:00"
+  },
+  {
+    "id": "653e0495-e9eb-45e5-af8f-5c59088c5e0f",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:58.691297+00:00"
+  },
+  {
+    "id": "9ca77580-7b35-42ef-bb0a-b593851a2a33",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:58.856248+00:00"
+  },
+  {
+    "id": "79060ee0-2291-4faa-a2a9-571fe84d0c4a",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:59.061477+00:00"
+  },
+  {
+    "id": "c5474cca-52d7-4198-a15a-3fda4db2d4ac",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:59.180295+00:00"
+  },
+  {
+    "id": "4ee778d1-6a41-48a8-95e6-52e2e80bb156",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:59.520008+00:00"
+  },
+  {
+    "id": "127d1119-5137-46aa-832b-294bbd75252d",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:07:59.737863+00:00"
+  },
+  {
+    "id": "f207cac8-9d4a-484b-9552-4a2b1f57c593",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:07:59.976095+00:00"
+  },
+  {
+    "id": "647c8950-bca2-4847-8944-830356560a23",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:00.092361+00:00"
+  },
+  {
+    "id": "54aba2c8-925c-44cb-8480-1555327040fe",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Business Automation specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:00.385766+00:00"
+  },
+  {
+    "id": "59f215b7-6c60-45e2-ba4e-8341cfe2f0e2",
+    "service_id": "d3c2a0f2-1c4e-4a3d-0b4c-3e5d7f9a1b3c",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:00.511814+00:00"
+  },
+  {
+    "id": "819e3904-603f-4b4d-85da-6f4396ffcaba",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Ashford.",
+    "created_at": "2026-03-14T07:08:00.869324+00:00"
+  },
+  {
+    "id": "5360ee72-d4b1-4862-8800-a93f37d16b0a",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:08:00.946955+00:00"
+  },
+  {
+    "id": "186fa7b6-ea41-4139-81a5-ede29d070c54",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:08:01.031232+00:00"
+  },
+  {
+    "id": "afd3b638-1750-4cb8-b2e0-25a16eada9f9",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Ashford.",
+    "created_at": "2026-03-14T07:08:01.25144+00:00"
+  },
+  {
+    "id": "20933c3b-f359-4b60-9d5f-a2782533c6a3",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:08:01.393694+00:00"
+  },
+  {
+    "id": "360f5057-3182-4b9c-879d-389caca516d3",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:08:01.478692+00:00"
+  },
+  {
+    "id": "b892b3cc-9072-4d5f-9ad2-8821bfb9d967",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Ashford.",
+    "created_at": "2026-03-14T07:08:01.680675+00:00"
+  },
+  {
+    "id": "1f908a12-06cd-47d0-8428-bb1e949c74d6",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:08:01.820331+00:00"
+  },
+  {
+    "id": "806ebe10-20a4-40df-acea-85db7ef8f9f9",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:08:01.989285+00:00"
+  },
+  {
+    "id": "4dd632e7-8329-4eff-926b-207bc31bb0b7",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Ashford.",
+    "created_at": "2026-03-14T07:08:02.193869+00:00"
+  },
+  {
+    "id": "a6ae958f-3c67-4d26-bc1a-d92876ec94d2",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:08:02.285684+00:00"
+  },
+  {
+    "id": "7a7e5549-30e8-4666-a9c0-109d62ac4b1d",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:08:02.462163+00:00"
+  },
+  {
+    "id": "a9a0974f-269a-4032-997f-022ceda66eea",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Ashford.",
+    "created_at": "2026-03-14T07:08:02.663104+00:00"
+  },
+  {
+    "id": "fe28f6a0-74ec-483d-8470-8a1ac1403a2e",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:08:02.750006+00:00"
+  },
+  {
+    "id": "b8b14cc7-5736-454a-a734-abee2a960864",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:08:02.868456+00:00"
+  },
+  {
+    "id": "6e31daa2-edfa-4478-95f9-9270edc049bf",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Canterbury.",
+    "created_at": "2026-03-14T07:08:03.128325+00:00"
+  },
+  {
+    "id": "fe229df0-24f3-4cb7-a0ae-f1ad37b87324",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:08:03.248987+00:00"
+  },
+  {
+    "id": "0a64f4fb-071a-4295-81a1-7c018970af89",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Canterbury.",
+    "created_at": "2026-03-14T07:08:03.528587+00:00"
+  },
+  {
+    "id": "3020ad88-7d11-493a-a42e-1effc41b6911",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:08:03.674317+00:00"
+  },
+  {
+    "id": "46b47e35-7ab2-49b4-9380-6fd985afbfee",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Canterbury.",
+    "created_at": "2026-03-14T07:08:04.053365+00:00"
+  },
+  {
+    "id": "7764d2f1-d924-408b-8d26-dc399b21922d",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:08:04.183471+00:00"
+  },
+  {
+    "id": "079a6c09-f382-4241-8ca2-96f53ae1a48d",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Canterbury.",
+    "created_at": "2026-03-14T07:08:04.383552+00:00"
+  },
+  {
+    "id": "4906f7ba-08cd-4000-a802-78376ce5e8bb",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:08:04.611784+00:00"
+  },
+  {
+    "id": "81c90197-aad9-4d43-b0ca-7a1d5700da10",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Canterbury.",
+    "created_at": "2026-03-14T07:08:04.801941+00:00"
+  },
+  {
+    "id": "fb3df941-2101-4295-843b-a416758ecb34",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:08:04.965108+00:00"
+  },
+  {
+    "id": "dabaa8a3-e842-479f-a054-bb69e8e48acb",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Maidstone.",
+    "created_at": "2026-03-14T07:08:05.218475+00:00"
+  },
+  {
+    "id": "0cb198d0-b18f-4fff-b872-47b07e43576d",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:08:05.361809+00:00"
+  },
+  {
+    "id": "025ee562-af35-46c0-8b76-23e904761d2c",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Maidstone.",
+    "created_at": "2026-03-14T07:08:05.639875+00:00"
+  },
+  {
+    "id": "b8947e31-7646-4675-be33-472de3912624",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:08:05.75475+00:00"
+  },
+  {
+    "id": "be2d14b6-37b1-4193-9c66-25842692ee33",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Maidstone.",
+    "created_at": "2026-03-14T07:08:06.019273+00:00"
+  },
+  {
+    "id": "9d1908fa-04bf-48c5-8a8d-6fd413c1d6fe",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:08:06.192985+00:00"
+  },
+  {
+    "id": "24ccf999-461c-4f9b-b688-0f9043afacfd",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Maidstone.",
+    "created_at": "2026-03-14T07:08:06.396015+00:00"
+  },
+  {
+    "id": "d00f5c91-14da-4305-85b4-a96e83580466",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:08:06.512392+00:00"
+  },
+  {
+    "id": "bedd1a49-eef0-43c8-b65c-249aa59c5713",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Maidstone.",
+    "created_at": "2026-03-14T07:08:06.821028+00:00"
+  },
+  {
+    "id": "dfecde1d-5d81-49f0-b81a-cd1dfac160cd",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:08:07.027005+00:00"
+  },
+  {
+    "id": "059f0958-4fac-4f5c-b7f8-fa3ab1a73ea6",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Folkestone.",
+    "created_at": "2026-03-14T07:08:07.292606+00:00"
+  },
+  {
+    "id": "8ec94a52-7cd9-43e8-b68c-631694cce160",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:08:07.495002+00:00"
+  },
+  {
+    "id": "83d443c2-ae3b-44ce-ad41-d62d221e53f2",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Folkestone.",
+    "created_at": "2026-03-14T07:08:07.772135+00:00"
+  },
+  {
+    "id": "d94a9b82-54f4-47de-8da9-55cf7c4e036d",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:08:07.889499+00:00"
+  },
+  {
+    "id": "7277e047-af02-4991-b537-2dd5c90a39a6",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Folkestone.",
+    "created_at": "2026-03-14T07:08:08.215225+00:00"
+  },
+  {
+    "id": "1d1d99d4-1e73-4a60-85ce-67bd50b6a486",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:08:08.33301+00:00"
+  },
+  {
+    "id": "291b18b2-5606-499f-85b4-bd773fbaeb18",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Folkestone.",
+    "created_at": "2026-03-14T07:08:08.552355+00:00"
+  },
+  {
+    "id": "b4959da7-f5a0-4c2e-96b0-6caab4c39862",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:08:08.744275+00:00"
+  },
+  {
+    "id": "53fa72ea-49ca-4993-9821-95ab9e917d31",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Folkestone.",
+    "created_at": "2026-03-14T07:08:08.949301+00:00"
+  },
+  {
+    "id": "d99b6c60-f94b-4eb9-9195-866063d5a6b3",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:08:09.253118+00:00"
+  },
+  {
+    "id": "3cc4da16-d611-43c5-820b-7e2a3d0a98ec",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:09.452662+00:00"
+  },
+  {
+    "id": "dfa9a822-67dc-488e-b0db-c8b1bce72174",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:09.571245+00:00"
+  },
+  {
+    "id": "ff4d8395-98eb-4833-a8de-fe06b399407d",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:09.821771+00:00"
+  },
+  {
+    "id": "f5f29d46-5b27-4b4f-becd-71dd0da7045b",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:09.937527+00:00"
+  },
+  {
+    "id": "841e1b95-cc1a-48c0-9486-d35548728da0",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:10.3239+00:00"
+  },
+  {
+    "id": "dcba3132-a9aa-4a85-ab89-1b6895fb9aca",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:10.448454+00:00"
+  },
+  {
+    "id": "5b82dfa2-bdfd-4932-adeb-bf8c8287ad3b",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:10.659024+00:00"
+  },
+  {
+    "id": "4354c4f6-5258-4eac-9ddc-27de870842f7",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:10.865127+00:00"
+  },
+  {
+    "id": "111227b5-dfd1-4c82-900a-90ee7153d0c1",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Branding specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:11.060014+00:00"
+  },
+  {
+    "id": "d0360255-3ef7-4261-99c6-180a7daa1d7a",
+    "service_id": "e4d3b1a3-2d5f-4f4e-1a5d-4f6e8a0b2c4d",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:11.357132+00:00"
+  },
+  {
+    "id": "87309a1c-d2d2-40ab-b24c-edf7353aca61",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Ashford.",
+    "created_at": "2026-03-14T07:08:11.55943+00:00"
+  },
+  {
+    "id": "0467c496-9be9-45a7-848c-c891ff2942cc",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:08:11.64979+00:00"
+  },
+  {
+    "id": "27573dca-1bf1-4eaf-916a-ae8c964bcaf4",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:08:11.77283+00:00"
+  },
+  {
+    "id": "bcf11c81-9c71-4933-acee-1326caee13c0",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Ashford.",
+    "created_at": "2026-03-14T07:08:12.031086+00:00"
+  },
+  {
+    "id": "52fa00a1-f80e-4c97-8ea4-ea42ffebfac0",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:08:12.105329+00:00"
+  },
+  {
+    "id": "8f5f3697-f1da-4118-b0d4-852041c1eedc",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:08:12.270751+00:00"
+  },
+  {
+    "id": "3a2815d6-7883-45e1-8226-285c0112b3d6",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Ashford.",
+    "created_at": "2026-03-14T07:08:12.60702+00:00"
+  },
+  {
+    "id": "76ef6459-7287-462f-a229-86699853bbab",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:08:12.697802+00:00"
+  },
+  {
+    "id": "993e0731-36e5-4775-85d1-5830dbb57d37",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:08:12.77612+00:00"
+  },
+  {
+    "id": "f1904176-cf49-4454-ae4b-1e2fbb7cba78",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Ashford.",
+    "created_at": "2026-03-14T07:08:13.057922+00:00"
+  },
+  {
+    "id": "52b29f17-4c3b-40e3-a5c3-f5b148332a20",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:08:13.132698+00:00"
+  },
+  {
+    "id": "f42a9f5f-0ac0-4b37-978d-8959b77d1f5f",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:08:13.313552+00:00"
+  },
+  {
+    "id": "5fdc1830-ca24-42a0-899c-0e80ae741122",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Ashford.",
+    "created_at": "2026-03-14T07:08:13.572844+00:00"
+  },
+  {
+    "id": "1f8e30d2-9aaf-4adb-9244-b9817c1b8cf0",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Outdated systems holding back your business growth.",
+    "created_at": "2026-03-14T07:08:13.655352+00:00"
+  },
+  {
+    "id": "db369da1-3b1c-4e23-a68d-38e37f6e8a21",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Ashford market dynamics.",
+    "created_at": "2026-03-14T07:08:13.735884+00:00"
+  },
+  {
+    "id": "fd7df284-abbb-4f8c-b779-b7ddffdeb8a4",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Canterbury.",
+    "created_at": "2026-03-14T07:08:14.047634+00:00"
+  },
+  {
+    "id": "624f7713-7695-4b4e-b25b-462bc7c3a661",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:08:14.167773+00:00"
+  },
+  {
+    "id": "4e009bc6-12dd-42bd-a5ff-38d6c5f88b50",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Canterbury.",
+    "created_at": "2026-03-14T07:08:14.54033+00:00"
+  },
+  {
+    "id": "89fa2726-71d2-4557-8029-37da4f348fa0",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:08:14.661126+00:00"
+  },
+  {
+    "id": "4b28f526-f989-4300-a10e-a9ca9b4386a0",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Canterbury.",
+    "created_at": "2026-03-14T07:08:14.865842+00:00"
+  },
+  {
+    "id": "f5b898e8-28f0-459c-ba83-b1fa0bc16329",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:08:15.083712+00:00"
+  },
+  {
+    "id": "90a80cb9-ba4b-45a9-98c8-bba1f30ce14a",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Canterbury.",
+    "created_at": "2026-03-14T07:08:15.279857+00:00"
+  },
+  {
+    "id": "4ce58e29-5478-4014-a840-0c6a3ef50ac2",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:08:15.5922+00:00"
+  },
+  {
+    "id": "643137f8-ad28-4860-aa5a-9178708d64b6",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Canterbury.",
+    "created_at": "2026-03-14T07:08:15.802155+00:00"
+  },
+  {
+    "id": "967870d3-9302-4225-a87b-b7ab0188ad80",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Canterbury market dynamics.",
+    "created_at": "2026-03-14T07:08:15.931222+00:00"
+  },
+  {
+    "id": "21fa9463-8424-4d29-a105-f0a9362f2548",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Maidstone.",
+    "created_at": "2026-03-14T07:08:16.202353+00:00"
+  },
+  {
+    "id": "906ac48f-83af-43d8-953b-002da18ff27e",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:08:16.467668+00:00"
+  },
+  {
+    "id": "7e16680e-ddee-4809-b25c-d472f1a5a7a3",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Maidstone.",
+    "created_at": "2026-03-14T07:08:16.77456+00:00"
+  },
+  {
+    "id": "60eda97f-cf9a-4e6c-9ced-e30ced47b09b",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:08:16.920072+00:00"
+  },
+  {
+    "id": "6e651c63-baf0-4e77-a485-4e54c6bd67a9",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Maidstone.",
+    "created_at": "2026-03-14T07:08:17.204266+00:00"
+  },
+  {
+    "id": "52d4401c-713e-4a3c-a3bd-604140d54a5b",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:08:17.342236+00:00"
+  },
+  {
+    "id": "3c3c6761-ef76-4166-a58e-6f1188cd39b9",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Maidstone.",
+    "created_at": "2026-03-14T07:08:17.663448+00:00"
+  },
+  {
+    "id": "529d44d1-7361-4233-9384-a131227c3376",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:08:17.784747+00:00"
+  },
+  {
+    "id": "c6ae27b3-5e60-4888-9972-c309a532fc7d",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Maidstone.",
+    "created_at": "2026-03-14T07:08:17.987196+00:00"
+  },
+  {
+    "id": "28488ab8-fc4a-4565-acac-dd2306c83e48",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Maidstone market dynamics.",
+    "created_at": "2026-03-14T07:08:18.176123+00:00"
+  },
+  {
+    "id": "773b4c77-2044-445b-8504-29edce48c030",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Folkestone.",
+    "created_at": "2026-03-14T07:08:18.39973+00:00"
+  },
+  {
+    "id": "94f13024-8c4e-4a00-84ee-98d10e8eeb68",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:08:18.605645+00:00"
+  },
+  {
+    "id": "43379d27-469d-4ef4-bda0-bd1a850ac3eb",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Folkestone.",
+    "created_at": "2026-03-14T07:08:18.85444+00:00"
+  },
+  {
+    "id": "a8658f94-1596-4650-9603-5ec8c1e57017",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:08:19.011398+00:00"
+  },
+  {
+    "id": "389d5a94-5d3a-4de9-9a77-6e5f85deb298",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Folkestone.",
+    "created_at": "2026-03-14T07:08:19.312389+00:00"
+  },
+  {
+    "id": "a2fb1d34-3b44-423f-a857-b6ff218f4268",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:08:19.438198+00:00"
+  },
+  {
+    "id": "eecd2f61-b32c-4f19-8bc9-f1c010f76237",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Folkestone.",
+    "created_at": "2026-03-14T07:08:19.87409+00:00"
+  },
+  {
+    "id": "18f59ab5-2d5d-4eff-895c-9b4d0a460b20",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:08:20.008912+00:00"
+  },
+  {
+    "id": "cdc60525-271d-40e6-a456-6ab51102b546",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Folkestone.",
+    "created_at": "2026-03-14T07:08:20.296112+00:00"
+  },
+  {
+    "id": "92f3e3df-54f3-41d1-b017-35b7e59d41cf",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Folkestone market dynamics.",
+    "created_at": "2026-03-14T07:08:20.421844+00:00"
+  },
+  {
+    "id": "35c5ef04-c304-43eb-913c-c47defb65326",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:20.699243+00:00"
+  },
+  {
+    "id": "9c59b01e-82a9-4293-9136-9b7ca0d5f2ac",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "11aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:20.882935+00:00"
+  },
+  {
+    "id": "9aaa81e5-62f7-4250-9a6c-d5f6d5c01eb5",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:21.139715+00:00"
+  },
+  {
+    "id": "7987ba3f-23ae-44ae-bcf2-a09e0b21f1cb",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "22bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:21.381384+00:00"
+  },
+  {
+    "id": "4792a007-f66e-4f1c-b33e-fff22b5f9d89",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:21.617449+00:00"
+  },
+  {
+    "id": "5496b448-b8bb-4000-bc20-7b7d739b36c3",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "33cccccc-cccc-cccc-cccc-cccccccccccc",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:21.844126+00:00"
+  },
+  {
+    "id": "bfb2e533-370c-4233-bff3-213b21b3d9ad",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:22.053012+00:00"
+  },
+  {
+    "id": "2de015d5-6109-4992-904a-a9da2d0580cb",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "44dddddd-dddd-dddd-dddd-dddddddddddd",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:22.182433+00:00"
+  },
+  {
+    "id": "8c1e2efb-bdd6-4cde-9ee0-5f9f833e6a3a",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Struggling to find reliable, local Digital Marketing specialists in Tunbridge Wells.",
+    "created_at": "2026-03-14T07:08:22.463068+00:00"
+  },
+  {
+    "id": "01fdb1f1-b833-446f-ba11-14831eff5ff7",
+    "service_id": "f5e4c2a4-3e6a-4f5f-2c6e-5a7f9b1c3d5e",
+    "industry_id": "55eeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    "pain_point": "Need a partner who understands the local Tunbridge Wells market dynamics.",
+    "created_at": "2026-03-14T07:08:22.595149+00:00"
+  }
+]
