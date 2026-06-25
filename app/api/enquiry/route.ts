@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { sendEmail, sendErrorAlert } from '@/lib/email';
+import { sendEmail, sendErrorAlert, renderLeadEmail } from '@/lib/email';
 
 export async function POST(req: Request) {
   let bodyContext: any = {};
@@ -13,10 +13,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true });
     }
 
-    await sendEmail(
-      `New Enquiry from ${name}`,
-      `New Enquiry / Message\n\nName: ${name || 'N/A'}\nEmail: ${email || 'N/A'}\nWebsite: ${website || 'N/A'}\nService Required: ${service_required || 'N/A'}\nPreferred Day: ${preferred_day || 'N/A'}\nPreferred Time: ${preferred_time || 'N/A'}\n\nMessage:\n${message || 'N/A'}`
-    );
+    const { subject, text, html } = renderLeadEmail({
+      name,
+      email,
+      website,
+      service_required,
+      preferred_day,
+      preferred_time,
+      message,
+    });
+    await sendEmail(subject, text, html);
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
