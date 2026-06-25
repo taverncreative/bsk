@@ -1,12 +1,8 @@
 import { NextResponse } from 'next/server';
 import { generateText } from 'ai';
 import { openai } from '@ai-sdk/openai';
-import { createClient } from '@supabase/supabase-js';
-import { sendEmail, sendErrorAlert } from '@/lib/web3forms';
+import { sendEmail, sendErrorAlert } from '@/lib/email';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
 async function generateAdminSummary(messages: any[], providedUrl: string) {
   if (!messages || messages.length === 0) return 'No conversation history available.';
 
@@ -58,44 +54,10 @@ export async function POST(req: Request) {
 
     const aiSummary = await generateAdminSummary(messages, url);
 
-    const businessTypeMatch = aiSummary.match(/Business Type\s*\n(.*)/);
-    const businessType = businessTypeMatch ? businessTypeMatch[1] : 'Unknown';
-
-    const locationMatch = aiSummary.match(/Business Location\s*\n(.*)/);
-    const location = locationMatch ? locationMatch[1] : 'Unknown';
-
-    const { error: insertError } = await supabase.from('unified_leads').insert({
-      name: name || 'Website Review Request',
-      email: email,
-      website_url: url,
-      page_context: pageUrl || 'Unknown',
-      submission_type: 'Website Review',
-      message: `Industry: ${businessType !== 'Unknown' ? businessType : 'Unknown'}, Location: ${location !== 'Unknown' ? location : 'Unknown'}\n\nAI Diagnostic Output:\n${aiSummary}`,
-    });
-    
-    if (insertError) {
-      console.error("Error inserting lead to Supabase:", insertError);
-      sendErrorAlert(
-        'Website Review',
-        pageUrl || 'Unknown',
-        email || 'Unknown',
-        body,
-        insertError.message || 'Supabase unified_leads Insert Failed'
-      ).catch(console.error);
-    }
-
-    // Also log Elle interaction
-    await supabase.from('elle_logs').insert({
-      intent: 'Website Review',
-      issues_detected: aiSummary.match(/Detected Issues\s*\n(.*)/)?.[1] || null,
-      lead_converted: true,
-      transcript: JSON.stringify(messages)
-    });
-
-    // Send Admin Email via Web3Forms
+    // Send Admin Email via Resend
     await sendEmail(
       `New Website Review Request from ${email}`,
-      `New Website Review Request\n\nEmail: ${email}\nWebsite: ${url}\n\nAI Diagnostic:\n${aiSummary}\n\nView in Dashboard: https://businesssortedkent.co.uk/admin-dashboard/lead-inbox`
+      `New Website Review Request\n\nName: ${name || 'Not provided'}\nEmail: ${email}\nWebsite: ${url}\nSource: ${pageUrl || 'Unknown'}\n\nAI Diagnostic:\n${aiSummary}`
     );
 
     console.log(`[CRM PIPELINE INGESTION] NEW WEBSITE REVIEW REQUEST:

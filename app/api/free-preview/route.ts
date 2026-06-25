@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabaseServer } from '@/lib/supabase-server';
+import { sendEmail, sendErrorAlert } from '@/lib/email';
 
 interface FreePreviewPayload {
   businessName?: string;
@@ -37,41 +37,21 @@ export async function POST(request: Request) {
     );
   }
 
-  // Persist to unified_leads so this submission surfaces in the admin lead inbox
-  // alongside contact-form and website-review submissions. Service-role client
-  // bypasses RLS as established by the earlier /api/enquiry work.
-  const messageBody = [
-    `Business does: ${whatYouDo}`,
-    `Current site: ${currentUrl || 'N/A'}`,
-    `Specifics: ${specifics || 'N/A'}`,
-  ].join('\n');
-
-  const { error: insertError } = await supabaseServer
-    .from('unified_leads')
-    .insert([
-      {
-        name: businessName,
-        email,
-        phone: null,
-        website_url: currentUrl || null,
-        message: messageBody,
-        page_context: 'Free Preview Form',
-        submission_type: 'Free Preview',
-      },
-    ]);
-
-  if (insertError) {
-    console.error('[free-preview] unified_leads insert failed:', insertError);
-    return NextResponse.json(
-      { error: 'Failed to record submission. Please try again.' },
-      { status: 500 }
+  try {
+    await sendEmail(
+      `New Free Preview Request from ${businessName}`,
+      `New Free Preview Request\n\nBusiness: ${businessName}\nEmail: ${email}\nBusiness does: ${whatYouDo}\nCurrent site: ${currentUrl || 'N/A'}\nSpecifics: ${specifics || 'N/A'}`
     );
+  } catch (error: any) {
+    sendErrorAlert(
+      'Free Preview',
+      'Free Preview Form',
+      email,
+      payload,
+      error?.message || 'Server Exception in /api/free-preview'
+    ).catch(console.error);
+    return NextResponse.json({ error: 'Failed to record submission. Please try again.' }, { status: 500 });
   }
-
-  // Email delivery is handled by the parallel client-side Web3Forms call in
-  // FreePreviewForm — same pattern as SecondaryContactForm and WebsiteReviewTool.
-  // No server-side email call here: Vercel-IP outbound to api.web3forms.com
-  // can hit Cloudflare bot-protection challenges.
 
   return NextResponse.json({ ok: true });
 }

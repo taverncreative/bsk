@@ -1,4 +1,3 @@
-import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 const CANONICAL_HOST = 'businesssortedkent.co.uk';
@@ -53,66 +52,10 @@ export async function middleware(request: NextRequest) {
     return res;
   }
 
-  // ── Auth routes: run Supabase session check ──
-  const isAuthRoute = request.nextUrl.pathname.startsWith('/login')
-  const isAdminRoute = request.nextUrl.pathname.startsWith('/admin-dashboard') || request.nextUrl.pathname.startsWith('/api/elle-logs')
-  const isClientRoute = request.nextUrl.pathname.startsWith('/client-dashboard')
-
-  if (!isAuthRoute && !isAdminRoute && !isClientRoute) {
-    return NextResponse.next()
-  }
-
-  let supabaseResponse = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  })
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            request.cookies.set(name, value)
-            supabaseResponse.cookies.set(name, value, options)
-          })
-        },
-      },
-    }
-  )
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  // Not authenticated
-  if (!user && (isAdminRoute || isClientRoute)) {
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
-
-  // Already authenticated, trying to access login
-  if (user && isAuthRoute) {
-    const role = user.app_metadata?.role
-    if (role === 'admin') {
-      return NextResponse.redirect(new URL('/admin-dashboard', request.url))
-    }
-    return NextResponse.redirect(new URL('/client-dashboard', request.url))
-  }
-
-  // Authenticated user trying to access admin
-  if (user && isAdminRoute) {
-    const role = user.app_metadata?.role
-    if (role !== 'admin') {
-      return NextResponse.redirect(new URL('/', request.url))
-    }
-  }
-
-  return supabaseResponse
+  // Auth, dashboards and the database have been removed — the site is now a
+  // static marketing site. Everything past the SEO redirects above just passes
+  // through.
+  return NextResponse.next();
 }
 
 export const config = {

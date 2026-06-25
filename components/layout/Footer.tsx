@@ -177,11 +177,6 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
-              <li className="pt-3 border-t border-white/10 mt-3">
-                <Link href="/login" className="text-brand-gold/90 hover:text-brand-gold transition-colors">
-                  Client login
-                </Link>
-              </li>
             </ul>
           </div>
         </div>

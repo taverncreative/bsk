@@ -5,7 +5,6 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/admin-dashboard', '/client-dashboard', '/login'],
     },
     sitemap: 'https://businesssortedkent.co.uk/sitemap.xml',
   };

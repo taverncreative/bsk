@@ -129,12 +129,8 @@ export default function PrivacyPage() {
                   processed in the EU/US under standard contractual clauses).
                 </li>
                 <li>
-                  <strong className="text-ink">Supabase</strong> — database for storing enquiries
-                  (EU region).
-                </li>
-                <li>
-                  <strong className="text-ink">Web3Forms</strong> — relays form submissions to our
-                  inbox.
+                  <strong className="text-ink">Resend</strong> — relays form submissions to our
+                  inbox by email.
                 </li>
                 <li>
                   <strong className="text-ink">Email and accounting software</strong> — to

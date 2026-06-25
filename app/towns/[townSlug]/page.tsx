@@ -2,9 +2,9 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTownBySlug, getAllTowns, getAllServices, getNearbyTowns, getAllGuides } from '@/lib/queries';
+import { getLocalContentByTown } from '@/lib/queries/local-content';
 import type { Town } from '@/types';
 import TownPage from '@/components/templates/TownPage';
-import { supabase } from '@/lib/supabase';
 
 type Props = {
   params: Promise<{
@@ -48,11 +48,8 @@ export default async function TownHubPage({ params }: Props) {
     notFound();
   }
 
-  // Fetch all local_content records for this town to build a rich overview
-  const { data: townContent } = await supabase
-    .from('local_content')
-    .select('service_slug, intro_paragraph, local_context, competition_landscape, success_approach, pain_points, solutions')
-    .eq('town_slug', townSlug);
+  // All local_content records for this town to build a rich overview
+  const townContent = await getLocalContentByTown(townSlug);
 
   let nearbyTowns: Town[] = [];
   if (town.latitude !== null && town.longitude !== null) {

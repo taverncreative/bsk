@@ -1,4 +1,5 @@
-import { supabaseServer as supabase } from '@/lib/supabase-server';
+import localContentData from '@/lib/data/local_content.json';
+import industryContentData from '@/lib/data/industry_content.json';
 
 export interface LocalContent {
   id: string;
@@ -27,26 +28,26 @@ export interface IndustryContent {
   faqs: Array<{ question: string; answer: string }>;
 }
 
-export async function getLocalContent(serviceSlug: string, townSlug: string): Promise<LocalContent | null> {
-  const { data, error } = await supabase
-    .from('local_content')
-    .select('*')
-    .eq('service_slug', serviceSlug)
-    .eq('town_slug', townSlug)
-    .single();
+const localContent = localContentData as unknown as (LocalContent & { updated_at?: string })[];
+const industryContent = industryContentData as unknown as IndustryContent[];
 
-  if (error || !data) return null;
-  return data as LocalContent;
+export async function getLocalContent(serviceSlug: string, townSlug: string): Promise<LocalContent | null> {
+  return localContent.find((c) => c.service_slug === serviceSlug && c.town_slug === townSlug) ?? null;
 }
 
 export async function getIndustryContent(industrySlug: string, serviceSlug: string): Promise<IndustryContent | null> {
-  const { data, error } = await supabase
-    .from('industry_content')
-    .select('*')
-    .eq('industry_slug', industrySlug)
-    .eq('service_slug', serviceSlug)
-    .single();
+  return (
+    industryContent.find((c) => c.industry_slug === industrySlug && c.service_slug === serviceSlug) ?? null
+  );
+}
 
-  if (error || !data) return null;
-  return data as IndustryContent;
+// All local_content rows for one town — used by the town hub page to build a
+// rich service overview.
+export async function getLocalContentByTown(townSlug: string): Promise<LocalContent[]> {
+  return localContent.filter((c) => c.town_slug === townSlug);
+}
+
+// All local_content rows — used by the sitemap to read per-page updated_at.
+export async function getAllLocalContent(): Promise<(LocalContent & { updated_at?: string })[]> {
+  return localContent;
 }

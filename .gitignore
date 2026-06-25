@@ -25,6 +25,7 @@ scripts/google-service-account.json
 
 # misc
 .DS_Store
+._*
 *.pem
 
 # debug

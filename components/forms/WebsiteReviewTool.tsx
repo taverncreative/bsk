@@ -28,29 +28,13 @@ export default function WebsiteReviewTool() {
     // Track lead capture for analytics
     trackLead('website_review_request', { url, email });
 
-    // Send the lead to our backend for team follow-up
+    // Send the lead to our backend (emails the request via Resend).
     try {
-      await Promise.all([
-        fetch('/api/website-review', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url, email, hp_website: honeypot }),
-        }),
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            access_key: '31fb5677-3e73-4a83-abc3-4c668ba876df',
-            subject: `New Website Review Request from ${email}`,
-            from_name: 'Business Sorted Kent',
-            Name: 'Website Review Request',
-            Email: email,
-            Website: url,
-            Message: `New website review request.\n\nWebsite: ${url}\nEmail: ${email}\n\nPlease run a manual review and follow up with the visitor.`,
-            botcheck: honeypot,
-          }),
-        }).catch(() => {}),
-      ]);
+      await fetch('/api/website-review', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url, email, hp_website: honeypot }),
+      });
 
       setSubmittedUrl(url);
       setSubmittedEmail(email);

@@ -35,37 +35,20 @@ export default function QuoteForm() {
     });
 
     try {
-      // Fire both API save and Web3Forms email in parallel
-      const [res] = await Promise.all([
-        fetch('/api/leads', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            website_url: null,
-            message: `Service Required: ${formData.service}\n\nMessage: ${formData.message}`,
-            page_context: window.location.pathname,
-            submission_type: 'Quote Request',
-          }),
+      // Submit to our API, which emails the lead via Resend.
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          website_url: null,
+          message: `Service Required: ${formData.service}\n\nMessage: ${formData.message}`,
+          page_context: window.location.pathname,
+          submission_type: 'Quote Request',
         }),
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            access_key: '31fb5677-3e73-4a83-abc3-4c668ba876df',
-            subject: `New Quote Request: ${formData.name}`,
-            from_name: 'Business Sorted Kent',
-            Name: formData.name,
-            Email: formData.email,
-            Phone: formData.phone || 'N/A',
-            Service: formData.service || 'N/A',
-            Message: formData.message || 'N/A',
-            Source: window.location.pathname,
-          }),
-        }).catch(() => {}),
-      ]);
+      });
 
       if (!res.ok) {
         throw new Error('Failed to submit');

@@ -1,4 +1,4 @@
-import { supabaseServer as supabase } from '@/lib/supabase-server';
+import caseStudiesData from '@/lib/data/case_studies.json';
 
 export interface CaseStudy {
   id?: string;
@@ -15,41 +15,20 @@ export interface CaseStudy {
   created_at?: string;
 }
 
+const caseStudies = caseStudiesData as unknown as CaseStudy[];
+
 /**
- * Fetch all Case Studies
- * Automatically ordered by newest first.
+ * Fetch all Case Studies, ordered newest first.
  */
 export async function getAllCaseStudies(): Promise<CaseStudy[]> {
-  const { data, error } = await supabase
-    .from('case_studies')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    console.error('Error fetching all case studies:', error);
-    return [];
-  }
-  
-  return data as CaseStudy[];
+  return [...caseStudies].sort(
+    (a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime()
+  );
 }
 
 /**
- * Fetch a specific Case Study natively mapped by its URL slug.
+ * Fetch a specific Case Study by its URL slug.
  */
 export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null> {
-  const { data, error } = await supabase
-    .from('case_studies')
-    .select('*')
-    .eq('slug', slug)
-    .single();
-
-  if (error) {
-    // Suppress warning if technically valid Postgres 116 "0 rows returned"
-    if (error.code !== 'PGRST116') {
-      console.error(`Error fetching case study by slug: ${slug}`, error);
-    }
-    return null;
-  }
-  
-  return data as CaseStudy;
+  return caseStudies.find((c) => c.slug === slug) ?? null;
 }

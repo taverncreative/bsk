@@ -57,28 +57,12 @@ export default function SecondaryContactForm() {
     }
 
     try {
-      // Fire both API save and Web3Forms email in parallel
-      const [res] = await Promise.all([
-        fetch('/api/enquiry', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...formData, hp_website: honeypot }),
-        }),
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            access_key: '31fb5677-3e73-4a83-abc3-4c668ba876df',
-            subject: `New Enquiry: ${formData.name}`,
-            from_name: 'Business Sorted Kent',
-            Name: formData.name,
-            Email: formData.email,
-            'Service Required': formData.service_required || 'N/A',
-            Message: formData.message || 'N/A',
-            botcheck: honeypot,
-          }),
-        }).catch(() => {}),
-      ]);
+      // Submit to our API, which emails the enquiry via Resend.
+      const res = await fetch('/api/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, hp_website: honeypot }),
+      });
 
       if (res.ok) {
         setStatus('success');

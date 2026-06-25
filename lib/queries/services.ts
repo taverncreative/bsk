@@ -1,31 +1,12 @@
-import { supabaseServer as supabase } from '@/lib/supabase-server';
 import type { Service } from '@/types';
+import servicesData from '@/lib/data/services.json';
+
+const services = servicesData as unknown as Service[];
 
 export async function getServiceBySlug(slug: string): Promise<Service | null> {
-  const { data, error } = await supabase
-    .from('services')
-    .select('*')
-    .eq('slug', slug)
-    .single();
-
-  if (error) {
-    if (error.code !== 'PGRST116') {
-      console.error(`Error fetching service by slug: ${slug}`, error);
-    }
-    return null;
-  }
-  return data as Service;
+  return services.find((s) => s.slug === slug) ?? null;
 }
 
 export async function getAllServices(): Promise<Service[]> {
-  const { data, error } = await supabase
-    .from('services')
-    .select('*')
-    .order('name');
-
-  if (error) {
-    console.error('Error fetching all services', error);
-    return [];
-  }
-  return data as Service[];
+  return [...services].sort((a, b) => (a.name || '').localeCompare(b.name || ''));
 }

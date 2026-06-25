@@ -1,24 +1,17 @@
-import { supabaseServer as supabase } from '@/lib/supabase-server';
 import type { FAQ } from '@/types';
+import faqsData from '@/lib/data/faqs.json';
+
+const faqs = faqsData as unknown as (FAQ & {
+  service_id?: string;
+  town_id?: string;
+  industry_id?: string;
+})[];
 
 export async function getFAQs(serviceId?: string, townId?: string, industryId?: string): Promise<FAQ[]> {
-  let query = supabase.from('faqs').select('*');
-  
-  if (serviceId) {
-    query = query.eq('service_id', serviceId);
-  }
-  if (townId) {
-    query = query.eq('town_id', townId);
-  }
-  if (industryId) {
-    query = query.eq('industry_id', industryId);
-  }
-  
-  const { data, error } = await query;
-  
-  if (error) {
-    console.error('Error fetching FAQs', error);
-    return [];
-  }
-  return data as FAQ[];
+  return faqs.filter((f) => {
+    if (serviceId && f.service_id !== serviceId) return false;
+    if (townId && f.town_id !== townId) return false;
+    if (industryId && f.industry_id !== industryId) return false;
+    return true;
+  }) as FAQ[];
 }

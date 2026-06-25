@@ -6,7 +6,7 @@ import {
   getAllGuides,
   getAllCaseStudies
 } from '@/lib/queries';
-import { supabase } from '@/lib/supabase';
+import { getAllLocalContent } from '@/lib/queries/local-content';
 
 /**
  * Pick the most recent of N possibly-undefined date strings, returning a Date
@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getAllIndustries(),
     getAllGuides(),
     getAllCaseStudies(),
-    supabase.from('local_content').select('service_slug, town_slug, updated_at').then(r => r.data || [])
+    getAllLocalContent()
   ]);
 
   // Map service-town slug pairs to their local_content updated_at timestamp.

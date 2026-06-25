@@ -24,22 +24,23 @@ export default function ConsultationCalendar() {
   const [isFallbackMode, setIsFallbackMode] = useState(false);
 
   useEffect(() => {
-    fetch('/api/availability')
-      .then(res => res.json())
-      .then(data => {
-        if (data.slots && data.slots.length > 0) {
-          setAvailableData(data.slots);
-          setSelectedDate(data.slots[0].date);
-        } else {
-          setIsFallbackMode(true);
-        }
-      })
-      .catch(() => {
-        setIsFallbackMode(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    // There is no backend: generate the next 8 weekday slots client-side.
+    // Bookings are emailed via /api/book-consultation; the listed times are
+    // indicative, and the team confirms the exact slot on reply.
+    const slots: TimeSlot[] = [];
+    const times = ['09:30', '10:30', '11:30', '14:00', '15:00', '16:00'];
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    while (slots.length < 8) {
+      const day = d.getDay();
+      if (day !== 0 && day !== 6) {
+        slots.push({ date: d.toISOString().split('T')[0], times: [...times] });
+      }
+      d.setDate(d.getDate() + 1);
+    }
+    setAvailableData(slots);
+    setSelectedDate(slots[0]?.date ?? null);
+    setIsLoading(false);
   }, []);
 
   const handleBookingSubmit = async (e: React.FormEvent) => {

@@ -37,31 +37,12 @@ export default function FreePreviewForm() {
     }
 
     try {
-      // Fire backend save + Web3Forms email in parallel — same pattern as
-      // SecondaryContactForm and WebsiteReviewTool.
-      const [res] = await Promise.all([
-        fetch('/api/free-preview', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...payload, hp_website: honeypot }),
-        }),
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            access_key: '31fb5677-3e73-4a83-abc3-4c668ba876df',
-            subject: `New Free Preview Request from ${payload.businessName}`,
-            from_name: 'Business Sorted Kent',
-            Name: payload.businessName,
-            Email: payload.email,
-            'Business does': payload.whatYouDo,
-            'Current site': payload.currentUrl || 'N/A',
-            Specifics: payload.specifics || 'N/A',
-            Message: `New Free Preview request.\n\nBusiness: ${payload.businessName}\nWhat they do: ${payload.whatYouDo}\nCurrent site: ${payload.currentUrl || 'N/A'}\nEmail: ${payload.email}\nSpecifics: ${payload.specifics || 'N/A'}\n\nBuild a preview and reply.`,
-            botcheck: honeypot,
-          }),
-        }).catch(() => {}),
-      ]);
+      // Submit to our API, which emails the request via Resend.
+      const res = await fetch('/api/free-preview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...payload, hp_website: honeypot }),
+      });
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
