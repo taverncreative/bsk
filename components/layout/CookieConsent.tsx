@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-
-const STORAGE_KEY = 'bsk_cookie_consent';
+import { CONSENT_STORAGE_KEY as STORAGE_KEY, CONSENT_EVENT } from '@/lib/analytics/consent';
 
 type Choice = 'accepted' | 'rejected';
 
@@ -28,6 +27,8 @@ export default function CookieConsent() {
     } catch {
       // localStorage unavailable (private mode, etc.) — silently drop.
     }
+    // Signal analytics so it can start/stop without a page reload.
+    window.dispatchEvent(new Event(CONSENT_EVENT));
     setVisible(false);
   };
 

@@ -1,10 +1,12 @@
 /**
  * Custom Analytics Tracking Engine
- * 
+ *
  * Centralized utility for tracking high-value conversion events across the site.
- * Currently routing to console.log, but architected for drop-in replacement 
- * with Google Analytics (GA4), PostHog, or Meta Pixel via unified schemas.
+ * Logs to console for debugging/future CRM ingestion and forwards GA4 events —
+ * but only after the visitor has accepted cookies (see hasAnalyticsConsent).
  */
+
+import { hasAnalyticsConsent } from './consent';
 
 interface LeadData {
   service?: string;
@@ -24,15 +26,18 @@ export const trackLead = (eventName: string, data: LeadData = {}) => {
   console.log('Payload:', data);
   console.groupEnd();
 
-  // 3. Example GA4 Integration Map (commented out for future use)
-  /*
-  if (window.gtag) {
-    window.gtag('event', eventName, {
-      ...data,
-      send_to: 'G-XXXXXXXXXX',
-    });
+  // 3. Google Analytics (GA4) forwarding.
+  //    Consent-gated: only fires once the visitor has accepted cookies, honouring
+  //    the cookie banner's promise. gtag is loaded by <GoogleAnalytics /> on accept
+  //    and routes events to the configured measurement ID automatically.
+  if (hasAnalyticsConsent() && typeof window.gtag === 'function') {
+    // Strip PII before it leaves the browser — GA4 must never receive email
+    // addresses (Google's policy + UK GDPR). Keep non-personal fields (service,
+    // magnet, town, url, sourcePage, industry) for conversion analysis.
+    const gaParams = { ...data };
+    delete gaParams.email;
+    window.gtag('event', eventName, gaParams);
   }
-  */
 
   // 4. Example PostHog Integration Map (commented out for future use)
   /*
