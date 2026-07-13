@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer';
 import CookieConsent from '@/components/layout/CookieConsent';
 import SiteSchema from '@/components/seo/SiteSchema';
 import ScrollToTop from '@/components/ui/ScrollToTop';
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 
 const nunitoSans = Nunito_Sans({
   subsets: ['latin'],
@@ -34,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={nunitoSans.variable}>
       <body className={nunitoSans.className}>
+        <GoogleAnalytics />
         <ScrollToTop />
         <SiteSchema />
         <header>
