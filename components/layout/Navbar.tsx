@@ -114,9 +114,6 @@ export default function Navbar() {
               <Link href="/case-studies" className="py-2 text-paper/70 hover:text-paper transition-colors">
                 Case studies
               </Link>
-              <Link href="/guides" className="py-2 text-paper/70 hover:text-paper transition-colors">
-                Guides
-              </Link>
               <Link href="/news" className="py-2 text-paper/70 hover:text-paper transition-colors">
                 News
               </Link>
@@ -191,9 +188,6 @@ export default function Navbar() {
           </Link>
           <Link href="/case-studies" className="text-xl font-display text-paper py-4 border-b border-white/10">
             Case studies
-          </Link>
-          <Link href="/guides" className="text-xl font-display text-paper py-4 border-b border-white/10">
-            Guides
           </Link>
           <Link href="/news" className="text-xl font-display text-paper py-4 border-b border-white/10">
             News
