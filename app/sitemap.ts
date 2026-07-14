@@ -7,6 +7,7 @@ import {
   getAllCaseStudies
 } from '@/lib/queries';
 import { getAllLocalContent } from '@/lib/queries/local-content';
+import { getPublishedPosts } from '@/lib/blog/client';
 
 /**
  * Pick the most recent of N possibly-undefined date strings, returning a Date
@@ -28,13 +29,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Fetch all programmatic data concurrently. Pull updated_at from local_content
   // so we can populate lastmod accurately on service×town URLs.
-  const [services, towns, industries, guides, caseStudies, localContentRows] = await Promise.all([
+  const [services, towns, industries, guides, caseStudies, localContentRows, newsPosts] = await Promise.all([
     getAllServices(),
     getAllTowns(),
     getAllIndustries(),
     getAllGuides(),
     getAllCaseStudies(),
-    getAllLocalContent()
+    getAllLocalContent(),
+    getPublishedPosts()
   ]);
 
   // Map service-town slug pairs to their local_content updated_at timestamp.
@@ -59,6 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/industries',
     '/case-studies',
     '/guides',
+    '/news',
   ];
 
   const map: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
@@ -155,6 +158,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       map.push({
         url: `${baseUrl}/case-studies/${cs.slug}`,
         ...(cs.updated_at && { lastModified: new Date(cs.updated_at) }),
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      });
+    }
+  });
+
+  // 7. News (blog posts fetched from Spotlight). getPublishedPosts returns []
+  // on any failure, so a Spotlight outage just omits these URLs rather than
+  // failing the sitemap. lastmod uses published_at (the only date the API
+  // exposes).
+  newsPosts.forEach((post) => {
+    if (post.slug) {
+      map.push({
+        url: `${baseUrl}/news/${post.slug}`,
+        ...(post.published_at && { lastModified: new Date(post.published_at) }),
         changeFrequency: 'monthly',
         priority: 0.7,
       });
