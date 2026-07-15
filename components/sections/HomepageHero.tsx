@@ -21,7 +21,7 @@ export default function HomepageHero({
   deck,
   subtitle,
   primaryCTA = { text: 'See what yours could look like', href: '#free-preview' },
-  secondaryCTA = { text: 'See pricing', href: '#services' },
+  secondaryCTA,
   eyebrow = 'Web · SEO · Automations · Kent',
 }: HomepageHeroProps) {
   return (
@@ -40,15 +40,9 @@ export default function HomepageHero({
             <p className="font-display text-2xl md:text-4xl text-ink/80 leading-tight mb-8">
               {deck || (
                 <>
+                  <span className="block">Built properly.</span>
                   <span className="block">
-                    Websites used to cost{' '}
-                    <span className="font-mono text-[0.78em] align-middle line-through decoration-2 text-ink-faint">
-                      £3000
-                    </span>
-                    .
-                  </span>
-                  <span className="block">
-                    Yours costs <span className="font-mono text-brand-gold">£280</span>.
+                    Live in <span className="text-brand-gold">weeks</span>, not months.
                   </span>
                 </>
               )}
@@ -57,7 +51,7 @@ export default function HomepageHero({
             <p className="text-lg md:text-xl text-ink-muted leading-relaxed mb-10">
               {subtitle || (
                 <>
-                  AI changed how websites get built, so we changed how much we charge for it. The checks for speed, security and SEO are the same as on a £3000 site.
+                  Mobile-first websites with rigorous checks for speed, security and SEO — the standards that actually matter, on every build.
                 </>
               )}
             </p>

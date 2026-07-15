@@ -1,7 +1,5 @@
 import HomepageHero from '@/components/sections/HomepageHero';
-import FreePreview from '@/components/sections/FreePreview';
 import WhatYouGet from '@/components/sections/WhatYouGet';
-import Services from '@/components/sections/Services';
 import Concerns from '@/components/sections/Concerns';
 import HomepageProof from '@/components/sections/HomepageProof';
 import CaseStudySection from '@/components/sections/CaseStudySection';
@@ -25,9 +23,7 @@ export default async function Home() {
   return (
     <>
       <HomepageHero />
-      <FreePreview />
       <WhatYouGet />
-      <Services />
       <Concerns />
       <HomepageProof caseStudies={caseStudies} />
       <CaseStudySection caseStudies={caseStudies} variant="spotlight" />
