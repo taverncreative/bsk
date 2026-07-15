@@ -148,11 +148,6 @@ export default function Footer() {
             <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-paper/50 mb-5">Company</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/free-preview" className="text-paper/70 hover:text-brand-gold transition-colors">
-                  Free preview
-                </Link>
-              </li>
-              <li>
                 <Link href="/about" className="text-paper/70 hover:text-brand-gold transition-colors">
                   About
                 </Link>

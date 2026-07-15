@@ -190,18 +190,12 @@ export default function AboutPage() {
           <h2 className="font-display text-ink mb-6">Got something in mind?</h2>
           <p className="text-lg text-ink-muted leading-relaxed mb-10 max-w-xl">
             Tell us what you do and what you need. We’ll come back with a plain answer, usually
-            within a day. Or get a free website preview built in 2 to 3 working days.
+            within a day.
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/free-preview"
-              className="inline-flex items-center bg-ink text-paper font-medium px-6 py-3 rounded-md hover:bg-brand-gold hover:text-ink transition-colors"
-            >
-              Get a free preview
-            </Link>
-            <Link
               href="/contact"
-              className="inline-flex items-center bg-transparent border border-ink/30 text-ink font-medium px-6 py-3 rounded-md hover:border-ink hover:bg-ink hover:text-paper transition-colors"
+              className="inline-flex items-center bg-ink text-paper font-medium px-6 py-3 rounded-md hover:bg-brand-gold hover:text-ink transition-colors"
             >
               Send a message
             </Link>
