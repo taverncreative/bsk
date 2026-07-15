@@ -33,7 +33,7 @@ export default function WhatYouGet() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <div className="mb-16 md:mb-20 max-w-2xl">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
-            Behind the £280
+            Behind the build
           </p>
           <h2 className="font-display text-ink mb-4">Not just a web designer.</h2>
           <p className="text-ink-muted leading-relaxed">

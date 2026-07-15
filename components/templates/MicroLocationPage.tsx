@@ -39,8 +39,14 @@ export default function MicroLocationPage({ service, town, nearbyTowns }: MicroL
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href={`/${service.slug}`}
+              href="/contact"
               className="inline-flex items-center bg-ink text-paper font-medium px-6 py-3 rounded-md hover:bg-brand-gold hover:text-ink transition-colors"
+            >
+              Get in touch
+            </Link>
+            <Link
+              href={`/${service.slug}`}
+              className="inline-flex items-center bg-transparent border border-ink/30 text-ink font-medium px-6 py-3 rounded-md hover:border-ink hover:bg-ink hover:text-paper transition-colors"
             >
               More on {service.name.toLowerCase()}
             </Link>

@@ -20,7 +20,7 @@ export default function HomepageHero({
   title,
   deck,
   subtitle,
-  primaryCTA = { text: 'See what yours could look like', href: '/contact' },
+  primaryCTA = { text: 'Get in touch', href: '/contact' },
   secondaryCTA,
   eyebrow = 'Web · SEO · Automations · Kent',
 }: HomepageHeroProps) {

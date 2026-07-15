@@ -12,17 +12,12 @@ const concerns: Concern[] = [
   {
     question: 'Is the code any good under the hood?',
     answer:
-      'Yes. The code is hand-checked Next.js with real React components, properly structured. AI accelerates the writing, it doesn’t get the final word. Lighthouse 95+, sub-2-second loads, indexed cleanly. The same standards a £3,000 site would ship with.',
-  },
-  {
-    question: '£280 sounds too cheap to be any good.',
-    answer:
-      'The price isn’t the corner-cutting, the tool change is. The work, the checks and the care are exactly what they were five years ago. What’s gone is the markup, because the hours have come down.',
+      'Yes. The code is hand-checked Next.js with real React components, properly structured. AI accelerates the writing, it doesn’t get the final word. Lighthouse 95+, sub-2-second loads, indexed cleanly. The same standards any professionally built site would ship with.',
   },
   {
     question: 'What if I need e-commerce, or something custom?',
     answer:
-      '£280 covers a classic small-business website: homepage, services, about, contact, a couple of supporting pages. E-commerce with a product catalogue, booking systems, member areas or anything custom is priced on application. Tell us what you need and we’ll quote it properly.',
+      'A classic small-business website covers: homepage, services, about, contact, a couple of supporting pages. E-commerce with a product catalogue, booking systems, member areas or anything custom is priced on application. Tell us what you need and we’ll quote it properly.',
   },
 ];
 
