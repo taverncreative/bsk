@@ -110,7 +110,7 @@ export default async function NewsPostPage({ params }: Props) {
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={post.featured_image}
-            alt=""
+            alt={post.featured_image_alt ?? ''}
             className="w-full rounded-xl border border-paper-border mb-12"
           />
         )}

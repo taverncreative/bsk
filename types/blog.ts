@@ -9,6 +9,7 @@ export type BlogPostSummary = {
   slug: string;
   meta_description: string | null;
   featured_image: string | null;
+  featured_image_alt: string | null;
   published_at: string | null;
 };
 
