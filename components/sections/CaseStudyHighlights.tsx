@@ -19,12 +19,12 @@ const highlights: Highlight[] = [
   {
     client: 'Kent iPhone Repair',
     industry: 'Mobile repair · Kent',
-    bigStat: '50',
-    bigStatNote: 'clicks a day',
+    bigStat: '597k',
+    bigStatNote: 'impressions in 6 months',
     bigStatTone: 'gold',
-    headline: 'Daily Google traffic from across Kent.',
+    headline: 'Average position 7, and 5,300+ clicks in six months.',
     body:
-      'New website, local SEO and Google Business Profile work. Map Pack visibility now drives consistent enquiries every working day from right across the county.',
+      'New website, local SEO and Google Business Profile work. Google Search Console over six months: an average position of 7, around 597k impressions and more than 5,300 clicks from across Kent.',
     href: '/case-studies/kent-iphone-repair',
     span: 'lg',
     tone: 'paper',
@@ -32,12 +32,12 @@ const highlights: Highlight[] = [
   {
     client: 'Excel Inspection Solutions',
     industry: 'Statutory inspections · London & SE',
-    bigStat: '+800%',
+    bigStat: '88k+',
     bigStatNote: 'impressions in 6 months',
     bigStatTone: 'ink',
-    headline: 'From invisible to dominating a niche.',
+    headline: 'A specialist niche, found in search.',
     body:
-      'Technical SEO foundations, structured content and Google Business Profile optimisation took a specialist inspection firm from a standing start to consistent first-page visibility.',
+      'Technical SEO foundations, structured content and Google Business Profile optimisation took a specialist inspection firm from a standing start to more than 88k search impressions in six months, with strong and sustained growth.',
     href: '/case-studies/excel-inspection-solutions',
     span: 'sm',
     tone: 'ink',
@@ -45,9 +45,9 @@ const highlights: Highlight[] = [
   {
     client: 'GEM Services',
     industry: 'Pest control · Kent',
-    headline: 'A custom CRM that runs itself.',
+    headline: 'One place to run the whole job.',
     body:
-      'Jobs, quotes, invoicing, follow-ups and review requests all handled automatically. The team spends time on jobs, not on admin.',
+      'A custom CRM built for GEM’s pest-control work: bookings and scheduling, recurring contract visits, agreements signed on-site, and service records with photos and signatures, with PDF reports emailed straight to customers. Works offline in the field and syncs when back in signal.',
     href: '/case-studies/gem-services',
     span: 'sm',
     tone: 'raised',

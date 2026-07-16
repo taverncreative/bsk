@@ -9,29 +9,39 @@ interface GoogleReviewsProps {
 const reviews = [
   {
     name: 'Sam Stewart',
+    rating: 5,
     text: "This is the best business decision I have made in years. Has completely transformed my business within 2 months. My only regret is that I didn’t use John much earlier. I would recommend absolutely any business to contact John as I can assure you he will make improvements across the board to your online presence.",
   },
   {
     name: 'Ella Pearson',
+    rating: 5,
     text: "These guys are the best of the best. I came to them with an idea and a vision and they managed to get exactly what I had in my head onto my website and make it look so professional and amazing. The attention to detail when designing was spot on.",
   },
   {
     name: 'Sandra Barrett',
+    rating: 5,
     text: "Business Sorted Kent created a clean and professional website for my villa rental, which guests have often commented on. The whole process was easy, clear and efficient and very good value for money.",
   },
   {
     name: 'Joe Ward',
+    rating: 5,
     text: "John and the team are nothing but consummate professionals. From the moment we discussed our needs right through to the final product, everything felt easy and professional. The designs received many compliments.",
   },
   {
     name: 'Tom Lawrie',
+    rating: 5,
     text: "They took the time to understand my brand vision and the final logo exceeded my expectations. The communication was excellent and the process was seamless.",
   },
   {
     name: 'Nathan Green',
+    rating: 5,
     text: "Great knowledgeable people with a genuine desire to support local small businesses. They have been absolutely vital to my business growth.",
   }
 ];
+
+// Derived from the actual per-review ratings above, so the summary can never
+// drift out of step with the testimonials shown.
+const averageRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
 
 export default function GoogleReviews({ compact = false }: GoogleReviewsProps) {
   // If compact, only show 3 reviews to keep it shorter vertically
@@ -45,11 +55,18 @@ export default function GoogleReviews({ compact = false }: GoogleReviewsProps) {
         <div className="flex flex-col items-center justify-center text-center mb-16">
           <div className="flex gap-1 mb-4">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-8 h-8 fill-brand-gold text-brand-gold drop-shadow-[0_0_8px_rgba(214,173,103,0.5)]" />
+              <Star
+                key={i}
+                className={`w-8 h-8 ${
+                  i < Math.round(averageRating)
+                    ? 'fill-brand-gold text-brand-gold drop-shadow-[0_0_8px_rgba(214,173,103,0.5)]'
+                    : 'text-paper-border'
+                }`}
+              />
             ))}
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-3xl font-extrabold text-ink tracking-tight">5.0</span>
+            <span className="text-3xl font-extrabold text-ink tracking-tight">{averageRating.toFixed(1)}</span>
             <span className="text-xl text-ink-muted font-medium">average rating</span>
           </div>
           <div className="mt-4 flex flex-col sm:flex-row items-center gap-4">
@@ -79,7 +96,12 @@ export default function GoogleReviews({ compact = false }: GoogleReviewsProps) {
             <div key={idx} className="bg-paper-raised border border-paper-border rounded-2xl p-8 flex flex-col h-full hover:border-brand-gold/30 hover:bg-paper-raised/90 transition-colors shadow-lg shadow-black/20">
               <div className="flex gap-1 mb-6">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-brand-gold text-brand-gold" />
+                  <Star
+                    key={i}
+                    className={`w-5 h-5 ${
+                      i < review.rating ? 'fill-brand-gold text-brand-gold' : 'text-paper-border'
+                    }`}
+                  />
                 ))}
               </div>
               <blockquote className="flex-1 text-ink leading-relaxed font-medium italic mb-8">
