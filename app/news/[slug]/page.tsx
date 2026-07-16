@@ -36,7 +36,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       url: `https://businesssortedkent.co.uk/news/${post.slug}`,
       ...(post.published_at && { publishedTime: post.published_at }),
-      ...(post.featured_image && { images: [{ url: post.featured_image }] }),
+      ...(post.featured_image && {
+        images: [
+          {
+            url: post.featured_image,
+            ...(post.featured_image_alt && { alt: post.featured_image_alt }),
+          },
+        ],
+      }),
     },
   };
 }
@@ -64,11 +71,22 @@ export default async function NewsPostPage({ params }: Props) {
             '@type': 'Article',
             headline: post.title,
             description: post.meta_description || post.title,
-            ...(post.featured_image && { image: post.featured_image }),
+            // ImageObject rather than a bare URL so the alt can travel with it
+            // (schema.org's property for alt-style text is `caption`).
+            ...(post.featured_image && {
+              image: {
+                '@type': 'ImageObject',
+                url: post.featured_image,
+                ...(post.featured_image_alt && {
+                  caption: post.featured_image_alt,
+                }),
+              },
+            }),
             author: {
               '@type': 'Person',
               name: 'John Lally',
               jobTitle: 'Founder',
+              url: 'https://businesssortedkent.co.uk/about',
               worksFor: {
                 '@type': 'Organization',
                 '@id': 'https://businesssortedkent.co.uk/#organization',
