@@ -8,7 +8,7 @@ import PageSchema from '@/components/seo/PageSchema';
 export const metadata: Metadata = {
   title: 'Areas we cover | Business Sorted Kent',
   description:
-    'Web design, SEO and automations for businesses in every Kent town. Built locally, priced honestly.',
+    'Web design, SEO and automations for businesses in every Kent town. Built locally, built properly.',
   alternates: {
     canonical: 'https://businesssortedkent.co.uk/towns',
   },

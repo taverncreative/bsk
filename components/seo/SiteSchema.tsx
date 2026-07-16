@@ -45,19 +45,11 @@ export default function SiteSchema() {
         {
           '@type': 'Offer',
           name: 'Websites',
-          price: '280',
-          priceCurrency: 'GBP',
           itemOffered: { '@type': 'Service', name: 'Website Design' },
         },
         {
           '@type': 'Offer',
           name: 'SEO',
-          priceSpecification: {
-            '@type': 'UnitPriceSpecification',
-            price: '45',
-            priceCurrency: 'GBP',
-            unitText: 'HOUR',
-          },
           itemOffered: { '@type': 'Service', name: 'Local SEO' },
         },
         {

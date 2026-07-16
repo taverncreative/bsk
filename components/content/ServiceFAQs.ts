@@ -127,7 +127,7 @@ export const getServiceFAQs = (serviceSlug: string) => {
         },
         {
           question: "How much does an AI chatbot cost?",
-          answer: "Our AI chatbot packages start from £150/month for a basic lead capture bot, up to £500/month for a fully customised AI assistant with booking integration, CRM synchronisation, and advanced multi-step conversation flows tailored to your business."
+          answer: "Every chatbot is priced to your project. A basic lead capture bot is a different build to a fully customised AI assistant with booking integration, CRM synchronisation, and advanced multi-step conversation flows tailored to your business. Tell us what you need handled and we'll quote it properly."
         },
         {
           question: "How long does it take to build and launch?",
@@ -162,7 +162,7 @@ export const getServiceFAQs = (serviceSlug: string) => {
         },
         {
           question: "What does AI content creation cost?",
-          answer: "Our content packages start from £200/month for 4 blog posts with SEO optimisation, up to £800/month for a comprehensive content strategy including blogs, social media scheduling, email campaigns, and performance reporting."
+          answer: "Content is priced to your project. Four blog posts a month with SEO optimisation is a different scope to a comprehensive content strategy including blogs, social media scheduling, email campaigns, and performance reporting. Tell us what you need and we'll quote it properly."
         }
       ];
     case 'ai-automation':
@@ -173,7 +173,7 @@ export const getServiceFAQs = (serviceSlug: string) => {
         },
         {
           question: "How much does AI automation cost?",
-          answer: "Automation packages start from £300/month for basic email and lead response workflows, up to £1,000/month for comprehensive AI-powered business process automation connecting multiple systems with intelligent decision-making."
+          answer: "Automation is priced to your project. Basic email and lead response workflows are a different scope to comprehensive AI-powered business process automation connecting multiple systems with intelligent decision-making. Tell us what you run now and we'll quote it properly."
         },
         {
           question: "Do I need to change my existing software?",

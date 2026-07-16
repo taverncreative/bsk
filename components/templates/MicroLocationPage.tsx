@@ -11,18 +11,18 @@ interface MicroLocationPageProps {
 
 const SERVICE_DESCRIPTORS: Record<string, string> = {
   'web-design':
-    '£280 for a classic small business website. Built right, indexed cleanly, yours in 1 to 2 weeks.',
-  seo: '£45 an hour of real ranking work, from one hour a month. No rolling contract.',
+    'A classic small business website, priced to your project. Built right, indexed cleanly, yours in 1 to 2 weeks.',
+  seo: 'Real ranking work, priced to your project. From one hour a month, no rolling contract.',
   'lead-capture':
-    'Forms, replies and missed-call recovery so a busy day does not cost you the lead. Priced on the brief.',
+    'Forms, replies and missed-call recovery so a busy day does not cost you the lead. Priced to your project.',
   'business-automation':
-    'CRM setup, follow-ups, job tracking, repeat invoicing. Priced on the brief.',
+    'CRM setup, follow-ups, job tracking, repeat invoicing. Priced to your project.',
 };
 
 export default function MicroLocationPage({ service, town, nearbyTowns }: MicroLocationPageProps) {
   const subtitle =
     SERVICE_DESCRIPTORS[service.slug] ||
-    `${service.name} for businesses operating near ${town.name}. Priced on the brief.`;
+    `${service.name} for businesses operating near ${town.name}. Priced to your project.`;
 
   return (
     <main className="min-h-screen bg-paper">
@@ -65,7 +65,7 @@ export default function MicroLocationPage({ service, town, nearbyTowns }: MicroL
           <div className="text-lg text-ink-muted leading-relaxed space-y-5 max-w-3xl">
             <p>
               People searching for {service.name.toLowerCase()} near {town.name} are usually
-              looking for someone who actually covers the area. We do. Same service, same prices,
+              looking for someone who actually covers the area. We do. Same service, same standards,
               same checks, regardless of which Kent postcode you’re in.
             </p>
             <p>

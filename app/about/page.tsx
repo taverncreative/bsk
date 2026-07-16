@@ -38,9 +38,8 @@ export default function AboutPage() {
             We build websites and digital admin for everyday Kent businesses.
           </h1>
           <p className="text-lg md:text-xl text-ink-muted leading-relaxed max-w-3xl">
-            Founder-led. Plain English. £280 for a classic small business website. £45/hour for SEO.
-            Automations and systems priced on the brief. AI tooling made the work faster, so we
-            charge less for it.
+            Founder-led. Plain English. Websites, SEO, automations and systems, priced to your
+            project. Built properly, with the same checks for speed, security and SEO on every job.
           </p>
         </div>
       </section>
@@ -70,32 +69,31 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Why it costs what it costs */}
+      {/* Why the work holds up */}
       <section className="py-24 md:py-32 bg-paper-raised border-y border-paper-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div className="mb-12 max-w-2xl">
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
-              Why our prices are what they are
+              Why the work holds up
             </p>
             <h2 className="font-display text-ink mb-4">
-              AI changed the maths. We adjusted the prices.
+              The tools changed. The standards didn’t.
             </h2>
           </div>
           <div className="text-lg text-ink-muted leading-relaxed space-y-5 max-w-3xl">
             <p>
-              A small business website used to cost £3,000 because building one took two designers,
-              two developers and three weeks. AI tools changed that. The hours came down.
+              Building a small business website used to take two designers, two developers and
+              three weeks. Modern tooling changed that. The hours came down.
             </p>
             <p>
               The work itself didn’t change. Same checks for speed, security and SEO. Same
               attention to design, copy and structure. Same hand-checking of every page before it
-              goes live. What changed is how long it takes to do that work, and we passed that
-              saving on rather than absorbing it as margin.
+              goes live. What changed is how long it takes to do that work. That speed goes into
+              the job: faster turnaround and more time on the details, not cutting corners.
             </p>
             <p>
-              SEO is billed by the hour because that’s the honest unit. One hour of real work is
-              one hour. No abstract monthly retainers, no “SEO package” with vague deliverables.
-              You see what got done and what it ranked for.
+              SEO is priced to your project. No abstract monthly retainers, no “SEO package” with
+              vague deliverables. You see what got done and what it ranked for.
             </p>
           </div>
         </div>
@@ -118,7 +116,8 @@ export default function AboutPage() {
               </h3>
               <p className="text-ink-muted leading-relaxed">
                 For websites, we’ll build a working preview at a temporary URL before you commit to
-                anything. If you like it, £280 finishes and launches it. If not, no charge.
+                anything. If you like it, we finish and launch it, priced to your project. If not,
+                no charge.
               </p>
             </div>
             <div className="bg-paper p-8">

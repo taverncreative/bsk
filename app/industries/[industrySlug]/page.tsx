@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${industry.name} in Kent | Business Sorted Kent`,
-    description: `£280 websites, £45/hour SEO and AI-assisted automations for ${industry.name.toLowerCase()} working in Kent. Plain prices, no rolling contracts.`,
+    description: `Websites, SEO and AI-assisted automations for ${industry.name.toLowerCase()} working in Kent. Built properly, priced to your project, no rolling contracts.`,
     alternates: {
       canonical: `https://businesssortedkent.co.uk/industries/${industry.slug}`,
     },
@@ -41,73 +41,62 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 // All 11 services. The hub links every service x industry combo (not just the
 // 4 core services), so none of the combo pages are left without an inbound
-// internal link. Names/prices/lines are display copy for the tile; the slug
+// internal link. Names/lines are display copy for the tile; the slug
 // must match the service slug so /industries/<industry>/<slug> resolves.
 const SERVICE_TILES = [
   {
     name: 'Websites',
     slug: 'web-design',
-    price: '£280',
     line: 'A small business website that loads fast, ranks well and books work.',
   },
   {
     name: 'SEO',
     slug: 'seo',
-    price: '£45/hr',
-    line: 'Real ranking work, billed by the hour. From one hour a month.',
+    line: 'Real ranking work, priced to your project. From one hour a month.',
   },
   {
     name: 'Lead capture',
     slug: 'lead-capture',
-    price: 'POA',
     line: 'Forms, instant replies, missed-call recovery.',
   },
   {
     name: 'Automations',
     slug: 'business-automation',
-    price: 'POA',
     line: 'CRM, follow-ups, invoicing, the repeat admin.',
   },
   {
     name: 'Branding',
     slug: 'branding',
-    price: 'POA',
     line: 'A logo, palette and brand kit you can actually use.',
   },
   {
     name: 'Social media',
     slug: 'social-media-setup',
-    price: 'POA',
     line: 'Profiles set up properly and branded consistently.',
   },
   {
     name: 'Digital marketing',
     slug: 'digital-marketing',
-    price: 'POA',
     line: 'Getting the right people to your business, consistently.',
   },
   {
     name: 'Workwear & print',
     slug: 'workwear-print',
-    price: 'POA',
     line: 'Workwear, cards, signage and vehicle graphics, on brand.',
   },
   {
     name: 'AI chatbots',
     slug: 'ai-chatbots',
-    price: 'POA',
     line: 'A chatbot that answers the same questions on repeat.',
   },
   {
     name: 'AI content',
     slug: 'ai-content',
-    price: 'POA',
     line: 'AI-assisted content that does not read like AI content.',
   },
   {
     name: 'AI automation',
     slug: 'ai-automation',
-    price: 'POA',
     line: 'AI for the repeating bits of your business.',
   },
 ];
@@ -273,10 +262,10 @@ export default async function IndustryHubPage({ params }: Props) {
               What we offer
             </p>
             <h2 className="font-display text-ink mb-4">
-              Plain prices for {lowerName}.
+              What we do for {lowerName}.
             </h2>
             <p className="text-ink-muted leading-relaxed">
-              Same prices, same checks, regardless of industry. The work just gets tuned to what
+              Same standards, same checks, regardless of industry. The work just gets tuned to what
               your customers actually search for and how they decide.
             </p>
           </div>
@@ -291,9 +280,6 @@ export default async function IndustryHubPage({ params }: Props) {
                   <h3 className="font-display text-2xl md:text-3xl text-ink leading-tight">
                     {s.name} for {lowerName}
                   </h3>
-                  <span className="font-mono text-lg md:text-xl text-brand-gold tracking-tight whitespace-nowrap">
-                    {s.price}
-                  </span>
                 </div>
                 <p className="text-ink-muted leading-relaxed mb-8">{s.line}</p>
                 <span className="mt-auto inline-flex items-center text-sm text-ink-muted group-hover:text-brand-gold transition-colors">

@@ -31,7 +31,7 @@ const steps = [
     when: 'When you’re ready',
     what: 'You decide',
     detail:
-      'If you like it, £280 covers finishing and launching on your domain. If not, that’s the end of it. No charge.',
+      'If you like it, we finish and launch it on your domain, priced to your project. If not, that’s the end of it. No charge.',
   },
 ];
 

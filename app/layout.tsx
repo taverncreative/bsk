@@ -18,10 +18,10 @@ const nunitoSans = Nunito_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL('https://businesssortedkent.co.uk'),
   title: 'Business Sorted Kent | Web Design & SEO',
-  description: 'Honest pricing for web design, SEO and automation. Built faster, priced fairly.',
+  description: 'Web design, SEO and automations for Kent businesses. Built properly, with rigorous checks for speed, security and SEO.',
   openGraph: {
     title: 'Business Sorted Kent | Web Design & SEO',
-    description: 'Honest pricing for web design, SEO and automation. Built faster, priced fairly.',
+    description: 'Web design, SEO and automations for Kent businesses. Built properly, with rigorous checks for speed, security and SEO.',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 };

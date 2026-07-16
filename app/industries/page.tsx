@@ -7,7 +7,7 @@ import PageSchema from '@/components/seo/PageSchema';
 export const metadata: Metadata = {
   title: 'Industries we serve | Business Sorted Kent',
   description:
-    'Websites, SEO and automations for trades, service businesses and small firms across Kent. Plain prices, no rolling contracts.',
+    'Websites, SEO and automations for trades, service businesses and small firms across Kent. Priced to your project, no rolling contracts.',
   alternates: {
     canonical: 'https://businesssortedkent.co.uk/industries',
   },
@@ -135,7 +135,7 @@ export default function IndustriesPage() {
               </h3>
               <p className="text-ink-muted leading-relaxed">
                 Their existing site looks like it was built in 2014 and the form has not worked
-                since 2019. They want one that does the job, without the agency price tag.
+                since 2019. They want one that does the job, without the agency runaround.
               </p>
             </div>
             <div className="bg-paper p-8">

@@ -48,29 +48,23 @@ export default function PageSchema({ breadcrumbs, extra }: PageSchemaProps) {
   );
 }
 
-/** Price-and-offer schema for the four core services + hourly SEO. */
+/** Offer schema for the four core services. No public prices: every offer is
+ *  priced to the project, so no price/priceSpecification is emitted. */
 export function serviceOfferSchema(serviceSlug: string): object | undefined {
   switch (serviceSlug) {
     case 'web-design':
       return {
         '@type': 'Offer',
-        price: '280',
-        priceCurrency: 'GBP',
         availability: 'https://schema.org/InStock',
         category: 'Website Design',
       };
     case 'seo':
       return {
         '@type': 'Offer',
-        priceSpecification: {
-          '@type': 'UnitPriceSpecification',
-          price: '45',
-          priceCurrency: 'GBP',
-          unitText: 'HOUR',
-        },
+        availability: 'https://schema.org/InStock',
         category: 'Search Engine Optimisation',
       };
     default:
-      return undefined; // POA — no fixed price
+      return undefined; // priced to the project — no fixed price
   }
 }

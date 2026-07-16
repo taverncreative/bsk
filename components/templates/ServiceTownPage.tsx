@@ -66,20 +66,6 @@ const SERVICE_DEFAULT_INCLUDED: Record<string, { title: string; body: string }[]
   ],
 };
 
-const SERVICE_PRICE: Record<string, string> = {
-  'web-design': '£280',
-  seo: '£45/hour',
-  'lead-capture': 'POA',
-  'business-automation': 'POA',
-  branding: 'POA',
-  'social-media-setup': 'POA',
-  'digital-marketing': 'POA',
-  'workwear-print': 'POA',
-  'ai-chatbots': 'POA',
-  'ai-content': 'POA',
-  'ai-automation': 'POA',
-};
-
 export default function ServiceTownPage({
   service,
   town,
@@ -100,7 +86,6 @@ export default function ServiceTownPage({
   const localPainPoints = localContent?.pain_points?.slice(0, 3) || [];
   const localSolutions = localContent?.solutions?.slice(0, 4) || [];
   const localFaqs = localContent?.faqs;
-  const price = SERVICE_PRICE[service.slug] || 'POA';
 
   const includedItems =
     localSolutions.length >= 3
@@ -128,7 +113,7 @@ export default function ServiceTownPage({
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
             <div className="mb-16 md:mb-20 max-w-2xl">
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
-                What {price !== 'POA' ? price : 'it'} covers
+                What it covers
               </p>
               <h2 className="font-display text-ink">
                 {service.name} for {town.name}, properly done.

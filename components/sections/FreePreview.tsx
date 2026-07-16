@@ -9,7 +9,7 @@ const promises = [
   'A working homepage at a temporary URL',
   'Built in 2–3 working days',
   'No deposit, no card details, no follow-up email if you pass',
-  'If you like it, £280 covers finishing and launching on your domain',
+  'If you like it, we finish and launch it on your domain, priced to your project',
 ];
 
 export default function FreePreview({ variant = 'section' }: FreePreviewProps) {
@@ -31,8 +31,8 @@ export default function FreePreview({ variant = 'section' }: FreePreviewProps) {
           <p className="text-lg text-ink-muted leading-relaxed max-w-2xl">
             Tell us about your business. We’ll build a working preview of your new website at a
             temporary URL, set up the way we’d actually build it for you. Take your time deciding.
-            If you like it, £280 finishes and launches it on your domain. If not, that’s the end of
-            it. No charge.
+            If you like it, we finish and launch it on your domain, priced to your project. If not,
+            that’s the end of it. No charge.
           </p>
         </div>
 

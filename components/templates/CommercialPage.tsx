@@ -43,16 +43,16 @@ export default function CommercialPage({
         }}
       />
 
-      {/* SECTION 2: TYPICAL COSTS / EXPECTATIONS */}
+      {/* SECTION 2: SCOPE / EXPECTATIONS */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-              {isPricing ? 'Typical Costs & Pricing Ranges' : `What to Expect from a Top ${service?.name || 'Local'} Agency`}
+              {isPricing ? 'How the Work Is Scoped' : `What to Expect from a Top ${service?.name || 'Local'} Agency`}
             </h2>
             <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-              {isPricing 
-                ? `Understanding exactly how much you should invest to get meaningful results in ${town.name}.`
+              {isPricing
+                ? `What actually drives meaningful results in ${town.name}, and how the work is scoped to get them.`
                 : `How to evaluate and choose the right partner for your business&apos;s online growth.`}
             </p>
           </div>
@@ -61,8 +61,8 @@ export default function CommercialPage({
             <div className="prose prose-lg text-slate-700 max-w-none">
               <p>
                 When researching <strong>{keyword.title.toLowerCase()} in {town.name}</strong>, one of the most common questions business owners have is what they can expect practically. 
-                {isPricing 
-                  ? ' While cheap templated options exist from a few hundred pounds, a professional solution that actively generates qualified leads and dominates competitive local search terms typically requires a sustained and realistic investment.'
+                {isPricing
+                  ? ' A professional solution that actively generates qualified leads and competes for the local search terms that matter is scoped around your goals, and priced to your project.'
                   : ' The difference between a generic provider and a specialist agency ultimately comes down to their ability to generate a tangible return on investment.'}
               </p>
               <p className="mt-4">
@@ -73,12 +73,12 @@ export default function CommercialPage({
         </div>
       </section>
 
-      {/* SECTION 3: WHAT AFFECTS PRICING / SCOPE */}
+      {/* SECTION 3: WHAT AFFECTS SCOPE */}
       <section className="py-24 section-light border-t border-slate-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-              What Affects {isPricing ? 'Pricing' : 'the Scope of Work'}?
+              What Affects the Scope of Work?
             </h2>
           </div>
 
@@ -142,9 +142,9 @@ export default function CommercialPage({
                 <svg className="w-6 h-6 text-brand mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4L19 7" />
                 </svg>
-                <h3 className="text-lg font-bold text-slate-900">Transparent Pricing</h3>
+                <h3 className="text-lg font-bold text-slate-900">Priced to Your Project</h3>
               </div>
-              <p className="text-slate-600 text-sm">Clear, upfront structures with absolutely no hidden agency fees.</p>
+              <p className="text-slate-600 text-sm">Scoped to what you actually need, with absolutely no hidden agency fees.</p>
             </div>
 
             <div className="p-6 bg-slate-50 border border-slate-200 rounded-xl">

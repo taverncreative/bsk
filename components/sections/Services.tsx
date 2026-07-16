@@ -3,8 +3,6 @@ import { ArrowRight } from 'lucide-react';
 
 export interface ServiceItem {
   title: string;
-  price: string;
-  priceNote?: string;
   description: string;
   href: string;
 }
@@ -18,34 +16,26 @@ interface ServicesProps {
 const pillars: ServiceItem[] = [
   {
     title: 'Websites',
-    price: '£280',
-    priceNote: 'classic site · e-com/custom: POA',
     description:
-      'A small business website that loads fast, ranks well and works on every phone. Yours in 1–2 weeks. Hosting, SSL, backups and security patches: £18 a month.',
+      'A small business website that loads fast, ranks well and works on every phone. Yours in 1–2 weeks. Hosting, SSL, backups and security patches available, priced to your project.',
     href: '/web-design',
   },
   {
     title: 'SEO',
-    price: '£45',
-    priceNote: 'per hour · from 1 hr/mo',
     description:
-      'Real work on your Google rankings, billed by the hour. From one hour a month, no minimum term. You see what got done and what it ranked for.',
+      'Real work on your Google rankings, priced to your project. From one hour a month, no minimum term. You see what got done and what it ranked for.',
     href: '/seo',
   },
   {
     title: 'Lead capture',
-    price: 'POA',
-    priceNote: 'priced on the brief',
     description:
-      'Forms, replies and missed-call recovery so a busy day doesn’t cost you the lead. Quoted once we know what you handle now.',
+      'Forms, replies and missed-call recovery so a busy day doesn’t cost you the lead. Priced to your project once we know what you handle now.',
     href: '/lead-capture',
   },
   {
     title: 'Automations',
-    price: 'POA',
-    priceNote: 'priced on the brief',
     description:
-      'CRM setup, job tracking, follow-ups, repeat invoicing. Anything you’d rather not do twice. Quoted once we know what you actually run.',
+      'CRM setup, job tracking, follow-ups, repeat invoicing. Anything you’d rather not do twice. Priced to your project once we know what you actually run.',
     href: '/business-automation',
   },
 ];
@@ -58,14 +48,14 @@ export default function Services({ headlineOverride, descriptionOverride, servic
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <div className="mb-16 md:mb-20 max-w-2xl">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint mb-4">
-            What things cost
+            What we do
           </p>
           <h2 className="font-display text-ink mb-4">
-            {headlineOverride || 'Plain prices.'}
+            {headlineOverride || 'The core services.'}
           </h2>
           <p className="text-ink-muted leading-relaxed">
             {descriptionOverride ||
-              'AI made the work faster, not less rigorous. Performance, security and SEO get the same checks as a £3,000 site.'}
+              'Performance, security and SEO get the same rigorous checks on every build. Priced to your project.'}
           </p>
         </div>
 
@@ -80,16 +70,6 @@ export default function Services({ headlineOverride, descriptionOverride, servic
                 <h3 className="font-display text-3xl md:text-4xl text-ink leading-none">
                   {service.title}
                 </h3>
-                <div className="text-right">
-                  <span className="font-mono text-2xl md:text-3xl text-brand-gold tracking-tight">
-                    {service.price}
-                  </span>
-                  {service.priceNote && (
-                    <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-faint mt-1">
-                      {service.priceNote}
-                    </p>
-                  )}
-                </div>
               </div>
               <p className="text-ink-muted leading-relaxed mb-8">
                 {service.description}

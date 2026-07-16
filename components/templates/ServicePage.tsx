@@ -82,14 +82,14 @@ interface ServiceContent {
 const serviceContent: Record<string, ServiceContent> = {
   'web-design': {
     hero: {
-      title: 'Websites built faster. Priced honestly.',
+      title: 'Websites built properly.',
       subtitle:
-        '£280 for a classic small business website. E-commerce and anything custom priced on application. Built properly, indexed cleanly, yours in 1 to 2 weeks.',
+        'A classic small business website, or e-commerce and anything custom. Priced to your project. Built properly, indexed cleanly, yours in 1 to 2 weeks.',
       primaryCTA: { text: 'See what yours could look like', href: '/free-preview' },
       secondaryCTA: { text: 'Get in touch', href: '/contact' },
     },
     included: {
-      eyebrow: 'What £280 covers',
+      eyebrow: 'What it covers',
       headline: 'A working small business website, built properly.',
       intro:
         'Homepage, services, about, contact, plus a couple of supporting pages. Designed, built, launched, and indexed by Google. Hand-checked Next.js code under the hood, not template assembly.',
@@ -124,7 +124,7 @@ const serviceContent: Record<string, ServiceContent> = {
         },
         {
           title: '08 · Hosting (optional)',
-          body: '£18 a month covers fast UK hosting, SSL, weekly backups, security patches, uptime monitoring. Or bring your own — we’ll deploy to whatever you’re using.',
+          body: 'Fast UK hosting, SSL, weekly backups, security patches and uptime monitoring, priced to your project. Or bring your own and we’ll deploy to whatever you’re using.',
         },
       ],
     },
@@ -148,7 +148,7 @@ const serviceContent: Record<string, ServiceContent> = {
           num: '03',
           title: 'You decide',
           body:
-            'Like it? £280 to finish and launch. Want changes? We do them. Not for you? No charge. No card details taken upfront, no awkward follow-up.',
+            'Like it? We finish and launch it, priced to your project. Want changes? We do them. Not for you? No charge. No card details taken upfront, no awkward follow-up.',
         },
         {
           num: '04',
@@ -172,7 +172,7 @@ const serviceContent: Record<string, ServiceContent> = {
         },
         {
           title: 'We won’t pretend AI didn’t change this',
-          body: 'AI tooling is how the work got faster, and that’s why £280 is realistic. The design decisions, editing and final checks are still done by people. We don’t hide it.',
+          body: 'AI tooling is how the work got faster. The design decisions, editing and final checks are still done by people. We don’t hide it.',
         },
       ],
     },
@@ -188,9 +188,9 @@ const serviceContent: Record<string, ServiceContent> = {
     hero: {
       title: 'SEO that gets your business found.',
       subtitle:
-        '£45 an hour. From one hour a month. No retainer, no rolling contract. You see exactly what got done and what moved. SEO for everyday businesses who would rather pay someone to do it than learn it themselves.',
+        'Priced to your project. From one hour a month. No retainer, no rolling contract. You see exactly what got done and what moved. SEO for everyday businesses who would rather pay someone to do it than learn it themselves.',
       primaryCTA: { text: 'Get a free SEO audit', href: '/contact?service=seo&intent=audit' },
-      secondaryCTA: { text: 'See pricing', href: '#services' },
+      secondaryCTA: { text: 'Get in touch', href: '/contact' },
     },
     included: {
       eyebrow: 'How SEO actually works',
@@ -494,7 +494,7 @@ const serviceContent: Record<string, ServiceContent> = {
     hero: {
       title: 'A logo and brand identity that fits.',
       subtitle:
-        'A proper mark, a usable colour palette, fonts that pair, and the bits you need to apply it. For Kent businesses who want something that looks designed, not generated. Priced on the brief.',
+        'A proper mark, a usable colour palette, fonts that pair, and the bits you need to apply it. For Kent businesses who want something that looks designed, not generated. Priced to your project.',
       primaryCTA: { text: 'Get in touch', href: '/contact' },
     },
     included: {
@@ -532,7 +532,7 @@ const serviceContent: Record<string, ServiceContent> = {
     hero: {
       title: 'Social media set up properly.',
       subtitle:
-        'Profiles set up the right way the first time, branded consistently, pointed at the work you want to win. Priced on the brief.',
+        'Profiles set up the right way the first time, branded consistently, pointed at the work you want to win. Priced to your project.',
       primaryCTA: { text: 'Get in touch', href: '/contact' },
     },
     included: {
@@ -560,7 +560,7 @@ const serviceContent: Record<string, ServiceContent> = {
     hero: {
       title: 'Paid ads, content, email — done properly.',
       subtitle:
-        'Ongoing Google, Meta and email campaigns aimed at the customers you actually want to win. No jargon, plain monthly reports. Priced on the brief.',
+        'Ongoing Google, Meta and email campaigns aimed at the customers you actually want to win. No jargon, plain monthly reports. Priced to your project.',
       primaryCTA: { text: 'Get in touch', href: '/contact' },
     },
     included: {
@@ -579,7 +579,7 @@ const serviceContent: Record<string, ServiceContent> = {
     },
     cta: {
       title: 'Want more of the right enquiries?',
-      paragraph: 'Tell us what you sell and who you want to reach. We will come back with a plain plan and a price.',
+      paragraph: 'Tell us what you sell and who you want to reach. We will come back with a plain plan, priced to your project.',
       button: 'Get in touch',
     },
   },
@@ -588,7 +588,7 @@ const serviceContent: Record<string, ServiceContent> = {
     hero: {
       title: 'Workwear and print, matched to your brand.',
       subtitle:
-        'T-shirts, polos, hi-vis, business cards, signage. Sorted at the same time as your website so it all matches. Priced on the brief.',
+        'T-shirts, polos, hi-vis, business cards, signage. Sorted at the same time as your website so it all matches. Priced to your project.',
       primaryCTA: { text: 'Get in touch', href: '/contact' },
     },
     included: {
@@ -616,7 +616,7 @@ const serviceContent: Record<string, ServiceContent> = {
     hero: {
       title: 'A chatbot that answers the same five questions on repeat.',
       subtitle:
-        'A chatbot that handles the basic enquiries your website gets every day. Books appointments, answers FAQs, hands off to you when it matters. Priced on the brief.',
+        'A chatbot that handles the basic enquiries your website gets every day. Books appointments, answers FAQs, hands off to you when it matters. Priced to your project.',
       primaryCTA: { text: 'Get in touch', href: '/contact' },
     },
     included: {
@@ -644,7 +644,7 @@ const serviceContent: Record<string, ServiceContent> = {
     hero: {
       title: 'AI-assisted content that does not read like AI content.',
       subtitle:
-        'Blog posts, service pages and landing copy written with AI and edited by people who know what good writing looks like. Priced on the brief.',
+        'Blog posts, service pages and landing copy written with AI and edited by people who know what good writing looks like. Priced to your project.',
       primaryCTA: { text: 'Get in touch', href: '/contact' },
     },
     included: {
@@ -672,7 +672,7 @@ const serviceContent: Record<string, ServiceContent> = {
     hero: {
       title: 'AI for the repeating bits of your business.',
       subtitle:
-        'Email triage, follow-up sequences, document drafting, data sorting. Pick what eats your time and we will show you a way around it. Priced on the brief.',
+        'Email triage, follow-up sequences, document drafting, data sorting. Pick what eats your time and we will show you a way around it. Priced to your project.',
       primaryCTA: { text: 'Get in touch', href: '/contact' },
     },
     included: {
@@ -703,7 +703,7 @@ function getServiceContent(slug: string, fallbackName: string): ServiceContent {
       hero: {
         title: fallbackName,
         subtitle:
-          'Web, SEO and automations for Kent businesses. £280 websites, £45/hour SEO, automations priced on the brief.',
+          'Web, SEO and automations for Kent businesses. Built properly, priced to your project.',
         primaryCTA: { text: 'Get in touch', href: '/contact' },
       },
       included: {

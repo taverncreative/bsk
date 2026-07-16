@@ -63,7 +63,7 @@ export default function TermsPage() {
             <div>
               <h2 className="font-display text-ink mb-4">Accuracy</h2>
               <p className="leading-relaxed">
-                We try to keep prices, examples and information up to date, but the website is not a
+                We try to keep examples and information up to date, but the website is not a
                 binding quote. The price of any specific job is whatever we agree in writing before
                 we start.
               </p>

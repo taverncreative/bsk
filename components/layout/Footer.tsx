@@ -60,7 +60,7 @@ export default function Footer() {
             </div>
             <p className="font-display text-2xl md:text-3xl text-paper leading-snug">
               Websites, SEO and automations for Kent businesses.
-              <span className="block text-paper/60 mt-1">Built faster because the tools got better. Priced honestly.</span>
+              <span className="block text-paper/60 mt-1">Built properly, and priced to your project.</span>
             </p>
           </div>
           <div className="md:text-right">

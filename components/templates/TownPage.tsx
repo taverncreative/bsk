@@ -29,20 +29,6 @@ interface TownPageProps {
 
 const NEARBY_FALLBACK = ['Ashford', 'Maidstone', 'Folkestone', 'Canterbury', 'Tunbridge Wells'];
 
-const SERVICE_PRICES: Record<string, string> = {
-  'web-design': '£280',
-  seo: '£45/hr',
-  'lead-capture': 'POA',
-  'business-automation': 'POA',
-  branding: 'POA',
-  'social-media-setup': 'POA',
-  'digital-marketing': 'POA',
-  'workwear-print': 'POA',
-  'ai-chatbots': 'POA',
-  'ai-content': 'POA',
-  'ai-automation': 'POA',
-};
-
 export default function TownPage({ town, services, guides, townContent = [] }: TownPageProps) {
   const hasContent = townContent.length > 0;
 
@@ -52,7 +38,7 @@ export default function TownPage({ town, services, guides, townContent = [] }: T
   const heroSubtitle =
     hasContent && seoContent
       ? seoContent.intro_paragraph
-      : `Web design, SEO and automations for businesses in ${town.name}. £280 websites, £45/hour SEO, automations on the brief.`;
+      : `Web design, SEO and automations for businesses in ${town.name}. Built properly, priced to your project.`;
 
   const localContext =
     hasContent && webDesignContent
@@ -108,18 +94,10 @@ export default function TownPage({ town, services, guides, townContent = [] }: T
                 {
                   '@type': 'Offer',
                   itemOffered: { '@type': 'Service', name: 'Website Design' },
-                  price: '280',
-                  priceCurrency: 'GBP',
                 },
                 {
                   '@type': 'Offer',
                   itemOffered: { '@type': 'Service', name: 'Local SEO' },
-                  priceSpecification: {
-                    '@type': 'UnitPriceSpecification',
-                    price: '45',
-                    priceCurrency: 'GBP',
-                    unitText: 'HOUR',
-                  },
                 },
                 {
                   '@type': 'Offer',
@@ -156,7 +134,6 @@ export default function TownPage({ town, services, guides, townContent = [] }: T
               const match = townContent.find((c) => c.service_slug === service.slug);
               const snippet =
                 match?.intro_paragraph?.slice(0, 140).replace(/\s+\S*$/, '') || null;
-              const price = SERVICE_PRICES[service.slug] || 'POA';
               return (
                 <Link
                   key={service.slug}
@@ -167,9 +144,6 @@ export default function TownPage({ town, services, guides, townContent = [] }: T
                     <h3 className="font-display text-2xl md:text-3xl text-ink leading-tight">
                       {service.name}
                     </h3>
-                    <span className="font-mono text-lg md:text-xl text-brand-gold tracking-tight whitespace-nowrap">
-                      {price}
-                    </span>
                   </div>
                   {snippet && (
                     <p className="text-ink-muted leading-relaxed mb-8">{snippet}…</p>

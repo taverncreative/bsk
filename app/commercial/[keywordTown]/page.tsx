@@ -57,8 +57,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${keyword.title} in ${town.name} | Business Sorted Kent`,
-    description: isPricing 
-      ? `Discover the typical ${keyword.title.toLowerCase()} for businesses in ${town.name}. Get transparent rates and expert strategies.`
+    description: isPricing
+      ? `What shapes ${keyword.title.toLowerCase()} for businesses in ${town.name}. What to expect, and how the work is scoped and priced to your project.`
       : `Looking for the ${keyword.title.toLowerCase()} in ${town.name}? Learn what to expect and how to secure the best partner.`,
     alternates: {
       canonical: `https://businesssortedkent.co.uk/commercial/${keyword.slug}-${town.slug}`,

@@ -51,7 +51,7 @@ export default function HomepageHero({
             <p className="text-lg md:text-xl text-ink-muted leading-relaxed mb-10">
               {subtitle || (
                 <>
-                  Mobile-first websites with rigorous checks for speed, security and SEO — the standards that actually matter, on every build.
+                  Mobile-first websites with rigorous checks for speed, security and SEO: the standards that actually matter, on every build.
                 </>
               )}
             </p>

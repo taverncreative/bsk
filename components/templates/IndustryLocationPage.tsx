@@ -11,23 +11,23 @@ interface IndustryLocationPageProps {
 }
 
 const SERVICE_DESCRIPTORS: Record<string, string> = {
-  'web-design': 'A small business website that loads fast, ranks well, and works on every phone. £280, one-off.',
-  seo: 'Real ranking work, billed by the hour. From one hour a month, no rolling contract. £45/hour.',
-  'lead-capture': 'Forms, replies and missed-call recovery so a busy day does not cost you the lead. Priced on the brief.',
+  'web-design': 'A small business website that loads fast, ranks well, and works on every phone. Priced to your project.',
+  seo: 'Real ranking work, priced to your project. From one hour a month, no rolling contract.',
+  'lead-capture': 'Forms, replies and missed-call recovery so a busy day does not cost you the lead. Priced to your project.',
   'business-automation':
-    'CRM setup, job tracking, follow-ups, repeat invoicing. The repeat work, handled. Priced on the brief.',
+    'CRM setup, job tracking, follow-ups, repeat invoicing. The repeat work, handled. Priced to your project.',
   branding:
-    'A logo and brand identity that fits. A proper mark, a usable palette, typography that pairs. Priced on the brief.',
+    'A logo and brand identity that fits. A proper mark, a usable palette, typography that pairs. Priced to your project.',
   'social-media-setup':
-    'Profiles set up the right way, branded consistently, pointed at the work you want to win. Priced on the brief.',
+    'Profiles set up the right way, branded consistently, pointed at the work you want to win. Priced to your project.',
   'workwear-print':
     'Branded workwear, business cards, signage and vehicle graphics. Sorted alongside your website so it all matches.',
   'ai-chatbots':
-    'A chatbot trained on your business that handles repeat enquiries and books appointments. Priced on the brief.',
+    'A chatbot trained on your business that handles repeat enquiries and books appointments. Priced to your project.',
   'ai-content':
-    'AI-assisted blog posts and service pages, edited by hand. Doesn’t read like AI content. Priced on the brief.',
+    'AI-assisted blog posts and service pages, edited by hand. Doesn’t read like AI content. Priced to your project.',
   'ai-automation':
-    'Email triage, follow-ups, document drafting, data sorting. The mundane bits handled. Priced on the brief.',
+    'Email triage, follow-ups, document drafting, data sorting. The mundane bits handled. Priced to your project.',
 };
 
 export default function IndustryLocationPage({

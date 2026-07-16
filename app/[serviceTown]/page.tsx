@@ -281,8 +281,6 @@ export default async function ProgrammaticPage({ params }: Props) {
                  ...(service.slug === 'web-design' && {
                    "offers": {
                      "@type": "Offer",
-                     "price": "280",
-                     "priceCurrency": "GBP",
                      "availability": "https://schema.org/InStock",
                      "category": "Website Design"
                    }
@@ -290,12 +288,7 @@ export default async function ProgrammaticPage({ params }: Props) {
                  ...(service.slug === 'seo' && {
                    "offers": {
                      "@type": "Offer",
-                     "priceSpecification": {
-                       "@type": "UnitPriceSpecification",
-                       "price": "45",
-                       "priceCurrency": "GBP",
-                       "unitText": "HOUR"
-                     },
+                     "availability": "https://schema.org/InStock",
                      "category": "Search Engine Optimisation"
                    }
                  })
@@ -415,8 +408,6 @@ export default async function ProgrammaticPage({ params }: Props) {
                 ...(service.slug === 'web-design' && {
                   "offers": {
                     "@type": "Offer",
-                    "price": "280",
-                    "priceCurrency": "GBP",
                     "availability": "https://schema.org/InStock",
                     "category": "Website Design"
                   }
@@ -424,12 +415,7 @@ export default async function ProgrammaticPage({ params }: Props) {
                 ...(service.slug === 'seo' && {
                   "offers": {
                     "@type": "Offer",
-                    "priceSpecification": {
-                      "@type": "UnitPriceSpecification",
-                      "price": "45",
-                      "priceCurrency": "GBP",
-                      "unitText": "HOUR"
-                    },
+                    "availability": "https://schema.org/InStock",
                     "category": "Search Engine Optimisation"
                   }
                 })

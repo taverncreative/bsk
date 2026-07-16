@@ -17,7 +17,7 @@ const concerns: Concern[] = [
   {
     question: 'What if I need e-commerce, or something custom?',
     answer:
-      'A classic small-business website covers: homepage, services, about, contact, a couple of supporting pages. E-commerce with a product catalogue, booking systems, member areas or anything custom is priced on application. Tell us what you need and we’ll quote it properly.',
+      'A classic small-business website covers: homepage, services, about, contact, a couple of supporting pages. E-commerce with a product catalogue, booking systems, member areas or anything custom is priced to your project. Tell us what you need and we’ll quote it properly.',
   },
 ];
 
