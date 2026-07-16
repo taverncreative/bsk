@@ -5,7 +5,7 @@ import PageSchema from '@/components/seo/PageSchema';
 export const metadata: Metadata = {
   title: 'About | Business Sorted Kent',
   description:
-    'Founder-led digital agency for everyday Kent businesses. £280 websites, £45/hour SEO, automations on the brief. AI made the work faster — saving passed on.',
+    'Founder-led digital agency for everyday Kent businesses. Websites, SEO and automations, built properly with rigorous checks for speed, security and SEO.',
   alternates: {
     canonical: 'https://businesssortedkent.co.uk/about',
   },

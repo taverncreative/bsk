@@ -15,7 +15,7 @@ export default function SiteSchema() {
       },
       image: 'https://businesssortedkent.co.uk/logo.png',
       description:
-        'Founder-led digital agency in Kent. £280 websites, £45/hour SEO, automations priced on the brief. AI tooling made the work faster, and we passed the saving on.',
+        'Founder-led digital agency in Kent. Websites, SEO and automations for everyday Kent businesses, with rigorous checks for speed, security and SEO on every build.',
       email: 'hello@businesssortedkent.co.uk',
       telephone: '+447522388055',
       address: {
